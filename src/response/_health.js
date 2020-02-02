@@ -70,7 +70,9 @@ class HealthServer {
         for (let item of keys) {
             if (item !== "Hydration" && item !== "Energy") {
                 /* set body part health */
-                pmcData.Health.BodyParts[item].Health.Current = (node[item] === 0) ? (pmcData.Health.BodyParts[item].Health.Maximum * settings.gameplay.inraid.saveHealthMultiplier) : node[item];
+                pmcData.Health.BodyParts[item].Health.Current = (node[item] === 0)
+                    ? Math.round((pmcData.Health.BodyParts[item].Health.Maximum * settings.gameplay.inraid.saveHealthMultiplier))
+                    : node[item];
             } else {
                 /* set resources */
                 pmcData.Health[item].Current += node[item];
