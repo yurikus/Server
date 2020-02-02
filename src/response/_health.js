@@ -8,19 +8,18 @@ class HealthServer {
         this.healths = {};
     }
 
+    /* resets the healh response */
     initializeHealth(sessionID) {
-        let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-
         this.healths[sessionID] = {
             "Hydration": 0,
             "Energy": 0,
-            "Head": pmcData.Health.BodyParts.Head.Health.Current,
-            "Chest": pmcData.Health.BodyParts.Chest.Health.Current,
-            "Stomach": pmcData.Health.BodyParts.Stomach.Health.Current,
-            "LeftArm": pmcData.Health.BodyParts.LeftArm.Health.Current,
-            "RightArm": pmcData.Health.BodyParts.RightArm.Health.Current,
-            "LeftLeg": pmcData.Health.BodyParts.LeftLeg.Health.Current,
-            "RightLeg": pmcData.Health.BodyParts.RightLeg.Health.Current
+            "Head": 0,
+            "Chest": 0,
+            "Stomach": 0,
+            "LeftArm": 0,
+            "RightArm": 0,
+            "LeftLeg": 0,
+            "RightLeg": 0
         };
     }
 
@@ -56,8 +55,8 @@ class HealthServer {
         this.healths[sessionID] = node;
     }
 
-    /* apply the health changes and delete stored ones */
-    setHealth(pmcData, sessionID) {
+    /* apply the health changes to the profile */
+    applyHealth(pmcData, sessionID) {
         if (!settings.gameplay.inraid.saveHealthEnabled) {
             return;
         }

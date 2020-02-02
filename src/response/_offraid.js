@@ -112,7 +112,7 @@ function saveProgress(offraidData, sessionID) {
         }
 
         // set player health now
-        health_f.healthServer.setHealth(pmcData, sessionID);
+        health_f.healthServer.applyHealth(pmcData, sessionID);
 
         // Remove the Lab card now
         removeLabKeyCard(offraidData);
