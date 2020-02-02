@@ -2,6 +2,21 @@
 
 require("../libs.js");
 
+// remove the labs keycard at the end of raid in labs
+function removeLabKeyCard(offraidData) {
+    if (offraidData.profile.Info.EntryPoint !== "Laboratory") {
+        return;
+    }
+
+    for (let item of offraidData.profile.Inventory.items) {
+        if (item._tpl === "5c94bbff86f7747ee735c08f" && item.slotId !== "Hideout") {
+            move_f.removeItemFromProfile(offraidData.profile, item._id);
+            break;
+        }
+    }
+}
+
+/* adds SpawnedInSession property to items found in a raid */
 function markFoundItems(pmcData, offraidData, isPlayerScav) {
     // mark items found in raid
     for (let offraidItem of offraidData.Inventory.items) {
@@ -74,20 +89,6 @@ function deleteInventory(pmcData, sessionID) {
     return pmcData;
 }
 
-// remove the labs keycard at the end of raid in labs
-function removeLabKeyCard(offraidData) {
-    if (offraidData.profile.Info.EntryPoint !== "Laboratory") {
-        return;
-    }
-
-    for (let item of offraidData.profile.Inventory.items) {
-        if (item._tpl === "5c94bbff86f7747ee735c08f" && item.slotId !== "Hideout") {
-            move_f.removeItemFromProfile(offraidData.profile, item._id);
-            break;
-        }
-    }
-}
-
 function saveProgress(offraidData, sessionID) {
     if (!settings.gameplay.inraid.saveLootEnabled) {
         return;
@@ -124,15 +125,11 @@ function saveProgress(offraidData, sessionID) {
     offraidData.profile.Inventory.items = itm_hf.replaceIDs(offraidData.profile, offraidData.profile.Inventory.items);
 
     // set profile equipment to the raid equipment
-    if (isPlayerScav) {
-        scavData = setInventory(scavData, offraidData.profile);
-    } else {
+    if (!isPlayerScav) {
         pmcData = setInventory(pmcData, offraidData.profile);
         insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
-    }
-
-    // terminate early for player scavs because we don't care about whether they died.
-    if (isPlayerScav) {
+    } else {
+        scavData = setInventory(scavData, offraidData.profile);
         return;
     }
 
