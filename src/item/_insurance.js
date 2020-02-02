@@ -137,7 +137,7 @@ class InsuranceServer {
     storeDeadGear(pmcData, sessionID) {
         for (let insuredItem of pmcData.InsuredItes) {
             for (let item of pmcData.Inventory.Items) {
-                if (insuredItem.itemId === item._id) {
+                if (insuredItem.itemId === item._id && item.parentId === pmcData.Inventory.equipment) {
                     this.addGearToSend(pmcData, item, sessionID);
                     break;
                 }
