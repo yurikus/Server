@@ -48,6 +48,7 @@ function deleteInventory(pmcData, sessionID) {
     let toDelete = [];
 
     for (let item of pmcData.Inventory.items) {
+        // remove normal item
         if (item.parentId === pmcData.Inventory.equipment
             && item.slotId !== "SecuredContainer"
             && item.slotId !== "Scabbard"
@@ -65,7 +66,7 @@ function deleteInventory(pmcData, sessionID) {
         }
     }
 
-    // finally delete them
+    // delete items
     for (let item of toDelete) {
         move_f.removeItemFromProfile(pmcData, item);
     }
@@ -118,23 +119,6 @@ function saveProgress(offraidData, sessionID) {
         removeLabKeyCard(offraidData);
     }
 
-    // Find insured items and filter out items still in inventory (if alive).
-    let insuredItems = pmcData.InsuredItems;
-    let retainedInsuranceItemIds = {};
-    let traderToInsuredItems = {};
-
-    // If character died, then want all the insured items on inventory.
-    // Otherwise, only get insured items not in offraidProfile's inventory.
-    if (!isDead) {
-        for (let insuredIndex in insuredItems) {
-            for (let item of offraidData.profile.Inventory.items) {
-                if (item._id === insuredItems[insuredIndex].itemId) {
-                    retainedInsuranceItemIds[item._id] = 1;
-                }
-            }
-        }
-    }
-
     // mark found items and replace item ID's
     offraidData.profile = markFoundItems(pmcData, offraidData.profile, isPlayerScav);
     offraidData.profile.Inventory.items = itm_hf.replaceIDs(offraidData.profile, offraidData.profile.Inventory.items);
@@ -143,18 +127,8 @@ function saveProgress(offraidData, sessionID) {
     if (isPlayerScav) {
         scavData = setInventory(scavData, offraidData.profile);
     } else {
-        for (let insuredIndex in insuredItems) {
-            for (let item of pmcData.Inventory.items) {
-                if (item._id === insuredItems[insuredIndex].itemId && !(item._id in retainedInsuranceItemIds)) {
-                    const traderId = insuredItems[insuredIndex].tid;
-                    traderToInsuredItems[traderId] = traderToInsuredItems[traderId] || [];
-                    traderToInsuredItems[traderId].push(item);
-                    insurance_f.remove(pmcData, item._id, sessionID);
-                }
-            }
-        }
-
         pmcData = setInventory(pmcData, offraidData.profile);
+        insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
     }
 
     // terminate early for player scavs because we don't care about whether they died.
@@ -164,46 +138,12 @@ function saveProgress(offraidData, sessionID) {
 
     // remove inventory if player died
     if (isDead) {
+        insurance_f.insuranceServer.storeDeadGear(pmcData, sessionID);
         pmcData = deleteInventory(pmcData, sessionID);
     }
 
     // Send insurance message to player.
-    // TODO(camo1018): Send insuranceExpired/Complete messages.
-    // TODO(camo1018): Pretty sure items are messed up. Investigate and fix.
-    for (let traderId in traderToInsuredItems) {
-        let trader = trader_f.traderServer.getTrader(traderId);
-        let dialogueTemplates = json.parse(json.read(filepaths.dialogues[traderId]));
-
-        let messageContent = {
-            templateId: dialogueTemplates.insuranceStart[utility.getRandomInt(0, 
-                                                        dialogueTemplates.insuranceStart.length - 1)],
-            type: dialogue_f.getMessageTypeValue("npcTrader")
-        };
-        dialogue_f.dialogueServer.addDialogueMessage(traderId, messageContent, sessionID);
-    
-        messageContent = {
-            templateId: dialogueTemplates.insuranceFound[utility.getRandomInt(0, 
-                                                        dialogueTemplates.insuranceFound.length - 1)],
-            type: dialogue_f.getMessageTypeValue("insuranceReturn"),
-            maxStorageTime: trader.data.insurance.max_storage_time * 3600,
-            systemData: {
-                date: utility.getDate(),
-                time: utility.getTime(),
-                location: pmcData.Info.EntryPoint
-            }
-        };
-        events_f.scheduledEventHandler.addToSchedule({
-            type: "insuranceReturn",
-            sessionId: sessionID,
-            scheduledTime: Date.now() + utility.getRandomInt(trader.data.insurance.min_return_hour * 3600,
-                                                             trader.data.insurance.max_return_hour * 3600) * 1000,
-            data: {
-                traderId: traderId,
-                messageContent: messageContent,
-                items: traderToInsuredItems[traderId]
-            }
-        });        
-    }
+    insurance_f.insuranceServer.sendInsuredItems(pmcData, sessionID);
 }
 
 module.exports.saveProgress = saveProgress;

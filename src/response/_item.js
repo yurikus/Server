@@ -42,7 +42,7 @@ const staticRoutes = {
     "CustomizationWear": customization_f.wearClothing,
     "CustomizationBuy": customization_f.buyClothing,
     "Repair": repair_f.main,
-    "Insure": insurance_f.insure
+    "Insure": insurance_f.insuranceServer.insure
 };
 
 function getOutput() {

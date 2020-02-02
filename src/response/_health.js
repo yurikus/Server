@@ -28,15 +28,18 @@ class HealthServer {
         let node = this.healths[sessionID];
 
         switch (info.type) {
+            /* store difference from infill */
             case "HydrationChanged":
             case "EnergyChanged":
                 node[(info.type).replace("Changed", "")] += parseInt(info.diff);
                 break;
     
+            /* difference is already applies */
             case "HealthChanged":
                 node[info.item] = info.value;
                 break;
     
+            /* store state and make server aware to kill all body parts */
             case "Died":
                 node = {
                     "Hydration": this.healths[sessionID].Hydration,
@@ -66,8 +69,10 @@ class HealthServer {
 
         for (let item of keys) {
             if (item !== "Hydration" && item !== "Energy") {
+                /* set body part health */
                 pmcData.Health.BodyParts[item].Health.Current = (node[item] === 0) ? (pmcData.Health.BodyParts[item].Health.Maximum * settings.gameplay.inraid.saveHealthMultiplier) : node[item];
             } else {
+                /* set resources */
                 pmcData.Health[item].Current += node[item];
             }   
         }

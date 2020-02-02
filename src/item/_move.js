@@ -185,7 +185,7 @@ function removeItem(profileData, body, output, sessionID) {
 }
 
 function discardItem(pmcData, body, sessionID) {
-    insurance_f.remove(pmcData, body.item, sessionID);
+    insurance_f.insuranceServer.remove(pmcData, body.item, sessionID);
     return removeItem(pmcData, body.item, item.getOutput(), sessionID);
 }
 
