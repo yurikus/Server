@@ -80,7 +80,6 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.move_f = require('./item/_move.js');
 	global.status_f = require('./item/_status.js');
 	global.wishList_f = require('./item/_wishList.js');
-	global.character_f = require('./item/_character.js');
 	global.trade_f = require('./item/_trade.js');
 	global.customization_f = require('./item/_customization.js');
 	global.hideout_f = require('./item/_hideout.js');
