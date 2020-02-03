@@ -23,6 +23,80 @@ class HealthServer {
         };
     }
 
+    healOffraid(pmcData, body, sessionID) {
+        let output = item.getOutput();
+    
+        // healing body part
+        for (let bdpart in pmcData.Health.BodyParts) {
+            if (bdpart === body.part) {
+                this.healths[sessionID][bdpart] += body.count;
+            }
+        }
+    
+        // update medkit used (hpresource)
+        for (let item of pmcData.Inventory.items) {
+            if (item._id === body.item) {
+                if (typeof item.upd.MedKit === "undefined") {
+                    let maxhp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
+                    item.upd.MedKit = {"HpResource": maxhp - body.count};
+                } else {
+                    item.upd.MedKit.HpResource -= body.count;
+                }
+    
+                if (item.upd.MedKit.HpResource === 0) {
+                    move_f.removeItem(pmcData, body.item, output, sessionID);
+                }
+            }
+        }
+
+        this.applyHealth(pmcData, sessionID);
+        return "OK";
+    }
+
+    eatItemOffraid(pmcData, body, sessionID) {
+        item.resetOutput();
+        
+        let output = item.getOutput();
+        let todelete = false;
+        let maxResource = undefined;
+        let effects = undefined;
+    
+        for (let item in pmcData.Inventory.items) {
+            if (pmcData.Inventory.items[item]._id === body.item) {
+                maxResource = itm_hf.getItem(pmcData.Inventory.items[item]._tpl)[1]._props.MaxResource;
+                effects = itm_hf.getItem(pmcData.Inventory.items[item]._tpl)[1]._props.effects_health; 
+    
+                if (maxResource > 1) {   
+                    if (typeof pmcData.Inventory.items[item].upd.FoodDrink === 'undefined') {
+                        pmcData.Inventory.items[item].upd.FoodDrink = {"HpPercent" : maxResource - body.count}; 
+                    } else {
+                        pmcData.Inventory.items[item].upd.FoodDrink.HpPercent -= body.count; 
+                        
+                        if (pmcData.Inventory.items[item].upd.FoodDrink.HpPercent < 1) {
+                            todelete = true;
+                        }
+                    }  
+                }
+            }
+        }
+    
+        let hydration = pmcData.Health.Hydration;
+        let energy = pmcData.Health.Energy;
+    
+        this.healths[sessionID].Hydration += effects.hydration.value;
+        this.healths[sessionID].Energy += effects.energy.value;
+    
+        
+    
+    
+        if (maxResource === 1 || todelete === true) {
+            output = move_f.removeItem(pmcData, body.item, output, sessionID);
+        }
+
+        this.applyHealth(pmcData, sessionID);
+        return output;
+    }
+
     /* stores the player health changes */
     updateHealth(info, sessionID) {
         let node = this.healths[sessionID];
@@ -44,13 +118,13 @@ class HealthServer {
                 node = {
                     "Hydration": this.healths[sessionID].Hydration,
                     "Energy": this.healths[sessionID].Energy,
-                    "Head": 0,
-                    "Chest": 0,
-                    "Stomach": 0,
-                    "LeftArm": 0,
-                    "RightArm": 0,
-                    "LeftLeg": 0,
-                    "RightLeg": 0
+                    "Head": -1,
+                    "Chest": -1,
+                    "Stomach": -1,
+                    "LeftArm": -1,
+                    "RightArm": -1,
+                    "LeftLeg": -1,
+                    "RightLeg": -1
                 };
                 break;
         }
@@ -65,18 +139,22 @@ class HealthServer {
         }
 
         let node = this.healths[sessionID];
-        let keys = Object.keys(node);        
+        let keys = Object.keys(node);
 
         for (let item of keys) {
             if (item !== "Hydration" && item !== "Energy") {
                 /* set body part health */
-                pmcData.Health.BodyParts[item].Health.Current = (node[item] === 0)
+                pmcData.Health.BodyParts[item].Health.Current = (node[item] === -1)
                     ? Math.round((pmcData.Health.BodyParts[item].Health.Maximum * settings.gameplay.inraid.saveHealthMultiplier))
                     : node[item];
             } else {
                 /* set resources */
                 pmcData.Health[item].Current += node[item];
-            }   
+
+                if (pmcData.Health[item].Current > pmcData.Health[item].Maximum) {
+                    pmcData.Health[item].Current = pmcData.Health[item].Maximum;
+                }
+            }
         }
     
         this.initializeHealth(sessionID);

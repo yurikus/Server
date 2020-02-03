@@ -111,7 +111,7 @@ class InsuranceServer {
 
     /* store lost pmc gear */
     storeLostGear(pmcData, offraidData, sessionID) {
-        for (let insuredItem of pmcData.InsuredItes) {
+        for (let insuredItem of pmcData.InsuredItems) {
             let found = false;
 
             /* find item */
