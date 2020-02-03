@@ -31,7 +31,7 @@ const staticRoutes = {
     "Bind": status_f.bindItem,
     "Examine": status_f.examineItem,
     "ReadEncyclopedia": status_f.readEncyclopedia,
-    "Eat": health_f.heathServer.eatItemOffraid,
+    "Eat": health_f.healthServer.eatItemOffraid,
     "Heal": health_f.heathServer.healOffraid,
     "Transfer": move_f.transferItem,
     "Swap": move_f.swapItem,
