@@ -111,11 +111,13 @@ class InsuranceServer {
 
     /* store lost pmc gear */
     storeLostGear(pmcData, offraidData, sessionID) {
+        console.log(offraidData);
+
         for (let insuredItem of pmcData.InsuredItems) {
             let found = false;
 
             /* find item */
-            for (let item of offraidData.profile.Inventory.Items) {
+            for (let item of offraidData.profile.Inventory.items) {
                 if (insuredItem.itemId === item._id) {
                     found = true;
                     break;
@@ -124,7 +126,7 @@ class InsuranceServer {
 
             /* item is lost */
             if (!found) {
-                for (let item of pmcData.Inventory.Items) {
+                for (let item of pmcData.Inventory.items) {
                     if (insuredItem.itemId === item._id) {
                         this.addGearToSend(pmcData, item, sessionID);
                     }
@@ -136,7 +138,7 @@ class InsuranceServer {
     /* store insured items on pmc death */
     storeDeadGear(pmcData, sessionID) {
         for (let insuredItem of pmcData.InsuredItes) {
-            for (let item of pmcData.Inventory.Items) {
+            for (let item of pmcData.Inventory.items) {
                 if (insuredItem.itemId === item._id && item.parentId === pmcData.Inventory.equipment) {
                     this.addGearToSend(pmcData, item, sessionID);
                     break;
