@@ -23,7 +23,7 @@ class HealthServer {
         };
     }
 
-    healOffraid(pmcData, body, sessionID) {
+    offraidHeal(pmcData, body, sessionID) {
         let output = item.getOutput();
     
         // healing body part
@@ -53,7 +53,7 @@ class HealthServer {
         return "OK";
     }
 
-    eatItemOffraid(pmcData, body, sessionID) {
+    offraidEat(pmcData, body, sessionID) {
         item.resetOutput();
         
         let output = item.getOutput();
