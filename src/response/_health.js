@@ -80,15 +80,9 @@ class HealthServer {
             }
         }
     
-        let hydration = pmcData.Health.Hydration;
-        let energy = pmcData.Health.Energy;
-    
         this.healths[sessionID].Hydration += effects.hydration.value;
         this.healths[sessionID].Energy += effects.energy.value;
-    
         
-    
-    
         if (maxResource === 1 || todelete === true) {
             output = move_f.removeItem(pmcData, body.item, output, sessionID);
         }
