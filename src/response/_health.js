@@ -61,32 +61,31 @@ class HealthServer {
         let maxResource = undefined;
         let effects = undefined;
     
-        for (let item in pmcData.Inventory.items) {
-            if (pmcData.Inventory.items[item]._id === body.item) {
-                maxResource = itm_hf.getItem(pmcData.Inventory.items[item]._tpl)[1]._props.MaxResource;
-                effects = itm_hf.getItem(pmcData.Inventory.items[item]._tpl)[1]._props.effects_health; 
+        for (let item of pmcData.Inventory.items) {
+            if (item._id === body.item) {
+                maxResource = itm_hf.getItem(item._tpl)[1]._props.MaxResource;
+                effects = itm_hf.getItem(item._tpl)[1]._props.effects_health; 
     
                 if (maxResource > 1) {   
-                    if (typeof pmcData.Inventory.items[item].upd.FoodDrink === 'undefined') {
-                        pmcData.Inventory.items[item].upd.FoodDrink = {"HpPercent" : maxResource - body.count}; 
+                    if (typeof item.upd.FoodDrink === 'undefined') {
+                        item.upd.FoodDrink = {"HpPercent" : maxResource - body.count}; 
                     } else {
-                        pmcData.Inventory.items[item].upd.FoodDrink.HpPercent -= body.count; 
+                        item.upd.FoodDrink.HpPercent -= body.count; 
                         
-                        if (pmcData.Inventory.items[item].upd.FoodDrink.HpPercent < 1) {
+                        if (item.upd.FoodDrink.HpPercent < 1) {
                             todelete = true;
                         }
                     }  
                 }
             }
         }
-    
-        this.healths[sessionID].Hydration += effects.hydration.value;
-        this.healths[sessionID].Energy += effects.energy.value;
-        
+
         if (maxResource === 1 || todelete === true) {
             output = move_f.removeItem(pmcData, body.item, output, sessionID);
         }
 
+        this.healths[sessionID].Hydration += effects.hydration.value;
+        this.healths[sessionID].Energy += effects.energy.value;
         this.applyHealth(pmcData, sessionID);
         return output;
     }
