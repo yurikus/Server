@@ -204,15 +204,15 @@ function findMoney(by, pmcData, barter_itemID) { // find required items to take 
 * ancestor with slotId=hideout
 */
 function isItemInStash(pmcData, item) {
-	let container = item;
-	while (typeof container.parentId != "undefined") {
-		if (container.parentId === pmcData.Inventory.stash && container.slotId === "hideout") {
-			return true;
-		}
-		container = container.parentId;
-	}
+    let container = item;
+    while (typeof container.parentId != "undefined") {
+        if (container.parentId === pmcData.Inventory.stash && container.slotId === "hideout") {
+            return true;
+        }
+        container = container.parentId;
+    }
 
-	return false;
+    return false;
 }
 
 /* receive money back after selling
@@ -224,7 +224,7 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;
-	let maxStackSize = 50000;
+    let maxStackSize = 50000;
 
     // adjust maxStackSize for RUN
     if (currency === "5449016a4bdc2d6f028b456f") {
