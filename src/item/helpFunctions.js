@@ -199,6 +199,18 @@ function findMoney(by, pmcData, barter_itemID) { // find required items to take 
     return itemsArray;
 }
 
+/*
+* Finds an item given its id using linear search
+*/
+function findItemById(items, id) {
+    for (let item of items) {
+        if (item._id === id) {
+            return item;
+        }
+    }
+    return false;
+}
+
 /* Recursively checks if the given item is
 * inside the stash, that is it has the stash as
 * ancestor with slotId=hideout
@@ -209,7 +221,10 @@ function isItemInStash(pmcData, item) {
         if (container.parentId === pmcData.Inventory.stash && container.slotId === "hideout") {
             return true;
         }
-        container = container.parentId;
+        container = findItemById(pmcData.Inventory.items, container.parentId);
+        if (!container) {
+            break;
+        }
     }
 
     return false;
