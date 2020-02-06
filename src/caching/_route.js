@@ -363,15 +363,19 @@ function locales() {
         if (path == 0) {
             baseNode.data.name = "db/locales/en/en.json";
             filepaths.locales.en = baseNode.data;
+            filepaths.user.cache["locale_en"] = "user/cache/locale_en.json";
         } else if (path == 1) {
             baseNode.data.name = "db/locales/fr/fr.json";
             filepaths.locales.fr = baseNode.data;
+            filepaths.user.cache["locale_fr"] = "user/cache/locale_fr.json";
         } else if (path == 2) {
             baseNode.data.name = "db/locales/ge/ge.json";
             filepaths.locales.ge = baseNode.data;
+            filepaths.user.cache["locale_ge"] = "user/cache/locale_ge.json";
         } else if (path == 3) {
             baseNode.data.name = "db/locales/ru/ru.json";
             filepaths.locales.ru = baseNode.data;
+            filepaths.user.cache["locale_ru"] = "user/cache/locale_ru.json";
         }
     }
 }
