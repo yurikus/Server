@@ -431,6 +431,11 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
                             let toDo = [[item._id, newItem]];
                             let upd = {"StackObjectsCount": StacksValue[stacks]};
 
+                            // in case people want all items to be marked as found in raid
+                            if (settings.gameplay.trading.buyItemsMarkedFound) {
+                                foundInRaid = true;
+                            }
+
                             // hideout items need to be marked as found in raid
                             if (foundInRaid) {
                                 upd["SpawnedInSession"] = true;
