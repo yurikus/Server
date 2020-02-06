@@ -199,6 +199,37 @@ function findMoney(by, pmcData, barter_itemID) { // find required items to take 
     return itemsArray;
 }
 
+/*
+* Finds an item given its id using linear search
+*/
+function findItemById(items, id) {
+    for (let item of items) {
+        if (item._id === id) {
+            return item;
+        }
+    }
+    return false;
+}
+
+/* Recursively checks if the given item is
+* inside the stash, that is it has the stash as
+* ancestor with slotId=hideout
+*/
+function isItemInStash(pmcData, item) {
+    let container = item;
+    while (typeof container.parentId != "undefined") {
+        if (container.parentId === pmcData.Inventory.stash && container.slotId === "hideout") {
+            return true;
+        }
+        container = findItemById(pmcData.Inventory.items, container.parentId);
+        if (!container) {
+            break;
+        }
+    }
+
+    return false;
+}
+
 /* receive money back after selling
 * input: pmcData, numberToReturn, request.body,
 * output: none (output is sended to item.js, and profile is saved to file)
@@ -208,6 +239,12 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;
+    let maxStackSize = 50000;
+
+    // adjust maxStackSize for RUN
+    if (currency === "5449016a4bdc2d6f028b456f") {
+        maxStackSize = 500000;
+    }
 
     for (let item of pmcData.Inventory.items) {
         // item is not currency
@@ -215,14 +252,19 @@ function getMoney(pmcData, amount, body, output, sessionID) {
             continue;
         }
 
+        // item is not in the stash
+        if (!isItemInStash(pmcData, item)) {
+            continue;
+        }
+
         // too much money for a stack
-        if (item.upd.StackObjectsCount + calcAmount > 500000) {
+        if (item.upd.StackObjectsCount + calcAmount > maxStackSize) {
             // calculate difference
             let tmp = item.upd.StackObjectsCount;
-            let difference = 500000 - tmp;
+            let difference = maxStackSize - tmp;
 
             // make stack max money, then look further
-            item.upd.StackObjectsCount = 500000;
+            item.upd.StackObjectsCount = maxStackSize;
             output.data.items.change.push(item);
             calcAmount -= difference;
             continue;
