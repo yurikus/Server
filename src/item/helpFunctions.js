@@ -496,20 +496,22 @@ function replaceIDs(pmcData, items) {
     for (let item of items) {
         let insuredItem = false;
 
-        // insured items shouldn't be renamed
-        // only works for pmcs.
-        for (let insurance of pmcData.InsuredItems) {
-            if (insurance.itemId === item._id) {
-                insuredItem = true;
+        if (pmcData !== null) {
+            // insured items shouldn't be renamed
+            // only works for pmcs.
+            for (let insurance of pmcData.InsuredItems) {
+                if (insurance.itemId === item._id) {
+                    insuredItem = true;
+                }
             }
-        }
 
-        // do not replace important ID's
-        if (item._id === pmcData.Inventory.equipment
-        || item._id === pmcData.Inventory.questRaidItems
-        || item._id === pmcData.Inventory.questStashItems
-        || insuredItem) {
-            continue;
+            // do not replace important ID's
+            if (item._id === pmcData.Inventory.equipment
+            || item._id === pmcData.Inventory.questRaidItems
+            || item._id === pmcData.Inventory.questStashItems
+            || insuredItem) {
+                continue;
+            }
         }
 
         // replace id

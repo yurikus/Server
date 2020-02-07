@@ -39,6 +39,11 @@ class InsuranceServer {
 
     /* adds gear to store */
     addGearToSend(pmcData, insuredItem, actualItem, sessionID) {
+        // Mark root-level items for later.
+        if (actualItem.parentId === pmcData.Inventory.equipment) {
+            actualItem.slotId = "hideout";
+        }
+
         this.insured[sessionID][insuredItem.tid] = this.insured[sessionID][insuredItem.tid] || [];
         this.insured[sessionID][insuredItem.tid].push(actualItem);
         this.remove(pmcData, insuredItem.itemId);
