@@ -1,12 +1,12 @@
 {
-	"Id": "loot_grenade (87)3060316",
-	"IsStatic": false,
+	"Id": "Lootable_00171",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -204.592,
-		"y": -3.606,
-		"z": -369.961
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d1881c20ab7c9a5a0d64",
+	"Root": "5db5d18ef113b904523aee3a",
 	"Items": [
 		{
-			"_id": "5db5d1881c20ab7c9a5a0d64",
-			"_tpl": "5a2a57cfc4a2826c6e06d44a"
+			"_id": "5db5d18ef113b904523aee3a",
+			"_tpl": "5909d5ef86f77467974efbd8"
+		},
+		{
+			"_id": "5db5d18ef113b904523aee3b",
+			"_tpl": "5c6d10fa2e221600106f3f23",
+			"parentId": "5db5d18ef113b904523aee3a",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

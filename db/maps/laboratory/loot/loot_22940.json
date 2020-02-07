@@ -1,12 +1,12 @@
 {
-	"Id": "loot_transluminator (72)3059960",
-	"IsStatic": false,
-	"useGravity": false,
-	"randomRotation": true,
+	"Id": "Lootable_00013",
+	"IsStatic": true,
+	"useGravity": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -173.351,
-		"y": 0.966,
-		"z": -367.129
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d1918bcb9e33ce40272a",
+	"Root": "5db5d19342a81007cb24f9a8",
 	"Items": [
 		{
-			"_id": "5db5d1918bcb9e33ce40272a",
-			"_tpl": "5c0530ee86f774697952d952"
+			"_id": "5db5d19342a81007cb24f9a8",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5db5d19342a81007cb24f9a9",
+			"_tpl": "57347c1124597737fb1379e3",
+			"parentId": "5db5d19342a81007cb24f9a8",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

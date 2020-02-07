@@ -1,12 +1,12 @@
 {
-	"Id": "loot_stimulators (93)3055750",
+	"Id": "loot_ammo_rare (21)4561866",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": -131.492,
-		"y": 0.881,
-		"z": -358.013
+		"x": -183.944,
+		"y": 1.45,
+		"z": -316.356
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,30 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d18dcd1e3d3a9450a554",
+	"Root": "5e0675f3ba96696e0f05590b",
 	"Items": [
 		{
-			"_id": "5db5d18dcd1e3d3a9450a554",
-			"_tpl": "5c0e534186f7747fa1419867"
+			"_id": "5e0675f3ba96696e0f05590b",
+			"_tpl": "57372deb245977685d4159b3"
+		},
+		{
+			"_id": "5e0675f3ba96696e0f05590c",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e0675f3ba96696e0f05590b",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e0675f3ba96696e0f05590d",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e0675f3ba96696e0f05590b",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

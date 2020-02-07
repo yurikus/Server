@@ -1,12 +1,12 @@
 {
-	"Id": "loot_mod (39)1329662",
-	"IsStatic": false,
+	"Id": "Lootable_00165",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -268.785,
-		"y": 5,
-		"z": -323.237
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,86 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5c8a662786f77422ab649a86",
+	"Root": "5e0675f5ba96696e0f055c33",
 	"Items": [
 		{
-			"_id": "5c8a662786f77422ab649a86",
-			"_tpl": "57da93632459771cb65bf83f"
+			"_id": "5e0675f5ba96696e0f055c33",
+			"_tpl": "578f8782245977354405a1e3"
+		},
+		{
+			"_id": "5e0675f5ba96696e0f055c34",
+			"_tpl": "5df8a6a186f77412640e2e80",
+			"parentId": "5e0675f5ba96696e0f055c33",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0675f5ba96696e0f055c35",
+			"_tpl": "5df8a72c86f77412640e2e83",
+			"parentId": "5e0675f5ba96696e0f055c33",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0675f5ba96696e0f055c36",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e0675f5ba96696e0f055c33",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 1063
+			}
+		},
+		{
+			"_id": "5e0675f5ba96696e0f055c37",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e0675f5ba96696e0f055c33",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 887
+			}
+		},
+		{
+			"_id": "5e0675f5ba96696e0f055c38",
+			"_tpl": "5df8a72c86f77412640e2e83",
+			"parentId": "5e0675f5ba96696e0f055c33",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 1,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0675f5ba96696e0f055c39",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e0675f5ba96696e0f055c33",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 720
+			}
 		}
 	]
 }

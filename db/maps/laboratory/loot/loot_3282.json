@@ -1,12 +1,12 @@
 {
-	"Id": "loot_jeverly (39)1333602",
-	"IsStatic": false,
+	"Id": "Lootable_00067",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -251.869,
-		"y": 5.717,
-		"z": -328.541
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5c8a662186f774283a1ca88b",
+	"Root": "5db5d18ff113b904523aee7d",
 	"Items": [
 		{
-			"_id": "5c8a662186f774283a1ca88b",
-			"_tpl": "5bc9bdb8d4351e003562b8a1"
+			"_id": "5db5d18ff113b904523aee7d",
+			"_tpl": "59139c2186f77411564f8e42"
+		},
+		{
+			"_id": "5db5d18ff113b904523aee7e",
+			"_tpl": "5734779624597737e04bf329",
+			"parentId": "5db5d18ff113b904523aee7d",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d18ff113b904523aee7f",
+			"_tpl": "5734779624597737e04bf329",
+			"parentId": "5db5d18ff113b904523aee7d",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

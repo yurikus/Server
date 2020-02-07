@@ -1,12 +1,12 @@
 {
-	"Id": "loot_med_super_rare (48)3060384",
-	"IsStatic": false,
+	"Id": "Lootable_00242",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -133.492,
-		"y": 5.229,
-		"z": -356.865
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,61 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d1908bcb9e33ce402655",
+	"Root": "5c8a662886f77422ab649bdb",
 	"Items": [
 		{
-			"_id": "5db5d1908bcb9e33ce402655",
-			"_tpl": "5751a89d24597722aa0e8db0"
+			"_id": "5c8a662886f77422ab649bdb",
+			"_tpl": "578f87a3245977356274f2cb"
+		},
+		{
+			"_id": "5c8a662886f77422ab649bdc",
+			"_tpl": "5448bd6b4bdc2dfc2f8b4569",
+			"parentId": "5c8a662886f77422ab649bdb",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5c8a662886f77422ab649bdd",
+			"_tpl": "5448c12b4bdc2d02308b456f",
+			"parentId": "5c8a662886f77422ab649bdc",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5c8a662886f77422ab649bde",
+			"_tpl": "590de71386f774347051a052",
+			"parentId": "5c8a662886f77422ab649bdb",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5c8a662886f77422ab649bdf",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5c8a662886f77422ab649bdb",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5c8a662886f77422ab649be0",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5c8a662886f77422ab649bdb",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			}
 		}
 	]
 }
