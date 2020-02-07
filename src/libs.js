@@ -92,7 +92,6 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.weather_f = require('./classes/_weather.js');
 	global.map_f =  require('./classes/_map.js');
 	global.item = require('./classes/_item.js');
-	global.response = require('./classes/response.js');
 	
 	if (isFirstLaunch) {
 		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");

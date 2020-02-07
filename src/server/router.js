@@ -13,8 +13,22 @@ class Router {
         this.dynamicRoutes = {};
         this.itemRoutes = {};
 
+        /* load all responses */
+        this.initializeResponses();
+
         /* add item routes handler */
         this.staticRoutes["/client/game/profile/items/moving"] = this.handleItemRoute;
+    }
+
+    /* load responses */
+    initializeResponses() {
+        this.staticRoutes = {};
+        this.dynamicRoutes = {};
+        this.itemRoutes = {};
+
+        for (let response in filepaths.src.responses) {
+            require(filepaths.src.responses[response]);
+        }
     }
 
     /* sets static routes to check for */

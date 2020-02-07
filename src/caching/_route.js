@@ -34,6 +34,8 @@ function genericFilepathCacher(type, basepath) {
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
             case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
             case "profileEditions": filepaths.profile.character[fileName] = filePath; break;
+            case "srcResponses": filepaths.src.responses[fileName] = filePath; break;
+            case "srcClasses": filepaths.src.classes[fileName] = filePath; break;
         }
     }
 }
@@ -420,6 +422,14 @@ function profile() {
     genericFilepathCacher("profileEditions", "db/profile/character");
 }
 
+function srcClasses() {
+    genericFilepathCacher("srcClasses", "src/classes");
+}
+
+function srcResponses() {
+    genericFilepathCacher("srcResponses", "src/responses");
+}
+
 function others() {
     logger.logInfo("Routing: others");
 
@@ -479,6 +489,8 @@ function routeDatabase() {
     locales();
     images();
     profile();
+    srcClasses();
+    srcResponses();
     others();
     cache();
 }
