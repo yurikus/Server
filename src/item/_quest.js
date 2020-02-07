@@ -73,6 +73,16 @@ function completeQuest(pmcData, body, sessionID) {
                     }
                     break;
 
+                case "Skill":
+                    pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+
+                    for (let skill of pmcData.Skills.Common) {
+                        if (skill.Id === reward.target) {
+                            skill.Progress += parseInt(reward.value);
+                        }
+                    }
+                    break;
+
                 case "Experience":
                     pmcData = profile_f.profileServer.getPmcProfile(sessionID);
                     pmcData.Info.Experience += parseInt(reward.value);
