@@ -1,12 +1,12 @@
 {
-	"Id": "LootFood[14] (54)2109122",
-	"IsStatic": false,
+	"Id": "Lootable_00261",
+	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": -513.803955,
-		"y": -24.596,
-		"z": 239.786987
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,44 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d31e3f7645bb716d02dd1b3",
+	"Root": "5db5d07a8bcb9e33ce400ecb",
 	"Items": [
 		{
-			"_id": "5d31e3f7645bb716d02dd1b3",
-			"_tpl": "590c5d4b86f774784e1b9c45"
+			"_id": "5db5d07a8bcb9e33ce400ecb",
+			"_tpl": "59139c2186f77411564f8e42"
+		},
+		{
+			"_id": "5db5d07a8bcb9e33ce400ecc",
+			"_tpl": "59e36c6f86f774176c10a2a7",
+			"parentId": "5db5d07a8bcb9e33ce400ecb",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d07a8bcb9e33ce400ecd",
+			"_tpl": "5734781f24597737e04bf32a",
+			"parentId": "5db5d07a8bcb9e33ce400ecb",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d07a8bcb9e33ce400ece",
+			"_tpl": "5734779624597737e04bf329",
+			"parentId": "5db5d07a8bcb9e33ce400ecb",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			}
 		}
 	]
 }

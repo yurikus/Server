@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_barter_flam_kerosine (36)4378434",
+	"Id": "LootAmmoBoxes[0] (47)4374958",
 	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 339.025757,
-		"y": -55.562,
-		"z": 107.558
+		"x": -236.97998,
+		"y": -0.004,
+		"z": -129.493
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d03342a81007cb24d99d",
+	"Root": "5db5d03442a81007cb24d9db",
 	"Items": [
 		{
-			"_id": "5db5d03342a81007cb24d99d",
-			"_tpl": "5d1b371186f774253763a656"
+			"_id": "5db5d03442a81007cb24d9db",
+			"_tpl": "573727c624597765cc785b5b"
+		},
+		{
+			"_id": "5db5d03442a81007cb24d9dc",
+			"_tpl": "5737201124597760fc4431f1",
+			"parentId": "5db5d03442a81007cb24d9db",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 16
+			}
 		}
 	]
 }
