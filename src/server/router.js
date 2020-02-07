@@ -60,17 +60,17 @@ class Router {
         let url = req.url;
         let info = {};
     
-        // parse body
+        /* parse body */
         if (body !== "") {
             info = json.parse(body);
         }
     
-        // remove ?retry=X from URL
+        /* remove retry from URL */
         if (url.indexOf("?retry=") !== -1) {
             url = url.split("?retry=")[0];
         }
         
-        // route request
+        /* route request */
         if (typeof this.staticRoutes[url] !== "undefined") {
             output = this.staticRoutes[url](url, info, sessionID);
         } else {
@@ -81,13 +81,13 @@ class Router {
             }
         }
     
-        // request couldn't be handled
+        /* route doesn't exist */
         if (output === "") {
             logger.logError("[UNHANDLED][" + url + "] request data: " + json.stringify(info));
             output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
         }
     
-        // load from cache when server is in release mode
+        /* load files from game cache */
         if (typeof info.crc !== "undefined") {
             let crctest = json.parse(output);
     

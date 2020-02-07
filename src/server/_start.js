@@ -84,11 +84,11 @@ function sendResponse(req, resp, body, sessionID) {
 
     // get response
     if (req.method === "POST") {
-        output = response.getResponse(req, body, sessionID);
+        output = router.getResponse(req, body, sessionID);
     } else if (req.method === "PUT") {
-        output = response.getResponse(req, json.stringify(body), sessionID);
+        output = router.getResponse(req, json.stringify(body), sessionID);
     } else {
-        output = response.getResponse(req, "{}", sessionID);
+        output = router.getResponse(req, "{}", sessionID);
     }
 
     if (output === "NOTIFY") {

@@ -59,6 +59,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	}
 
 	// Other
+	global.router = (require('./server/router.js').router);
 	global.locale = require('./classes/_locale.js');
 	global.index_f = require('./classes/_homeCredits.js');
 	global.keepAlive_f = require('./classes/_keepAlive.js');
