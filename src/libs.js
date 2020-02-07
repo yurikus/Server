@@ -7,12 +7,11 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	if (isFirstLaunch) {
 		logger.start();
 		logger.logSuccess("Main require() files loaded... [" + String(new Date() - time) + "]");
-	}	
+	}
 
 	// setup server
 	global.settings = json.parse(json.read("user/server.config.json"));
 	global.ended_at = 0;
-	global.ip = settings.server.ip;
 
 	if (isFirstLaunch) {
 		logger.logSuccess("Main variables setted properly... [" + String(new Date() - time) + "]");
@@ -50,12 +49,13 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	}
 
 	// load logic
+	global.server = (require('./server/_start.js').server);
+
 	global.locale = require('./classes/_locale.js');
 	global.index_f = require('./classes/_homeCredits.js');
 	global.keepAlive_f = require('./classes/_keepAlive.js');
 	global.health_f = require('./classes/_health.js');
 	global.offraid_f = require('./classes/_offraid.js');
-	global.server = require('./server/_start.js');
 	global.saveHandler = require('./server/_saveHandler.js');
 	global.constants = require('./server/_constants.js');
 	global.header_f = require('./server/_sendHeader.js');
@@ -82,9 +82,6 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.weather_f = require('./classes/_weather.js');
 	global.map_f =  require('./classes/_map.js');
 	global.item = require('./classes/_item.js');
-
-	// load routes
-    router.initializeRoutes();
 
 	if (isFirstLaunch) {
 		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");

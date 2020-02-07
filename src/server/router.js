@@ -16,8 +16,6 @@ class Router {
 
     /* load routes */
     initializeRoutes() {
-        logger.logWarning("Loading routes...");
-
         this.staticRoutes = {};
         this.dynamicRoutes = {};
         this.itemRoutes = {};
@@ -25,9 +23,6 @@ class Router {
         for (let response in filepaths.src.responses) {
             require(filepaths.src.responses[response]);
         }
-
-        /* add item routes handler */
-        this.staticRoutes["/client/game/profile/items/moving"] = this.handleItemRoute;
     }
 
     /* sets static routes to check for */
@@ -45,40 +40,31 @@ class Router {
         this.itemRoutes[route] = callback;
     }
 
-    /* handle item routes */
-    handleItemRoute(url, info, sessionID) {
-        console.log(this.itemRoutes);
+    handleItemRoutes(info, sessionID) {
         let output = "";
-
-        // handle all items
-        for (let i = 0; i < info.data.length; i++) {
-            console.log(this.itemRoutes);
-
-            let body = info.data[i];
+        
+        for (let body of info.data) {
             let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
-            if (typeof this.itemRoutes[body.Action] !== "undefined") {
-                return this.itemRoutes[body.Action](pmcData, body, sessionID);
+            if (body.Action in this.itemRoutes) {
+                output = this.itemRoutes[body.Action](pmcData, body, sessionID);
+            } else {
+                logger.logError("[UNHANDLED ACTION] " + body.Action);
             }
-
-            logger.logError("[UNHANDLED ACTION] " + body.Action);
         }
 
-        // return items
         if (output === "OK") {
-            return json.stringify(getOutput());
+            output = json.stringify(item_f.getOutput());
         }
 
         if (output !== "") {
-            return json.stringify(output);
+            output = json.stringify(output);
         }
 
         return output;
     }
 
     getResponse(req, body, sessionID) {
-        console.log(this.itemRoutes);
-
         let output = "";
         let url = req.url;
         let info = {};
@@ -89,35 +75,39 @@ class Router {
         }
     
         /* remove retry from URL */
-        if (url.indexOf("?retry=") !== -1) {
+        if (url.includes("?retry=")) {
             url = url.split("?retry=")[0];
         }
         
         /* route request */
-        if (typeof this.staticRoutes[url] !== "undefined") {
-            output = this.staticRoutes[url](url, info, sessionID);
+        if (url in this.staticRoutes) {
+            if (url === "/client/game/profile/items/moving") {
+                output = this.handleItemRoutes(info, sessionID);
+            } else {
+                output = this.staticRoutes[url](url, info, sessionID);
+            }
         } else {
             for (let key in this.dynamicRoutes) {
-                if (url.indexOf(key) !== -1) {
+                if (url.includes(key)) {
                     output = this.dynamicRoutes[key](url, info, sessionID);
                 }
             }
         }
     
-        /* route doesn't exist */
-        if (output === "") {
-            logger.logError("[UNHANDLED][" + url + "] request data: " + json.stringify(info));
-            output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
-        }
-    
         /* load files from game cache */
-        if (typeof info.crc !== "undefined") {
+        if ("crc" in info) {
             let crctest = json.parse(output);
     
-            if (typeof crctest.crc !== "undefined" && output.crc === crctest.crc) {
+            if ("crc" in crctest && output.crc === crctest.crc) {
                 logger.logWarning("[Loading from game cache files]");
                 output = nullResponse(url, info, sessionID);
             }
+        }
+
+        /* route doesn't exist or response is not properly set up */
+        if (output === "") {
+            logger.logError("[UNHANDLED][" + url + "] request data: " + json.stringify(info));
+            output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
         }
     
         return output;

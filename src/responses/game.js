@@ -12,7 +12,7 @@ function getGameConfig(url, info, sessionID) {
 }
 
 function selectProfile(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + ip + '/", "channel_id":"testChannel"}}}';
+    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + server.getIp() + '/", "channel_id":"testChannel"}}}';
 }
 
 function getProfileStatus(url, info, sessionID) {
@@ -20,7 +20,7 @@ function getProfileStatus(url, info, sessionID) {
 }
 
 function getServer(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + 443 + '"}]}';
+    return '{"err":0, "errmsg":null, "data":[{"ip":"' + server.getIp() + '", "port":"' + server.getHttpsPort() + '"}]}';
 }
 
 function validateGameVersion(url, info, sessionID) {

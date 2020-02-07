@@ -51,11 +51,6 @@ function getCookies(req) {
     return found;
 }
 
-function generateCertifcate() {
-    let perms = selfsigned.generate([{ name: 'commonName', value: settings.server.ip + "/" }], { days: 365 });
-    return {cert: perms.cert, key: perms.private};
-}
-
 async function notificationWaitAsync(resp, sessionID) {
     let promise = new Promise(resolve => {
         // Timeout after 15 seconds even if no messages have been received to keep the poll requests going.
@@ -207,41 +202,65 @@ function handleRequest(req, resp) {
     }
 }
 
-function start() {
-    // set the ip
-    if (settings.server.generateIp == true) {
-        ip = utility.getLocalIpAddress();
-        settings.server.ip = ip;
+class Server {
+    constructor() {
+        this.ip = settings.server.ip;
+        this.httpPort = 80;
+        this.httpsPort = 443;
     }
 
-    const options = generateCertifcate();
+    getIp() {
+        return this.ip;
+    }
 
-    // show our watermark
-    showWatermark();
+    getHttpPort() {
+        return this.httpPort;
+    }
 
-    // create HTTPS server (port 443)
-    let gameServer = https.createServer(options, (req, res) => {
-        handleRequest(req, res);
-    }).listen(443, ip, function() {
-        logger.logIp("» server url: " + "https://" + ip + "/");
-    });
+    getHttpsPort() {
+        return this.httpsPort;
+    }
 
-    // server already running
-    gameServer.on('error', function(e) {
-        logger.logError("» Port " + 443 + " is already in use, check if the server isn't already running");
-    });
+    generateCertifcate() {
+        let perms = selfsigned.generate([{ name: 'commonName', value: this.ip + "/" }], { days: 365 });
+        return {cert: perms.cert, key: perms.private};
+    }
 
-    // create HTTP server (port 80)
-    let launcherServer = http.createServer((req, res) => {
-        handleRequest(req, res);
-    }).listen(80, ip, function() {
-        logger.logIp("» launcher url: " + "http://" + ip + "/");
-    });
+    start() {
+        // set the ip
+        if (settings.server.generateIp == true) {
+            this.ip = utility.getLocalIpAddress();
+            settings.server.ip = ip;
+        }
+    
+        // show our watermark
+        showWatermark();
+    
+        // load responses
+        router.initializeRoutes();
+    
+        // create servers (https: game, http: launcher)
+        let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {
+            handleRequest(req, res);
+        }).listen(this.httpsPort, this.ip, function() {
+            logger.logIp("» server url: " + "https://" + this.ip + ":" + this.httpsPort + "/");
+        });
 
-    // server already running
-    launcherServer.on('error', function(e) {
-        logger.logError("» Port " + 80 + " is already in use, check if the server isn't already running");
-    });
+        let httpServer = http.createServer((req, res) => {
+            handleRequest(req, res);
+        }).listen(this.httpPort, this.ip, function() {
+            logger.logIp("» launcher url: " + "http://" + this.ip + ":" + this.httpPort + "/");
+        });
+
+        // game server already running
+        httpsServer.on('error', function(e) {
+            logger.logError("» Port " + this.httpsPort + " is already in use, check if the server isn't already running");
+        });
+
+        httpServer.on('error', function(e) {
+            logger.logError("» Port " + this.httpPort + " is already in use, check if the server isn't already running");
+        });
+    }
 }
 
-module.exports.start = start;
+module.exports.server = new Server();

@@ -7,7 +7,7 @@ function nullArrayResponse(url, info, sessionID) {
 }
 
 function createNotifierChannel(url, info, sessionID) {
-    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '/","channel_id":"testChannel","url":"https://' + ip + '/notifierServer/get/' + sessionID + '"},"notifierServer":"https://' + ip + '/notifierServer/get/' + sessionID + '"}}';
+    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + server.getIp() + '/","channel_id":"testChannel","url":"https://' + server.getIp() + '/notifierServer/get/' + sessionID + '"},"notifierServer":"https://' + server.getIp() + '/notifierServer/get/' + sessionID + '"}}';
 }
 
 function handleNotifierCustomLink(url, info, sessionID) {
