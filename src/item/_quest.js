@@ -79,6 +79,7 @@ function completeQuest(pmcData, body, sessionID) {
                     for (let skill of pmcData.Skills.Common) {
                         if (skill.Id === reward.target) {
                             skill.Progress += parseInt(reward.value);
+                            break;
                         }
                     }
                     break;
