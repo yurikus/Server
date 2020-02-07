@@ -1,25 +1,44 @@
 {
-	"Id": "loot_el_military (26)6033954",
+	"Id": "loot_rf_ammo_true (105)6010642",
 	"IsStatic": false,
-	"useGravity": false,
+	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": -132.95697,
-		"y": -5.906,
-		"z": -17.0909729
+		"x": -144.094971,
+		"y": -2.251824,
+		"z": -7.417877
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06760d9a5d683c327eda83",
+	"Root": "5e0676070b8cde1bad722a3c",
 	"Items": [
 		{
-			"_id": "5e06760d9a5d683c327eda83",
-			"_tpl": "5d0376a486f7747d8050965c"
+			"_id": "5e0676070b8cde1bad722a3c",
+			"_tpl": "57372deb245977685d4159b3"
+		},
+		{
+			"_id": "5e0676070b8cde1bad722a3d",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e0676070b8cde1bad722a3c",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e0676070b8cde1bad722a3e",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e0676070b8cde1bad722a3c",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

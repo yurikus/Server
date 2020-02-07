@@ -1,12 +1,12 @@
 {
-	"Id": "loot_drink_jackdaniels640330",
-	"IsStatic": false,
+	"Id": "Lootable_00355",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -983.873,
-		"y": 1.262,
-		"z": -829.454
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,44 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06d1d9e8a7532059f36",
+	"Root": "5db5d06142a81007cb24e64b",
 	"Items": [
 		{
-			"_id": "5db5d06d1d9e8a7532059f36",
-			"_tpl": "5d403f9186f7743cac3f229b"
+			"_id": "5db5d06142a81007cb24e64b",
+			"_tpl": "578f87a3245977356274f2cb"
+		},
+		{
+			"_id": "5db5d06142a81007cb24e64c",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5db5d06142a81007cb24e64b",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d06142a81007cb24e64d",
+			"_tpl": "5751a25924597722c463c472",
+			"parentId": "5db5d06142a81007cb24e64b",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d06142a81007cb24e64e",
+			"_tpl": "57347c77245977448d35f6e2",
+			"parentId": "5db5d06142a81007cb24e64b",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

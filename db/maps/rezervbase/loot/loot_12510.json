@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_military604688",
-	"IsStatic": false,
+	"Id": "Lootable_00270",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 232.499023,
-		"y": -9.548,
-		"z": 0.0130004883
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d04acd1e3d3a94508012",
+	"Root": "5db5d043533aa77c477a6015",
 	"Items": [
 		{
-			"_id": "5db5d04acd1e3d3a94508012",
-			"_tpl": "5d1c819a86f774771b0acd6c"
+			"_id": "5db5d043533aa77c477a6015",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5db5d043533aa77c477a6016",
+			"_tpl": "5d1c774f86f7746d6620f8db",
+			"parentId": "5db5d043533aa77c477a6015",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

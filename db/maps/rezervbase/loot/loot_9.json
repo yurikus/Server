@@ -1,34 +1,92 @@
 {
-	"Id": "loot_mix_food_med_ammo (38)2171940",
+	"Id": "ak-74u_med (2)629424",
 	"IsStatic": false,
-	"useGravity": true,
-	"randomRotation": true,
+	"useGravity": false,
+	"randomRotation": false,
 	"Position": {
-		"x": -57.71161,
-		"y": -3.05699921,
-		"z": -39.0372
+		"x": 142.464111,
+		"y": -5.926,
+		"z": 1.0569458
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 0,
-		"z": 0
+		"y": 52.62131,
+		"z": 90
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d7227ac5549dd27ff027723",
+	"Root": "5db5d02209aff62a3d37165b",
 	"Items": [
 		{
-			"_id": "5d7227ac5549dd27ff027723",
-			"_tpl": "573728f324597765e5728561"
+			"_id": "5db5d02209aff62a3d37165b",
+			"_tpl": "57dc2fa62459775949412633",
+			"upd": {
+				"Foldable": {
+					"Folded": false
+				}
+			}
 		},
 		{
-			"_id": "5d7227ac5549dd27ff027724",
-			"_tpl": "5737218f245977612125ba51",
-			"parentId": "5d7227ac5549dd27ff027723",
+			"_id": "5db5d02209aff62a3d37165c",
+			"_tpl": "5649ad3f4bdc2df8348b4585",
+			"parentId": "5db5d02209aff62a3d37165b",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5db5d02209aff62a3d37165d",
+			"_tpl": "57dc347d245977596754e7a1",
+			"parentId": "5db5d02209aff62a3d37165b",
+			"slotId": "mod_stock",
+			"upd": {
+				"Foldable": {
+					"Folded": false
+				}
+			}
+		},
+		{
+			"_id": "5db5d02209aff62a3d37165e",
+			"_tpl": "55d480c04bdc2d1d4e8b456a",
+			"parentId": "5db5d02209aff62a3d37165b",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5db5d02209aff62a3d37165f",
+			"_tpl": "56dff4a2d2720bbd668b456a",
+			"parentId": "5db5d02209aff62a3d37165e",
 			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 16
+				"StackObjectsCount": 30
 			}
+		},
+		{
+			"_id": "5db5d02209aff62a3d371660",
+			"_tpl": "57dc324a24597759501edc20",
+			"parentId": "5db5d02209aff62a3d37165b",
+			"slotId": "mod_muzzle"
+		},
+		{
+			"_id": "5db5d02209aff62a3d371661",
+			"_tpl": "5839a7742459773cf9693481",
+			"parentId": "5db5d02209aff62a3d37165b",
+			"slotId": "mod_reciever"
+		},
+		{
+			"_id": "5db5d02209aff62a3d371662",
+			"_tpl": "59d36a0086f7747e673f3946",
+			"parentId": "5db5d02209aff62a3d37165b",
+			"slotId": "mod_gas_block"
+		},
+		{
+			"_id": "5db5d02209aff62a3d371663",
+			"_tpl": "57ffa9f4245977728561e844",
+			"parentId": "5db5d02209aff62a3d371662",
+			"slotId": "mod_handguard"
+		},
+		{
+			"_id": "5db5d02209aff62a3d371664",
+			"_tpl": "5a5f1ce64f39f90b401987bc",
+			"parentId": "5db5d02209aff62a3d371663",
+			"slotId": "mod_tactical_001"
 		}
 	]
 }

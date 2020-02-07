@@ -1,12 +1,12 @@
 {
-	"Id": "Lootable_00004",
-	"IsStatic": true,
+	"Id": "loot_rf_ammo_true (21)6009978",
+	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -64.50781,
+		"y": 0.279423267,
+		"z": 31.2012939
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,80 +15,19 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d72279e5549dd5da607a4b5",
+	"Root": "5e0676070b8cde1bad722a96",
 	"Items": [
 		{
-			"_id": "5d72279e5549dd5da607a4b5",
-			"_tpl": "578f8782245977354405a1e3"
+			"_id": "5e0676070b8cde1bad722a96",
+			"_tpl": "560d75f54bdc2da74d8b4573"
 		},
 		{
-			"_id": "5d72279e5549dd5da607a4b6",
-			"_tpl": "569668774bdc2da2298b4568",
-			"parentId": "5d72279e5549dd5da607a4b5",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 0,
-				"r": 0
-			},
+			"_id": "5e0676070b8cde1bad722a97",
+			"_tpl": "560d61e84bdc2da74d8b4571",
+			"parentId": "5e0676070b8cde1bad722a96",
+			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 50
-			}
-		},
-		{
-			"_id": "5d72279e5549dd5da607a4b7",
-			"_tpl": "5449016a4bdc2d6f028b456f",
-			"parentId": "5d72279e5549dd5da607a4b5",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 942
-			}
-		},
-		{
-			"_id": "5d72279e5549dd5da607a4b8",
-			"_tpl": "5449016a4bdc2d6f028b456f",
-			"parentId": "5d72279e5549dd5da607a4b5",
-			"slotId": "main",
-			"location": {
-				"x": 2,
-				"y": 0,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 592
-			}
-		},
-		{
-			"_id": "5d72279e5549dd5da607a4b9",
-			"_tpl": "5449016a4bdc2d6f028b456f",
-			"parentId": "5d72279e5549dd5da607a4b5",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 1,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 863
-			}
-		},
-		{
-			"_id": "5d72279e5549dd5da607a4ba",
-			"_tpl": "5449016a4bdc2d6f028b456f",
-			"parentId": "5d72279e5549dd5da607a4b5",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 1,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 748
+				"StackObjectsCount": 30
 			}
 		}
 	]

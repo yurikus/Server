@@ -1,12 +1,12 @@
 {
-	"Id": "loot_electron_rare (4)583522",
+	"Id": "loot_rf_ammo_true (26)5988804",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": 12.6589966,
-		"y": -5.661003,
-		"z": -28.1329956
+		"x": -62.0038452,
+		"y": 0.383423269,
+		"z": 12.8413086
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,30 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d05c42a81007cb24e14e",
+	"Root": "5e06760e9a5d683c327edca1",
 	"Items": [
 		{
-			"_id": "5db5d05c42a81007cb24e14e",
-			"_tpl": "57347c2e24597744902c94a1"
+			"_id": "5e06760e9a5d683c327edca1",
+			"_tpl": "57372c21245977670937c6c2"
+		},
+		{
+			"_id": "5e06760e9a5d683c327edca2",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5e06760e9a5d683c327edca1",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e06760e9a5d683c327edca3",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5e06760e9a5d683c327edca1",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

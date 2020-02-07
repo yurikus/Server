@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_electr (32)590872",
-	"IsStatic": false,
+	"Id": "Lootable_00427",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -65.9678345,
-		"y": -5.271577,
-		"z": 32.6052856
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,43 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d03f533aa77c477a5a71",
+	"Root": "5dd2961686f77407281731e7",
 	"Items": [
 		{
-			"_id": "5db5d03f533aa77c477a5a71",
-			"_tpl": "5d1b313086f77425227d1678"
+			"_id": "5dd2961686f77407281731e7",
+			"_tpl": "578f87ad245977356274f2cc"
+		},
+		{
+			"_id": "5dd2961686f77407281731e8",
+			"_tpl": "57d14d2524597714373db789",
+			"parentId": "5dd2961686f77407281731e7",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5dd2961686f77407281731e9",
+			"_tpl": "57d152ec245977144076ccdf",
+			"parentId": "5dd2961686f77407281731e8",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5dd2961686f77407281731ea",
+			"_tpl": "57d1519e24597714373db79d",
+			"parentId": "5dd2961686f77407281731e8",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5dd2961686f77407281731eb",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5dd2961686f77407281731ea",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 21
+			}
 		}
 	]
 }

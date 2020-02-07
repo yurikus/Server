@@ -1,12 +1,12 @@
 {
-	"Id": "loot_barter_electr_phaseantenna (8)610360",
+	"Id": "loot_rf_ammo_true (104)717038",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": 108.039978,
-		"y": -5.853,
-		"z": 59.70404
+		"x": 157.612,
+		"y": -6.007,
+		"z": -221.381989
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d05b42a81007cb24e10a",
+	"Root": "5dd2961886f774793e1edcf1",
 	"Items": [
 		{
-			"_id": "5db5d05b42a81007cb24e10a",
-			"_tpl": "5d03775b86f774203e7e0c4b"
+			"_id": "5dd2961886f774793e1edcf1",
+			"_tpl": "57372c89245977685d4159b1"
+		},
+		{
+			"_id": "5dd2961886f774793e1edcf2",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5dd2961886f774793e1edcf1",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		}
 	]
 }

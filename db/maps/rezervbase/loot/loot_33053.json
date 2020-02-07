@@ -1,12 +1,12 @@
 {
-	"Id": "loot_mod_regular (15)671028",
-	"IsStatic": false,
+	"Id": "Lootable_00111",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 73.28003,
-		"y": 0.00399780273,
-		"z": -40.5979919
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961d86f77414f52bc1dd",
+	"Root": "5e0676129a5d683c327ee28b",
 	"Items": [
 		{
-			"_id": "5dd2961d86f77414f52bc1dd",
-			"_tpl": "5bbdb811d4351e45020113c7"
+			"_id": "5e0676129a5d683c327ee28b",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e0676129a5d683c327ee28c",
+			"_tpl": "573478bc24597738002c6175",
+			"parentId": "5e0676129a5d683c327ee28b",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

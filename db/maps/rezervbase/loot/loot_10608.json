@@ -1,25 +1,36 @@
 {
-	"Id": "loot_el_military (11)6016572",
-	"IsStatic": false,
-	"useGravity": false,
-	"randomRotation": true,
+	"Id": "Lootable_00578",
+	"IsStatic": true,
+	"useGravity": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -24.3380127,
-		"y": -5.403,
-		"z": 23.8919983
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e0676070b8cde1bad72288a",
+	"Root": "5e067615ba96696e0f056167",
 	"Items": [
 		{
-			"_id": "5e0676070b8cde1bad72288a",
-			"_tpl": "5d0378d486f77420421a5ff4"
+			"_id": "5e067615ba96696e0f056167",
+			"_tpl": "5909d36d86f774660f0bb900"
+		},
+		{
+			"_id": "5e067615ba96696e0f056168",
+			"_tpl": "5a2a57cfc4a2826c6e06d44a",
+			"parentId": "5e067615ba96696e0f056167",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

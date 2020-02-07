@@ -1,25 +1,47 @@
 {
-	"Id": "loot_el_mill_acum (16)639328",
-	"IsStatic": false,
-	"useGravity": false,
+	"Id": "Lootable_00145",
+	"IsStatic": true,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": 215.513,
-		"y": -6.925,
-		"z": -85.065
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 23.2594681,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06d1d9e8a7532059f4c",
+	"Root": "5e0676119a5d683c327ee161",
 	"Items": [
 		{
-			"_id": "5db5d06d1d9e8a7532059f4c",
-			"_tpl": "5d03794386f77420415576f5"
+			"_id": "5e0676119a5d683c327ee161",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e0676119a5d683c327ee162",
+			"_tpl": "590a3efd86f77437d351a25b",
+			"parentId": "5e0676119a5d683c327ee161",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0676119a5d683c327ee163",
+			"_tpl": "590a3cd386f77436f20848cb",
+			"parentId": "5e0676119a5d683c327ee161",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

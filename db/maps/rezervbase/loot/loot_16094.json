@@ -1,25 +1,44 @@
 {
-	"Id": "loot_military_veh (33)724100",
+	"Id": "loot_rf_ammo_true (147)688056",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": 206.659,
-		"y": -6.603,
-		"z": -87.3139954
+		"x": -111.94397,
+		"y": -6.093,
+		"z": -111.537994
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961886f774793e1edb45",
+	"Root": "5dd2961386f774793d4cd59c",
 	"Items": [
 		{
-			"_id": "5dd2961886f774793e1edb45",
-			"_tpl": "5d1c819a86f774771b0acd6c"
+			"_id": "5dd2961386f774793d4cd59c",
+			"_tpl": "57372c21245977670937c6c2"
+		},
+		{
+			"_id": "5dd2961386f774793d4cd59d",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5dd2961386f774793d4cd59c",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dd2961386f774793d4cd59e",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5dd2961386f774793d4cd59c",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

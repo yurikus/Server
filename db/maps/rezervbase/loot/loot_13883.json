@@ -1,12 +1,12 @@
 {
-	"Id": "loot_tools_metalscissors704368",
-	"IsStatic": false,
+	"Id": "Lootable_00062",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -983.873,
-		"y": 1.262,
-		"z": -829.454
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961886f774793e1ede69",
+	"Root": "5dd2961786f774793d4cdc55",
 	"Items": [
 		{
-			"_id": "5dd2961886f774793e1ede69",
-			"_tpl": "590c2e1186f77425357b6124"
+			"_id": "5dd2961786f774793d4cdc55",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5dd2961786f774793d4cdc56",
+			"_tpl": "5672cb304bdc2dc2088b456a",
+			"parentId": "5dd2961786f774793d4cdc55",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5dd2961786f774793d4cdc57",
+			"_tpl": "56742c284bdc2d98058b456d",
+			"parentId": "5dd2961786f774793d4cdc55",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

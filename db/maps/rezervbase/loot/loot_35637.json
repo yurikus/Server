@@ -1,25 +1,47 @@
 {
-	"Id": "loot_military_veh (2)704074",
-	"IsStatic": false,
+	"Id": "Lootable_00302",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 112.778015,
-		"y": -6.018,
-		"z": 65.21002
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961d86f77414f52bc0d8",
+	"Root": "5dd2961b86f774793f5f9e31",
 	"Items": [
 		{
-			"_id": "5dd2961d86f77414f52bc0d8",
-			"_tpl": "5d0379a886f77420407aa271"
+			"_id": "5dd2961b86f774793f5f9e31",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5dd2961b86f774793f5f9e32",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5dd2961b86f774793f5f9e31",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5dd2961b86f774793f5f9e33",
+			"_tpl": "56742c284bdc2d98058b456d",
+			"parentId": "5dd2961b86f774793f5f9e31",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

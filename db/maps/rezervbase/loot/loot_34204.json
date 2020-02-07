@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_barter_flam_gasoline (28)599722",
-	"IsStatic": false,
+	"Id": "Lootable_00346",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -89.58301,
-		"y": -5.824,
-		"z": 53.0930176
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,55 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06e1d9e8a7532059fbe",
+	"Root": "5db5d06342a81007cb24e804",
 	"Items": [
 		{
-			"_id": "5db5d06e1d9e8a7532059fbe",
-			"_tpl": "5d1b36a186f7742523398433"
+			"_id": "5db5d06342a81007cb24e804",
+			"_tpl": "5d6fd13186f77424ad2a8c69"
+		},
+		{
+			"_id": "5db5d06342a81007cb24e805",
+			"_tpl": "57347d692459774491567cf1",
+			"parentId": "5db5d06342a81007cb24e804",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d06342a81007cb24e806",
+			"_tpl": "573475fb24597737fb1379e1",
+			"parentId": "5db5d06342a81007cb24e804",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d06342a81007cb24e807",
+			"_tpl": "573475fb24597737fb1379e1",
+			"parentId": "5db5d06342a81007cb24e804",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d06342a81007cb24e808",
+			"_tpl": "57513f07245977207e26a311",
+			"parentId": "5db5d06342a81007cb24e804",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

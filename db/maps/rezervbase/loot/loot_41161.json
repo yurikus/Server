@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_barter_flam_gasoline (38)583850",
-	"IsStatic": false,
+	"Id": "Lootable_00270",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 102.072021,
-		"y": -6.638,
-		"z": 38.9530029
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d07dcd1e3d3a94509674",
+	"Root": "5db5d06442a81007cb24ea95",
 	"Items": [
 		{
-			"_id": "5db5d07dcd1e3d3a94509674",
-			"_tpl": "5d1b36a186f7742523398433"
+			"_id": "5db5d06442a81007cb24ea95",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5db5d06442a81007cb24ea96",
+			"_tpl": "57347c5b245977448d35f6e1",
+			"parentId": "5db5d06442a81007cb24ea95",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d06442a81007cb24ea97",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5db5d06442a81007cb24ea95",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

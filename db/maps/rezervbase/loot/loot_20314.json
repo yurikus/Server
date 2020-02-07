@@ -1,12 +1,12 @@
 {
-	"Id": "loot_drink5973676",
-	"IsStatic": false,
+	"Id": "Lootable_00370",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -135.096985,
-		"y": -5.00682354,
-		"z": -11.17688
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,55 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06760d9a5d683c327eda7d",
+	"Root": "5e06760a0b8cde1bad722ded",
 	"Items": [
 		{
-			"_id": "5e06760d9a5d683c327eda7d",
-			"_tpl": "57513fcc24597720a31c09a6"
+			"_id": "5e06760a0b8cde1bad722ded",
+			"_tpl": "5d6fd45b86f774317075ed43"
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722dee",
+			"_tpl": "59e366c186f7741778269d85",
+			"parentId": "5e06760a0b8cde1bad722ded",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722def",
+			"_tpl": "590c2b4386f77425357b6123",
+			"parentId": "5e06760a0b8cde1bad722ded",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722df0",
+			"_tpl": "5c06779c86f77426e00dd782",
+			"parentId": "5e06760a0b8cde1bad722ded",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722df1",
+			"_tpl": "590c2d8786f774245b1f03f3",
+			"parentId": "5e06760a0b8cde1bad722ded",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

@@ -1,12 +1,12 @@
 {
-	"Id": "Lootable_00280",
-	"IsStatic": true,
+	"Id": "loot_mix_food_med_ammo (49)5970572",
+	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -103.4303,
+		"y": -9.276,
+		"z": 73.44757
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,64 +15,29 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e0676128b77ae77226398c2",
+	"Root": "5e06760d9a5d683c327edb4f",
 	"Items": [
 		{
-			"_id": "5e0676128b77ae77226398c2",
-			"_tpl": "5909d45286f77465a8136dc6"
+			"_id": "5e06760d9a5d683c327edb4f",
+			"_tpl": "57372deb245977685d4159b3"
 		},
 		{
-			"_id": "5e0676128b77ae77226398c3",
-			"_tpl": "57372e4a24597768553071c2",
-			"parentId": "5e0676128b77ae77226398c2",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5e0676128b77ae77226398c4",
+			"_id": "5e06760d9a5d683c327edb50",
 			"_tpl": "56dff338d2720bbd668b4569",
-			"parentId": "5e0676128b77ae77226398c3",
+			"parentId": "5e06760d9a5d683c327edb4f",
 			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 30
+				"StackObjectsCount": 60
 			}
 		},
 		{
-			"_id": "5e0676128b77ae77226398c5",
-			"_tpl": "56dff216d2720bbd668b4568",
-			"parentId": "5e0676128b77ae77226398c2",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 52
-			}
-		},
-		{
-			"_id": "5e0676128b77ae77226398c6",
-			"_tpl": "560d75f54bdc2da74d8b4573",
-			"parentId": "5e0676128b77ae77226398c2",
-			"slotId": "main",
-			"location": {
-				"x": 2,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5e0676128b77ae77226398c7",
-			"_tpl": "560d61e84bdc2da74d8b4571",
-			"parentId": "5e0676128b77ae77226398c6",
+			"_id": "5e06760d9a5d683c327edb51",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e06760d9a5d683c327edb4f",
 			"slotId": "cartridges",
+			"location": 1,
 			"upd": {
-				"StackObjectsCount": 30
+				"StackObjectsCount": 60
 			}
 		}
 	]

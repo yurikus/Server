@@ -1,12 +1,12 @@
 {
-	"Id": "loot_barter_electr_phaseantenna (7)596346",
-	"IsStatic": false,
+	"Id": "Lootable_00377",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -267.307,
-		"y": -9.555,
-		"z": -72.50699
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d07ccd1e3d3a945095e4",
+	"Root": "5db5d0741d9e8a753205a566",
 	"Items": [
 		{
-			"_id": "5db5d07ccd1e3d3a945095e4",
-			"_tpl": "5d03775b86f774203e7e0c4b"
+			"_id": "5db5d0741d9e8a753205a566",
+			"_tpl": "5909d5ef86f77467974efbd8"
+		},
+		{
+			"_id": "5db5d0741d9e8a753205a567",
+			"_tpl": "59e6318286f77444dd62c4cc",
+			"parentId": "5db5d0741d9e8a753205a566",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d0741d9e8a753205a568",
+			"_tpl": "5a37cb10c4a282329a73b4e7",
+			"parentId": "5db5d0741d9e8a753205a566",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

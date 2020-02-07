@@ -1,25 +1,58 @@
 {
-	"Id": "loot_el_military_citizen (53)5987108",
-	"IsStatic": false,
+	"Id": "Lootable_00332",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -9.989014,
-		"y": 22.645,
-		"z": 190.109009
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06760d9a5d683c327eda89",
+	"Root": "5e06760a0b8cde1bad722e31",
 	"Items": [
 		{
-			"_id": "5e06760d9a5d683c327eda89",
-			"_tpl": "5d1b313086f77425227d1678"
+			"_id": "5e06760a0b8cde1bad722e31",
+			"_tpl": "5d6fd13186f77424ad2a8c69"
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722e32",
+			"_tpl": "5448ff904bdc2d6f028b456e",
+			"parentId": "5e06760a0b8cde1bad722e31",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722e33",
+			"_tpl": "544fb62a4bdc2dfb738b4568",
+			"parentId": "5e06760a0b8cde1bad722e31",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722e34",
+			"_tpl": "573476f124597737e04bf328",
+			"parentId": "5e06760a0b8cde1bad722e31",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

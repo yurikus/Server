@@ -1,25 +1,36 @@
 {
-	"Id": "loot_military_veh (6)684234",
-	"IsStatic": false,
+	"Id": "Lootable_00196",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 102.531006,
-		"y": -5.879,
-		"z": 48.51599
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961d86f774794047c4e4",
+	"Root": "5d7227b15549dd482740852c",
 	"Items": [
 		{
-			"_id": "5dd2961d86f774794047c4e4",
-			"_tpl": "5d0379a886f77420407aa271"
+			"_id": "5d7227b15549dd482740852c",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5d7227b15549dd482740852d",
+			"_tpl": "5672cb124bdc2d1a0f8b4568",
+			"parentId": "5d7227b15549dd482740852c",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

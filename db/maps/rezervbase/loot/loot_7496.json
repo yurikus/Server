@@ -1,12 +1,12 @@
 {
-	"Id": "loot_food6030888",
+	"Id": "loot_rf_ammo_true (13)631724",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": 74.81415,
-		"y": -10.908577,
-		"z": -132.808716
+		"x": -47.39386,
+		"y": 0.448423266,
+		"z": 21.97229
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,30 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e0676070b8cde1bad7228cb",
+	"Root": "5db5d02609aff62a3d371a1b",
 	"Items": [
 		{
-			"_id": "5e0676070b8cde1bad7228cb",
-			"_tpl": "590c5f0d86f77413997acfab"
+			"_id": "5db5d02609aff62a3d371a1b",
+			"_tpl": "57372deb245977685d4159b3"
+		},
+		{
+			"_id": "5db5d02609aff62a3d371a1c",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5db5d02609aff62a3d371a1b",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5db5d02609aff62a3d371a1d",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5db5d02609aff62a3d371a1b",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

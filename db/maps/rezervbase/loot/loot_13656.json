@@ -1,12 +1,12 @@
 {
-	"Id": "loot_money708366",
-	"IsStatic": false,
+	"Id": "Lootable_00287",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -164.338684,
-		"y": 0.52,
-		"z": 35.68692
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,13 +15,21 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961886f774793e1edcde",
+	"Root": "5dd2961686f774793d4cda0f",
 	"Items": [
 		{
-			"_id": "5dd2961886f774793e1edcde",
-			"_tpl": "5696686a4bdc2da3298b456a",
-			"upd": {
-				"StackObjectsCount": 93
+			"_id": "5dd2961686f774793d4cda0f",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5dd2961686f774793d4cda10",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5dd2961686f774793d4cda0f",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		}
 	]

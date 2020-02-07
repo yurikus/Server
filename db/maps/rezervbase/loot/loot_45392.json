@@ -1,25 +1,69 @@
 {
-	"Id": "loot_el_military (11)714738",
-	"IsStatic": false,
-	"useGravity": false,
-	"randomRotation": true,
+	"Id": "Lootable_00036",
+	"IsStatic": true,
+	"useGravity": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -24.3380127,
-		"y": -5.403,
-		"z": 23.8919983
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961d86f774794047c452",
+	"Root": "5db5d0761d9e8a753205a8c4",
 	"Items": [
 		{
-			"_id": "5dd2961d86f774794047c452",
-			"_tpl": "5d03784a86f774203e7e0c4d"
+			"_id": "5db5d0761d9e8a753205a8c4",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8c5",
+			"_tpl": "5d1b392c86f77425243e98fe",
+			"parentId": "5db5d0761d9e8a753205a8c4",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8c6",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5db5d0761d9e8a753205a8c4",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8c7",
+			"_tpl": "57347c5b245977448d35f6e1",
+			"parentId": "5db5d0761d9e8a753205a8c4",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8c8",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5db5d0761d9e8a753205a8c4",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }
