@@ -1,5 +1,10 @@
 ﻿"use strict";
 
+const zlib = require('zlib');
+const http = require('http');
+const https = require('https');
+const selfsigned = require('selfsigned');
+
 require('../libs.js');
 
 function showWatermark() {

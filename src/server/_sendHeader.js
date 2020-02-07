@@ -1,6 +1,7 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
+const zlib = require('zlib');
 
 const mime = {
 	html: 'text/html',

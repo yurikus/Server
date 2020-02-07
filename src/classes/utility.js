@@ -1,6 +1,8 @@
 "use strict";
 
-require("../libs.js");
+const fs = require('fs');
+const os = require('os');
+const adler32 = require('adler32');
 
 function clearString(string) {
 	return string.replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");

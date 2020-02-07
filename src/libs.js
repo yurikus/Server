@@ -1,14 +1,4 @@
-module.exports = function(isFirstLaunch = false, time = 0) {	
-	global.fs = require('fs');
-	global.path = require('path');
-	global.util = require('util');
-	global.http = require('http');
-	global.https = require('https');
-	global.zlib = require('zlib');
-	global.os = require('os');
-	global.adler32 = require('adler32');
-	global.selfsigned = require('selfsigned');
-	
+module.exports = function(isFirstLaunch = false, time = 0) {		
 	global.json = require('./classes/json.js');
 	global.utility = require('./classes/utility.js');
 	global.logger = require('./classes/logger.js');

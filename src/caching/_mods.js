@@ -1,6 +1,6 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
 
 function cache(mod) {
     if (!mod.files.hasOwnProperty("user")) {

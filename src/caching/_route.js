@@ -1,6 +1,6 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
 
 function flush() {
     filepaths = json.parse(json.read("db/cache/filepaths.json"));

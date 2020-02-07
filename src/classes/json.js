@@ -1,6 +1,6 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
 
 function createDir(file) {    
     let filePath = file.substr(0, file.lastIndexOf('/'));

@@ -1,13 +1,14 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
+const util = require('util');
 
 let fileStream = undefined;
 
 function start() {
     let file = utility.getDate() + "_" + utility.getTime() + ".log";
     let folder = "user/logs/";
-    let filepath = path.join(folder, file);
+    let filepath = folder +file;
 
     // create log folder
     if (!fs.existsSync(folder)) { +

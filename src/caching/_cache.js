@@ -1,6 +1,6 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
 
 function genericCacher(cachename, filepathNode, output = "") {
     logger.logInfo("Caching: " + cachename);
