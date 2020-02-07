@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00301",
+	"Id": "Lootable_00250",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,16 +15,16 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d065533aa77c477a6864",
+	"Root": "5e0675d1243fd85e273fe327",
 	"Items": [
 		{
-			"_id": "5db5d065533aa77c477a6864",
-			"_tpl": "578f87a3245977356274f2cb"
+			"_id": "5e0675d1243fd85e273fe327",
+			"_tpl": "5909d5ef86f77467974efbd8"
 		},
 		{
-			"_id": "5db5d065533aa77c477a6865",
-			"_tpl": "57347c77245977448d35f6e2",
-			"parentId": "5db5d065533aa77c477a6864",
+			"_id": "5e0675d1243fd85e273fe328",
+			"_tpl": "58d2946386f774496974c37e",
+			"parentId": "5e0675d1243fd85e273fe327",
 			"slotId": "main",
 			"location": {
 				"x": 0,
@@ -33,20 +33,9 @@
 			}
 		},
 		{
-			"_id": "5db5d065533aa77c477a6866",
-			"_tpl": "56742c284bdc2d98058b456d",
-			"parentId": "5db5d065533aa77c477a6864",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5db5d065533aa77c477a6867",
-			"_tpl": "57347b8b24597737dd42e192",
-			"parentId": "5db5d065533aa77c477a6864",
+			"_id": "5e0675d1243fd85e273fe329",
+			"_tpl": "5448bd6b4bdc2dfc2f8b4569",
+			"parentId": "5e0675d1243fd85e273fe327",
 			"slotId": "main",
 			"location": {
 				"x": 2,
@@ -55,14 +44,29 @@
 			}
 		},
 		{
-			"_id": "5db5d065533aa77c477a6868",
-			"_tpl": "573475fb24597737fb1379e1",
-			"parentId": "5db5d065533aa77c477a6864",
+			"_id": "5e0675d1243fd85e273fe32a",
+			"_tpl": "5448c12b4bdc2d02308b456f",
+			"parentId": "5e0675d1243fd85e273fe329",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e0675d1243fd85e273fe32b",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5e0675d1243fd85e273fe32a",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 4
+			}
+		},
+		{
+			"_id": "5e0675d1243fd85e273fe32c",
+			"_tpl": "5bb20d92d4351e00853263eb",
+			"parentId": "5e0675d1243fd85e273fe327",
 			"slotId": "main",
 			"location": {
-				"x": 3,
+				"x": 4,
 				"y": 0,
-				"r": 0
+				"r": 1
 			}
 		}
 	]
