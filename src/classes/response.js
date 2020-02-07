@@ -2,83 +2,121 @@
 
 require('../libs.js');
 
-const staticRoutes = {
-    "/": showIndex,
-    "/inv": showInventoryChecker,
-    "/favicon.ico": nullResponse,
-    "/client/friend/list": getFriendList,
-    "/client/game/profile/items/moving": handleItems,
-    "/client/languages": getLocale,
-    "/client/items": getItems,
-    "/client/globals": getGlobals,
-    "/client/game/profile/list": getProfileData,
-    "/client/game/profile/select": selectProfile,
-    "/client/profile/status": getProfileStatus,
-    "/client/weather": getWeather,
-    "/client/locations": getLocations,
-    "/client/handbook/templates": getTemplates,
-    "/client/quest/list": getQuests,
-    "/client/game/bot/generate": getBots,
-    "/client/trading/api/getTradersList": getTraderList,
-    "/client/server/list": getServer,
-    "/client/ragfair/search": searchRagfair,
-    "/client/ragfair/find": searchRagfair,
-    "/client/chatServer/list": getChatServerList,
-    "/client/game/profile/nickname/change": changeNickname,
-    "/client/game/profile/voice/change": changeVoice,
-    "/client/repair/exec": handleRepair,
-    "/client/game/keepalive": handleKeepAlive,
-    "/client/game/version/validate": validateGameVersion,
-    "/client/game/config": getGameConfig,
-    "/client/customization": getCustomization,
-    "/client/trading/customization/storage": getCustomizationStorage,
-    "/client/hideout/production/recipes": getHideoutRecipes,
-    "/client/hideout/settings": getHideoutSettings,
-    "/client/hideout/areas": getHideoutAreas,
-    "/client/hideout/production/scavcase/recipes": getScavDatacaseRecipes,
-    "/client/handbook/builds/my/list": getHandbookUserlist,
-    "/client/notifier/channel/create": createNotifierChannel,
-    "/client/game/profile/nickname/reserved": getReservedNickname,
-    "/client/game/profile/nickname/validate": validateNickname,
-    "/client/game/profile/create": createProfile,
-    "/client/insurance/items/list/cost": getInsuranceCost,
-    "/client/game/logout": nullResponse,
-    "/client/match/exit": nullResponse,
-    "/client/game/profile/savage/regenerate": regenerateScav,
-    "/client/mail/dialog/list": getMailDialogList,
-    "/client/mail/dialog/view": getMailDialogView,
-    "/client/mail/dialog/info": getMailDialogInfo,
-    "/client/mail/dialog/remove": removeDialog,
-    "/client/mail/dialog/pin": pinDialog,
-    "/client/mail/dialog/unpin": unpinDialog,
-    "/client/mail/dialog/read": setRead,
-    "/client/mail/dialog/getAllAttachments": getAllAttachments,
-    "/client/friend/request/list/outbox": nullArrayResponse,
-    "/client/friend/request/list/inbox": nullArrayResponse,
+// static routes
+router.addStaticRoute("/", showIndex);
+router.addStaticRoute("/inv", showInventoryChecker);
+router.addStaticRoute("/favicon.ico", nullResponse);
+router.addStaticRoute("/client/friend/list", getFriendList);
+router.addStaticRoute("/client/languages", getLocale);
+router.addStaticRoute("/client/items", getItems);
+router.addStaticRoute("/client/globals", getGlobals);
+router.addStaticRoute("/client/game/profile/list", getProfileData);
+router.addStaticRoute("/client/game/profile/select", selectProfile);
+router.addStaticRoute("/client/profile/status", getProfileStatus);
+router.addStaticRoute("/client/weather", getWeather);
+router.addStaticRoute("/client/locations", getLocations);
+router.addStaticRoute("/client/handbook/templates", getTemplates);
+router.addStaticRoute("/client/quest/list", getQuests);
+router.addStaticRoute("/client/game/bot/generate", getBots);
+router.addStaticRoute("/client/trading/api/getTradersList", getTraderList);
+router.addStaticRoute("/client/server/list", getServer);
+router.addStaticRoute("/client/ragfair/search", searchRagfair);
+router.addStaticRoute("/client/ragfair/find", searchRagfair);
+router.addStaticRoute("/client/chatServer/list", getChatServerList);
+router.addStaticRoute("/client/game/profile/nickname/change", changeNickname);
+router.addStaticRoute("/client/game/profile/voice/change", changeVoice);
+router.addStaticRoute("/client/repair/exec", handleRepair);
+router.addStaticRoute("/client/game/keepalive", handleKeepAlive);
+router.addStaticRoute("/client/game/version/validate", validateGameVersion);
+router.addStaticRoute("/client/game/config", getGameConfig);
+router.addStaticRoute("/client/customization", getCustomization);
+router.addStaticRoute("/client/trading/customization/storage", getCustomizationStorage);
+router.addStaticRoute("/client/hideout/production/recipes", getHideoutRecipes);
+router.addStaticRoute("/client/hideout/settings", getHideoutSettings);
+router.addStaticRoute("/client/hideout/areas", getHideoutAreas);
+router.addStaticRoute("/client/hideout/production/scavcase/recipes", getScavDatacaseRecipes);
+router.addStaticRoute("/client/handbook/builds/my/list", getHandbookUserlist);
+router.addStaticRoute("/client/notifier/channel/create", createNotifierChannel);
+router.addStaticRoute("/client/game/profile/nickname/reserved", getReservedNickname);
+router.addStaticRoute("/client/game/profile/nickname/validate", validateNickname);
+router.addStaticRoute("/client/game/profile/create", createProfile);
+router.addStaticRoute("/client/insurance/items/list/cost", getInsuranceCost);
+router.addStaticRoute("/client/game/logout", nullResponse);
+router.addStaticRoute("/client/match/exit", nullResponse);
+router.addStaticRoute("/client/game/profile/savage/regenerate", regenerateScav);
+router.addStaticRoute("/client/mail/dialog/list", getMailDialogList);
+router.addStaticRoute("/client/mail/dialog/view", getMailDialogView);
+router.addStaticRoute("/client/mail/dialog/info", getMailDialogInfo);
+router.addStaticRoute("/client/mail/dialog/remove", removeDialog);
+router.addStaticRoute("/client/mail/dialog/pin", pinDialog);
+router.addStaticRoute("/client/mail/dialog/unpin", unpinDialog);
+router.addStaticRoute("/client/mail/dialog/read", setRead);
+router.addStaticRoute("/client/mail/dialog/getAllAttachments", getAllAttachments);
+router.addStaticRoute("/client/friend/request/list/outbox", nullArrayResponse);
+router.addStaticRoute("/client/friend/request/list/inbox", nullArrayResponse);
 
-    // EmuTarkov-Launcher
-    "/launcher/profile/login": loginUser,
+// EmuTarkov-Launcher
+router.addStaticRoute("/launcher/profile/login", loginUser);
 
-    // EmuLib
-    "/OfflineRaidSave": saveProgress,
-    "/player/health/events": updateHealth
-};
+/// EmuLib
+router.addStaticRoute("/OfflineRaidSave", saveProgress);
+router.addStaticRoute("/player/health/events", updateHealth);
 
-const dynamicRoutes = {
-    "/api/location": getMap,
-    ".jpg": getImage,
-    ".png": getImage,
-    "/?last_id": handleNotifierCustomLink,
-    "/client/trading/api/getUserAssortPrice/trader/": getProfilePurchases,
-    "/client/trading/api/getTrader/": getTrader,
-    "/client/trading/api/getTraderAssort/": getAssort,
-    "/client/trading/customization/": getCustomizationOffers,
-    "/client/menu/locale/": getMenuLocale,
-    "/client/locale/": getGlobalLocale,
-    "/notifierBase": nullArrayResponse,
-    "/notifierServer": notify,
-    "/push/notifier/get/": nullArrayResponse
-};
+// dynamic routes
+router.addDynamicRoute("/api/location", getMap);
+router.addDynamicRoute(".jpg", getImage);
+router.addDynamicRoute(".png", getImage);
+router.addDynamicRoute("/?last_id", handleNotifierCustomLink);
+router.addDynamicRoute("/client/trading/api/getUserAssortPrice/trader/", getProfilePurchases);
+router.addDynamicRoute("/client/trading/api/getTrader/", getTrader);
+router.addDynamicRoute("/client/trading/api/getTraderAssort/", getAssort);
+router.addDynamicRoute("/client/trading/customization/", getCustomizationOffers);
+router.addDynamicRoute("/client/menu/locale/", getMenuLocale);
+router.addDynamicRoute("/client/locale/", getGlobalLocale);
+router.addDynamicRoute("/notifierBase", nullArrayResponse);
+router.addDynamicRoute("/notifierServer", notify);
+router.addDynamicRoute("/push/notifier/get/", nullArrayResponse);
+
+// item routs
+router.addItemRoute("SaveBuild", weaponBuilds_f.saveBuild);
+router.addItemRoute("RemoveBuild", weaponBuilds_f.removeBuild);
+router.addItemRoute("HideoutUpgrade", hideout_f.hideoutUpgrade);
+router.addItemRoute("HideoutUpgradeComplete", hideout_f.hideoutUpgradeComplete);
+router.addItemRoute("HideoutContinuousProductionStart", hideout_f.hideoutContinuousProductionStart);
+router.addItemRoute("HideoutSingleProductionStart", hideout_f.hideoutSingleProductionStart);
+router.addItemRoute("HideoutScavCaseProductionStart", hideout_f.hideoutScavCaseProductionStart);
+router.addItemRoute("HideoutTakeProduction", hideout_f.hideoutTakeProduction);
+router.addItemRoute("HideoutPutItemsInAreaSlots", hideout_f.hideoutPutItemsInAreaSlots);
+router.addItemRoute("HideoutTakeItemsFromAreaSlots", hideout_f.hideoutTakeItemsFromAreaSlots);
+router.addItemRoute("HideoutToggleArea", hideout_f.hideoutToggleArea);
+router.addItemRoute("QuestAccept", quest_f.acceptQuest);
+router.addItemRoute("QuestComplete", quest_f.completeQuest);
+router.addItemRoute("QuestHandover", quest_f.handoverQuest);
+router.addItemRoute("AddNote", note_f.addNote);
+router.addItemRoute("EditNote", note_f.editNode);
+router.addItemRoute("DeleteNote", note_f.deleteNote);
+router.addItemRoute("Move", move_f.moveItem);
+router.addItemRoute("Remove", move_f.discardItem);
+router.addItemRoute("Split", move_f.splitItem);
+router.addItemRoute("Merge", move_f.mergeItem);
+router.addItemRoute("Fold", status_f.foldItem);
+router.addItemRoute("Toggle", status_f.toggleItem);
+router.addItemRoute("Tag", status_f.tagItem);
+router.addItemRoute("Bind", status_f.bindItem);
+router.addItemRoute("Examine", status_f.examineItem);
+router.addItemRoute("ReadEncyclopedia", status_f.readEncyclopedia);
+router.addItemRoute("Eat", health_f.healthServer.offraidEat);
+router.addItemRoute("Heal", health_f.healthServer.offraidHeal);
+router.addItemRoute("Transfer", move_f.transferItem);
+router.addItemRoute("Swap", move_f.swapItem);
+router.addItemRoute("AddToWishList", wishList_f.addToWishList);
+router.addItemRoute("RemoveFromWishList", wishList_f.removeFromWishList);
+router.addItemRoute("TradingConfirm", trade_f.confirmTrading);
+router.addItemRoute("RagFairBuyOffer", trade_f.confirmRagfairTrading);
+router.addItemRoute("CustomizationWear", customization_f.wearClothing);
+router.addItemRoute("CustomizationBuy", customization_f.buyClothing);
+router.addItemRoute("Repair", repair_f.main);
+router.addItemRoute("Insure", insurance_f.insure);
 
 function nullResponse(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":null}';
@@ -102,15 +140,11 @@ function notify(url, info) {
 
 function getGameConfig(url, info, sessionID) {
     let backendUrl = "https://" + ip;
-    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid":' + sessionID + ', "token": "token_' + sessionID + '", "taxonomy": "341", "activeProfileId": "user' + sessionID + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
+    return '{"err":0,"errmsg":null,"data":{"queued", false, "banTime", 0, "hash", "BAN0", "lang", "en", "aid":' + sessionID + ', "token", "token_' + sessionID + '", "taxonomy", "341", "activeProfileId", "user' + sessionID + 'pmc", "nickname", "user", "backend", {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame", 0}}';
 }
 
 function getFriendList(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
-}
-
-function handleItems(url, info, sessionID) {
-    return item.moving(info, sessionID);
 }
 
 function getLocale(url, info, sessionID) {
@@ -360,50 +394,3 @@ function getMenuLocale(url, info, sessionID) {
 function getGlobalLocale(url, info, sessionID) {
     return locale.getGlobal(url.replace("/client/locale/", ''));
 }
-
-function getResponse(req, body, sessionID) {
-    let output = "";
-    let url = req.url;
-    let info = {};
-
-    // parse body
-    if (body !== "") {
-        info = json.parse(body);
-    }
-
-    // remove ?retry=X from URL
-    if (url.indexOf("?retry=") !== -1) {
-        url = url.split("?retry=")[0];
-    }
-    
-    // route request
-    if (typeof staticRoutes[url] !== "undefined") {
-        output = staticRoutes[url](url, info, sessionID);
-    } else {
-        for (let key in dynamicRoutes) {
-            if (url.indexOf(key) !== -1) {
-                output = dynamicRoutes[key](url, info, sessionID);
-            }
-        }
-    }
-
-    // request couldn't be handled
-    if (output === "") {
-        logger.logError("[UNHANDLED][" + url + "] request data: " + json.stringify(info));
-        output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
-    }
-
-    // load from cache when server is in release mode
-    if (typeof info.crc !== "undefined") {
-        let crctest = json.parse(output);
-
-        if (typeof crctest.crc !== "undefined" && output.crc === crctest.crc) {
-            logger.logWarning("[Loading from game cache files]");
-            output = nullResponse(url, info, sessionID);
-        }
-    }
-
-    return output;
-}
-
-module.exports.getResponse = getResponse;
