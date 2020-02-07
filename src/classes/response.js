@@ -140,11 +140,15 @@ function notify(url, info) {
 
 function getGameConfig(url, info, sessionID) {
     let backendUrl = "https://" + ip;
-    return '{"err":0,"errmsg":null,"data":{"queued", false, "banTime", 0, "hash", "BAN0", "lang", "en", "aid":' + sessionID + ', "token", "token_' + sessionID + '", "taxonomy", "341", "activeProfileId", "user' + sessionID + 'pmc", "nickname", "user", "backend", {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame", 0}}';
+    return '{"err":0, "errmsg":null, "data":{"queued":false, "banTime":0, "hash":"BAN0", "lang":"en", "aid":' + sessionID + ', "token":"token_' + sessionID + '", "taxonomy":"341", "activeProfileId":"user' + sessionID + 'pmc", "nickname":"user", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame":0}}';
 }
 
 function getFriendList(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
+}
+
+function handleItems(url, info, sessionID) {
+    return item.moving(info, sessionID);
 }
 
 function getLocale(url, info, sessionID) {
@@ -243,7 +247,7 @@ function handleRepair(url, info, sessionID) {
 
 function handleKeepAlive(url, info, sessionID) {
     keepAlive_f.main(sessionID);
-    return '{"err":0,"errmsg":null,"data":{"msg":"OK"}}';
+    return '{"err":0, "errmsg":null, "data":{"msg":"OK"}}';
 }
 
 function validateGameVersion(url, info, sessionID) {
@@ -295,9 +299,7 @@ function getHandbookUserlist(url, info, sessionID) {
 }
 
 function createNotifierChannel(url, info, sessionID) {
-    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip +
-           '/","channel_id":"testChannel","url":"https://' + ip + '/notifierServer/get/' + 
-           sessionID + '"},"notifierServer":"https://' + ip + '/notifierServer/get/' + sessionID + '"}}';
+    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '/","channel_id":"testChannel","url":"https://' + ip + '/notifierServer/get/' + sessionID + '"},"notifierServer":"https://' + ip + '/notifierServer/get/' + sessionID + '"}}';
 }
 
 function getReservedNickname(url, info, sessionID) {

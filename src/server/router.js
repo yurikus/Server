@@ -1,3 +1,8 @@
+/* router.js
+ * responsible for sending the correct data
+ * TODO: fix issue where itemRoutes is set to underfined on /handle/items/
+ */
+
 "use strict";
 
 const logger = require("../classes/logger");
@@ -29,18 +34,21 @@ class Router {
 
     /* handle item routes */
     handleItemRoute(url, info, sessionID) {
+        console.log(this.itemRoutes);
         let output = "";
 
         // handle all items
         for (let i = 0; i < info.data.length; i++) {
-            let route = info.data[i];
+            console.log(this.itemRoutes);
+
+            let body = info.data[i];
             let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
-            if (typeof this.itemRoutes[route] !== "undefined") {
-                return this.itemRoutes[route](pmcData, body, sessionID);
+            if (typeof this.itemRoutes[body.Action] !== "undefined") {
+                return this.itemRoutes[body.Action](pmcData, body, sessionID);
             }
 
-            logger.logError("[UNHANDLED ACTION] " + route);
+            logger.logError("[UNHANDLED ACTION] " + body.Action);
         }
 
         // return items
@@ -56,6 +64,8 @@ class Router {
     }
 
     getResponse(req, body, sessionID) {
+        console.log(this.itemRoutes);
+
         let output = "";
         let url = req.url;
         let info = {};
