@@ -87,4 +87,4 @@ function processInsuranceReturn(event) {
 												 event.data.items);
 }
 
-module.exports.scheduledEventHandler = new ScheduledEventHandler(60000);
+module.exports.scheduledEventHandler = new ScheduledEventHandler(settings.server.eventPollIntervalSec * 1000);
