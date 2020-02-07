@@ -1,6 +1,6 @@
 "use strict";
 
-require('./libs.js');
+require('../libs.js');
 
 let fileStream = undefined;
 

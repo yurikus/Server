@@ -1,6 +1,6 @@
 "use strict";
 
-require("./libs.js");
+require("../libs.js");
 
 function clearString(string) {
 	return string.replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
