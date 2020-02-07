@@ -188,7 +188,7 @@ function assort(mod) {
 
     for (let assort in mod.files.assort) {
         // create assort
-        if (!filepaths.assort.hasOwnProperty(assort)) {
+        if (!filepaths.assort.hasOwnProperty("assort")) {
             filepaths.assort[assort] = mod.files.assort[assort];
             continue;
         }
@@ -197,18 +197,24 @@ function assort(mod) {
         let activeAssort = mod.files.assort[assort];
 
         // assort items
-        for (let item in activeAssort.items) {
-            filepaths.assort[assort].items[item] = activeAssort.items[item];
+        if (activeAssort.hasOwnProperty("items")) {
+            for (let item in activeAssort.items) {
+                filepaths.assort[assort].items[item] = activeAssort.items[item];
+            }
         }
 
         // assort barter_scheme
-        for (let item in activeAssort.barter_scheme) {
-            filepaths.assort[assort].barter_scheme[item] = activeAssort.barter_scheme[item];
+        if (activeAssort.hasOwnProperty("barter_scheme")) {
+            for (let item in activeAssort.barter_scheme) {
+                filepaths.assort[assort].barter_scheme[item] = activeAssort.barter_scheme[item];
+            }
         }
 
         // assort loyal_level_items
-        for (let item in activeAssort.loyal_level_items) {
-            filepaths.assort[assort].loyal_level_items[item] = activeAssort.loyal_level_items[item];
+        if (activeAssort.hasOwnProperty("loyal_level_items")) {
+            for (let item in activeAssort.loyal_level_items) {
+                filepaths.assort[assort].loyal_level_items[item] = activeAssort.loyal_level_items[item];
+            }
         }
     }
 }
@@ -220,7 +226,7 @@ function locales(mod) {
 
     for (let locale in mod.files.locales) {
         // create locale
-        if (!filepaths.locales.hasOwnProperty(locale)) {
+        if (!filepaths.locales.hasOwnProperty("locale")) {
             filepaths.locales[locale] = mod.files.locales[locale];
             continue;
         }
@@ -229,54 +235,83 @@ function locales(mod) {
         let activeLocale = mod.files.locales[locale];
 
         // set static locale data
-        filepaths.locales[locale].name = activeLocale.shortname;
-        filepaths.locales[locale].menu = activeLocale.menu;
-        filepaths.locales[locale].interface = activeLocale.interface;
-        filepaths.locales[locale].error = activeLocale.error;
+        if (activeLocale.hasOwnProperty("name")) {
+            filepaths.locales[locale].name = activeLocale.name;
+        }
+
+        if (activeLocale.hasOwnProperty("menu")) {
+            filepaths.locales[locale].menu = activeLocale.menu;
+        }
+
+        if (activeLocale.hasOwnProperty("interface")) {
+            filepaths.locales[locale].interface = activeLocale.interface;
+        }
+
+        if (activeLocale.hasOwnProperty("error")) {
+            filepaths.locales[locale].error = activeLocale.error;
+        }
 
         // locale banners
-        for (let item in activeLocale.banners) {
-            filepaths.locales[locale].banners[item] = activeLocale.banners[item];
+        if (activeLocale.hasOwnProperty("banners")) {
+            for (let item in activeLocale.banners) {
+                filepaths.locales[locale].banners[item] = activeLocale.banners[item];
+            }
         }
 
         // locale handbook
-        for (let item in activeLocale.handbook) {
-            filepaths.locales[locale].handbook[item] = activeLocale.handbook[item];
+        if (activeLocale.hasOwnProperty("handbook")) {
+            for (let item in activeLocale.handbook) {
+                filepaths.locales[locale].handbook[item] = activeLocale.handbook[item];
+            }
         }
 
         // locale locations
-        for (let item in activeLocale.locations) {
-            filepaths.locales[locale].locations[item] = activeLocale.locations[item];
+        if (activeLocale.hasOwnProperty("locations")) {
+            for (let item in activeLocale.locations) {
+                filepaths.locales[locale].locations[item] = activeLocale.locations[item];
+            }
         }
 
         // locale mail
-        for (let item in activeLocale.mail) {
-            filepaths.locales[locale].mail[item] = activeLocale.mail[item];
+        if (activeLocale.hasOwnProperty("mail")) {
+            for (let item in activeLocale.mail) {
+                filepaths.locales[locale].mail[item] = activeLocale.mail[item];
+            }
         }
 
         // locale preset
-        for (let item in activeLocale.preset) {
-            filepaths.locales[locale].preset[item] = activeLocale.preset[item];
+        if (activeLocale.hasOwnProperty("preset")) {
+            for (let item in activeLocale.preset) {
+                filepaths.locales[locale].preset[item] = activeLocale.preset[item];
+            }
         }
 
         // locale quest
-        for (let item in activeLocale.quest) {
-            filepaths.locales[locale].quest[item] = activeLocale.quest[item];
+        if (activeLocale.hasOwnProperty("quest")) {
+            for (let item in activeLocale.quest) {
+                filepaths.locales[locale].quest[item] = activeLocale.quest[item];
+            }
         }
 
         // locale season
-        for (let item in activeLocale.season) {
-            filepaths.locales[locale].season[item] = activeLocale.season[item];
+        if (activeLocale.hasOwnProperty("season")) {
+            for (let item in activeLocale.season) {
+                filepaths.locales[locale].season[item] = activeLocale.season[item];
+            }
         }
 
         // locale templates
-        for (let item in activeLocale.templates) {
-            filepaths.locales[locale].templates[item] = activeLocale.templates[item];
+        if (activeLocale.hasOwnProperty("templates")) {
+            for (let item in activeLocale.templates) {
+                filepaths.locales[locale].templates[item] = activeLocale.templates[item];
+            }
         }
 
         // locale trading
-        for (let item in activeLocale.trading) {
-            filepaths.locales[locale].trading[item] = activeLocale.trading[item];
+        if (activeLocale.hasOwnProperty("trading")) {
+            for (let item in activeLocale.trading) {
+                filepaths.locales[locale].trading[item] = activeLocale.trading[item];
+            }
         }
     }
 }
