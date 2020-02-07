@@ -1,25 +1,40 @@
 {
-	"Id": "Loot_jigul_garbage(Clone)4333314",
+	"Id": "Loot 135 (10)6936978",
 	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": 3.73536444,
-		"y": 1.775189,
-		"z": -113.504051
+		"x": 184.088,
+		"y": 6.351,
+		"z": 182.923
 	},
 	"Rotation": {
-		"x": -0.000142420118,
-		"y": 18.5357189,
-		"z": 183.296112
+		"x": 0.00000170754731,
+		"y": 134.652985,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d31e40e645bb73eed3d9da4",
+	"Root": "5e067582abf057147c03d1a8",
 	"Items": [
 		{
-			"_id": "5d31e40e645bb73eed3d9da4",
-			"_tpl": "5751487e245977207e26a315"
+			"_id": "5e067582abf057147c03d1a8",
+			"_tpl": "59f98b4986f7746f546d2cef"
+		},
+		{
+			"_id": "5e067582abf057147c03d1a9",
+			"_tpl": "59f99a7d86f7745b134aa97b",
+			"parentId": "5e067582abf057147c03d1a8",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e067582abf057147c03d1aa",
+			"_tpl": "5a269f97c4a282000b151807",
+			"parentId": "5e067582abf057147c03d1a9",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 10
+			}
 		}
 	]
 }
