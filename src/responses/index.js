@@ -11,7 +11,7 @@ function showIndex(url, info, sessionID) {
 }
 
 function showInventoryChecker(url, info, sessionID) {
-    return index_f.inventory();
+    return index_f.inventory(sessionID);
 }
 
 router.addStaticRoute("/", showIndex);

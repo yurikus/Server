@@ -14,7 +14,7 @@ function index() {
         '</body>'
 }
 
-function inventory() {
+function inventory(sessionID) {
     let output = "";
     let inv = itm_hf.recheckInventoryFreeSpace(profile_f.profileServer.getPmcProfile(sessionID));
 

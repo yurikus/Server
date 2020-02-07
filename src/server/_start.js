@@ -205,8 +205,8 @@ function handleRequest(req, resp) {
 class Server {
     constructor() {
         this.ip = settings.server.ip;
-        this.httpPort = 80;
-        this.httpsPort = 443;
+        this.httpPort = settings.server.httpPort;
+        this.httpsPort = settings.server.httpsPort;
     }
 
     getIp() {
@@ -227,14 +227,13 @@ class Server {
     }
 
     start() {
-        // set the ip
-        if (settings.server.generateIp == true) {
-            this.ip = utility.getLocalIpAddress();
-            settings.server.ip = ip;
-        }
-    
         // show our watermark
         showWatermark();
+
+        // set the ip
+        if (settings.server.generateIp === true) {
+            this.ip = utility.getLocalIpAddress();
+        }
     
         // load responses
         router.initializeRoutes();

@@ -52,7 +52,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.server = (require('./server/_start.js').server);
 
 	global.locale = require('./classes/_locale.js');
-	global.index_f = require('./classes/_homeCredits.js');
+	global.index_f = require('./classes/index.js');
 	global.keepAlive_f = require('./classes/_keepAlive.js');
 	global.health_f = require('./classes/_health.js');
 	global.offraid_f = require('./classes/_offraid.js');
