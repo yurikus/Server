@@ -1,25 +1,61 @@
 {
-	"Id": "giroscope22285206",
-	"IsStatic": false,
-	"useGravity": false,
+	"Id": "Lootable_00016",
+	"IsStatic": true,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": 56.7209473,
-		"y": -1.791,
-		"z": -50.2489929
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
-		"x": 272.717346,
-		"y": 297.500916,
-		"z": 62.4726944
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06dcd831147964f343e",
+	"Root": "5e0674db2b233a57e4763bd1",
 	"Items": [
 		{
-			"_id": "5db5d06dcd831147964f343e",
-			"_tpl": "5af04e0a86f7743a532b79e2"
+			"_id": "5e0674db2b233a57e4763bd1",
+			"_tpl": "578f87ad245977356274f2cc"
+		},
+		{
+			"_id": "5e0674db2b233a57e4763bd2",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5e0674db2b233a57e4763bd1",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 7
+			}
+		},
+		{
+			"_id": "5e0674db2b233a57e4763bd3",
+			"_tpl": "55d4887d4bdc2d962f8b4570",
+			"parentId": "5e0674db2b233a57e4763bd1",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0674db2b233a57e4763bd4",
+			"_tpl": "57ffaea724597779f52b3a4d",
+			"parentId": "5e0674db2b233a57e4763bd1",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

@@ -1,25 +1,47 @@
 {
-	"Id": "Loot_armor_paca [4] (5)2284000",
-	"IsStatic": false,
-	"useGravity": false,
+	"Id": "Lootable_00056",
+	"IsStatic": true,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": -211.515991,
-		"y": -0.909,
-		"z": 195.885986
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
-		"x": 308.508545,
-		"y": 180,
-		"z": 180
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06dcd831147964f3441",
+	"Root": "5e0674db2b233a57e4763c00",
 	"Items": [
 		{
-			"_id": "5db5d06dcd831147964f3441",
-			"_tpl": "5648a7494bdc2d9d488b4583"
+			"_id": "5e0674db2b233a57e4763c00",
+			"_tpl": "5909d7cf86f77470ee57d75a"
+		},
+		{
+			"_id": "5e0674db2b233a57e4763c01",
+			"_tpl": "59e61eb386f77440d64f5daf",
+			"parentId": "5e0674db2b233a57e4763c00",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0674db2b233a57e4763c02",
+			"_tpl": "591af10186f774139d495f0e",
+			"parentId": "5e0674db2b233a57e4763c00",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

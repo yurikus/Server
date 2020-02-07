@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00031",
+	"Id": "Lootable_00051",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,16 +15,16 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e0674dd26f42d2de93ff3b3",
+	"Root": "5e0674dd26f42d2de93ff34c",
 	"Items": [
 		{
-			"_id": "5e0674dd26f42d2de93ff3b3",
+			"_id": "5e0674dd26f42d2de93ff34c",
 			"_tpl": "578f87ad245977356274f2cc"
 		},
 		{
-			"_id": "5e0674dd26f42d2de93ff3b4",
-			"_tpl": "55f84c3c4bdc2d5f408b4576",
-			"parentId": "5e0674dd26f42d2de93ff3b3",
+			"_id": "5e0674dd26f42d2de93ff34d",
+			"_tpl": "5448bd6b4bdc2dfc2f8b4569",
+			"parentId": "5e0674dd26f42d2de93ff34c",
 			"slotId": "main",
 			"location": {
 				"x": 0,
@@ -33,20 +33,38 @@
 			}
 		},
 		{
-			"_id": "5e0674dd26f42d2de93ff3b5",
-			"_tpl": "5649ae4a4bdc2d1b2b8b4588",
-			"parentId": "5e0674dd26f42d2de93ff3b3",
+			"_id": "5e0674dd26f42d2de93ff34e",
+			"_tpl": "5448c12b4bdc2d02308b456f",
+			"parentId": "5e0674dd26f42d2de93ff34d",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e0674dd26f42d2de93ff34f",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5e0674dd26f42d2de93ff34e",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 2
+			}
+		},
+		{
+			"_id": "5e0674dd26f42d2de93ff350",
+			"_tpl": "59e655cb86f77411dc52a77b",
+			"parentId": "5e0674dd26f42d2de93ff34c",
 			"slotId": "main",
 			"location": {
 				"x": 2,
 				"y": 0,
 				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 33
 			}
 		},
 		{
-			"_id": "5e0674dd26f42d2de93ff3b6",
-			"_tpl": "59e6542b86f77411dc52a77a",
-			"parentId": "5e0674dd26f42d2de93ff3b3",
+			"_id": "5e0674dd26f42d2de93ff351",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e0674dd26f42d2de93ff34c",
 			"slotId": "main",
 			"location": {
 				"x": 3,
@@ -54,18 +72,7 @@
 				"r": 0
 			},
 			"upd": {
-				"StackObjectsCount": 23
-			}
-		},
-		{
-			"_id": "5e0674dd26f42d2de93ff3b7",
-			"_tpl": "576a7c512459771e796e0e17",
-			"parentId": "5e0674dd26f42d2de93ff3b3",
-			"slotId": "main",
-			"location": {
-				"x": 4,
-				"y": 0,
-				"r": 0
+				"StackObjectsCount": 7
 			}
 		}
 	]

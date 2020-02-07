@@ -1,25 +1,47 @@
 {
-	"Id": "Loot_armor_3m [4] (7)2305386",
-	"IsStatic": false,
-	"useGravity": false,
+	"Id": "Lootable_00009",
+	"IsStatic": true,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": -413.852051,
-		"y": -2.39,
-		"z": 309.552
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
-		"x": 275.3542,
-		"y": -0.000036597874,
-		"z": 318.939545
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06dcd831147964f3440",
+	"Root": "5e0674db2b233a57e4763bfd",
 	"Items": [
 		{
-			"_id": "5db5d06dcd831147964f3440",
-			"_tpl": "59e7635f86f7742cbf2c1095"
+			"_id": "5e0674db2b233a57e4763bfd",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e0674db2b233a57e4763bfe",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5e0674db2b233a57e4763bfd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0674db2b233a57e4763bff",
+			"_tpl": "590a386e86f77429692b27ab",
+			"parentId": "5e0674db2b233a57e4763bfd",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 1
+			}
 		}
 	]
 }

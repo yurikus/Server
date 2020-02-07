@@ -1,12 +1,12 @@
 {
-	"Id": "LootAmmoBoxes (10)4929180",
-	"IsStatic": false,
+	"Id": "Lootable_00003",
+	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": -390.533,
-		"y": 3.77000046,
-		"z": 13.167
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,19 +15,21 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d31e3cb645bb7391133ce24",
+	"Root": "5db5d0408bcb9e33ce4007a0",
 	"Items": [
 		{
-			"_id": "5d31e3cb645bb7391133ce24",
-			"_tpl": "5737273924597765dd374461"
+			"_id": "5db5d0408bcb9e33ce4007a0",
+			"_tpl": "578f87b7245977356274f2cd"
 		},
 		{
-			"_id": "5d31e3cb645bb7391133ce25",
-			"_tpl": "57371f8d24597761006c6a81",
-			"parentId": "5d31e3cb645bb7391133ce24",
-			"slotId": "cartridges",
-			"upd": {
-				"StackObjectsCount": 16
+			"_id": "5db5d0408bcb9e33ce4007a1",
+			"_tpl": "5d1b392c86f77425243e98fe",
+			"parentId": "5db5d0408bcb9e33ce4007a0",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		}
 	]
