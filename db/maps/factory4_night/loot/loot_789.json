@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00022",
+	"Id": "Lootable_00008",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,16 +15,16 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d032f113b904523acdfa",
+	"Root": "5e06757626f42d2de93ff4c2",
 	"Items": [
 		{
-			"_id": "5db5d032f113b904523acdfa",
+			"_id": "5e06757626f42d2de93ff4c2",
 			"_tpl": "578f87ad245977356274f2cc"
 		},
 		{
-			"_id": "5db5d032f113b904523acdfb",
-			"_tpl": "5751a25924597722c463c472",
-			"parentId": "5db5d032f113b904523acdfa",
+			"_id": "5e06757626f42d2de93ff4c3",
+			"_tpl": "5448bd6b4bdc2dfc2f8b4569",
+			"parentId": "5e06757626f42d2de93ff4c2",
 			"slotId": "main",
 			"location": {
 				"x": 0,
@@ -33,17 +33,18 @@
 			}
 		},
 		{
-			"_id": "5db5d032f113b904523acdfc",
-			"_tpl": "56dff338d2720bbd668b4569",
-			"parentId": "5db5d032f113b904523acdfa",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			},
+			"_id": "5e06757626f42d2de93ff4c4",
+			"_tpl": "5448c12b4bdc2d02308b456f",
+			"parentId": "5e06757626f42d2de93ff4c3",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e06757626f42d2de93ff4c5",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5e06757626f42d2de93ff4c4",
+			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 10
+				"StackObjectsCount": 3
 			}
 		}
 	]
