@@ -38,9 +38,9 @@ class InsuranceServer {
     }
 
     /* adds gear to store */
-    addGearToSend(pmcData, insuredItem, sessionID) {
+    addGearToSend(pmcData, insuredItem, actualItem, sessionID) {
         this.insured[sessionID][insuredItem.tid] = this.insured[sessionID][insuredItem.tid] || [];
-        this.insured[sessionID][insuredItem.tid].push(insuredItem);
+        this.insured[sessionID][insuredItem.tid].push(actualItem);
         this.remove(pmcData, insuredItem.itemId);
     }
 
@@ -63,7 +63,7 @@ class InsuranceServer {
             if (!found) {
                 for (let item of pmcData.Inventory.items) {
                     if (insuredItem.itemId === item._id) {
-                        this.addGearToSend(pmcData, item, sessionID);
+                        this.addGearToSend(pmcData, insuredItem, item, sessionID);
                     }
                 }
             }
@@ -72,10 +72,10 @@ class InsuranceServer {
 
     /* store insured items on pmc death */
     storeDeadGear(pmcData, sessionID) {
-        for (let insuredItem of pmcData.InsuredItes) {
+        for (let insuredItem of pmcData.InsuredItems) {
             for (let item of pmcData.Inventory.items) {
-                if (insuredItem.itemId === item._id && item.parentId === pmcData.Inventory.equipment) {
-                    this.addGearToSend(pmcData, item, sessionID);
+                if (insuredItem.itemId === item._id) {
+                    this.addGearToSend(pmcData, insuredItem, item, sessionID);
                     break;
                 }
             }

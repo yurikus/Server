@@ -107,6 +107,9 @@ function saveProgress(offraidData, sessionID) {
         pmcData.Encyclopedia = offraidData.profile.Encyclopedia;
         pmcData.ConditionCounters = offraidData.profile.ConditionCounters;
         pmcData.Quests = offraidData.profile.Quests;
+        // For some reason, offraidData seems to drop the latest insured items.
+        // It makes more sense to use pmcData's insured items as the source of truth.
+        offraidData.profile.InsuredItems = pmcData.InsuredItems;
 
         // level 69 cap to prevent visual bug occuring at level 70
         if (pmcData.Info.Experience > 13129881) {
@@ -125,18 +128,19 @@ function saveProgress(offraidData, sessionID) {
     offraidData.profile.Inventory.items = itm_hf.replaceIDs(offraidData.profile, offraidData.profile.Inventory.items);
 
     // set profile equipment to the raid equipment
-    if (!isPlayerScav) {
-        pmcData = setInventory(pmcData, offraidData.profile);
-        insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
-    } else {
+    if (isPlayerScav) {
         scavData = setInventory(scavData, offraidData.profile);
         return;
     }
 
-    // remove inventory if player died
+    insurance_f.insuranceServer.resetSession(sessionID);
     if (isDead) {
+        // remove inventory if player died
         insurance_f.insuranceServer.storeDeadGear(pmcData, sessionID);
         pmcData = deleteInventory(pmcData, sessionID);
+    } else {
+        insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
+        pmcData = setInventory(pmcData, offraidData.profile);
     }
 
     // Send insurance message to player.
