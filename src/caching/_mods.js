@@ -188,7 +188,7 @@ function assort(mod) {
 
     for (let assort in mod.files.assort) {
         // create assort
-        if (!filepaths.assort.hasOwnProperty("assort")) {
+        if (!filepaths.assort.hasOwnProperty(assort)) {
             filepaths.assort[assort] = mod.files.assort[assort];
             continue;
         }
@@ -226,7 +226,7 @@ function locales(mod) {
 
     for (let locale in mod.files.locales) {
         // create locale
-        if (!filepaths.locales.hasOwnProperty("locale")) {
+        if (!filepaths.locales.hasOwnProperty(locale)) {
             filepaths.locales[locale] = mod.files.locales[locale];
             continue;
         }
