@@ -75,7 +75,7 @@ function processEvent(event) {
 
 function processInsuranceReturn(event) {
 	// Inject a little bit of a surprise by failing the insurance from time to time ;)
-	if (utility.getRandomInt(0, 99) < settings.gameplay.trading.insureReturnChance) {
+	if (utility.getRandomInt(0, 99) > settings.gameplay.trading.insureReturnChance) {
 		let insuranceFailedTemplates = json.parse(json.read(filepaths.dialogues[event.data.traderId])).insuranceFailed;
 		event.data.messageContent.templateId = insuranceFailedTemplates[utility.getRandomInt(0, insuranceFailedTemplates.length)];
 		event.data.items = [];
