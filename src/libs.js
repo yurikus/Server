@@ -12,6 +12,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.json = require('./classes/json.js');
 	global.utility = require('./classes/utility.js');
 	global.logger = require('./classes/logger.js');
+	global.router = (require('./server/router.js').router);
 
 	if (isFirstLaunch) {
 		logger.start();
@@ -58,8 +59,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 		logger.logSuccess("Finished loading json files... [" + String(new Date() - time) + "]");
 	}
 
-	// Other
-	global.router = (require('./server/router.js').router);
+	// load logic
 	global.locale = require('./classes/_locale.js');
 	global.index_f = require('./classes/_homeCredits.js');
 	global.keepAlive_f = require('./classes/_keepAlive.js');
@@ -92,7 +92,10 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.weather_f = require('./classes/_weather.js');
 	global.map_f =  require('./classes/_map.js');
 	global.item = require('./classes/_item.js');
-	
+
+	// load routes
+    router.initializeRoutes();
+
 	if (isFirstLaunch) {
 		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");
 		logger.logSuccess("[Library Loaded]");
