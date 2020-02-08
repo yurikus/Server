@@ -139,21 +139,6 @@ function getPmcPath(sessionID) {
     return pmcPath.replace("__REPLACEME__", sessionID);;
 }
 
-function addChildPrice(data, parentID, childPrice) {
-    for (let invItems in data) {
-        if (data[invItems]._id === parentID) {
-            if (data[invItems].hasOwnProperty("childPrice")) {
-                data[invItems].childPrice += childPrice;
-            } else {
-                data[invItems].childPrice = childPrice;
-                break;
-            }
-        }
-    }
-
-    return data;
-}
-
 function getStashType(sessionID) {
     let temp = profile_f.profileServer.getPmcProfile(sessionID);
 
@@ -165,6 +150,40 @@ function getStashType(sessionID) {
 
     logger.logError("Not found Stash: error check character.json", "red");
     return "NotFound Error";
+}
+
+// returns an array of items that are "direct" children of the given item
+function getItemChildren(inventory, item) {
+    let children = [];
+    for (let it of inventory) {
+        if (it.hasOwnProperty("parentId") && it.parentId === item._id) {
+            children.push(it); // push it, push it!
+        }
+    }
+
+    return children;
+}
+
+// Computes the total price of an item, that is the price
+// of the whole package (item, count, and children)
+// memo is used for memoization to avoid useless computations
+function getItemTotalPrice(inv, item, memo) {
+    // if we have already computed it, we're good
+    if (item._id in memo) {
+        return memo[item._id];
+    }
+
+    let basePrice = (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
+    let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
+    let children = getItemChildren(inv, item);
+    let childrenPrice = 0;
+    for (let child of children) {
+        childrenPrice += getItemTotalPrice(inv, child, memo);
+    }
+    // store it for later use
+    memo[item._id] = (basePrice + childrenPrice) * count;
+
+    return memo[item._id];
 }
 
 // added lastTrader so that we can list prices using the correct currency based on the trader
@@ -188,47 +207,35 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 
     //start output string here
     let purchaseOutput = '{"err": 0,"errmsg":null,"data":{';
-    let i = 0;
+    let outputs = [];
+    let memo = {};
 
-    for (let invItems in data) {
-        if (data[invItems]._id !== equipment
-        && data[invItems]._id !== stash
-        && data[invItems]._id !== questRaidItems
-        && data[invItems]._id !== questStashItems
-        && notSoldableItems.includes(data[invItems]._tpl)) {
-            if (i !== 0) {
-                purchaseOutput += ",";
-            } else {
-                i++;
-            }
+    for (let item of data) {
+        if (item._id !== equipment
+        && item._id !== stash
+        && item._id !== questRaidItems
+        && item._id !== questStashItems
+        && !notSoldableItems.includes(item._tpl)) {
 
-            let itemCount = ("upd" in data[invItems] ? ("StackObjectsCount" in data[invItems].upd ? data[invItems].upd.StackObjectsCount : 1) : 1);
-            let templateId = data[invItems]._tpl;
-            let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
-
-            data = addChildPrice(data, data[invItems].parentId, itemCount * basePrice);
-
-            if (data[invItems].hasOwnProperty("childPrice")) {
-                basePrice += data[invItems].childPrice;
-            }
-
-            let preparePrice = basePrice * multiplier * itemCount;
+            let preparePrice = getItemTotalPrice(data, item, memo);
 
             // convert the price using the lastTrader's currency
             preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency));
 
             // uses profile information to get the level of the dogtag and multiplies
             // the prepare price after conversion with this factor
-            if (itm_hf.isDogtag(data[invItems]._tpl) && data[invItems].upd.hasOwnProperty("Dogtag")) {
-                preparePrice = preparePrice * data[invItems].upd.Dogtag.Level;
+            if (itm_hf.isDogtag(item._tpl) && item.upd.hasOwnProperty("Dogtag")) {
+                preparePrice = preparePrice * item.upd.Dogtag.Level;
             }
 
+            preparePrice *= multiplier;
+
             preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
-            purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' + data[invItems]._tpl + '","count": ' + preparePrice.toFixed(0) + "}]]";
+            outputs.push('"' + item._id + '":[[{"_tpl": "' + item._tpl + '","count": ' + preparePrice.toFixed(0) + '}]]');
         }
     }
 
-    purchaseOutput += "}}"; // end output string here
+    purchaseOutput += outputs.join(',') + "}}"; // end output string here
     return purchaseOutput;
 }
 
