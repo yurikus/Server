@@ -23,6 +23,8 @@ class Router {
         for (let response in filepaths.src.responses) {
             require(filepaths.src.responses[response]);
         }
+
+        this.addStaticRoute("/client/game/profile/items/moving", this.handleItemRoutes);
     }
 
     /* sets static routes to check for */
@@ -40,7 +42,7 @@ class Router {
         this.itemRoutes[route] = callback;
     }
 
-    handleItemRoutes(info, sessionID) {
+    handleItemRoutes(url, info, sessionID) {
         let output = "";
         
         for (let body of info.data) {
@@ -81,11 +83,7 @@ class Router {
         
         /* route request */
         if (url in this.staticRoutes) {
-            if (url === "/client/game/profile/items/moving") {
-                output = this.handleItemRoutes(info, sessionID);
-            } else {
-                output = this.staticRoutes[url](url, info, sessionID);
-            }
+            output = this.staticRoutes[url](url, info, sessionID);
         } else {
             for (let key in this.dynamicRoutes) {
                 if (url.includes(key)) {

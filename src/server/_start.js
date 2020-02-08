@@ -207,6 +207,7 @@ class Server {
         this.ip = settings.server.ip;
         this.httpPort = settings.server.httpPort;
         this.httpsPort = settings.server.httpsPort;
+        this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
     }
 
     getIp() {
@@ -219,6 +220,10 @@ class Server {
 
     getHttpsPort() {
         return this.httpsPort;
+    }
+
+    getBackendUrl() {
+        return this.backendUrl;
     }
 
     generateCertifcate() {
@@ -234,6 +239,8 @@ class Server {
         if (settings.server.generateIp === true) {
             this.ip = utility.getLocalIpAddress();
         }
+
+        this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
     
         // load responses
         router.initializeRoutes();
@@ -242,13 +249,13 @@ class Server {
         let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {
             handleRequest(req, res);
         }).listen(this.httpsPort, this.ip, function() {
-            logger.logIp("» server url: " + "https://" + this.ip + ":" + this.httpsPort + "/");
+            logger.logSuccess("Started game server");
         });
 
         let httpServer = http.createServer((req, res) => {
             handleRequest(req, res);
         }).listen(this.httpPort, this.ip, function() {
-            logger.logIp("» launcher url: " + "http://" + this.ip + ":" + this.httpPort + "/");
+            logger.logSuccess("Started launcher server");
         });
 
         // game server already running

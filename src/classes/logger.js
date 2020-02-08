@@ -101,10 +101,6 @@ function logData(data) {
     log(data);
 }
 
-function logIp(text) {
-    log(text, "green", "black");
-}
-
 module.exports.start = start;
 module.exports.logError = logError;
 module.exports.logWarning = logWarning;
@@ -112,4 +108,3 @@ module.exports.logSuccess = logSuccess;
 module.exports.logInfo = logInfo;
 module.exports.logRequest = logRequest;
 module.exports.logData = logData;
-module.exports.logIp = logIp;

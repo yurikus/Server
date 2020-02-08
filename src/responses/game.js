@@ -7,12 +7,11 @@ function nullResponse(url, info, sessionID) {
 }
 
 function getGameConfig(url, info, sessionID) {
-    let backendUrl = "https://" + server.getIp();
-    return '{"err":0, "errmsg":null, "data":{"queued":false, "banTime":0, "hash":"BAN0", "lang":"en", "aid":' + sessionID + ', "token":"token_' + sessionID + '", "taxonomy":"341", "activeProfileId":"user' + sessionID + 'pmc", "nickname":"user", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame":0}}';
+    return '{"err":0, "errmsg":null, "data":{"queued":false, "banTime":0, "hash":"BAN0", "lang":"en", "aid":' + sessionID + ', "token":"token_' + sessionID + '", "taxonomy":"341", "activeProfileId":"user' + sessionID + 'pmc", "nickname":"user", "backend":{"Trading":"' + server.getBackendUrl() + '", "Messaging":"' + server.getBackendUrl() + '", "Main":"' + server.getBackendUrl() + '", "RagFair":"' + server.getBackendUrl() + '"}, "totalInGame":0}}';
 }
 
 function selectProfile(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + server.getIp() + '/", "channel_id":"testChannel"}}}';
+    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + server.getBackendUrl() + '/", "channel_id":"testChannel"}}}';
 }
 
 function getProfileStatus(url, info, sessionID) {
