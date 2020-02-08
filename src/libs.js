@@ -52,12 +52,10 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.server = (require('./server/start.js').server);
 
 	global.locale = require('./classes/locale.js');
-	global.index_f = require('./classes/index.js');
 	global.keepAlive_f = require('./classes/keepAlive.js');
 	global.health_f = require('./classes/health.js');
 	global.offraid_f = require('./classes/offraid.js');
 	global.saveHandler = require('./server/saveHandler.js');
-	global.constants = require('./server/constants.js');
 	global.header_f = require('./server/sendHeader.js');
 	global.events_f = require('./server/events.js');
 	global.dialogue_f = require('./classes/dialogue.js');

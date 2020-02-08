@@ -23,7 +23,6 @@ function getServer(url, info, sessionID) {
 }
 
 function validateGameVersion(url, info, sessionID) {
-    constants.setVersion(info.version.major);
     return nullResponse(url, info, sessionID);
 }
 

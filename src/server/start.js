@@ -8,7 +8,7 @@ const selfsigned = require('selfsigned');
 require('../libs.js');
 
 function showWatermark() {
-    let text_1 = "JustEmuTarkov " + constants.serverVersion();
+    let text_1 = "JustEmuTarkov " + server.getVersion();
     let text_2 = "https://justemutarkov.github.io/";
     let diffrence = Math.abs(text_1.length - text_2.length);
     let whichIsLonger = ((text_1.length >= text_2.length) ? text_1.length : text_2.length);
@@ -141,11 +141,6 @@ function sendResponse(req, resp, body, sessionID) {
         return;
     }
 
-    if (req.url === "/" || req.url === "/inv") {
-        header_f.sendHTML(resp, output);
-        return;
-    }
-
     header_f.sendZlibJson(resp, output, sessionID);
 }
 
@@ -179,12 +174,12 @@ function handleRequest(req, resp) {
                 const requestLength = req.headers["content-length"] - 0;
                 const sessionID = req.headers.sessionid - 0;
 
-                if (!constants.putInBuffer(sessionID, data, requestLength)) {
+                if (!server.putInBuffer(sessionID, data, requestLength)) {
                     resp.writeContinue();
                     return;
                 }
 
-                data = constants.getFromBuffer(sessionID);
+                data = server.getFromBuffer(sessionID);
             }
 
             // unpack data
@@ -204,10 +199,32 @@ function handleRequest(req, resp) {
 
 class Server {
     constructor() {
+        this.buffers = {};
         this.ip = settings.server.ip;
         this.httpPort = settings.server.httpPort;
         this.httpsPort = settings.server.httpsPort;
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
+        this.version = "1.0.0";
+    }
+
+    putInBuffer(sessionID, data, bufLength) {
+        if (this.buffers[sessionID] === undefined || this.buffers[sessionID].allocated !== bufLength) {
+            this.buffers[sessionID] = {
+                written: 0,
+                allocated: bufLength,
+                buffer: Buffer.alloc(bufLength)
+            };
+        }
+    
+        let buf = this.buffers[sessionID];
+        
+        data.copy(buf.buffer, buf.written, 0);
+        buf.written += data.length;
+        return buf.written === buf.allocated;
+    }
+    
+    getFromBuffer(sessionID) {
+        return this.buffers[sessionID].buffer;
     }
 
     getIp() {
@@ -224,6 +241,10 @@ class Server {
 
     getBackendUrl() {
         return this.backendUrl;
+    }
+
+    getVersion() {
+        return this.version;
     }
 
     generateCertifcate() {
