@@ -9,6 +9,7 @@ const logger = require("../classes/logger");
 
 class Router {
     constructor() {
+        this.self = this;
         this.staticRoutes = {};
         this.dynamicRoutes = {};
         this.itemRoutes = {};
@@ -48,8 +49,8 @@ class Router {
         for (let body of info.data) {
             let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
-            if (body.Action in this.itemRoutes) {
-                output = this.itemRoutes[body.Action](pmcData, body, sessionID);
+            if (body.Action in self.itemRoutes) {
+                output = self.itemRoutes[body.Action](pmcData, body, sessionID);
             } else {
                 logger.logError("[UNHANDLED ACTION] " + body.Action);
             }
