@@ -36,11 +36,11 @@ class HealthServer {
         // update medkit used (hpresource)
         for (let item of pmcData.Inventory.items) {
             if (item._id === body.item) {
-                if (typeof item.upd.MedKit === "undefined") {
+                if ("MedKit" in item.upd) {
+                    item.upd.MedKit.HpResource -= body.count;
+                } else {
                     let maxhp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
                     item.upd.MedKit = {"HpResource": maxhp - body.count};
-                } else {
-                    item.upd.MedKit.HpResource -= body.count;
                 }
     
                 if (item.upd.MedKit.HpResource === 0) {
@@ -67,14 +67,14 @@ class HealthServer {
                 effects = itm_hf.getItem(item._tpl)[1]._props.effects_health; 
     
                 if (maxResource > 1) {   
-                    if (typeof item.upd.FoodDrink === 'undefined') {
-                        item.upd.FoodDrink = {"HpPercent" : maxResource - body.count}; 
-                    } else {
+                    if ("FoodDrink" in item.upd) {
                         item.upd.FoodDrink.HpPercent -= body.count; 
                         
                         if (item.upd.FoodDrink.HpPercent < 1) {
                             todelete = true;
                         }
+                    } else {
+                        item.upd.FoodDrink = {"HpPercent" : maxResource - body.count};
                     }  
                 }
             }

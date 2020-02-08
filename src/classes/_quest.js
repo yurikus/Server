@@ -57,7 +57,7 @@ function completeQuest(pmcData, body, sessionID) {
                         // Quest rewards bundle up items whose max stack size is 1. Break them up.
                         let itemTmplData = json.parse(json.read(filepaths.items[rewardItem._tpl]));
 
-                        if (typeof rewardItem.upd !== "undefined" && itemTmplData._props.StackMaxSize === 1) {
+                        if ("upd" in rewardItem && itemTmplData._props.StackMaxSize === 1) {
                             let count = rewardItem.upd.StackObjectsCount;
                             
                             rewardItem.upd.StackObjectsCount = 1;

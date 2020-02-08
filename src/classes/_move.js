@@ -5,14 +5,12 @@ require('../libs.js');
 /* Based on the item action, determine whose inventories we should be looking at for from and to. */
 function getOwnerInventoryItems(body, sessionID) {
     let isSameInventory = false;
-
     let pmcItems = profile_f.profileServer.getPmcProfile(sessionID).Inventory.items;
     let scavData = profile_f.profileServer.getScavProfile(sessionID);
-
-
     let fromInventoryItems = pmcItems;
     let fromType = "pmc";
-    if (typeof body.fromOwner !== "undefined") {
+
+    if ("fromOwner" in body) {
         if (body.fromOwner.id === scavData._id) {
             fromInventoryItems = scavData.Inventory.items;
             fromType = "scav";
@@ -22,11 +20,12 @@ function getOwnerInventoryItems(body, sessionID) {
         }
     }
 
-    let toInventoryItems = pmcItems;
-    let toType = "pmc";
     // Don't need to worry about mail for destination because client doesn't allow
     // users to move items back into the mail stash.
-    if (typeof body.toOwner !== "undefined" && body.toOwner.id === scavData._id) {
+    let toInventoryItems = pmcItems;
+    let toType = "pmc";
+
+    if ("toOwner" in body && body.toOwner.id === scavData._id) {
         toInventoryItems = scavData.Inventory.items;
         toType = "scav";
     }
@@ -90,7 +89,7 @@ function moveItemToProfile(fromItems, toItems, body) {
                     fromItems[itemIndex].parentId = body.to.id;
                     fromItems[itemIndex].slotId = body.to.container;
 
-                    if (typeof body.to.location !== "undefined") {
+                    if ("location" in body.to) {
                         fromItems[itemIndex].location = body.to.location;
                     } else {
                         if (fromItems[itemIndex].location) {
@@ -118,7 +117,7 @@ function moveItemInternal(items, body) {
             item.parentId = body.to.id;
             item.slotId = body.to.container;
 
-            if (typeof body.to.location !== "undefined") {
+            if ("location" in body.to) {
                 item.location = body.to.location;
             } else {
                 if (item.location) {
@@ -200,7 +199,7 @@ function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new 
 
     let items = getOwnerInventoryItems(body, sessionID);
     
-    if (typeof body.container.location === "undefined" && body.container.container === "cartridges") {
+    if (!("location" in body.container) && body.container.container === "cartridges") {
         let tmp_counter = 0;
     
         for (let item_ammo in items.to) {
@@ -261,11 +260,11 @@ function mergeItem(pmcData, body, sessionID) {
                     let stackItem0 = 1;
                     let stackItem1 = 1;
 
-                    if (typeof items.to[key].upd !== "undefined") {
+                    if ("upd" in items.to[key]) {
                         stackItem0 = items.to[key].upd.StackObjectsCount;
                     }
 
-                    if (typeof items.from[key2].upd !== "undefined") {
+                    if ("upd" in items.from[key2]) {
                         stackItem1 = items.from[key2].upd.StackObjectsCount;
                     }
 
@@ -298,7 +297,7 @@ function transferItem(pmcData, body, sessionID) {
         if (item._id === body.item) {
             let stackItem = 1;
 
-            if (typeof item.upd !== "undefined") {
+            if ("upd" in item.upd) {
                 stackItem = item.upd.StackObjectsCount;
             }
 
@@ -318,7 +317,7 @@ function transferItem(pmcData, body, sessionID) {
         if (item._id === body.with) {
             let stackItemWith = 1;
 
-            if (typeof item.upd !== "undefined") {
+            if ("upd" in item) {
                 stackItemWith = item.upd.StackObjectsCount;
             }
 
@@ -460,7 +459,7 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
                             });
 
                             while (true) {
-                                if (typeof toDo[0] === "undefined") {
+                                if (toDo.length === 0) {
                                     break;
                                 }
 

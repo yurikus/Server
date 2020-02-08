@@ -338,7 +338,7 @@ function isRebuildRequired() {
             return true;
         }
         
-        if (modList[mod].enabled !== typeof undefined && cachedList[mod].enabled !== typeof undefined && modList[mod].enabled !== cachedList[mod].enabled) {
+        if (modList[mod].enabled !== cachedList[mod].enabled) {
             return true;
         }
     }

@@ -107,7 +107,7 @@ function getLinkedSearchList(linkedSearchId, response) {
 
     response.data.categories = {};
 
-    if (typeof itemLink._props.Slots !== "undefined") {
+    if ("Slots" in itemLink._props) {
         for (let itemSlot of itemLink._props.Slots) {
             for (let itemSlotFilter of itemSlot._props.filters) {
                 for (let mod of itemSlotFilter.Filter) {
@@ -122,7 +122,7 @@ function getLinkedSearchList(linkedSearchId, response) {
         }
     }
 
-    if (typeof itemLink._props.Chambers !== "undefined") {
+    if ("Chambers" in itemLink._props) {
         for (let patron of itemLink._props.Chambers[0]._props.filters[0].Filter) {
             for (let item of templates.data.Items) {
                 if (item.Id === patron) {

@@ -65,12 +65,12 @@ function examineItem(pmcData, body, sessionID) {
     let returned = "BAD";
 
     // ragfair
-    if (typeof body.fromOwner !== "undefined" && body.fromOwner.type === "RagFair") {
+    if ("fromOwner" in body && body.fromOwner.type === "RagFair") {
         returned = body.fromOwner.id;
     }
 
     // trader
-    if (typeof body.fromOwner !== "undefined" && body.fromOwner.type === "Trader") {
+    if ("fromOwner" in body && body.fromOwner.type === "Trader") {
         if (body.fromOwner.id === "579dc571d53a0658a154fbec") {
             body.fromOwner.id = "ragfair";
         }

@@ -10,27 +10,27 @@ function recheckInventoryFreeSpace(pmcData, sessionID) { // recalculate stach ta
     let PlayerStash = getPlayerStash(sessionID);
     let Stash2D = Array(PlayerStash[1]).fill(0).map(x => Array(PlayerStash[0]).fill(0));
     for (let item of pmcData.Inventory.items) {
-        // hideout  // added proper stash ID older was "5c71b934354682353958ea35"
-        if (item.parentId === pmcData.Inventory.stash && typeof item.location != "undefined") {
-            // let tmpItem = getItem(item._tpl)[1];
+        if ("location" in item && item.parentId === pmcData.Inventory.stash) {
             let tmpSize = getSize(item._tpl, item._id, pmcData.Inventory.items);
-            //			x
-            let iW = tmpSize[0];
-            //			y
-            let iH = tmpSize[1];
-            if (typeof item.upd != "undefined")
-                if (typeof item.upd.Foldable != "undefined")
+            let iW = tmpSize[0]; // x
+            let iH = tmpSize[1]; // y
+
+            if ("upd" in item) {
+                if ("Foldable" in item.upd) {
                     if (item.upd.Foldable.Folded) {
                         iW -= 1;
                     }
+                }
+            }
 
             let fH = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iW : iH);
             let fW = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iH : iW);
 
-
             for (let y = 0; y < fH; y++) {
-                if (item.location.y + y <= PlayerStash[1] && item.location.x + fW <= PlayerStash[0]) { // fixed filling out of bound
+                // fixed filling out of bound
+                if (item.location.y + y <= PlayerStash[1] && item.location.x + fW <= PlayerStash[0]) {
                     let FillTo = ((item.location.x + fW >= PlayerStash[0]) ? PlayerStash[0] : item.location.x + fW);
+
                     try {
                         Stash2D[item.location.y + y].fill(1, item.location.x, FillTo);
                     } catch (e) {
@@ -208,6 +208,7 @@ function findItemById(items, id) {
             return item;
         }
     }
+
     return false;
 }
 
@@ -217,11 +218,14 @@ function findItemById(items, id) {
 */
 function isItemInStash(pmcData, item) {
     let container = item;
-    while (typeof container.parentId != "undefined") {
+
+    while ("parentId" in container) {
         if (container.parentId === pmcData.Inventory.stash && container.slotId === "hideout") {
             return true;
         }
+
         container = findItemById(pmcData.Inventory.items, container.parentId);
+        
         if (!container) {
             break;
         }
@@ -353,98 +357,112 @@ function getItem(template) { // -> Gets item from <input: _tpl>
 * outputs [width, height]
 * */
 function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and height returns [sizeX, sizeY]
-    let toDo = [itemID],
-        rootItem = itemID,
-        tmpItem = getItem(itemtpl)[1],
-        isFolded = false,
-        isMagazine = false,
-        isGrip = false,
-        isMainBaseHasis = false,
-        isBarrel = false,
-        BxH_diffrence_stock = 0,
-        BxH_diffrence_barrel = 0;
-
-
+    let toDo = [itemID];
+    let tmpItem = getItem(itemtpl)[1];
+    let isFolded = false;
+    let isMagazine = false;
+    let isGrip = false;
+    let isMainBaseHasis = false;
+    let isBarrel = false;
+    let BxH_diffrence_stock = 0;
+    let BxH_diffrence_barrel = 0;
     let outX = tmpItem._props.Width;
     let outY = tmpItem._props.Height;
     let skipThisItems = ["5448e53e4bdc2d60728b4567", "566168634bdc2d144c8b456c", "5795f317245977243854e041"];
 
-    if (skipThisItems.indexOf(tmpItem._parent) === -1) { // containers big no no
+    // containers big no no
+    if (!skipThisItems.contains(tmpItem._parent)) {
         while (true) {
-            if (typeof toDo[0] === "undefined") {
+            if (toDo.length === 0) {
                 break;
             }
-            for (let tmpKey in InventoryItem) {
-                if (InventoryItem.hasOwnProperty(tmpKey)) {
-                    if (InventoryItem[tmpKey]._id == toDo[0]) {
-                        if (typeof InventoryItem[tmpKey].upd != "undefined")
-                            if (typeof InventoryItem[tmpKey].upd.Foldable != "undefined")
-                                if (InventoryItem[tmpKey].upd.Foldable.Folded === true)
-                                    isFolded = true;
-                    }
-                    if (InventoryItem[tmpKey].parentId === toDo[0]) {
-                        let itm = getItem(InventoryItem[tmpKey]._tpl)[1];
-                        //if(rootItem === InventoryItem[tmpKey].parentId || itm._props.ExtraSizeForceAdd == true) {
-                        if (InventoryItem[tmpKey].slotId != "mod_handguard") {
-                            if (InventoryItem[tmpKey].slotId == "mod_magazine") {
-                                if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
-                                    isMagazine = true;
-                                }
-                            }
-                            if (InventoryItem[tmpKey].slotId == "mod_pistol_grip" || InventoryItem[tmpKey].slotId == "mod_pistolgrip") {
 
-                                isGrip = true;
-                            }
-                            if (InventoryItem[tmpKey].slotId == "mod_stock") {
-                                if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
-                                    isGrip = true;
-                                }
-                            }
-                            if (InventoryItem[tmpKey].slotId == "mod_stock") {
-                                if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
-                                    BxH_diffrence_stock = itm._props.ExtraSizeLeft;
-                                    isMainBaseHasis = true;
-                                }
-                            }
-                            if (InventoryItem[tmpKey].slotId == "mod_barrel") {
-                                if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
-                                    BxH_diffrence_barrel = itm._props.ExtraSizeLeft;
-                                    isBarrel = true;
-                                }
-                            }
-                            if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
-                                if (InventoryItem[tmpKey].slotId == "mod_barrel" && itm._props.ExtraSizeLeft > 1 || InventoryItem[tmpKey].slotId != "mod_barrel")
-                                    outX += itm._props.ExtraSizeLeft;
-                            }
-
-                            if (typeof itm._props.ExtraSizeRight !== "undefined" && itm._props.ExtraSizeRight > 0) {
-                                outX += itm._props.ExtraSizeRight;
-                            }
-
-                            if (typeof itm._props.ExtraSizeUp !== "undefined" && itm._props.ExtraSizeUp > 0) {
-                                outY += itm._props.ExtraSizeUp;
-                            }
-
-                            if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
-                                outY += itm._props.ExtraSizeDown;
+            for (let item of InventoryItem) {
+                if (item._id === toDo[0]) {
+                    if ("upd" in item) {
+                        if ("Foldable" in item.upd) {
+                            if (item.upd.Foldable.Folded === true) {
+                                isFolded = true;
                             }
                         }
-                        toDo.push(InventoryItem[tmpKey]._id);
                     }
                 }
+
+                if (item.parentId === toDo[0]) {
+                    let itm = getItem(item._tpl)[1];
+
+                    if (item.slotId != "mod_handguard") {
+                        if (item.slotId == "mod_magazine") {
+                            if ("ExtraSizeDown" in itm._props && itm._props.ExtraSizeDown > 0) {
+                                isMagazine = true;
+                            }
+                        }
+
+                        if (item.slotId == "mod_pistol_grip" || item.slotId == "mod_pistolgrip") {
+                            isGrip = true;
+                        }
+
+                        if (item.slotId == "mod_stock") {
+                            if ("ExtraSizeDown" in itm._props && itm._props.ExtraSizeDown > 0) {
+                                isGrip = true;
+                            }
+                        }
+
+                        if (item.slotId == "mod_stock") {
+                            if ("ExtraSizeLeft" in itm._props && itm._props.ExtraSizeLeft > 0) {
+                                BxH_diffrence_stock = itm._props.ExtraSizeLeft;
+                                isMainBaseHasis = true;
+                            }
+                        }
+
+                        if (item.slotId == "mod_barrel") {
+                            if ("ExtraSizeLeft" in itm._props && itm._props.ExtraSizeLeft > 0) {
+                                BxH_diffrence_barrel = itm._props.ExtraSizeLeft;
+                                isBarrel = true;
+                            }
+                        }
+
+                        if ("ExtraSizeLeft" in itm._props && itm._props.ExtraSizeLeft > 0) {
+                            if (item.slotId == "mod_barrel" && itm._props.ExtraSizeLeft > 1 || item.slotId != "mod_barrel") {
+                                outX += itm._props.ExtraSizeLeft;
+                            }
+                        }
+
+                        if ("ExtraSizeRight" in itm._props && itm._props.ExtraSizeRight > 0) {
+                            outX += itm._props.ExtraSizeRight;
+                        }
+
+                        if ("ExtraSizeUp" in itm._props && itm._props.ExtraSizeUp > 0) {
+                            outY += itm._props.ExtraSizeUp;
+                        }
+
+                        if ("ExtraSizeDown" in itm._props && itm._props.ExtraSizeDown > 0) {
+                            outY += itm._props.ExtraSizeDown;
+                        }
+                    }
+
+                    toDo.push(item._id);
+                }
             }
+
             toDo.splice(0, 1);
         }
     }
+
     if (isBarrel && isMainBaseHasis) {
         let calculate = Math.abs(BxH_diffrence_stock - BxH_diffrence_barrel);
         calculate = ((BxH_diffrence_stock > BxH_diffrence_barrel) ? BxH_diffrence_stock : BxH_diffrence_barrel) - calculate;
         outX -= calculate;
     }
-    if (isMagazine && isGrip)
+
+    if (isMagazine && isGrip) {
         outY -= 1;
-    if (isFolded)
+    }
+
+    if (isFolded) {
         outX -= 1;
+    }
+
     return [outX, outY];
 }
 
@@ -483,9 +501,10 @@ function isDogtag(itemId) {
 
 /* Gets the identifier for a child using slotId, locationX and locationY. */
 function getChildId(item) {
-    if (typeof item.location === "undefined") {
+    if (!("location" in item)) {
         return item.slotId;
     }
+
     return item.slotId + ',' + item.location.x + ',' + item.location.y;
 }
 

@@ -12,10 +12,9 @@ class DialogueServer {
 	}
 
 	saveToDisk(sessionID) {
-		if (typeof this.dialogues[sessionID] === "undefined") {
-			return;
+		if (sessionID in this.dialogues) {
+			json.write(getPath(sessionID), this.dialogues[sessionID]);
 		}
-		json.write(getPath(sessionID), this.dialogues[sessionID]);
 	}
 
 	/* Set the content of the dialogue on the list tab. */

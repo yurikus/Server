@@ -51,17 +51,17 @@ function log(data, colorFront = "", colorBack = "") {
     let setColors = "";
     let colors = ["", ""];
 
-    if (typeof colorFront !== "") {
+    if (colorFront !== "") {
         colors[0] = colorFront;
     }
 
-    if (typeof colorBack !== "") {
+    if (colorBack !== "") {
         colors[1] = colorBack;
     }
 
     // properly set colorString indicator
     for (let i = 0; i < colors.length; i++) {
-        if (((i === 0) || (i === 1)) && colors[i] !== "") {
+        if (colors[i] !== "") {
             setColors += colorData[i][colors[i]];
         }
     }
@@ -74,9 +74,7 @@ function log(data, colorFront = "", colorBack = "") {
     }
 
     // write the logged data to the file
-    if (typeof fileStream !== "undefined") {
-        fileStream.write(util.format(data) + '\n');
-    }
+    fileStream.write(util.format(data) + '\n');
 };
 
 function logError(text) {

@@ -26,11 +26,9 @@ class ProfileServer {
     }
 
     saveToDisk(sessionID) {
-        if (typeof this.profiles[sessionID]['pmc'] === "undefined") {
-            return;
+        if ("pmc" in this.profiles[sessionID]) {
+            json.write(getPmcPath(sessionID), this.profiles[sessionID]['pmc']);
         }
-        
-        json.write(getPmcPath(sessionID), this.profiles[sessionID]['pmc']);
     }
 
     /* 
@@ -204,7 +202,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
                 i++;
             }
 
-            let itemCount = (typeof data[invItems].upd !== "undefined" ? (typeof data[invItems].upd.StackObjectsCount !== "undefined" ? data[invItems].upd.StackObjectsCount : 1) : 1);
+            let itemCount = ("upd" in data[invItems] ? ("StackObjectsCount" in data[invItems].upd ? data[invItems].upd.StackObjectsCount : 1) : 1);
             let templateId = data[invItems]._tpl;
             let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
 
