@@ -5,26 +5,30 @@ require('../libs.js');
 function sortOffersByID(a, b) {
     return a.intId - b.intId;
 }
+
 function sortOffersByRating(a, b) {
     return a.user.rating - b.user.rating;
 }
+
 function sortOffersByName(a, b) {
     // @TODO: Get localized item names
     try {
         let aa = itm_hf.getItem(a._id)[1]._name;
         let bb = itm_hf.getItem(b._id)[1]._name;
 
-        aa = aa.substring(aa.indexOf('_')+1);
-        bb = bb.substring(bb.indexOf('_')+1);
+        aa = aa.substring(aa.indexOf('_') + 1);
+        bb = bb.substring(bb.indexOf('_') + 1);
 
         return aa.localeCompare(bb);
-    } catch (e) {}
-
-    return 0;
+    } catch (e) {
+        return 0;
+    }
 }
+
 function sortOffersByPrice(a, b) {
     return a.requirements[0].count - b.requirements[0].count;
 }
+
 function sortOffersByExpiry(a, b) {
     return a.endTime - b.endTime;
 }
@@ -35,22 +39,28 @@ function sortOffers(request, offers) {
         case 0: // ID
             offers.sort(sortOffersByID);
             break;
+
         case 3: // Merchant (rating)
             offers.sort(sortOffersByRating);
             break;
+
         case 4: // Offer (title)
             offers.sort(sortOffersByName);
             break;
+
         case 5: // Price
             offers.sort(sortOffersByPrice);
             break;
+
         case 6: // Expires in
             offers.sort(sortOffersByExpiry);
             break;
     }
 
-    if (request.sortDirection == 1) // 0=ASC 1=DESC
+    // 0=ASC 1=DESC
+    if (request.sortDirection === 1) {
         offers.reverse();
+    }
 
     return offers;
 }
@@ -60,8 +70,7 @@ function getOffers(request) {
 
     if (Object.entries(request.buildItems).length != 0) {
         createOfferFromBuild(request.buildItems,response);
-    }
-    else if (request.handbookId !== "" && request.linkedSearchId !== "") {
+    } else if (request.handbookId !== "" && request.linkedSearchId !== "") {
         //list specific category from a linked search
         let linkedSearch = getLinkedSearchList(request.linkedSearchId,response);
         let categorySearch = getCategoryList(request.handbookId);
@@ -76,8 +85,7 @@ function getOffers(request) {
         }
 
         response.data.offers = sortOffers(request, offers);
-    }
-    else if (request.linkedSearchId !== "") {
+    } else if (request.linkedSearchId !== "") {
         let offers_tpl = getLinkedSearchList(request.linkedSearchId,response);
         let offers = [];
 
@@ -86,8 +94,7 @@ function getOffers(request) {
         }
 
         response.data.offers = sortOffers(request, offers);
-    }
-    else if (request.handbookId !== "") {
+    } else if (request.handbookId !== "") {
         let offers_tpl = getCategoryList(request.handbookId);
         let offers = [];
 

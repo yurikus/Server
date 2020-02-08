@@ -195,7 +195,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && data[invItems]._id !== stash
         && data[invItems]._id !== questRaidItems
         && data[invItems]._id !== questStashItems
-        && notSoldableItems.indexOf(data[invItems]._tpl) === -1) {
+        && notSoldableItems.includes(data[invItems]._tpl)) {
             if (i !== 0) {
                 purchaseOutput += ",";
             } else {

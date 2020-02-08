@@ -114,16 +114,16 @@ function sendResponse(req, resp, body, sessionID) {
         let baseNode = {};
 
         // get images to look through
-        if (req.url.indexOf("/quest") !== -1) {
+        if (req.url.includes("/quest")) {
             logger.logInfo("[IMG.quests]:" + req.url);
             baseNode = filepaths.images.quest;
-        } else if (req.url.indexOf("/handbook") !== -1) {
+        } else if (req.url.includes("/handbook")) {
             logger.logInfo("[IMG.handbook]:" + req.url);
             baseNode = filepaths.images.handbook;
-        } else if (req.url.indexOf("/avatar") !== -1) {
+        } else if (req.url.includes("/avatar")) {
             logger.logInfo("[IMG.trader]:" + req.url);
             baseNode = filepaths.images.trader;
-        } else if (req.url.indexOf("/banners") !== -1) {
+        } else if (req.url.includes("/banners")) {
             logger.logInfo("[IMG.banners]:" + req.url);
             baseNode = filepaths.images.banners;
         } else {
