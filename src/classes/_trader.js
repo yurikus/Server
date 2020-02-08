@@ -82,9 +82,10 @@ class TraderServer {
     }
 
     getAssort(traderId) {
-        if (typeof this.traders[traderId].assort === "undefined") {
+        if (!("assort" in this.traders[traderId])) {
             this.generateAssort(traderId);
         }
+        
         return this.traders[traderId].assort;
     }
 
