@@ -7,7 +7,7 @@ function nullResponse(url, info, sessionID) {
 }
 
 function getGameConfig(url, info, sessionID) {
-    let backendUrl = "https://" + ip;
+    let backendUrl = "https://" + server.getIp();
     return '{"err":0, "errmsg":null, "data":{"queued":false, "banTime":0, "hash":"BAN0", "lang":"en", "aid":' + sessionID + ', "token":"token_' + sessionID + '", "taxonomy":"341", "activeProfileId":"user' + sessionID + 'pmc", "nickname":"user", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame":0}}';
 }
 
