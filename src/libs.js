@@ -49,7 +49,8 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	}
 
 	// load logic
-	global.server = require('./server/_start.js');
+	global.server = (require('./server/_start.js').server);
+
 	global.locale = require('./classes/_locale.js');
 	global.index_f = require('./classes/index.js');
 	global.keepAlive_f = require('./classes/_keepAlive.js');
