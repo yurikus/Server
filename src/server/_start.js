@@ -1,4 +1,8 @@
-﻿"use strict";
+﻿/* _start.js
+ * TODO: rewrite as class
+ */
+
+"use strict";
 
 const zlib = require('zlib');
 const http = require('http');
@@ -6,6 +10,10 @@ const https = require('https');
 const selfsigned = require('selfsigned');
 
 require('../libs.js');
+
+let ip = settings.server.ip;
+let httpPort = settings.server.httpPort;
+let httpsPort = settings.server.httpsPort;
 
 function showWatermark() {
     let text_1 = "JustEmuTarkov " + constants.serverVersion();
@@ -202,64 +210,58 @@ function handleRequest(req, resp) {
     }
 }
 
-class Server {
-    constructor() {
-        this.ip = settings.server.ip;
-        this.httpPort = settings.server.httpPort;
-        this.httpsPort = settings.server.httpsPort;
-    }
-
-    getIp() {
-        return this.ip;
-    }
-
-    getHttpPort() {
-        return this.httpPort;
-    }
-
-    getHttpsPort() {
-        return this.httpsPort;
-    }
-
-    generateCertifcate() {
-        let perms = selfsigned.generate([{ name: 'commonName', value: this.ip + "/" }], { days: 365 });
-        return {cert: perms.cert, key: perms.private};
-    }
-
-    start() {
-        // show our watermark
-        showWatermark();
-
-        // set the ip
-        if (settings.server.generateIp === true) {
-            this.ip = utility.getLocalIpAddress();
-        }
-    
-        // load responses
-        router.initializeRoutes();
-    
-        // create servers (https: game, http: launcher)
-        let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {
-            handleRequest(req, res);
-        }).listen(this.httpsPort, this.ip, function() {
-            logger.logIp("» server url: " + "https://" + this.ip + ":" + this.httpsPort + "/");
-        });
-
-        let httpServer = http.createServer((req, res) => {
-            handleRequest(req, res);
-        }).listen(this.httpPort, this.ip, function() {
-            logger.logIp("» launcher url: " + "http://" + this.ip + ":" + this.httpPort + "/");
-        });
-
-        // game server already running
-        httpsServer.on('error', function(e) {
-            logger.logError("» Port " + this.httpsPort + " is already in use, check if the server isn't already running");
-        });
-
-        httpServer.on('error', function(e) {
-            logger.logError("» Port " + this.httpPort + " is already in use, check if the server isn't already running");
-        });
-    }
+function getIp() {
+    return ip;
 }
 
-module.exports.server = new Server();
+function getHttpPort() {
+    return httpPort;
+}
+
+function getHttpsPort() {
+    return httpsPort;
+}
+
+function generateCertifcate() {
+    let perms = selfsigned.generate([{ name: 'commonName', value: ip + "/" }], { days: 365 });
+    return {cert: perms.cert, key: perms.private};
+}
+
+function start() {
+    showWatermark();
+
+    // set the ip
+    if (settings.server.generateIp === true) {
+        ip = utility.getLocalIpAddress();
+    }
+
+    // load responses
+    router.initializeRoutes();
+
+    // create servers (https: game, http: launcher)
+    let httpsServer = https.createServer(generateCertifcate(), (req, res) => {
+        handleRequest(req, res);
+    }).listen(httpsPort, ip, function() {
+        logger.logIp("» server url: " + "https://" + ip + ":" + httpsPort + "/");
+    });
+
+    let httpServer = http.createServer((req, res) => {
+        handleRequest(req, res);
+    }).listen(httpPort, ip, function() {
+        logger.logIp("» launcher url: " + "http://" + ip + ":" + httpPort + "/");
+    });
+
+    // game server already running
+    httpsServer.on('error', function(e) {
+        logger.logError("» Port " + httpsPort + " is already in use, check if the server isn't already running");
+    });
+
+    httpServer.on('error', function(e) {
+        logger.logError("» Port " + httpPort + " is already in use, check if the server isn't already running");
+    });
+}
+
+module.exports.getIp = getIp;
+module.exports.getHttpPort = getHttpPort;
+module.exports.getHttpsPort = getHttpsPort;
+module.exports.start = start;
