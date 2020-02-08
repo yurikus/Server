@@ -17,7 +17,7 @@ function setOutput(data) {
 }
 
 function resetOutput() {
-    output = JSON.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums, {} }}');
+    output = JSON.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{} }}');
 }
 
 module.exports.getOutput = getOutput;
