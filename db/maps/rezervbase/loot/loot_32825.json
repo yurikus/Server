@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_barter_flam_kerosine (10)665984",
-	"IsStatic": false,
+	"Id": "Lootable_00005",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -17.3259888,
-		"y": -5.088,
-		"z": -169.639984
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961d86f77414f52bc0bf",
+	"Root": "5e0676119a5d683c327ee082",
 	"Items": [
 		{
-			"_id": "5dd2961d86f77414f52bc0bf",
-			"_tpl": "5d1b371186f774253763a656"
+			"_id": "5e0676119a5d683c327ee082",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e0676119a5d683c327ee083",
+			"_tpl": "591382d986f774465a6413a7",
+			"parentId": "5e0676119a5d683c327ee082",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0676119a5d683c327ee084",
+			"_tpl": "5672cb124bdc2d1a0f8b4568",
+			"parentId": "5e0676119a5d683c327ee082",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

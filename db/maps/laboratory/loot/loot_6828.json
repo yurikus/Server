@@ -1,58 +1,68 @@
 {
-	"Id": "Lootable_00238",
-	"IsStatic": true,
-	"useGravity": true,
+	"Id": "loot_test_weap_work_zone (1)1336378",
+	"IsStatic": false,
+	"useGravity": false,
 	"randomRotation": false,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -138.48587,
+		"y": 5.171,
+		"z": -283.100525
 	},
 	"Rotation": {
-		"x": 0,
-		"y": 0,
+		"x": 270,
+		"y": 44.7493935,
 		"z": 0
 	},
-	"IsGroupPosition": false,
-	"GroupPositions": [],
-	"Root": "5e0675f496074431445d480f",
+	"IsGroupPosition": true,
+	"GroupPositions": [
+		{
+			"Name": "groupPosition[0]",
+			"Weight": 33,
+			"Position": {
+				"x": -241.6116,
+				"y": 0.633999944,
+				"z": -294.8935
+			},
+			"Rotation": {
+				"x": 270,
+				"y": 318.158142,
+				"z": 0
+			}
+		},
+		{
+			"Name": "groupPosition[1]",
+			"Weight": 33,
+			"Position": {
+				"x": -252.689743,
+				"y": 5.131,
+				"z": -320.529541
+			},
+			"Rotation": {
+				"x": 270,
+				"y": 286.425446,
+				"z": 0
+			}
+		},
+		{
+			"Name": "groupPosition[2]",
+			"Weight": 33,
+			"Position": {
+				"x": -138.48587,
+				"y": 5.171,
+				"z": -283.100525
+			},
+			"Rotation": {
+				"x": 270,
+				"y": 44.7493935,
+				"z": 0
+			}
+		}
+	],
+	"Root": "5c8a662186f774283a1ca95c",
 	"Items": [
 		{
-			"_id": "5e0675f496074431445d480f",
-			"_tpl": "578f87a3245977356274f2cb"
-		},
-		{
-			"_id": "5e0675f496074431445d4810",
-			"_tpl": "5734781f24597737e04bf32a",
-			"parentId": "5e0675f496074431445d480f",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5e0675f496074431445d4811",
-			"_tpl": "5df8a72c86f77412640e2e83",
-			"parentId": "5e0675f496074431445d480f",
-			"slotId": "main",
-			"location": {
-				"x": 2,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5e0675f496074431445d4812",
-			"_tpl": "573475fb24597737fb1379e1",
-			"parentId": "5e0675f496074431445d480f",
-			"slotId": "main",
-			"location": {
-				"x": 3,
-				"y": 0,
-				"r": 0
-			}
+			"_id": "5c8a662186f774283a1ca95c",
+			"_tpl": "5c1e2d1f86f77431e9280bee"
 		}
 	]
 }

@@ -1,12 +1,12 @@
 {
-	"Id": "loot_med_super_rare (73)3055176",
+	"Id": "loot_ammo_rare (13)4563332",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": -126.175,
-		"y": 5.03,
-		"z": -347.607
+		"x": -176.876,
+		"y": 4.899,
+		"z": -281.482
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,30 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d1891c20ab7c9a5a0dbe",
+	"Root": "5e0675f8f15d9d2288414fc9",
 	"Items": [
 		{
-			"_id": "5db5d1891c20ab7c9a5a0dbe",
-			"_tpl": "5af0548586f7743a532b7e99"
+			"_id": "5e0675f8f15d9d2288414fc9",
+			"_tpl": "57372c21245977670937c6c2"
+		},
+		{
+			"_id": "5e0675f8f15d9d2288414fca",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5e0675f8f15d9d2288414fc9",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e0675f8f15d9d2288414fcb",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5e0675f8f15d9d2288414fc9",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

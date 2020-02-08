@@ -1,12 +1,12 @@
 {
-	"Id": "loot_vaselin (2)584690",
-	"IsStatic": false,
+	"Id": "Lootable_00248",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 234.819946,
-		"y": -4.652,
-		"z": -58.0469971
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d04bcd1e3d3a9450806a",
+	"Root": "5db5d043533aa77c477a5f88",
 	"Items": [
 		{
-			"_id": "5db5d04bcd1e3d3a9450806a",
-			"_tpl": "5755383e24597772cb798966"
+			"_id": "5db5d043533aa77c477a5f88",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5db5d043533aa77c477a5f89",
+			"_tpl": "57347c1124597737fb1379e3",
+			"parentId": "5db5d043533aa77c477a5f88",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

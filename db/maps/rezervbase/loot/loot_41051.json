@@ -1,25 +1,36 @@
 {
-	"Id": "loot_el_military_citizen (14)625604",
-	"IsStatic": false,
+	"Id": "Lootable_00132",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -65.8358154,
-		"y": -3.3285768,
-		"z": 31.4642944
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d07ccd1e3d3a94509606",
+	"Root": "5db5d06442a81007cb24e980",
 	"Items": [
 		{
-			"_id": "5db5d07ccd1e3d3a94509606",
-			"_tpl": "5c06782b86f77426df5407d2"
+			"_id": "5db5d06442a81007cb24e980",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5db5d06442a81007cb24e981",
+			"_tpl": "59e36c6f86f774176c10a2a7",
+			"parentId": "5db5d06442a81007cb24e980",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

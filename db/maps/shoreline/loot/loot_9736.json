@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00172",
+	"Id": "Lootable_00278",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,16 +15,16 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d31e3c9645bb716d02dccb9",
+	"Root": "5db5d03542a81007cb24dade",
 	"Items": [
 		{
-			"_id": "5d31e3c9645bb716d02dccb9",
-			"_tpl": "578f87b7245977356274f2cd"
+			"_id": "5db5d03542a81007cb24dade",
+			"_tpl": "5909d76c86f77471e53d2adf"
 		},
 		{
-			"_id": "5d31e3c9645bb716d02dccba",
-			"_tpl": "590a3d9c86f774385926e510",
-			"parentId": "5d31e3c9645bb716d02dccb9",
+			"_id": "5db5d03542a81007cb24dadf",
+			"_tpl": "571a12c42459771f627b58a0",
+			"parentId": "5db5d03542a81007cb24dade",
 			"slotId": "main",
 			"location": {
 				"x": 0,
@@ -33,24 +33,40 @@
 			}
 		},
 		{
-			"_id": "5d31e3c9645bb716d02dccbb",
-			"_tpl": "56742c2e4bdc2d95058b456d",
-			"parentId": "5d31e3c9645bb716d02dccb9",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
+			"_id": "5db5d03542a81007cb24dae0",
+			"_tpl": "571a26d524597720680fbe8a",
+			"parentId": "5db5d03542a81007cb24dadf",
+			"slotId": "mod_barrel"
+		},
+		{
+			"_id": "5db5d03542a81007cb24dae1",
+			"_tpl": "571a282c2459771fb2755a69",
+			"parentId": "5db5d03542a81007cb24dadf",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5db5d03542a81007cb24dae2",
+			"_tpl": "571a29dc2459771fb2755a6a",
+			"parentId": "5db5d03542a81007cb24dadf",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5db5d03542a81007cb24dae3",
+			"_tpl": "5736026a245977644601dc61",
+			"parentId": "5db5d03542a81007cb24dae2",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 4
 			}
 		},
 		{
-			"_id": "5d31e3c9645bb716d02dccbc",
-			"_tpl": "57347cd0245977445a2d6ff1",
-			"parentId": "5d31e3c9645bb716d02dccb9",
+			"_id": "5db5d03542a81007cb24dae4",
+			"_tpl": "59fc48e086f77463b1118392",
+			"parentId": "5db5d03542a81007cb24dade",
 			"slotId": "main",
 			"location": {
-				"x": 0,
-				"y": 1,
+				"x": 2,
+				"y": 0,
 				"r": 0
 			}
 		}

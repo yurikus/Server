@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_building_items (23)676912",
+	"Id": "loot_rf_ammo_true (110)671968",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": 45.81598,
-		"y": -4.692,
-		"z": -127.875977
+		"x": 45.4219971,
+		"y": -5.824,
+		"z": 63.6959839
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961d86f774794047c83b",
+	"Root": "5dd2961d86f77414f52bc28f",
 	"Items": [
 		{
-			"_id": "5dd2961d86f774794047c83b",
-			"_tpl": "5d1b385e86f774252167b98a"
+			"_id": "5dd2961d86f77414f52bc28f",
+			"_tpl": "560d75f54bdc2da74d8b4573"
+		},
+		{
+			"_id": "5dd2961d86f77414f52bc290",
+			"_tpl": "560d61e84bdc2da74d8b4571",
+			"parentId": "5dd2961d86f77414f52bc28f",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		}
 	]
 }

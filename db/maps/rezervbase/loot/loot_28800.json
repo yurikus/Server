@@ -1,12 +1,12 @@
 {
-	"Id": "loot_rf_ammo_true (46)585428",
-	"IsStatic": false,
+	"Id": "Lootable_00261",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -23.9359741,
-		"y": -6.741,
-		"z": -14.0739746
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,29 +15,32 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d05f42a81007cb24e474",
+	"Root": "5e0676129a5d683c327ee211",
 	"Items": [
 		{
-			"_id": "5db5d05f42a81007cb24e474",
-			"_tpl": "57372c21245977670937c6c2"
+			"_id": "5e0676129a5d683c327ee211",
+			"_tpl": "578f87b7245977356274f2cd"
 		},
 		{
-			"_id": "5db5d05f42a81007cb24e475",
-			"_tpl": "56dff061d2720bb5668b4567",
-			"parentId": "5db5d05f42a81007cb24e474",
-			"slotId": "cartridges",
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5e0676129a5d683c327ee212",
+			"_tpl": "5734795124597738002c6176",
+			"parentId": "5e0676129a5d683c327ee211",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		},
 		{
-			"_id": "5db5d05f42a81007cb24e476",
-			"_tpl": "56dff061d2720bb5668b4567",
-			"parentId": "5db5d05f42a81007cb24e474",
-			"slotId": "cartridges",
-			"location": 1,
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5e0676129a5d683c327ee213",
+			"_tpl": "5909e99886f7740c983b9984",
+			"parentId": "5e0676129a5d683c327ee211",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
 			}
 		}
 	]

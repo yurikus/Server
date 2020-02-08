@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_barter_flam_gasoline (13)639800",
+	"Id": "loot_rf_ammo_true (32)6036910",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": 26.2160034,
-		"y": -5.897,
-		"z": -21.0139771
+		"x": -32.5738525,
+		"y": 4.00142336,
+		"z": 26.8182983
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,30 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d05c42a81007cb24e199",
+	"Root": "5e0676070b8cde1bad722ab8",
 	"Items": [
 		{
-			"_id": "5db5d05c42a81007cb24e199",
-			"_tpl": "5d1b36a186f7742523398433"
+			"_id": "5e0676070b8cde1bad722ab8",
+			"_tpl": "57372deb245977685d4159b3"
+		},
+		{
+			"_id": "5e0676070b8cde1bad722ab9",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e0676070b8cde1bad722ab8",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e0676070b8cde1bad722aba",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e0676070b8cde1bad722ab8",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

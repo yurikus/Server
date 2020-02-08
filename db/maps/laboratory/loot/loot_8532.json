@@ -1,12 +1,12 @@
 {
-	"Id": "loot_electron_rare (10)3054958",
-	"IsStatic": false,
+	"Id": "Lootable_00187",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -188.044,
-		"y": 0.76,
-		"z": -367.823
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d1888bcb9e33ce4021ce",
+	"Root": "5db5d18a1c20ab7c9a5a0edd",
 	"Items": [
 		{
-			"_id": "5db5d1888bcb9e33ce4021ce",
-			"_tpl": "59e36c6f86f774176c10a2a7"
+			"_id": "5db5d18a1c20ab7c9a5a0edd",
+			"_tpl": "5909d7cf86f77470ee57d75a"
+		},
+		{
+			"_id": "5db5d18a1c20ab7c9a5a0ede",
+			"_tpl": "590c5d4b86f774784e1b9c45",
+			"parentId": "5db5d18a1c20ab7c9a5a0edd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

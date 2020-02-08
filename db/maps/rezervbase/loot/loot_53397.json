@@ -1,12 +1,12 @@
 {
-	"Id": "Lootable_00609",
-	"IsStatic": true,
+	"Id": "loot_rf_ammo_true (10)2173658",
+	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -67.4465942,
+		"y": -6.57579041,
+		"z": -36.9512024
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961586f774072817312a",
+	"Root": "5d7227a55549dd54e348b2b1",
 	"Items": [
 		{
-			"_id": "5dd2961586f774072817312a",
-			"_tpl": "578f87ad245977356274f2cc"
+			"_id": "5d7227a55549dd54e348b2b1",
+			"_tpl": "560d75f54bdc2da74d8b4573"
+		},
+		{
+			"_id": "5d7227a55549dd54e348b2b2",
+			"_tpl": "560d61e84bdc2da74d8b4571",
+			"parentId": "5d7227a55549dd54e348b2b1",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		}
 	]
 }

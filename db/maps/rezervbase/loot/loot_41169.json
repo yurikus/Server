@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_weapon_parts (16)581686",
-	"IsStatic": false,
+	"Id": "Lootable_00277",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 10.4790039,
-		"y": -3.632,
-		"z": -2.97698975
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d07dcd1e3d3a9450967c",
+	"Root": "5db5d06442a81007cb24eaa9",
 	"Items": [
 		{
-			"_id": "5db5d07dcd1e3d3a9450967c",
-			"_tpl": "5d1c819a86f774771b0acd6c"
+			"_id": "5db5d06442a81007cb24eaa9",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5db5d06442a81007cb24eaaa",
+			"_tpl": "56742c324bdc2d150f8b456d",
+			"parentId": "5db5d06442a81007cb24eaa9",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d06442a81007cb24eaab",
+			"_tpl": "590a386e86f77429692b27ab",
+			"parentId": "5db5d06442a81007cb24eaa9",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 1
+			}
 		}
 	]
 }

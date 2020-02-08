@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00373",
+	"Id": "Lootable_00198",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,16 +15,16 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d058cd1e3d3a94508ce8",
+	"Root": "5e0675b796074431445d449d",
 	"Items": [
 		{
-			"_id": "5db5d058cd1e3d3a94508ce8",
-			"_tpl": "5d6d2bb386f774785b07a77a"
+			"_id": "5e0675b796074431445d449d",
+			"_tpl": "5909d7cf86f77470ee57d75a"
 		},
 		{
-			"_id": "5db5d058cd1e3d3a94508ce9",
-			"_tpl": "57372bd3245977670b7cd243",
-			"parentId": "5db5d058cd1e3d3a94508ce8",
+			"_id": "5e0675b796074431445d449e",
+			"_tpl": "56e0598dd2720bb5668b45a6",
+			"parentId": "5e0675b796074431445d449d",
 			"slotId": "main",
 			"location": {
 				"x": 0,
@@ -33,49 +33,31 @@
 			}
 		},
 		{
-			"_id": "5db5d058cd1e3d3a94508cea",
-			"_tpl": "56dff026d2720bb8668b4567",
-			"parentId": "5db5d058cd1e3d3a94508ce9",
+			"_id": "5e0675b796074431445d449f",
+			"_tpl": "5448c12b4bdc2d02308b456f",
+			"parentId": "5e0675b796074431445d449e",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e0675b796074431445d44a2",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5e0675b796074431445d449f",
 			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 30
+				"StackObjectsCount": 6
 			}
 		},
 		{
-			"_id": "5db5d058cd1e3d3a94508ceb",
-			"_tpl": "5449016a4bdc2d6f028b456f",
-			"parentId": "5db5d058cd1e3d3a94508ce8",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 1044
-			}
+			"_id": "5e0675b796074431445d44a0",
+			"_tpl": "56e05b06d2720bb2668b4586",
+			"parentId": "5e0675b796074431445d449e",
+			"slotId": "mod_muzzle"
 		},
 		{
-			"_id": "5db5d058cd1e3d3a94508cec",
-			"_tpl": "59e361e886f774176c10a2a5",
-			"parentId": "5db5d058cd1e3d3a94508ce8",
-			"slotId": "main",
-			"location": {
-				"x": 2,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5db5d058cd1e3d3a94508ced",
-			"_tpl": "5733279d245977289b77ec24",
-			"parentId": "5db5d058cd1e3d3a94508ce8",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 1,
-				"r": 0
-			}
+			"_id": "5e0675b796074431445d44a1",
+			"_tpl": "56e05a6ed2720bd0748b4567",
+			"parentId": "5e0675b796074431445d449e",
+			"slotId": "mod_pistol_grip"
 		}
 	]
 }

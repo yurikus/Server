@@ -1,12 +1,12 @@
 {
-	"Id": "loot_barter_gyrotahometr (1)615446",
-	"IsStatic": false,
+	"Id": "Lootable_00085",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 233.802979,
-		"y": -10.015,
-		"z": -8.789978
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d07ccd1e3d3a945095e5",
+	"Root": "5e0676118b77ae7722639810",
 	"Items": [
 		{
-			"_id": "5db5d07ccd1e3d3a945095e5",
-			"_tpl": "5d03784a86f774203e7e0c4d"
+			"_id": "5e0676118b77ae7722639810",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e0676118b77ae7722639811",
+			"_tpl": "56742c284bdc2d98058b456d",
+			"parentId": "5e0676118b77ae7722639810",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

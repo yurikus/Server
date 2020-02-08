@@ -1,12 +1,12 @@
 {
-	"Id": "loot_fuel (69)3057320",
-	"IsStatic": false,
+	"Id": "Lootable_00007",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -276.74,
-		"y": 0.826,
-		"z": -373.419
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,25 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d19042a81007cb24f64e",
+	"Root": "5db5d18fcd1e3d3a9450a6e4",
 	"Items": [
 		{
-			"_id": "5db5d19042a81007cb24f64e",
-			"_tpl": "590c5bbd86f774785762df04"
+			"_id": "5db5d18fcd1e3d3a9450a6e4",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5db5d18fcd1e3d3a9450a6e5",
+			"_tpl": "5696686a4bdc2da3298b456a",
+			"parentId": "5db5d18fcd1e3d3a9450a6e4",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 79
+			}
 		}
 	]
 }

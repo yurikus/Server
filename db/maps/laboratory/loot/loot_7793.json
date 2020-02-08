@@ -1,12 +1,12 @@
 {
-	"Id": "Lootable_00178",
-	"IsStatic": true,
+	"Id": "loot_mix_food_med_ammo (122)3055088",
+	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -183.644,
+		"y": -2.817,
+		"z": -361.086
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,81 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5c8a662386f774240c1b1caa",
+	"Root": "5db5d1891c20ab7c9a5a0dd0",
 	"Items": [
 		{
-			"_id": "5c8a662386f774240c1b1caa",
-			"_tpl": "5909d76c86f77471e53d2adf"
+			"_id": "5db5d1891c20ab7c9a5a0dd0",
+			"_tpl": "57372c89245977685d4159b1"
 		},
 		{
-			"_id": "5c8a662386f774240c1b1cab",
-			"_tpl": "5448c12b4bdc2d02308b456f",
-			"parentId": "5c8a662386f774240c1b1caa",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 0,
-				"r": 0
+			"_id": "5db5d1891c20ab7c9a5a0dd1",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5db5d1891c20ab7c9a5a0dd0",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
 			}
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cac",
-			"_tpl": "59e6152586f77473dc057aa1",
-			"parentId": "5c8a662386f774240c1b1caa",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cad",
-			"_tpl": "59e649f986f77411d949b246",
-			"parentId": "5c8a662386f774240c1b1cac",
-			"slotId": "mod_gas_block"
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cb4",
-			"_tpl": "59e6284f86f77440d569536f",
-			"parentId": "5c8a662386f774240c1b1cad",
-			"slotId": "mod_handguard"
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cae",
-			"_tpl": "59e61eb386f77440d64f5daf",
-			"parentId": "5c8a662386f774240c1b1cac",
-			"slotId": "mod_muzzle"
-		},
-		{
-			"_id": "5c8a662386f774240c1b1caf",
-			"_tpl": "59e6318286f77444dd62c4cc",
-			"parentId": "5c8a662386f774240c1b1cac",
-			"slotId": "mod_pistol_grip"
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cb0",
-			"_tpl": "59e6449086f7746c9f75e822",
-			"parentId": "5c8a662386f774240c1b1cac",
-			"slotId": "mod_reciever"
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cb1",
-			"_tpl": "59d650cf86f7741b846413a4",
-			"parentId": "5c8a662386f774240c1b1cac",
-			"slotId": "mod_sight_rear"
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cb2",
-			"_tpl": "59e6227d86f77440d64f5dc2",
-			"parentId": "5c8a662386f774240c1b1cac",
-			"slotId": "mod_stock"
-		},
-		{
-			"_id": "5c8a662386f774240c1b1cb3",
-			"_tpl": "59d625f086f774661516605d",
-			"parentId": "5c8a662386f774240c1b1cac",
-			"slotId": "mod_magazine"
 		}
 	]
 }

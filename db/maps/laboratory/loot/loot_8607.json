@@ -1,12 +1,12 @@
 {
-	"Id": "loot_housestuff (64)3055924",
-	"IsStatic": false,
+	"Id": "Lootable_00081",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -125.26,
-		"y": 5.15,
-		"z": -389.205
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d1898bcb9e33ce402219",
+	"Root": "5db5d18b1c20ab7c9a5a1006",
 	"Items": [
 		{
-			"_id": "5db5d1898bcb9e33ce402219",
-			"_tpl": "5734770f24597738025ee254"
+			"_id": "5db5d18b1c20ab7c9a5a1006",
+			"_tpl": "59139c2186f77411564f8e42"
+		},
+		{
+			"_id": "5db5d18b1c20ab7c9a5a1007",
+			"_tpl": "5734781f24597737e04bf32a",
+			"parentId": "5db5d18b1c20ab7c9a5a1006",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

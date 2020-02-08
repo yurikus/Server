@@ -1,12 +1,12 @@
 {
-	"Id": "loot_food_drink (4)6037186",
-	"IsStatic": false,
+	"Id": "Lootable_00292",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -55.9178467,
-		"y": -6.36057663,
-		"z": -7.543701
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06760d9a5d683c327edaa9",
+	"Root": "5e06760a0b8cde1bad722e8d",
 	"Items": [
 		{
-			"_id": "5e06760d9a5d683c327edaa9",
-			"_tpl": "544fb62a4bdc2dfb738b4568"
+			"_id": "5e06760a0b8cde1bad722e8d",
+			"_tpl": "59139c2186f77411564f8e42"
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722e8e",
+			"_tpl": "5c06782b86f77426df5407d2",
+			"parentId": "5e06760a0b8cde1bad722e8d",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

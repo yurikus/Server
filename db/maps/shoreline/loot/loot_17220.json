@@ -1,25 +1,44 @@
 {
-	"Id": "controller1_forest_crate4377372",
+	"Id": "LootAmmoBoxes[0] (23)4376150",
 	"IsStatic": false,
-	"useGravity": false,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": -753.850952,
-		"y": -44.348,
-		"z": 180.932
+		"x": -187.61499,
+		"y": -39.065,
+		"z": 140.43
 	},
 	"Rotation": {
-		"x": 7.603465,
-		"y": 29.75233,
-		"z": 76.96652
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d053cd1e3d3a945088bc",
+	"Root": "5e0675b396074431445d3fc9",
 	"Items": [
 		{
-			"_id": "5db5d053cd1e3d3a945088bc",
-			"_tpl": "5b4c72b386f7745b453af9c0"
+			"_id": "5e0675b396074431445d3fc9",
+			"_tpl": "57d14e1724597714010c3f4b"
+		},
+		{
+			"_id": "5e0675b396074431445d3fca",
+			"_tpl": "5737218f245977612125ba51",
+			"parentId": "5e0675b396074431445d3fc9",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 10
+			}
+		},
+		{
+			"_id": "5e0675b396074431445d3fcb",
+			"_tpl": "5737218f245977612125ba51",
+			"parentId": "5e0675b396074431445d3fc9",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 3
+			}
 		}
 	]
 }

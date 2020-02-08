@@ -1,12 +1,12 @@
 {
-	"Id": "loot_mix_food_med_ammo (269)587368",
-	"IsStatic": false,
+	"Id": "Lootable_00034",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -107.786987,
-		"y": -5.734,
-		"z": -95.46698
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,43 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d07dcd1e3d3a94509729",
+	"Root": "5db5d0761d9e8a753205a8b2",
 	"Items": [
 		{
-			"_id": "5db5d07dcd1e3d3a94509729",
-			"_tpl": "57513f9324597720a7128161"
+			"_id": "5db5d0761d9e8a753205a8b2",
+			"_tpl": "578f87ad245977356274f2cc"
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8b3",
+			"_tpl": "57f4c844245977379d5c14d1",
+			"parentId": "5db5d0761d9e8a753205a8b2",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8b4",
+			"_tpl": "57d152ec245977144076ccdf",
+			"parentId": "5db5d0761d9e8a753205a8b3",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8b5",
+			"_tpl": "57d1519e24597714373db79d",
+			"parentId": "5db5d0761d9e8a753205a8b3",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5db5d0761d9e8a753205a8b6",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5db5d0761d9e8a753205a8b5",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 29
+			}
 		}
 	]
 }

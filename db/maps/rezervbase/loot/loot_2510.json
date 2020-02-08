@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_electr (40)605074",
-	"IsStatic": false,
+	"Id": "Lootable_00553",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -55.079834,
-		"y": -6.114577,
-		"z": 16.2453
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d03f533aa77c477a5a73",
+	"Root": "5dd2961686f77407281731ef",
 	"Items": [
 		{
-			"_id": "5db5d03f533aa77c477a5a73",
-			"_tpl": "5d1c774f86f7746d6620f8db"
+			"_id": "5dd2961686f77407281731ef",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5dd2961686f77407281731f0",
+			"_tpl": "5672cb124bdc2d1a0f8b4568",
+			"parentId": "5dd2961686f77407281731ef",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

@@ -1,6 +1,6 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
 
 function genericCacher(cachename, filepathNode, output = "") {
     logger.logInfo("Caching: " + cachename);
@@ -63,10 +63,7 @@ function languages() {
         base.data.push(fileData);
     }
 
-    if (typeof base.crc != "undefined") {
-        base.crc = utility.adlerGen(json.stringify(base.data));
-    }
-
+    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/languages.json", base);
 }
 

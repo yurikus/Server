@@ -1,12 +1,12 @@
 {
-	"Id": "loot_med_super_rare (2)3057266",
-	"IsStatic": false,
+	"Id": "Lootable_00060",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -122.763,
-		"y": 5.628,
-		"z": -411.37
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d18cf113b904523aec1d",
+	"Root": "5e0675f75fd55152ed5e393c",
 	"Items": [
 		{
-			"_id": "5db5d18cf113b904523aec1d",
-			"_tpl": "5c10c8fd86f7743d7d706df3"
+			"_id": "5e0675f75fd55152ed5e393c",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e0675f75fd55152ed5e393d",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5e0675f75fd55152ed5e393c",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0675f75fd55152ed5e393e",
+			"_tpl": "57347cd0245977445a2d6ff1",
+			"parentId": "5e0675f75fd55152ed5e393c",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

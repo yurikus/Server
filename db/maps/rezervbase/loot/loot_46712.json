@@ -1,12 +1,12 @@
 {
-	"Id": "loot_ammo_regular (2)5992030",
-	"IsStatic": false,
+	"Id": "Lootable_00034",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 91.9359741,
-		"y": -0.154998779,
-		"z": -34.9119873
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,30 +15,67 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06761396074431445d4a5f",
+	"Root": "5dd2962086f77414f52bc924",
 	"Items": [
 		{
-			"_id": "5e06761396074431445d4a5f",
-			"_tpl": "57d14e1724597714010c3f4b"
+			"_id": "5dd2962086f77414f52bc924",
+			"_tpl": "578f87ad245977356274f2cc"
 		},
 		{
-			"_id": "5e06761396074431445d4a60",
-			"_tpl": "5737207f24597760ff7b25f2",
-			"parentId": "5e06761396074431445d4a5f",
-			"slotId": "cartridges",
-			"upd": {
-				"StackObjectsCount": 10
+			"_id": "5dd2962086f77414f52bc925",
+			"_tpl": "57c44b372459772d2b39b8ce",
+			"parentId": "5dd2962086f77414f52bc924",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		},
 		{
-			"_id": "5e06761396074431445d4a61",
-			"_tpl": "5737207f24597760ff7b25f2",
-			"parentId": "5e06761396074431445d4a5f",
+			"_id": "5dd2962086f77414f52bc926",
+			"_tpl": "57c44dd02459772d2e0ae249",
+			"parentId": "5dd2962086f77414f52bc925",
+			"slotId": "mod_muzzle"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc92b",
+			"_tpl": "57c44e7b2459772d28133248",
+			"parentId": "5dd2962086f77414f52bc926",
+			"slotId": "mod_sight_rear"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc927",
+			"_tpl": "57c44f4f2459772d2c627113",
+			"parentId": "5dd2962086f77414f52bc925",
+			"slotId": "mod_reciever"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc928",
+			"_tpl": "57838f9f2459774a150289a0",
+			"parentId": "5dd2962086f77414f52bc925",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc92c",
+			"_tpl": "57a0dfb82459774d3078b56c",
+			"parentId": "5dd2962086f77414f52bc928",
 			"slotId": "cartridges",
-			"location": 1,
 			"upd": {
-				"StackObjectsCount": 9
+				"StackObjectsCount": 20
 			}
+		},
+		{
+			"_id": "5dd2962086f77414f52bc929",
+			"_tpl": "57c44fa82459772d2d75e415",
+			"parentId": "5dd2962086f77414f52bc925",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc92a",
+			"_tpl": "57c450252459772d28133253",
+			"parentId": "5dd2962086f77414f52bc925",
+			"slotId": "mod_stock"
 		}
 	]
 }

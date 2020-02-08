@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_barter_flam_gasoline (59)4377972",
+	"Id": "Loot_barter[2] (32)2108262",
 	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 242.314774,
-		"y": -55.5953255,
-		"z": 126.95
+		"x": -187.657959,
+		"y": 0.046,
+		"z": -89.554
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d04509aff62a3d372617",
+	"Root": "5d31e3c2645bb716d02dcb93",
 	"Items": [
 		{
-			"_id": "5db5d04509aff62a3d372617",
-			"_tpl": "5d1b36a186f7742523398433"
+			"_id": "5d31e3c2645bb716d02dcb93",
+			"_tpl": "573725b0245977612125bae2"
+		},
+		{
+			"_id": "5d31e3c2645bb716d02dcb94",
+			"_tpl": "57371b192459775a9f58a5e0",
+			"parentId": "5d31e3c2645bb716d02dcb93",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 16
+			}
 		}
 	]
 }

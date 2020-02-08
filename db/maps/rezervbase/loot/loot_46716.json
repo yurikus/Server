@@ -1,12 +1,12 @@
 {
-	"Id": "loot_ammo_regular (6)5981972",
-	"IsStatic": false,
+	"Id": "Lootable_00262",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 82.078,
-		"y": -0.08999634,
-		"z": -27.8469849
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06761396074431445d4a65",
+	"Root": "5dd2962086f77414f52bc932",
 	"Items": [
 		{
-			"_id": "5e06761396074431445d4a65",
-			"_tpl": "5c87ca002e221600114cb150"
+			"_id": "5dd2962086f77414f52bc932",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc933",
+			"_tpl": "57347c1124597737fb1379e3",
+			"parentId": "5dd2962086f77414f52bc932",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

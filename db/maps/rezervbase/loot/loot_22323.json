@@ -1,12 +1,12 @@
 {
-	"Id": "Lootable_00237",
-	"IsStatic": true,
+	"Id": "loot_ammo_common (84)596788",
+	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": 41.664978,
+		"y": -4.309,
+		"z": -77.7479858
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,21 +15,19 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06142a81007cb24e60b",
+	"Root": "5db5d046cd1e3d3a94507b90",
 	"Items": [
 		{
-			"_id": "5db5d06142a81007cb24e60b",
-			"_tpl": "5909d4c186f7746ad34e805a"
+			"_id": "5db5d046cd1e3d3a94507b90",
+			"_tpl": "5c1127d0d174af29be75cf68"
 		},
 		{
-			"_id": "5db5d06142a81007cb24e60c",
-			"_tpl": "5755356824597772cb798962",
-			"parentId": "5db5d06142a81007cb24e60b",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 0,
-				"r": 0
+			"_id": "5db5d046cd1e3d3a94507b91",
+			"_tpl": "5c0d591486f7744c505b416f",
+			"parentId": "5db5d046cd1e3d3a94507b90",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 5
 			}
 		}
 	]

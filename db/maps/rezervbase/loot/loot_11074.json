@@ -1,25 +1,46 @@
 {
-	"Id": "loot_shelter_building_items (21)6017046",
+	"Id": "Loot 135 (9)583718",
 	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 3.145996,
-		"y": -3.507,
-		"z": -98.44498
+		"x": -154.13385,
+		"y": -8.923576,
+		"z": 74.3963
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 0,
+		"y": 269.8601,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e0676070b8cde1bad722b3e",
+	"Root": "5db5d03a533aa77c477a5529",
 	"Items": [
 		{
-			"_id": "5e0676070b8cde1bad722b3e",
-			"_tpl": "5d1b39a386f774252339976f"
+			"_id": "5db5d03a533aa77c477a5529",
+			"_tpl": "57f4c844245977379d5c14d1"
+		},
+		{
+			"_id": "5db5d03a533aa77c477a552a",
+			"_tpl": "57d152ec245977144076ccdf",
+			"parentId": "5db5d03a533aa77c477a5529",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5db5d03a533aa77c477a552b",
+			"_tpl": "57d1519e24597714373db79d",
+			"parentId": "5db5d03a533aa77c477a5529",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5db5d03a533aa77c477a552c",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5db5d03a533aa77c477a552b",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 18
+			}
 		}
 	]
 }

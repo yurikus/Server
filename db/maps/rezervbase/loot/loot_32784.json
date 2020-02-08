@@ -1,12 +1,12 @@
 {
-	"Id": "loot_food_drink (21)730612",
-	"IsStatic": false,
+	"Id": "Lootable_00331",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -121.586975,
-		"y": -4.3138237,
-		"z": -10.7998657
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,55 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961d86f77414f52bc096",
+	"Root": "5e0676119a5d683c327edfe8",
 	"Items": [
 		{
-			"_id": "5dd2961d86f77414f52bc096",
-			"_tpl": "57513f07245977207e26a311"
+			"_id": "5e0676119a5d683c327edfe8",
+			"_tpl": "5d6fe50986f77449d97f7463"
+		},
+		{
+			"_id": "5e0676119a5d683c327edfe9",
+			"_tpl": "590c661e86f7741e566b646a",
+			"parentId": "5e0676119a5d683c327edfe8",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0676119a5d683c327edfea",
+			"_tpl": "590c661e86f7741e566b646a",
+			"parentId": "5e0676119a5d683c327edfe8",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0676119a5d683c327edfeb",
+			"_tpl": "5d1b3f2d86f774253763b735",
+			"parentId": "5e0676119a5d683c327edfe8",
+			"slotId": "main",
+			"location": {
+				"x": 4,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0676119a5d683c327edfec",
+			"_tpl": "5c13cd2486f774072c757944",
+			"parentId": "5e0676119a5d683c327edfe8",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			}
 		}
 	]
 }

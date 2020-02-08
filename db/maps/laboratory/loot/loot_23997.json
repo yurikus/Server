@@ -1,12 +1,12 @@
 {
-	"Id": "loot_wire_mil_transm (4)3056620",
-	"IsStatic": false,
+	"Id": "Lootable_00074",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -155.099,
-		"y": 5.029,
-		"z": -405.539
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d1918bcb9e33ce40272b",
+	"Root": "5db5d19242a81007cb24f986",
 	"Items": [
 		{
-			"_id": "5db5d1918bcb9e33ce40272b",
-			"_tpl": "5c052f6886f7746b1e3db148"
+			"_id": "5db5d19242a81007cb24f986",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5db5d19242a81007cb24f987",
+			"_tpl": "5672cb124bdc2d1a0f8b4568",
+			"parentId": "5db5d19242a81007cb24f986",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d19242a81007cb24f988",
+			"_tpl": "56742c284bdc2d98058b456d",
+			"parentId": "5db5d19242a81007cb24f986",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

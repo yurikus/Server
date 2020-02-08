@@ -1,12 +1,12 @@
 {
-	"Id": "loot_ammo_sup (30)1332898",
-	"IsStatic": false,
+	"Id": "Lootable_00068",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -256.457,
-		"y": 4.63,
-		"z": -321.109
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,19 +15,77 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5c8a662386f774240c1b1b50",
+	"Root": "5e0675faf15d9d22884152bd",
 	"Items": [
 		{
-			"_id": "5c8a662386f774240c1b1b50",
-			"_tpl": "5c12619186f7743f871c8a32"
+			"_id": "5e0675faf15d9d22884152bd",
+			"_tpl": "578f8782245977354405a1e3"
 		},
 		{
-			"_id": "5c8a662386f774240c1b1b51",
-			"_tpl": "5c0d668f86f7747ccb7f13b2",
-			"parentId": "5c8a662386f774240c1b1b50",
-			"slotId": "cartridges",
+			"_id": "5e0675faf15d9d22884152be",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e0675faf15d9d22884152bd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
 			"upd": {
-				"StackObjectsCount": 8
+				"StackObjectsCount": 699
+			}
+		},
+		{
+			"_id": "5e0675faf15d9d22884152bf",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e0675faf15d9d22884152bd",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 877
+			}
+		},
+		{
+			"_id": "5e0675faf15d9d22884152c0",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e0675faf15d9d22884152bd",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 946
+			}
+		},
+		{
+			"_id": "5e0675faf15d9d22884152c1",
+			"_tpl": "5df8a6a186f77412640e2e80",
+			"parentId": "5e0675faf15d9d22884152bd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e0675faf15d9d22884152c2",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e0675faf15d9d22884152bd",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 678
 			}
 		}
 	]

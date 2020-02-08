@@ -1,12 +1,12 @@
 {
-	"Id": "loot_item_weapon_parts (17)705398",
+	"Id": "loot_rf_ammo_true (89)606046",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": 7.84100342,
-		"y": -3.663,
-		"z": -6.664978
+		"x": 11.6935425,
+		"y": -2.836081,
+		"z": -2.40957642
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961886f774793f5f9702",
+	"Root": "5db5d04acd1e3d3a94507fc1",
 	"Items": [
 		{
-			"_id": "5dd2961886f774793f5f9702",
-			"_tpl": "5d1c819a86f774771b0acd6c"
+			"_id": "5db5d04acd1e3d3a94507fc1",
+			"_tpl": "57372e4a24597768553071c2"
+		},
+		{
+			"_id": "5db5d04acd1e3d3a94507fc2",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5db5d04acd1e3d3a94507fc1",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		}
 	]
 }

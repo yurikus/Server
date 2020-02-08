@@ -1,25 +1,44 @@
 {
-	"Id": "loot_el_military_citizen (28)617766",
+	"Id": "loot_rf_ammo_true (180)668696",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": -59.34381,
-		"y": -14.3635769,
-		"z": 132.293274
+		"x": -52.3079834,
+		"y": -9.717,
+		"z": -27.92099
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 135.458725,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d05b42a81007cb24e139",
+	"Root": "5dd2961886f774793e1edd4f",
 	"Items": [
 		{
-			"_id": "5db5d05b42a81007cb24e139",
-			"_tpl": "5d1b313086f77425227d1678"
+			"_id": "5dd2961886f774793e1edd4f",
+			"_tpl": "57372c21245977670937c6c2"
+		},
+		{
+			"_id": "5dd2961886f774793e1edd50",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5dd2961886f774793e1edd4f",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dd2961886f774793e1edd51",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5dd2961886f774793e1edd4f",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

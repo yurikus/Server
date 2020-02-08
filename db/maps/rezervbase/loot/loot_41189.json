@@ -1,12 +1,12 @@
 {
-	"Id": "loot_lubrik (4)632456",
-	"IsStatic": false,
+	"Id": "Lootable_00108",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -164.592651,
-		"y": -7.91600037,
-		"z": 56.50891
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d07dcd1e3d3a94509691",
+	"Root": "5db5d06442a81007cb24eaeb",
 	"Items": [
 		{
-			"_id": "5db5d07dcd1e3d3a94509691",
-			"_tpl": "56742c2e4bdc2d95058b456d"
+			"_id": "5db5d06442a81007cb24eaeb",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5db5d06442a81007cb24eaec",
+			"_tpl": "5672cb124bdc2d1a0f8b4568",
+			"parentId": "5db5d06442a81007cb24eaeb",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

@@ -1,12 +1,12 @@
 {
-	"Id": "loot_mix_food_med_ammo (224)6037666",
-	"IsStatic": false,
+	"Id": "Lootable_00156",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 147.13,
-		"y": -5.897,
-		"z": -237.273
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,29 +15,43 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06760d9a5d683c327edb18",
+	"Root": "5e06760b0b8cde1bad722f6f",
 	"Items": [
 		{
-			"_id": "5e06760d9a5d683c327edb18",
-			"_tpl": "57372deb245977685d4159b3"
+			"_id": "5e06760b0b8cde1bad722f6f",
+			"_tpl": "578f87b7245977356274f2cd"
 		},
 		{
-			"_id": "5e06760d9a5d683c327edb19",
-			"_tpl": "56dff338d2720bbd668b4569",
-			"parentId": "5e06760d9a5d683c327edb18",
-			"slotId": "cartridges",
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5e06760b0b8cde1bad722f70",
+			"_tpl": "5734795124597738002c6176",
+			"parentId": "5e06760b0b8cde1bad722f6f",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		},
 		{
-			"_id": "5e06760d9a5d683c327edb1a",
-			"_tpl": "56dff338d2720bbd668b4569",
-			"parentId": "5e06760d9a5d683c327edb18",
-			"slotId": "cartridges",
-			"location": 1,
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5e06760b0b8cde1bad722f71",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5e06760b0b8cde1bad722f6f",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e06760b0b8cde1bad722f72",
+			"_tpl": "57347cd0245977445a2d6ff1",
+			"parentId": "5e06760b0b8cde1bad722f6f",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
 			}
 		}
 	]

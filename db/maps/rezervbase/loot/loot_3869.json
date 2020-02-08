@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_electr (33)702574",
-	"IsStatic": false,
+	"Id": "Lootable_00230",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -66.54187,
-		"y": -5.29457664,
-		"z": 32.82129
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,44 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961386f774793d4cd6b5",
+	"Root": "5db5d02809aff62a3d371cbd",
 	"Items": [
 		{
-			"_id": "5dd2961386f774793d4cd6b5",
-			"_tpl": "5d1b304286f774253763a528"
+			"_id": "5db5d02809aff62a3d371cbd",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5db5d02809aff62a3d371cbe",
+			"_tpl": "57347c1124597737fb1379e3",
+			"parentId": "5db5d02809aff62a3d371cbd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d02809aff62a3d371cbf",
+			"_tpl": "5d1b31ce86f7742523398394",
+			"parentId": "5db5d02809aff62a3d371cbd",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d02809aff62a3d371cc0",
+			"_tpl": "57347c5b245977448d35f6e1",
+			"parentId": "5db5d02809aff62a3d371cbd",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

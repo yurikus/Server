@@ -1,12 +1,12 @@
 {
-	"Id": "lootpoint (101)1685530",
-	"IsStatic": false,
+	"Id": "Lootable_00028",
+	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": 28.449,
-		"y": 8.664,
-		"z": 40.32
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,29 +15,60 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e067524f15d9d228841441a",
+	"Root": "5d31e40c645bb7074f706f26",
 	"Items": [
 		{
-			"_id": "5e067524f15d9d228841441a",
-			"_tpl": "57372deb245977685d4159b3"
+			"_id": "5d31e40c645bb7074f706f26",
+			"_tpl": "5909d76c86f77471e53d2adf"
 		},
 		{
-			"_id": "5e067524f15d9d228841441b",
-			"_tpl": "56dff338d2720bbd668b4569",
-			"parentId": "5e067524f15d9d228841441a",
-			"slotId": "cartridges",
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5d31e40c645bb7074f706f27",
+			"_tpl": "58d2946386f774496974c37e",
+			"parentId": "5d31e40c645bb7074f706f26",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		},
 		{
-			"_id": "5e067524f15d9d228841441c",
-			"_tpl": "56dff338d2720bbd668b4569",
-			"parentId": "5e067524f15d9d228841441a",
-			"slotId": "cartridges",
-			"location": 1,
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5d31e40c645bb7074f706f28",
+			"_tpl": "57acb6222459771ec34b5cb0",
+			"parentId": "5d31e40c645bb7074f706f26",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5d31e40c645bb7074f706f29",
+			"_tpl": "5448bd6b4bdc2dfc2f8b4569",
+			"parentId": "5d31e40c645bb7074f706f26",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5d31e40c645bb7074f706f2a",
+			"_tpl": "5448c12b4bdc2d02308b456f",
+			"parentId": "5d31e40c645bb7074f706f29",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5d31e40c645bb7074f706f2b",
+			"_tpl": "571a29dc2459771fb2755a6a",
+			"parentId": "5d31e40c645bb7074f706f26",
+			"slotId": "main",
+			"location": {
+				"x": 5,
+				"y": 0,
+				"r": 0
 			}
 		}
 	]

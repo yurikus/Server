@@ -1,12 +1,12 @@
 {
-	"Id": "loot_mod_true (42)714664",
-	"IsStatic": false,
+	"Id": "Lootable_00342",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -55.1359863,
-		"y": -2.65699768,
-		"z": -29.1319885
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,29 +15,65 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961386f774793d4cd4f3",
+	"Root": "5e067617ba96696e0f0562da",
 	"Items": [
 		{
-			"_id": "5dd2961386f774793d4cd4f3",
-			"_tpl": "564ca99c4bdc2d16268b4589"
+			"_id": "5e067617ba96696e0f0562da",
+			"_tpl": "5d6fd45b86f774317075ed43"
 		},
 		{
-			"_id": "5dd2961386f774793d4cd4f4",
-			"_tpl": "56dff3afd2720bba668b4567",
-			"parentId": "5dd2961386f774793d4cd4f3",
-			"slotId": "cartridges",
-			"upd": {
-				"StackObjectsCount": 15
+			"_id": "5e067617ba96696e0f0562db",
+			"_tpl": "5733279d245977289b77ec24",
+			"parentId": "5e067617ba96696e0f0562da",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		},
 		{
-			"_id": "5dd2961386f774793d4cd4f5",
-			"_tpl": "56dff3afd2720bba668b4567",
-			"parentId": "5dd2961386f774793d4cd4f3",
-			"slotId": "cartridges",
-			"location": 1,
-			"upd": {
-				"StackObjectsCount": 10
+			"_id": "5e067617ba96696e0f0562dc",
+			"_tpl": "590c31c586f774245e3141b2",
+			"parentId": "5e067617ba96696e0f0562da",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e067617ba96696e0f0562dd",
+			"_tpl": "5d40425986f7743185265461",
+			"parentId": "5e067617ba96696e0f0562da",
+			"slotId": "main",
+			"location": {
+				"x": 4,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e067617ba96696e0f0562de",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5e067617ba96696e0f0562da",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 1,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e067617ba96696e0f0562df",
+			"_tpl": "590a3c0a86f774385a33c450",
+			"parentId": "5e067617ba96696e0f0562da",
+			"slotId": "main",
+			"location": {
+				"x": 4,
+				"y": 1,
+				"r": 0
 			}
 		}
 	]

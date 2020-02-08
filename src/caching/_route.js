@@ -1,6 +1,6 @@
 "use strict";
 
-require('../libs.js');
+const fs = require('fs');
 
 function flush() {
     filepaths = json.parse(json.read("db/cache/filepaths.json"));
@@ -34,6 +34,8 @@ function genericFilepathCacher(type, basepath) {
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
             case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
             case "profileEditions": filepaths.profile.character[fileName] = filePath; break;
+            case "srcResponses": filepaths.src.responses[fileName] = filePath.replace("src", ".."); break;
+            case "srcClasses": filepaths.src.classes[fileName] = filePath.replace("src", ".."); break;
         }
     }
 }
@@ -301,11 +303,131 @@ function images() {
     }
 }
 
+function locales() {
+    logger.logInfo("Routing: locales");
+    
+    let inputDir = [
+        "db/locales/en/",
+        "db/locales/fr/",
+        "db/locales/ge/",
+        "db/locales/ru/",
+    ];
+
+    let cacheDir = [
+        "mail/",
+        "quest/",
+        "preset/",
+        "handbook/",
+        "season/",
+        "templates/",
+        "locations/",
+        "banners/",
+        "trading/"
+    ];
+
+    for (let path in inputDir) {
+        let baseNode = json.parse(json.read("db/cache/locale.json"));
+
+        delete baseNode.data.enum;
+        baseNode.data.menu = inputDir[path] + "menu.json";
+        baseNode.data.interface = inputDir[path] + "interface.json";
+        baseNode.data.error = inputDir[path] + "error.json";
+
+        for (let item in cacheDir) {
+            let inputFiles = fs.readdirSync(inputDir[path] + cacheDir[item]);
+
+            for (let file in inputFiles) {
+                let filePath = inputDir[path] + cacheDir[item] + inputFiles[file];
+                let fileName = inputFiles[file].replace(".json", "");
+
+                if (item == 0) {
+                    baseNode.data.mail[fileName] = filePath;
+                } else if (item == 1) {
+                    baseNode.data.quest[fileName] = filePath;
+                } else if (item == 2) {
+                    baseNode.data.preset[fileName] = filePath;
+                } else if (item == 3) {
+                    baseNode.data.handbook[fileName] = filePath;
+                } else if (item == 4) {
+                    baseNode.data.season[fileName] = filePath;
+                } else if (item == 5) {
+                    baseNode.data.templates[fileName] = filePath;
+                } else if (item == 6) {
+                    baseNode.data.locations[fileName] = filePath;
+                } else if (item == 7) {
+                    baseNode.data.banners[fileName] = filePath;
+                } else if (item == 8) {
+                    baseNode.data.trading[fileName] = filePath;
+                }
+            }
+        }
+        
+        if (path == 0) {
+            baseNode.data.name = "db/locales/en/en.json";
+            filepaths.locales.en = baseNode.data;
+            filepaths.user.cache["locale_en"] = "user/cache/locale_en.json";
+        } else if (path == 1) {
+            baseNode.data.name = "db/locales/fr/fr.json";
+            filepaths.locales.fr = baseNode.data;
+            filepaths.user.cache["locale_fr"] = "user/cache/locale_fr.json";
+        } else if (path == 2) {
+            baseNode.data.name = "db/locales/ge/ge.json";
+            filepaths.locales.ge = baseNode.data;
+            filepaths.user.cache["locale_ge"] = "user/cache/locale_ge.json";
+        } else if (path == 3) {
+            baseNode.data.name = "db/locales/ru/ru.json";
+            filepaths.locales.ru = baseNode.data;
+            filepaths.user.cache["locale_ru"] = "user/cache/locale_ru.json";
+        }
+    }
+}
+
+function images() {
+    logger.logInfo("Routing: images");
+
+    let inputDir = [
+        "res/banners/",
+        "res/handbook/",
+        "res/hideout/",
+        "res/quest/",
+        "res/trader/",
+    ];
+
+    for (let path in inputDir) {
+        let inputFiles = fs.readdirSync(inputDir[path]);
+        
+        for (let file in inputFiles) {
+            let filePath = inputDir[path] + inputFiles[file];
+            let fileName = inputFiles[file].replace(".png", "").replace(".jpg", "");
+
+            if (path == 0) {
+                filepaths.images.banners[fileName] = filePath;
+            } else if (path == 1) {
+                filepaths.images.handbook[fileName] = filePath;
+            } else if (path == 2) {
+                filepaths.images.hideout[fileName] = filePath;
+            } else if (path == 3) {
+                filepaths.images.quest[fileName] = filePath;
+            } else if (path == 4) {
+                filepaths.images.trader[fileName] = filePath;
+            }
+        }
+    }
+}
+
 function profile() {
     logger.logInfo("Routing: profile");
     filepaths.profile.storage = "db/profile/storage.json";
     filepaths.profile.userbuilds = "db/profile/userbuilds.json";
     genericFilepathCacher("profileEditions", "db/profile/character");
+}
+
+function srcClasses() {
+    genericFilepathCacher("srcClasses", "src/classes");
+}
+
+function srcResponses() {
+    genericFilepathCacher("srcResponses", "src/responses");
 }
 
 function others() {
@@ -364,8 +486,11 @@ function routeDatabase() {
     weather();
     maps();
     bots();
+    locales();
     images();
     profile();
+    srcClasses();
+    srcResponses();
     others();
     cache();
 }

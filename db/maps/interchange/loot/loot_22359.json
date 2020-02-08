@@ -1,49 +1,53 @@
 {
-	"Id": "gun_mr-153 (4)4938862",
-	"IsStatic": false,
-	"useGravity": false,
+	"Id": "Lootable_00357",
+	"IsStatic": true,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": 158.537918,
-		"y": 22.2688122,
-		"z": -155.855713
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
-		"x": 20.6275959,
-		"y": 25.397789,
-		"z": 280.991272
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d31e3f3645bb73ce2607efc",
+	"Root": "5db5d0525442d7070d0f4a9e",
 	"Items": [
 		{
-			"_id": "5d31e3f3645bb73ce2607efc",
-			"_tpl": "56dee2bdd2720bc8328b4567"
+			"_id": "5db5d0525442d7070d0f4a9e",
+			"_tpl": "578f879c24597735401e6bc6"
 		},
 		{
-			"_id": "5d31e3f3645bb73ce2607efd",
-			"_tpl": "56deec93d2720bec348b4568",
-			"parentId": "5d31e3f3645bb73ce2607efc",
-			"slotId": "mod_barrel"
+			"_id": "5db5d0525442d7070d0f4a9f",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5db5d0525442d7070d0f4a9e",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 688
+			}
 		},
 		{
-			"_id": "5d31e3f3645bb73ce2607efe",
-			"_tpl": "56deed6ed2720b4c698b4583",
-			"parentId": "5d31e3f3645bb73ce2607efc",
-			"slotId": "mod_handguard"
-		},
-		{
-			"_id": "5d31e3f3645bb73ce2607eff",
-			"_tpl": "56deee15d2720bee328b4567",
-			"parentId": "5d31e3f3645bb73ce2607efc",
-			"slotId": "mod_magazine"
-		},
-		{
-			"_id": "5d31e3f3645bb73ce2607f00",
-			"_tpl": "56083be64bdc2d20478b456f",
-			"parentId": "5d31e3f3645bb73ce2607efc",
-			"slotId": "mod_stock"
+			"_id": "5db5d0525442d7070d0f4aa0",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5db5d0525442d7070d0f4a9e",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 728
+			}
 		}
 	]
 }

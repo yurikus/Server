@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00230",
+	"Id": "Lootable_00373",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,16 +15,16 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d31e3f1645bb7343507be21",
+	"Root": "5db5d058cd1e3d3a94508ce8",
 	"Items": [
 		{
-			"_id": "5d31e3f1645bb7343507be21",
-			"_tpl": "5909d7cf86f77470ee57d75a"
+			"_id": "5db5d058cd1e3d3a94508ce8",
+			"_tpl": "5d6d2bb386f774785b07a77a"
 		},
 		{
-			"_id": "5d31e3f1645bb7343507be22",
-			"_tpl": "5a7ae0c351dfba0017554310",
-			"parentId": "5d31e3f1645bb7343507be21",
+			"_id": "5db5d058cd1e3d3a94508ce9",
+			"_tpl": "57372bd3245977670b7cd243",
+			"parentId": "5db5d058cd1e3d3a94508ce8",
 			"slotId": "main",
 			"location": {
 				"x": 0,
@@ -33,43 +33,47 @@
 			}
 		},
 		{
-			"_id": "5d31e3f1645bb7343507be23",
-			"_tpl": "5a6b5f868dc32e000a311389",
-			"parentId": "5d31e3f1645bb7343507be22",
-			"slotId": "mod_barrel"
+			"_id": "5db5d058cd1e3d3a94508cea",
+			"_tpl": "56dff026d2720bb8668b4567",
+			"parentId": "5db5d058cd1e3d3a94508ce9",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		},
 		{
-			"_id": "5d31e3f1645bb7343507be24",
-			"_tpl": "5a6f5e048dc32e00094b97da",
-			"parentId": "5d31e3f1645bb7343507be22",
-			"slotId": "mod_reciever"
+			"_id": "5db5d058cd1e3d3a94508ceb",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5db5d058cd1e3d3a94508ce8",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 1044
+			}
 		},
 		{
-			"_id": "5d31e3f1645bb7343507be26",
-			"_tpl": "5a6f5d528dc32e00094b97d9",
-			"parentId": "5d31e3f1645bb7343507be24",
-			"slotId": "mod_sight_rear"
-		},
-		{
-			"_id": "5d31e3f1645bb7343507be27",
-			"_tpl": "5a6f58f68dc32e000a311390",
-			"parentId": "5d31e3f1645bb7343507be24",
-			"slotId": "mod_sight_front"
-		},
-		{
-			"_id": "5d31e3f1645bb7343507be25",
-			"_tpl": "5a718b548dc32e000d46d262",
-			"parentId": "5d31e3f1645bb7343507be22",
-			"slotId": "mod_magazine"
-		},
-		{
-			"_id": "5d31e3f1645bb7343507be28",
-			"_tpl": "5a7c74b3e899ef0014332c29",
-			"parentId": "5d31e3f1645bb7343507be21",
+			"_id": "5db5d058cd1e3d3a94508cec",
+			"_tpl": "59e361e886f774176c10a2a5",
+			"parentId": "5db5d058cd1e3d3a94508ce8",
 			"slotId": "main",
 			"location": {
 				"x": 2,
 				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d058cd1e3d3a94508ced",
+			"_tpl": "5733279d245977289b77ec24",
+			"parentId": "5db5d058cd1e3d3a94508ce8",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
 				"r": 0
 			}
 		}

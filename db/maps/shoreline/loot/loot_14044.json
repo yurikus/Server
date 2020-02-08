@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_building_items (36)4379798",
+	"Id": "LootFood[5] (21)4374826",
 	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -127.274239,
-		"y": -20.9883251,
-		"z": -20.2800064
+		"x": -313.593018,
+		"y": 8.184,
+		"z": -82.26199
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d04509aff62a3d372637",
+	"Root": "5db5d04509aff62a3d372656",
 	"Items": [
 		{
-			"_id": "5db5d04509aff62a3d372637",
-			"_tpl": "5d1b2fa286f77425227d1674"
+			"_id": "5db5d04509aff62a3d372656",
+			"_tpl": "573727c624597765cc785b5b"
+		},
+		{
+			"_id": "5db5d04509aff62a3d372657",
+			"_tpl": "5737201124597760fc4431f1",
+			"parentId": "5db5d04509aff62a3d372656",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 16
+			}
 		}
 	]
 }

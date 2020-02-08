@@ -1,12 +1,12 @@
 {
-	"Id": "loot_morhine4930292",
-	"IsStatic": false,
-	"useGravity": false,
+	"Id": "Lootable_00004",
+	"IsStatic": true,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": 232.304,
-		"y": -1.6657,
-		"z": -72.187
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5d31e3cb645bb7391133ce23",
+	"Root": "5db5d0408bcb9e33ce40079e",
 	"Items": [
 		{
-			"_id": "5d31e3cb645bb7391133ce23",
-			"_tpl": "544fb3f34bdc2d03748b456a"
+			"_id": "5db5d0408bcb9e33ce40079e",
+			"_tpl": "578f87a3245977356274f2cb"
+		},
+		{
+			"_id": "5db5d0408bcb9e33ce40079f",
+			"_tpl": "5af0484c86f7740f02001f7f",
+			"parentId": "5db5d0408bcb9e33ce40079e",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

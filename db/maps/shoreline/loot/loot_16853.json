@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00272",
+	"Id": "Lootable_00222",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,16 +15,16 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d056cd1e3d3a94508a55",
+	"Root": "5d31e3dd645bb73bbc082802",
 	"Items": [
 		{
-			"_id": "5db5d056cd1e3d3a94508a55",
-			"_tpl": "59139c2186f77411564f8e42"
+			"_id": "5d31e3dd645bb73bbc082802",
+			"_tpl": "5909d5ef86f77467974efbd8"
 		},
 		{
-			"_id": "5db5d056cd1e3d3a94508a56",
-			"_tpl": "5734779624597737e04bf329",
-			"parentId": "5db5d056cd1e3d3a94508a55",
+			"_id": "5d31e3dd645bb73bbc082803",
+			"_tpl": "5b07db875acfc40dc528a5f6",
+			"parentId": "5d31e3dd645bb73bbc082802",
 			"slotId": "main",
 			"location": {
 				"x": 0,
@@ -33,37 +33,44 @@
 			}
 		},
 		{
-			"_id": "5db5d056cd1e3d3a94508a57",
-			"_tpl": "5c06782b86f77426df5407d2",
-			"parentId": "5db5d056cd1e3d3a94508a55",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5db5d056cd1e3d3a94508a58",
-			"_tpl": "590a386e86f77429692b27ab",
-			"parentId": "5db5d056cd1e3d3a94508a55",
-			"slotId": "main",
-			"location": {
-				"x": 2,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5db5d056cd1e3d3a94508a59",
-			"_tpl": "5c06782b86f77426df5407d2",
-			"parentId": "5db5d056cd1e3d3a94508a55",
+			"_id": "5d31e3dd645bb73bbc082804",
+			"_tpl": "587e02ff24597743df3deaeb",
+			"parentId": "5d31e3dd645bb73bbc082802",
 			"slotId": "main",
 			"location": {
 				"x": 0,
 				"y": 1,
 				"r": 0
+			},
+			"upd": {
+				"FireMode": {
+					"FireMode": "single"
+				}
 			}
+		},
+		{
+			"_id": "5d31e3dd645bb73bbc082805",
+			"_tpl": "587e0531245977466077a0f7",
+			"parentId": "5d31e3dd645bb73bbc082804",
+			"slotId": "mod_stock"
+		},
+		{
+			"_id": "5d31e3dd645bb73bbc082806",
+			"_tpl": "574db213245977459a2f3f5d",
+			"parentId": "5d31e3dd645bb73bbc082804",
+			"slotId": "mod_sight_rear"
+		},
+		{
+			"_id": "5d31e3dd645bb73bbc082807",
+			"_tpl": "587df3a12459772c28142567",
+			"parentId": "5d31e3dd645bb73bbc082804",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5d31e3dd645bb73bbc082808",
+			"_tpl": "587e08ee245977446b4410cf",
+			"parentId": "5d31e3dd645bb73bbc082804",
+			"slotId": "mod_mount"
 		}
 	]
 }

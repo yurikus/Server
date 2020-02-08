@@ -1,12 +1,12 @@
 {
-	"Id": "Lootable_00326",
-	"IsStatic": true,
+	"Id": "LootFood[5] (26)4371828",
+	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -293.478027,
+		"y": 8.003,
+		"z": -99.78
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d06bf113b904523adbcd",
+	"Root": "5db5d067f113b904523ad74d",
 	"Items": [
 		{
-			"_id": "5db5d06bf113b904523adbcd",
-			"_tpl": "5909d50c86f774659e6aaebe"
+			"_id": "5db5d067f113b904523ad74d",
+			"_tpl": "57372bd3245977670b7cd243"
+		},
+		{
+			"_id": "5db5d067f113b904523ad74e",
+			"_tpl": "56dff026d2720bb8668b4567",
+			"parentId": "5db5d067f113b904523ad74d",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		}
 	]
 }

@@ -1,12 +1,12 @@
 {
-	"Id": "loot_building_mater (11)6027120",
-	"IsStatic": false,
+	"Id": "Lootable_00264",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 6.299988,
-		"y": -4.007,
-		"z": -117.528992
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,43 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06761396074431445d4a6a",
+	"Root": "5dd2962086f77414f52bc93f",
 	"Items": [
 		{
-			"_id": "5e06761396074431445d4a6a",
-			"_tpl": "5d1c774f86f7746d6620f8db"
+			"_id": "5dd2962086f77414f52bc93f",
+			"_tpl": "578f87ad245977356274f2cc"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc940",
+			"_tpl": "57d14d2524597714373db789",
+			"parentId": "5dd2962086f77414f52bc93f",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5dd2962086f77414f52bc941",
+			"_tpl": "57d152ec245977144076ccdf",
+			"parentId": "5dd2962086f77414f52bc940",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc942",
+			"_tpl": "57d1519e24597714373db79d",
+			"parentId": "5dd2962086f77414f52bc940",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5dd2962086f77414f52bc943",
+			"_tpl": "573719762459775a626ccbc1",
+			"parentId": "5dd2962086f77414f52bc942",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 29
+			}
 		}
 	]
 }

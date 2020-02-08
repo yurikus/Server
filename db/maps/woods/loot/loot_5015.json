@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_building_items (18)2298562",
-	"IsStatic": false,
+	"Id": "Lootable_00065",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -389.797241,
-		"y": 3.55867553,
-		"z": 15.491993
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,53 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e0674972b233a57e4763876",
+	"Root": "5db5d05fcd831147964f336f",
 	"Items": [
 		{
-			"_id": "5e0674972b233a57e4763876",
-			"_tpl": "5d1b2fa286f77425227d1674"
+			"_id": "5db5d05fcd831147964f336f",
+			"_tpl": "5d6d2bb386f774785b07a77a"
+		},
+		{
+			"_id": "5db5d05fcd831147964f3370",
+			"_tpl": "5c1127d0d174af29be75cf68",
+			"parentId": "5db5d05fcd831147964f336f",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d05fcd831147964f3371",
+			"_tpl": "5c0d591486f7744c505b416f",
+			"parentId": "5db5d05fcd831147964f3370",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 5
+			}
+		},
+		{
+			"_id": "5db5d05fcd831147964f3372",
+			"_tpl": "5734781f24597737e04bf32a",
+			"parentId": "5db5d05fcd831147964f336f",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5db5d05fcd831147964f3373",
+			"_tpl": "57347c77245977448d35f6e2",
+			"parentId": "5db5d05fcd831147964f336f",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			}
 		}
 	]
 }

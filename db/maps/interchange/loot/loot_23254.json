@@ -1,47 +1,49 @@
 {
-	"Id": "Lootable_00127",
-	"IsStatic": true,
-	"useGravity": true,
+	"Id": "GunsafeSpawn 2(Clone)4937502",
+	"IsStatic": false,
+	"useGravity": false,
 	"randomRotation": false,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -23.3166924,
+		"y": 27.42036,
+		"z": -39.1644058
 	},
 	"Rotation": {
-		"x": 0,
-		"y": 0,
+		"x": 270,
+		"y": 92.05776,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d068533aa77c477a6cb3",
+	"Root": "5d31e3da645bb732ce6f1610",
 	"Items": [
 		{
-			"_id": "5db5d068533aa77c477a6cb3",
-			"_tpl": "59139c2186f77411564f8e42"
+			"_id": "5d31e3da645bb732ce6f1610",
+			"_tpl": "54491c4f4bdc2db1078b4568"
 		},
 		{
-			"_id": "5db5d068533aa77c477a6cb4",
-			"_tpl": "5734779624597737e04bf329",
-			"parentId": "5db5d068533aa77c477a6cb3",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 0,
-				"r": 0
-			}
+			"_id": "5d31e3da645bb732ce6f1611",
+			"_tpl": "55d4491a4bdc2d882f8b456e",
+			"parentId": "5d31e3da645bb732ce6f1610",
+			"slotId": "mod_barrel"
 		},
 		{
-			"_id": "5db5d068533aa77c477a6cb5",
-			"_tpl": "590a386e86f77429692b27ab",
-			"parentId": "5db5d068533aa77c477a6cb3",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			}
+			"_id": "5d31e3da645bb732ce6f1612",
+			"_tpl": "55d45d3f4bdc2d972f8b456c",
+			"parentId": "5d31e3da645bb732ce6f1610",
+			"slotId": "mod_handguard"
+		},
+		{
+			"_id": "5d31e3da645bb732ce6f1613",
+			"_tpl": "55d484b44bdc2d1d4e8b456d",
+			"parentId": "5d31e3da645bb732ce6f1610",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5d31e3da645bb732ce6f1614",
+			"_tpl": "56083cba4bdc2de22e8b456f",
+			"parentId": "5d31e3da645bb732ce6f1610",
+			"slotId": "mod_stock"
 		}
 	]
 }

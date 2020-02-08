@@ -1,25 +1,34 @@
 {
-	"Id": "arm_cloth_head_v2 (20)5869856",
+	"Id": "loot_ammo_rare (20)5870134",
 	"IsStatic": false,
-	"useGravity": false,
-	"randomRotation": false,
+	"useGravity": true,
+	"randomRotation": true,
 	"Position": {
-		"x": 91.0344238,
-		"y": 27.3168068,
-		"z": -146.591309
+		"x": -19.4875488,
+		"y": 27.28181,
+		"z": 7.27063
 	},
 	"Rotation": {
-		"x": 273.8382,
-		"y": 347.470276,
-		"z": 275.708
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d04b5442d7070d0f4220",
+	"Root": "5db5d04b5442d7070d0f42b7",
 	"Items": [
 		{
-			"_id": "5db5d04b5442d7070d0f4220",
-			"_tpl": "59e770f986f7742cbe3164ef"
+			"_id": "5db5d04b5442d7070d0f42b7",
+			"_tpl": "57372c89245977685d4159b1"
+		},
+		{
+			"_id": "5db5d04b5442d7070d0f42b8",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5db5d04b5442d7070d0f42b7",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		}
 	]
 }

@@ -1,12 +1,12 @@
 {
-	"Id": "loot_barter_electr_phaseantenna (9)6016590",
-	"IsStatic": false,
+	"Id": "Lootable_00010",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 100.396973,
-		"y": -5.509,
-		"z": 57.73999
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e06760d9a5d683c327eda76",
+	"Root": "5e06760a0b8cde1bad722dcd",
 	"Items": [
 		{
-			"_id": "5e06760d9a5d683c327eda76",
-			"_tpl": "5d03775b86f774203e7e0c4b"
+			"_id": "5e06760a0b8cde1bad722dcd",
+			"_tpl": "5909d5ef86f77467974efbd8"
+		},
+		{
+			"_id": "5e06760a0b8cde1bad722dce",
+			"_tpl": "57ffb0062459777a045af529",
+			"parentId": "5e06760a0b8cde1bad722dcd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }
