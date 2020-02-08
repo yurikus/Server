@@ -24,7 +24,7 @@ class Router {
             require(filepaths.src.responses[response]);
         }
 
-        this.addStaticRoute("/client/game/profile/items/moving", this.handleItemRoutes);
+        this.addStaticRoute("/client/game/profile/items/moving", this.handleItemRoutes.bind(this));
     }
 
     /* sets static routes to check for */

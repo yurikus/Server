@@ -371,7 +371,7 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
     let skipThisItems = ["5448e53e4bdc2d60728b4567", "566168634bdc2d144c8b456c", "5795f317245977243854e041"];
 
     // containers big no no
-    if (!skipThisItems.contains(tmpItem._parent)) {
+    if (!skipThisItems.includes(tmpItem._parent)) {
         while (true) {
             if (toDo.length === 0) {
                 break;
