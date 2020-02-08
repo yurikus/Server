@@ -49,39 +49,39 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	}
 
 	// load logic
-	global.server = (require('./server/_start.js').server);
+	global.server = (require('./server/start.js').server);
 
-	global.locale = require('./classes/_locale.js');
+	global.locale = require('./classes/locale.js');
 	global.index_f = require('./classes/index.js');
-	global.keepAlive_f = require('./classes/_keepAlive.js');
-	global.health_f = require('./classes/_health.js');
-	global.offraid_f = require('./classes/_offraid.js');
-	global.saveHandler = require('./server/_saveHandler.js');
-	global.constants = require('./server/_constants.js');
-	global.header_f = require('./server/_sendHeader.js');
-	global.events_f = require('./server/_events.js');
-	global.dialogue_f = require('./classes/_dialogue.js');
-	global.notifier_f = require('./classes/_notifier.js');
-	global.account_f = require('./classes/_account.js');
-	global.profile_f = require('./classes/_profile.js');
-	global.bots = require('./classes/_bots.js');
-	global.itm_hf = require('./classes/helpFunctions.js');
-	global.quest_f = require('./classes/_quest.js');
-	global.note_f = require('./classes/_notes.js');
-	global.move_f = require('./classes/_move.js');
-	global.status_f = require('./classes/_status.js');
-	global.wishList_f = require('./classes/_wishList.js');
-	global.trade_f = require('./classes/_trade.js');
-	global.customization_f = require('./classes/_customization.js');
-	global.hideout_f = require('./classes/_hideout.js');
-	global.weaponBuilds_f = require('./classes/_weaponBuilds.js');
-	global.repair_f = require('./classes/_repair.js');
-	global.insurance_f = require('./classes/_insurance.js');
-	global.trader_f = require('./classes/_trader.js');
-	global.ragfair_f = require('./classes/_ragfair.js');
-	global.weather_f = require('./classes/_weather.js');
-	global.map_f =  require('./classes/_map.js');
-	global.item = require('./classes/_item.js');
+	global.keepAlive_f = require('./classes/keepAlive.js');
+	global.health_f = require('./classes/health.js');
+	global.offraid_f = require('./classes/offraid.js');
+	global.saveHandler = require('./server/saveHandler.js');
+	global.constants = require('./server/constants.js');
+	global.header_f = require('./server/sendHeader.js');
+	global.events_f = require('./server/events.js');
+	global.dialogue_f = require('./classes/dialogue.js');
+	global.notifier_f = require('./classes/notifier.js');
+	global.account_f = require('./classes/account.js');
+	global.profile_f = require('./classes/profile.js');
+	global.bots = require('./classes/bots.js');
+	global.itm_hf = require('./classes/helpfunc.js');
+	global.quest_f = require('./classes/quest.js');
+	global.note_f = require('./classes/notes.js');
+	global.move_f = require('./classes/move.js');
+	global.status_f = require('./classes/status.js');
+	global.wishList_f = require('./classes/wishList.js');
+	global.trade_f = require('./classes/trade.js');
+	global.customization_f = require('./classes/customization.js');
+	global.hideout_f = require('./classes/hideout.js');
+	global.weaponBuilds_f = require('./classes/userbuilds.js');
+	global.repair_f = require('./classes/repair.js');
+	global.insurance_f = require('./classes/insurance.js');
+	global.trader_f = require('./classes/trader.js');
+	global.ragfair_f = require('./classes/ragfair.js');
+	global.weather_f = require('./classes/weather.js');
+	global.map_f =  require('./classes/map.js');
+	global.item = require('./classes/item.js');
 
 	if (isFirstLaunch) {
 		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");
