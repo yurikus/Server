@@ -2,6 +2,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.json = require('./classes/json.js');
 	global.utility = require('./classes/utility.js');
 	global.logger = require('./classes/logger.js');
+	global.interpreter = (require('./server/interpreter.js').interpreter);
 	global.router = (require('./server/router.js').router);
 
 	if (isFirstLaunch) {
@@ -51,12 +52,12 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	// load logic
 	global.server = (require('./server/start.js').server);
 	global.item_f = ((require('./classes/item.js')).item);
+	global.saveHandler = require('./server/saveHandler.js');
 
 	global.locale_f = require('./classes/locale.js');
 	global.keepAlive_f = require('./classes/keepAlive.js');
 	global.health_f = require('./classes/health.js');
 	global.offraid_f = require('./classes/offraid.js');
-	global.saveHandler = require('./server/saveHandler.js');
 	global.header_f = require('./server/sendHeader.js');
 	global.events_f = require('./server/events.js');
 	global.dialogue_f = require('./classes/dialogue.js');

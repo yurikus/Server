@@ -1,8 +1,8 @@
 "use strict";
 
-class Interperter {
+class Interpreter {
     /* load classes */
-    initializeClases() {
+    initializeClasses() {
         for (let file in filepaths.src.classes) {
             require(filepaths.src.classes[file]);
         }
