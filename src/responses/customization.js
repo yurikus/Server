@@ -12,5 +12,5 @@ function getCustomizationStorage(url, info, sessionID) {
 
 router.addStaticRoute("/client/customization", getCustomization);
 router.addStaticRoute("/client/trading/customization/storage", getCustomizationStorage);
-router.addItemRoute("CustomizationWear", customization_f.wearClothing);
-router.addItemRoute("CustomizationBuy", customization_f.buyClothing);
+item_f.itemServer.addRoute("CustomizationWear", customization_f.wearClothing);
+item_f.itemServer.addRoute("CustomizationBuy", customization_f.buyClothing);

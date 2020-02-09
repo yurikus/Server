@@ -2,5 +2,5 @@
 
 require('../libs.js');
 
-router.addItemRoute("AddToWishList", wishList_f.addToWishList);
-router.addItemRoute("RemoveFromWishList", wishList_f.removeFromWishList);
+item_f.itemServer.addRoute("AddToWishList", wishList_f.addToWishList);
+item_f.itemServer.addRoute("RemoveFromWishList", wishList_f.removeFromWishList);

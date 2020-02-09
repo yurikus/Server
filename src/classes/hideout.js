@@ -17,7 +17,7 @@ function HideoutUpgrade(pmcData, body, sessionID) {
 			if (pmcData.Inventory.items[inventoryItem]._tpl === "5449016a4bdc2d6f028b456f") {
 				pmcData.Inventory.items[inventoryItem].upd.StackObjectsCount -= itemToPay.count;
 			} else {	
-				move_f.removeItem(pmcData, pmcData.Inventory.items[inventoryItem]._id, item_f.getOutput(), sessionID);
+				move_f.removeItem(pmcData, pmcData.Inventory.items[inventoryItem]._id, item_f.itemServer.getOutput(), sessionID);
 			}	
 		}
 	}
@@ -42,8 +42,8 @@ function HideoutUpgrade(pmcData, body, sessionID) {
 		}
 	}
 	
-	item_f.resetOutput();
-	return item_f.getOutput();
+	item_f.itemServer.resetOutput();
+	return item_f.itemServer.getOutput();
 }
 
 // validating the upgrade
@@ -59,15 +59,15 @@ function HideoutUpgradeComplete(pmcData, body, sessionID) {
 		pmcData.Hideout.Areas[hideoutArea].constructing = false;
 	}
 
-	item_f.resetOutput();		
-	return item_f.getOutput();
+	item_f.itemServer.resetOutput();		
+	return item_f.itemServer.getOutput();
 }
 
 // move items from hideout
 function HideoutPutItemsInAreaSlots(pmcData, body, sessionID) {
-	item_f.resetOutput();
+	item_f.itemServer.resetOutput();
 
-	let output = item_f.getOutput();
+	let output = item_f.itemServer.getOutput();
 
 	for (let itemToMove in body.items) {
 		for (let inventoryItem of pmcData.Inventory.items) {
@@ -92,9 +92,9 @@ function HideoutPutItemsInAreaSlots(pmcData, body, sessionID) {
 }
 
 function HideoutTakeItemsFromAreaSlots(pmcData, body, sessionID) {
-	item_f.resetOutput();
+	item_f.itemServer.resetOutput();
 
-	let output = item_f.getOutput();
+	let output = item_f.itemServer.getOutput();
 
 	for (let area in pmcData.Hideout.Areas) {
 		if (pmcData.Hideout.Areas[area].type !== body.areaType) {
@@ -123,15 +123,15 @@ function HideoutToggleArea(pmcData, body, sessionID) {
 		}
 	}
 
-	item_f.resetOutput();		
-	return item_f.getOutput();
+	item_f.itemServer.resetOutput();		
+	return item_f.itemServer.getOutput();
 }
 
 function HideoutSingleProductionStart(pmcData, body, sessionID) {
-	item_f.resetOutput();
+	item_f.itemServer.resetOutput();
 	registerProduction(pmcData, body, sessionID);
 
-	let output = item_f.getOutput();
+	let output = item_f.itemServer.getOutput();
 
 	for (let itemToDelete of body.items) {
 		output = move_f.removeItem(pmcData, itemToDelete.id, output, sessionID);
@@ -191,20 +191,20 @@ function HideoutScavCaseProductionStart(pmcData, body, sessionID) {
 		}
 	}
 
-	item_f.resetOutput();
-	return item_f.getOutput();
+	item_f.itemServer.resetOutput();
+	return item_f.itemServer.getOutput();
 }
 
 function HideoutContinuousProductionStart(pmcData, body, sessionID) {
 	registerProduction(pmcData, body, sessionID);
-	item_f.resetOutput();
-	return item_f.getOutput();
+	item_f.itemServer.resetOutput();
+	return item_f.itemServer.getOutput();
 }
 
 function HideoutTakeProduction(pmcData, body, sessionID) {
-	item_f.resetOutput();
+	item_f.itemServer.resetOutput();
 
-	let output = item_f.getOutput();
+	let output = item_f.itemServer.getOutput();
 
 	for (let receipe in hideoutProduction.data) {	
 		if (body.recipeId !== hideoutProduction.data[receipe]._id) {

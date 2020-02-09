@@ -20,11 +20,11 @@ function getUserBuilds(sessionID) {
 }
 
 function SaveBuild(pmcData, body, sessionID) {
-	item_f.resetOutput();
+	item_f.itemServer.resetOutput();
 	delete body.Action;
 	body.id = utility.generateNewItemId();	
 
-	let output = item_f.getOutput();
+	let output = item_f.itemServer.getOutput();
 	let savedBuilds = json.parse(json.read(getPath(sessionID)));
 
 	// replace duplicate ID's. The first item is the base item.
@@ -44,8 +44,8 @@ function RemoveBuild(pmcData, body, sessionID) {
 	delete savedBuilds[body.name];
 
 	json.write(getPath(sessionID), savedBuilds);
-	item_f.resetOutput();
-    return item_f.getOutput();
+	item_f.itemServer.resetOutput();
+    return item_f.itemServer.getOutput();
 }
 
 module.exports.getPath = getPath;

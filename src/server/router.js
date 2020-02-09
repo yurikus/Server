@@ -1,8 +1,3 @@
-/* router.js
- * responsible for sending the correct data
- * TODO: fix issue where itemRoutes is set to underfined on /handle/items/
- */
-
 "use strict";
 
 const logger = require("../classes/logger");
@@ -11,16 +6,6 @@ class Router {
     constructor() {
         this.staticRoutes = {};
         this.dynamicRoutes = {};
-        this.itemRoutes = {};
-    }
-
-    /* load routes */
-    initializeRoutes() {
-        this.staticRoutes = {};
-        this.dynamicRoutes = {};
-        this.itemRoutes = {};
-
-        this.addStaticRoute("/client/game/profile/items/moving", this.handleItemRoutes.bind(this));
     }
 
     /* sets static routes to check for */
@@ -31,35 +16,6 @@ class Router {
     /* sets dynamic routes to check for */
     addDynamicRoute(route, callback) {
         this.dynamicRoutes[route] = callback;
-    }
-
-    /* sets item routs to check for */
-    addItemRoute(route, callback) {
-        this.itemRoutes[route] = callback;
-    }
-
-    handleItemRoutes(url, info, sessionID) {
-        let output = "";
-        
-        for (let body of info.data) {
-            let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-
-            if (body.Action in this.itemRoutes) {
-                output = this.itemRoutes[body.Action](pmcData, body, sessionID);
-            } else {
-                logger.logError("[UNHANDLED ACTION] " + body.Action);
-            }
-        }
-
-        if (output === "OK") {
-            output = json.stringify(item_f.getOutput());
-        }
-
-        if (output !== "") {
-            output = json.stringify(output);
-        }
-
-        return output;
     }
 
     getResponse(req, body, sessionID) {
@@ -92,6 +48,9 @@ class Router {
         if ("crc" in info) {
             let crctest = json.parse(output);
     
+            console.log("crc" in crctest);
+            console.log(output.crc === crctest.crc);
+            console.log(output.crc == crctest.crc);
             if ("crc" in crctest && output.crc === crctest.crc) {
                 logger.logWarning("[Loading from game cache files]");
                 output = nullResponse(url, info, sessionID);

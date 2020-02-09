@@ -2,6 +2,6 @@
 
 require('../libs.js');
 
-router.addItemRoute("AddNote", note_f.addNote);
-router.addItemRoute("EditNote", note_f.editNode);
-router.addItemRoute("DeleteNote", note_f.deleteNote);
+item_f.itemServer.addRoute("AddNote", note_f.addNote);
+item_f.itemServer.addRoute("EditNote", note_f.editNode);
+item_f.itemServer.addRoute("DeleteNote", note_f.deleteNote);

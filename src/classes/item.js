@@ -5,6 +5,37 @@ require('../libs.js');
 class ItemServer {
     constructor() {
         this.output = "";
+        this.routes = {};
+        router.addStaticRoute("/client/game/profile/items/moving", this.handleRoutes.bind(this));
+    }
+
+    /* adds route to check for */
+    addRoute(route, callback) {
+        this.routes[route] = callback;
+    }
+
+    handleRoutes(url, info, sessionID) {
+        let result = "";
+        
+        for (let body of info.data) {
+            let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+
+            if (body.Action in this.routes) {
+                output = this.routes[body.Action](pmcData, body, sessionID);
+            } else {
+                logger.logError("[UNHANDLED ACTION] " + body.Action);
+            }
+        }
+
+        if (result === "OK") {
+            result = json.stringify(this.getOutput());
+        }
+
+        if (result !== "") {
+            result = json.stringify(result);
+        }
+
+        return result;
     }
 
     getOutput() {
@@ -24,4 +55,4 @@ class ItemServer {
     }
 }
 
-module.exports.item = new ItemServer();
+module.exports.itemServer = new ItemServer();

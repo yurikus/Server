@@ -31,8 +31,8 @@ function acceptQuest(pmcData, body, sessionID) {
     };
     dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID);
 
-    item_f.resetOutput();
-    return item_f.getOutput();
+    item_f.itemServer.resetOutput();
+    return item_f.itemServer.getOutput();
 }
 
 function completeQuest(pmcData, body, sessionID) {
@@ -112,17 +112,17 @@ function completeQuest(pmcData, body, sessionID) {
     };
     dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID, questRewards);
 
-    item_f.resetOutput();
-    let output = item_f.getOutput();
+    item_f.itemServer.resetOutput();
+    let output = item_f.itemServer.getOutput();
     output.data.quests = quests.data;
     return output;
 }
 
 // TODO: handle money
 function handoverQuest(pmcData, body, sessionID) {
-    item_f.resetOutput();
+    item_f.itemServer.resetOutput();
     
-    let output = item_f.getOutput();
+    let output = item_f.itemServer.getOutput();
     let counter = 0;
     let found = false;
     

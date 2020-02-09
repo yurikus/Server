@@ -264,7 +264,6 @@ class Server {
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
     
         // load server logic
-        router.initializeRoutes();
         interpreter.initializeClasses();
         interpreter.initializeResponses();
     

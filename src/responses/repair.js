@@ -7,4 +7,4 @@ function handleRepair(url, info, sessionID) {
 }
 
 router.addStaticRoute("/client/repair/exec", handleRepair);
-router.addItemRoute("Repair", repair_f.main);
+item_f.itemServer.addRoute("Repair", repair_f.main);

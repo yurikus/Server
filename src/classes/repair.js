@@ -3,9 +3,9 @@
 require('../libs.js');
 
 function main(pmcData, body, sessionID) {
-    item_f.resetOutput();
+    item_f.itemServer.resetOutput();
 
-    let output = item_f.getOutput();
+    let output = item_f.itemServer.getOutput();
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
     let RequestData = body.repairItems;

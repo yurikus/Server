@@ -2,9 +2,9 @@
 
 require('../libs.js');
 
-router.addItemRoute("Fold", status_f.foldItem);
-router.addItemRoute("Toggle", status_f.toggleItem);
-router.addItemRoute("Tag", status_f.tagItem);
-router.addItemRoute("Bind", status_f.bindItem);
-router.addItemRoute("Examine", status_f.examineItem);
-router.addItemRoute("ReadEncyclopedia", status_f.readEncyclopedia);
+item_f.itemServer.addRoute("Fold", status_f.foldItem);
+item_f.itemServer.addRoute("Toggle", status_f.toggleItem);
+item_f.itemServer.addRoute("Tag", status_f.tagItem);
+item_f.itemServer.addRoute("Bind", status_f.bindItem);
+item_f.itemServer.addRoute("Examine", status_f.examineItem);
+item_f.itemServer.addRoute("ReadEncyclopedia", status_f.readEncyclopedia);

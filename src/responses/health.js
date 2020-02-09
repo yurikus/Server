@@ -12,5 +12,5 @@ function updateHealth(url, info, sessionID) {
 }
 
 router.addStaticRoute("/player/health/events", updateHealth);
-router.addItemRoute("Eat", health_f.healthServer.offraidEat);
-router.addItemRoute("Heal", health_f.healthServer.offraidHeal);
+item_f.itemServer.addRoute("Eat", health_f.healthServer.offraidEat);
+item_f.itemServer.addRoute("Heal", health_f.healthServer.offraidHeal);

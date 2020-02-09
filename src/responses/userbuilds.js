@@ -7,5 +7,5 @@ function getHandbookUserlist(url, info, sessionID) {
 }
 
 router.addStaticRoute("/client/handbook/builds/my/list", getHandbookUserlist);
-router.addItemRoute("SaveBuild", weaponBuilds_f.saveBuild);
-router.addItemRoute("RemoveBuild", weaponBuilds_f.removeBuild);
+item_f.itemServer.addRoute("SaveBuild", weaponBuilds_f.saveBuild);
+item_f.itemServer.addRoute("RemoveBuild", weaponBuilds_f.removeBuild);

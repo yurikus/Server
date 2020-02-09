@@ -51,7 +51,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.server = (require('./server/start.js').server);
 	global.saveHandler = require('./server/saveHandler.js');
 
-	global["item_f"] = ((require('./classes/item.js')).item);
+	global["item_f"] = require('./classes/item.js');
 	global["locale_f"] = require('./classes/locale.js');
 	global["keepAlive_f"] = require('./classes/keepAlive.js');
 	global["health_f"] = require('./classes/health.js');
