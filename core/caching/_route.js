@@ -483,11 +483,12 @@ function routeDatabase() {
 
 function all() {
     if (mods.isRebuildRequired()) {
+        logger.logWarning("Modlist mismatch");
         settings.server.rebuild = true;
     }
 
     if (settings.server.rebuild || !fs.existsSync("user/cache/filepaths.json")) {
-        logger.logWarning("Modslist mismatch, force rebuilding cache");
+        logger.logWarning("Force rebuilding cache");
         routeDatabase();
         mods.load();
         dump();

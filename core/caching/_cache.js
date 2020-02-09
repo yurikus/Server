@@ -216,7 +216,7 @@ function mod() {
 }
 
 function all() {
-    let force = (settings.server.rebuildCache) ? true : false;
+    let force = settings.server.rebuildCache;
     let assortList = Object.keys(filepaths.assort);
     let localesList = Object.keys(filepaths.locales);
 
@@ -277,7 +277,10 @@ function all() {
         mod();
     }
 
-    settings.server.rebuild = false;
+    if (settings.server.rebuildCache) {
+        settings.server.rebuildCache = false;
+        json.write("user/server.config.json", settings);
+    }
 }
 
 module.exports.all = all;
