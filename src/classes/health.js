@@ -50,7 +50,7 @@ class HealthServer {
         }
 
         this.applyHealth(pmcData, sessionID);
-        return "OK";
+        return item_f.itemServer.getOutput();
     }
 
     offraidEat(pmcData, body, sessionID) {

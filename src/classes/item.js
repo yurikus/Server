@@ -29,14 +29,11 @@ class ItemServer {
             }
         }
 
-        if (result === "OK") {
-            result = json.stringify(this.getOutput());
-        }
-
         if (result !== "") {
             result = json.stringify(result);
         }
 
+        this.resetOutput();
         return result;
     }
 
@@ -53,7 +50,7 @@ class ItemServer {
     }
 
     resetOutput() {
-        this.output = json.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{} }}');
+        this.output = {"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{}}};
     }
 }
 

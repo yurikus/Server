@@ -10,12 +10,13 @@ function addToWishList(pmcData, body, sessionID) {
     for (let item in pmcData['Wishlist']) {
         // don't add the item
         if (pmcData.WishList[item] === body['templateId']) {
-            return "OK";
+            return item_f.itemServer.getOutput();
         }
     }
+
     // add the item to the wishlist
     pmcData.WishList.push(body['templateId']);
-    return "OK";
+    return item_f.itemServer.getOutput();
 }
 
 /* Removing item to wishlist
@@ -28,14 +29,15 @@ function removeFromWishList(pmcData, body, sessionID) {
             pmcData.WishList.splice(item, 1);
         }
     }
-    return "OK";
+
+    return item_f.itemServer.getOutput();
 }
 
 /* Reset wishlist to empty []
 *  input: playerProfileData
 *  output: none
 * */
-function resetWishList(pmcData){
+function resetWishList(pmcData) {
     pmcData.WishList = [];
 }
 

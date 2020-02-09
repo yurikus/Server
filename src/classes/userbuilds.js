@@ -20,7 +20,6 @@ function getUserBuilds(sessionID) {
 }
 
 function SaveBuild(pmcData, body, sessionID) {
-	item_f.itemServer.resetOutput();
 	delete body.Action;
 	body.id = utility.generateNewItemId();	
 
@@ -42,9 +41,7 @@ function RemoveBuild(pmcData, body, sessionID) {
 	let savedBuilds = json.parse(json.read(getPath(sessionID)));
 
 	delete savedBuilds[body.name];
-
 	json.write(getPath(sessionID), savedBuilds);
-	item_f.itemServer.resetOutput();
     return item_f.itemServer.getOutput();
 }
 

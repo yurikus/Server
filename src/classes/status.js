@@ -6,7 +6,7 @@ function foldItem(pmcData, body, sessionID) {
     for (let item of pmcData.Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Foldable = {"Folded": body.value};
-            return "OK";
+            return item_f.itemServer.getOutput();
         }
     }
 
@@ -17,7 +17,7 @@ function toggleItem(pmcData, body, sessionID) {
     for (let item of pmcData.Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Togglable = {"On": body.value};
-            return "OK";
+            return item_f.itemServer.getOutput();
         }
     }
 
@@ -43,7 +43,7 @@ function tagItem(pmcData, body, sessionID) {
                 Object.assign(item, myobject); // merge myobject into item -- overwrite same properties and add missings
             }
 
-            return "OK";
+            return item_f.itemServer.getOutput();
         }
     }
 
@@ -58,7 +58,7 @@ function bindItem(pmcData, body, sessionID) {
     }
 
     pmcData.Inventory.fastPanel[body.index] = body.item;
-    return "OK";
+    return item_f.itemServer.getOutput();
 }
 
 function examineItem(pmcData, body, sessionID) {
@@ -100,7 +100,7 @@ function examineItem(pmcData, body, sessionID) {
     // item not found
     if (returned === "BAD") {
         logger.logError("Cannot find proper item. Stopped.");
-        return "BAD";
+        return "";
     }
 
     // item found
@@ -109,11 +109,11 @@ function examineItem(pmcData, body, sessionID) {
     pmcData.Info.Experience += data._props.ExamineExperience;
     pmcData.Encyclopedia[returned] = true;
     logger.logSuccess("EXAMINED: " + returned);
-    return "OK";
+    return item_f.itemServer.getOutput();
 }
 
 function readEncyclopedia(pmcData, body, sessionID) {
-    return "OK";
+    return item_f.itemServer.getOutput();
 }
 
 module.exports.foldItem = foldItem;
