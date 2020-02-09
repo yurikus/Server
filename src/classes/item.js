@@ -21,7 +21,7 @@ class ItemServer {
             let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
             if (body.Action in this.routes) {
-                output = this.routes[body.Action](pmcData, body, sessionID);
+                result = this.routes[body.Action](pmcData, body, sessionID);
             } else {
                 logger.logError("[UNHANDLED ACTION] " + body.Action);
             }
@@ -51,7 +51,7 @@ class ItemServer {
     }
 
     resetOutput() {
-        this.output = {"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{}}};
+        this.output = json.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{} }}');
     }
 }
 

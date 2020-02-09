@@ -47,13 +47,10 @@ class Router {
         /* load files from game cache */
         if ("crc" in info) {
             let crctest = json.parse(output);
-    
-            console.log("crc" in crctest);
-            console.log(output.crc === crctest.crc);
-            console.log(output.crc == crctest.crc);
-            if ("crc" in crctest && output.crc === crctest.crc) {
-                logger.logWarning("[Loading from game cache files]");
-                output = nullResponse(url, info, sessionID);
+
+            if ("crc" in crctest && info.crc === crctest.crc) {
+                logger.logWarning("[Response loading from game cache files]");
+                output = '{"err":0, "errmsg":null, "data":null}';
             }
         }
 

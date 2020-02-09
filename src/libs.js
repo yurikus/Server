@@ -38,7 +38,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	// global data
 	global.items = json.parse(json.read(filepaths.user.cache.items));
 	global.quests = json.parse(json.read(filepaths.user.cache.quests));
-	global.globalSettings = json.parse(json.read(filepaths.user.cache.globals));
+	global.globalSettings = json.parse(json.read(filepaths.globals));
 	global.customizationOutfits = json.parse(json.read(filepaths.user.cache.customization_outfits));
 	global.customizationOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
 	global.templates = json.parse(json.read(filepaths.user.cache.templates));
