@@ -6,6 +6,8 @@ class ItemServer {
     constructor() {
         this.output = "";
         this.routes = {};
+
+        this.resetOutput();
         router.addStaticRoute("/client/game/profile/items/moving", this.handleRoutes.bind(this));
     }
 
