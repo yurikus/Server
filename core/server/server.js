@@ -5,7 +5,7 @@ const http = require('http');
 const https = require('https');
 const selfsigned = require('selfsigned');
 
-showWatermark() {
+function showWatermark() {
     let text_1 = "JustEmuTarkov " + server.version;
     let text_2 = "https://justemutarkov.github.io/";
     let diffrence = Math.abs(text_1.length - text_2.length);
