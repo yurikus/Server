@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 const hideoutAreas = json.parse(json.read(filepaths.user.cache.hideout_areas));
 const hideoutProduction = json.parse(json.read(filepaths.user.cache.hideout_production));
 const hideoutScavcase = json.parse(json.read(filepaths.user.cache.hideout_scavcase));

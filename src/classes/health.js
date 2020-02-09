@@ -1,7 +1,5 @@
 "use strict";
 
-require("../libs.js");
-
 /* HealthServer class maintains list of health for each sessionID in memory. */
 class HealthServer {
     constructor() {

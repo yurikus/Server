@@ -1,7 +1,5 @@
 "use strict";
 
-require("../libs.js");
-
 // remove the labs keycard at the end of raid in labs
 function removeLabKeyCard(offraidData) {
     if (offraidData.profile.Info.EntryPoint !== "Laboratory") {

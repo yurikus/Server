@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function createProfile(url, info, sessionID) {
     profile_f.profileServer.createProfile(info, sessionID);
     return '{"err":0,"errmsg":null,"data":{"uid":"pmc' + sessionID + '"}}';

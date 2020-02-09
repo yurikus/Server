@@ -1,7 +1,5 @@
 ﻿"use strict";
 
-require("../libs.js");
-
 /*
 * ProfileServer class maintains list of active profiles for each sessionID in memory. All first-time loads and save
 * operations also write to disk.*

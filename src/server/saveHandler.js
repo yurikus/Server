@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function saveOpenSessions() {
 	account_f.accountServer.saveToDisk();
 	events_f.scheduledEventHandler.saveToDisk();

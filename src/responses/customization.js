@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getCustomization(info) {
     return json.stringify(customizationOutfits);
 }

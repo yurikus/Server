@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getItems(url, info, sessionID) {
     return json.stringify(items);
 }

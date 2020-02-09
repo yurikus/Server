@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getHandbookUserlist(url, info, sessionID) {
     return '{"err":0,"errmsg":null,"data":' + json.stringify(weaponBuilds_f.getUserBuilds(sessionID)) + '}';
 }

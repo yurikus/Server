@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getImage(url, info, sessionID) {
     return "IMAGE";
 }

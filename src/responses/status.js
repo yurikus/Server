@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 item_f.itemServer.addRoute("Fold", status_f.foldItem);
 item_f.itemServer.addRoute("Toggle", status_f.toggleItem);
 item_f.itemServer.addRoute("Tag", status_f.tagItem);

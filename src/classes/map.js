@@ -1,7 +1,5 @@
 "use strict";
 
-require("../libs.js");
-
 /* MapServer class maintains list of maps in memory. */
 class MapServer {
     constructor() {

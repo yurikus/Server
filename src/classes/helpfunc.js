@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 /* Made a 2d array table with 0 - free slot and 1 - used slot
 * input: PlayerData
 * output: table[y][x]

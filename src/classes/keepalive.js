@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function main(sessionID) {
     if (!account_f.accountServer.isWiped(sessionID)) {
         updateTraders(sessionID);

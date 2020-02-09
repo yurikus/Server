@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function handleRepair(url, info, sessionID) {
     return repair_f.main(info);
 }

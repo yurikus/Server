@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function addNote(pmcData, body, sessionID) {
     pmcData.Notes.Notes.push({
 		"Time": body.note.Time, 

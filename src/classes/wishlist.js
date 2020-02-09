@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 /* Adding item to wishlist
 *  input: playerProfileData, Request body
 *  output: OK (saved profile)

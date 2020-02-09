@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getLocale(url, info, sessionID) {
     return locale_f.getLanguages();
 }

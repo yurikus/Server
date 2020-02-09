@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getHideoutRecipes(url, info, sessionID) {
     return json.read(filepaths.user.cache.hideout_production);
 }

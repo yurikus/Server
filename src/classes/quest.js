@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 /*
 * Quest status values
 * 0 - Locked

@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 /* TraderServer class maintains list of traders for each sessionID in memory. */
 class TraderServer {
     constructor() {

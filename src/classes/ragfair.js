@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function sortOffersByID(a, b) {
     return a.intId - b.intId;
 }

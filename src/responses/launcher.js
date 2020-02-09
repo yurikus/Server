@@ -5,8 +5,6 @@
 
 "use strict";
 
-require('../libs.js');
-
 function loginUser(url, info, sessionID) {
     return account_f.accountServer.findID(info);
 }

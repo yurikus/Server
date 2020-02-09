@@ -1,7 +1,5 @@
 ﻿"use strict";
 
-require('../libs.js');
-
 function getLanguages() {
     return json.read(filepaths.user.cache.languages);
 }

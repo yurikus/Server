@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getLocations(url, info, sessionID) {
     return map_f.mapServer.generateAll();
 }

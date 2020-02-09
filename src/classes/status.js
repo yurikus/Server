@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function foldItem(pmcData, body, sessionID) {
     for (let item of pmcData.Inventory.items) {
         if (item._id && item._id === body.item) {

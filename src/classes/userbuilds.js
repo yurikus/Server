@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getPath(sessionID) {
 	let path = filepaths.user.profiles.userbuilds;
 	return path.replace("__REPLACEME__", sessionID);

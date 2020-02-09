@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 /*
 * NotifierService class maintains a queue of notifications which will be pushed upon notification 
 * request from client per session.

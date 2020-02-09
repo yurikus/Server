@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function searchRagfair(url, info, sessionID) {
     return ragfair_f.getOffers(info);
 }

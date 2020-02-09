@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 let weather = json.parse(json.read(filepaths.user.cache.weather));
 
 function generate() {

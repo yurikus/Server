@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function buyItem(pmcData, body, sessionID) {
     if (!itm_hf.payMoney(pmcData, body, sessionID)) {
         logger.logError("no money found");

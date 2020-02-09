@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 /* Based on the item action, determine whose inventories we should be looking at for from and to. */
 function getOwnerInventoryItems(body, sessionID) {
     let isSameInventory = false;

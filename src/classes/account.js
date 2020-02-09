@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 /**
 * AccountServer class maintains list of accounts in memory. All account information should be 
 * loaded during server init.

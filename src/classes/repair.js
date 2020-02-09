@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function main(pmcData, body, sessionID) {
     let output = item_f.itemServer.getOutput();
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);

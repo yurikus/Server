@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function getTraderList(url, info, sessionID) {
     return json.stringify(trader_f.traderServer.getAllTraders(sessionID));
 }

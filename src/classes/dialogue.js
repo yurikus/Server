@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 class DialogueServer {
 	constructor() {
 		this.dialogues = {};

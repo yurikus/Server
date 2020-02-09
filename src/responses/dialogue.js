@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 function nullArrayResponse(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":[]}';
 }

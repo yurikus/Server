@@ -1,7 +1,5 @@
 "use strict";
 
-require('../libs.js');
-
 item_f.itemServer.addRoute("Move", move_f.moveItem);
 item_f.itemServer.addRoute("Remove", move_f.discardItem);
 item_f.itemServer.addRoute("Split", move_f.splitItem);
