@@ -46,14 +46,37 @@ function HideoutUpgrade(pmcData, body, sessionID) {
 // validating the upgrade
 // TODO: apply bonusses or is it automatically applied? 
 function HideoutUpgradeComplete(pmcData, body, sessionID) {
-	for (let hideoutArea in pmcData.Hideout.Areas) {
-		if (pmcData.Hideout.Areas[hideoutArea].type !== body.areaType) {
+	for (let hideoutArea of pmcData.Hideout.Areas) {
+		if (hideoutArea.type !== body.areaType) {
 			continue;
 		}
 
-		pmcData.Hideout.Areas[hideoutArea].level++;	
-		pmcData.Hideout.Areas[hideoutArea].completeTime = 0;
-		pmcData.Hideout.Areas[hideoutArea].constructing = false;
+		// upgrade area
+		hideoutArea.level++;	
+		hideoutArea.completeTime = 0;
+		hideoutArea.constructing = false;
+
+		// we need to set the right stash size
+		if (body.areaType === 3) {
+			for (let item of pmcData.Inventory.items) {
+				let counter = 0;
+
+				for (let bonus of pmcData.Bonusses) {
+					if (bonus.type === "StashSize") {
+						counter++;
+					}
+
+					if (hideoutArea.level === counter) {
+						item._tpl = bonus.templateId;
+						break;
+					}
+				}
+
+				if (hideoutArea.level === counter) {
+					break;
+				}
+			}
+		}
 	}
 		
 	return item_f.itemServer.getOutput();
