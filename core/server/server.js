@@ -219,7 +219,7 @@ class Server {
         if (req.method === "POST") {
             req.on('data', function (data) {
                 zlib.inflate(data, function (err, body) {
-                    let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
+                    let jsonData = ((body !== undefined && body !== "") ? body.toString() : "{}");
     
                     logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
                     sendResponse(req, resp, jsonData, sessionID);
@@ -235,19 +235,19 @@ class Server {
                     const requestLength = req.headers["content-length"] - 0;
                     const sessionID = req.headers.sessionid - 0;
     
-                    if (!this.putInBuffer(sessionID, data, requestLength)) {
+                    if (!server.putInBuffer(sessionID, data, requestLength)) {
                         resp.writeContinue();
                         return;
                     }
     
-                    data = this.getFromBuffer(sessionID);
+                    data = server.getFromBuffer(sessionID);
                 }
     
                 // unpack data
                 zlib.inflate(data, function (err, body) {
-                    let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
+                    let jsonData = ((body !== undefined && body !== "") ? body.toString() : "{}");
     
-                    logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
+                    logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
                     sendResponse(req, resp, jsonData, sessionID);
                 });
             });
