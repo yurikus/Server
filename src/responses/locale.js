@@ -3,15 +3,15 @@
 require('../libs.js');
 
 function getLocale(url, info, sessionID) {
-    return locale.getLanguages();
+    return locale_f.getLanguages();
 }
 
 function getMenuLocale(url, info, sessionID) {
-    return locale.getMenu(url.replace("/client/menu/locale/", ''));
+    return locale_f.getMenu(url.replace("/client/menu/locale/", ''));
 }
 
 function getGlobalLocale(url, info, sessionID) {
-    return locale.getGlobal(url.replace("/client/locale/", ''));
+    return locale_f.getGlobal(url.replace("/client/locale/", ''));
 }
 
 router.addStaticRoute("/client/languages", getLocale);

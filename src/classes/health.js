@@ -24,7 +24,7 @@ class HealthServer {
     }
 
     offraidHeal(pmcData, body, sessionID) {
-        let output = item.getOutput();
+        let output = item_f.getOutput();
     
         // healing body part
         for (let bdpart in pmcData.Health.BodyParts) {
@@ -54,9 +54,9 @@ class HealthServer {
     }
 
     offraidEat(pmcData, body, sessionID) {
-        item.resetOutput();
+        item_f.resetOutput();
         
-        let output = item.getOutput();
+        let output = item_f.getOutput();
         let todelete = false;
         let maxResource = undefined;
         let effects = undefined;

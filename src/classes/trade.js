@@ -14,16 +14,16 @@ function buyItem(pmcData, body, sessionID) {
         body.tid = "ragfair";
     }
     
-    return move_f.addItem(pmcData, body, item.getOutput(), sessionID);
+    return move_f.addItem(pmcData, body, item_f.getOutput(), sessionID);
 }
 
 // Selling item to trader
 function sellItem(pmcData, body, sessionID) {
-    item.resetOutput();
+    item_f.resetOutput();
 
     let money = 0;
     let prices = json.parse(profile_f.getPurchasesData(body.tid, sessionID));
-    let output = item.getOutput();
+    let output = item_f.getOutput();
 
     // find the items to sell
     for (let i in body.items) {
@@ -81,10 +81,10 @@ function confirmTrading(pmcData, body, sessionID) {
 
 // Ragfair trading
 function confirmRagfairTrading(pmcData, body, sessionID) {
-    item.resetOutput();
+    item_f.resetOutput();
 
     let offers = body.offers;
-    let output = item.getOutput()
+    let output = item_f.getOutput()
 
     for (let offer of offers) {
         pmcData = profile_f.profileServer.getPmcProfile(sessionID);

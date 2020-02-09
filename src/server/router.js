@@ -20,10 +20,6 @@ class Router {
         this.dynamicRoutes = {};
         this.itemRoutes = {};
 
-        for (let response in filepaths.src.responses) {
-            require(filepaths.src.responses[response]);
-        }
-
         this.addStaticRoute("/client/game/profile/items/moving", this.handleItemRoutes.bind(this));
     }
 

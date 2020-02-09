@@ -105,7 +105,7 @@ class ProfileServer {
 
     generateScav(sessionID) {
         let pmcData = this.getPmcProfile(sessionID);
-        let scavData = bots.generatePlayerScav();
+        let scavData = bots_f.generatePlayerScav();
 
         scavData._id = pmcData.savage;
         scavData.aid = sessionID;

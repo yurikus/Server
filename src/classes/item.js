@@ -2,24 +2,26 @@
 
 require('../libs.js');
 
-let output = "";
-
-function getOutput() {
-    if (output === "") {
-        resetOutput();
+class ItemServer {
+    constructor() {
+        this.output = "";
     }
 
-    return output;
+    getOutput() {
+        if (this.output === "") {
+            this.resetOutput();
+        }
+
+        return this.output;
+    }
+
+    setOutput(data) {
+        this.output = data;
+    }
+
+    resetOutput() {
+        this.output = {"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{}}};
+    }
 }
 
-function setOutput(data) {
-    output = data;
-}
-
-function resetOutput() {
-    output = JSON.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{} }}');
-}
-
-module.exports.getOutput = getOutput;
-module.exports.setOutput = setOutput;
-module.exports.resetOutput = resetOutput;
+module.exports.item = new ItemServer();

@@ -50,8 +50,9 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 
 	// load logic
 	global.server = (require('./server/start.js').server);
+	global.item_f = ((require('./classes/item.js')).item);
 
-	global.locale = require('./classes/locale.js');
+	global.locale_f = require('./classes/locale.js');
 	global.keepAlive_f = require('./classes/keepAlive.js');
 	global.health_f = require('./classes/health.js');
 	global.offraid_f = require('./classes/offraid.js');
@@ -62,7 +63,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.notifier_f = require('./classes/notifier.js');
 	global.account_f = require('./classes/account.js');
 	global.profile_f = require('./classes/profile.js');
-	global.bots = require('./classes/bots.js');
+	global.bots_f = require('./classes/bots.js');
 	global.itm_hf = require('./classes/helpfunc.js');
 	global.quest_f = require('./classes/quest.js');
 	global.note_f = require('./classes/notes.js');
@@ -79,7 +80,6 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.ragfair_f = require('./classes/ragfair.js');
 	global.weather_f = require('./classes/weather.js');
 	global.map_f =  require('./classes/map.js');
-	global.item = require('./classes/item.js');
 
 	if (isFirstLaunch) {
 		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");

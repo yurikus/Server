@@ -97,8 +97,8 @@ function fromRUB(value, currency) {
 * output: boolean
 * */
 function payMoney(pmcData, body, sessionID) {
-    item.resetOutput();
-    let output = item.getOutput();
+    item_f.resetOutput();
+    let output = item_f.getOutput();
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);
     let currencyTpl = getCurrency(tmpTraderInfo.data.currency);
 
@@ -176,7 +176,7 @@ function payMoney(pmcData, body, sessionID) {
 
     // save changes
     logger.logSuccess("Items taken. Status OK.");
-    item.setOutput(output);
+    item_f.setOutput(output);
     return true;
 }
 

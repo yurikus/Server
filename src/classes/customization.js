@@ -26,14 +26,14 @@ function wearClothing(pmcData, body, sessionID) {
 		}
 	}
 
-    item.resetOutput();
-	return item.getOutput();
+    item_f.resetOutput();
+	return item_f.getOutput();
 }
 
 function buyClothing(pmcData, body, sessionID) {
-	item.resetOutput();
+	item_f.resetOutput();
 
-	let output = item.getOutput();
+	let output = item_f.getOutput();
 	let item_toPay = body.items;
 	let customization_storage = json.parse(json.read(getPath(sessionID)));
 

@@ -263,8 +263,10 @@ class Server {
 
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
     
-        // load responses
-        router.initializeRoutes();
+        // load server logic
+        router.initalizeRoutes();
+        interpreter.initializeClasses();
+        interpreter.initializeResponses();
     
         // create servers (https: game, http: launcher)
         let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {

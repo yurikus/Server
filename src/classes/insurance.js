@@ -155,7 +155,7 @@ function cost(info, sessionID) {
 
 /* add insurance to an item */
 function insure(pmcData, body, sessionID) {
-    item.resetOutput();
+    item_f.resetOutput();
 
     let itemsToPay = [];
 
@@ -190,7 +190,7 @@ function insure(pmcData, body, sessionID) {
         }
     }
 
-    return item.getOutput();
+    return item_f.getOutput();
 }
 
 module.exports.insuranceServer = new InsuranceServer();

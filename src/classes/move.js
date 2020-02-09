@@ -48,9 +48,9 @@ function getOwnerInventoryItems(body, sessionID) {
 * otherwise, move is contained within the same profile_f.
 * */
 function moveItem(pmcData, body, sessionID) {
-    item.resetOutput();
+    item_f.resetOutput();
 
-    let output = item.getOutput();
+    let output = item_f.getOutput();
 
     let items = getOwnerInventoryItems(body, sessionID);
     if (items.isMail) {
@@ -185,16 +185,16 @@ function removeItem(profileData, body, output, sessionID) {
 
 function discardItem(pmcData, body, sessionID) {
     insurance_f.insuranceServer.remove(pmcData, body.item, sessionID);
-    return removeItem(pmcData, body.item, item.getOutput(), sessionID);
+    return removeItem(pmcData, body.item, item_f.getOutput(), sessionID);
 }
 
 /* Split Item
 * spliting 1 item into 2 separate items ...
 * */
 function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new item with splited amount and removing that amount from older one
-    item.resetOutput();
+    item_f.resetOutput();
 
-    let output = item.getOutput();
+    let output = item_f.getOutput();
     let location = body.container.location;
 
     let items = getOwnerInventoryItems(body, sessionID);
@@ -248,9 +248,9 @@ function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new 
 * merges 2 items into one, deletes item from body.item and adding number of stacks into body.with
 * */
 function mergeItem(pmcData, body, sessionID) {
-    item.resetOutput();
+    item_f.resetOutput();
 
-    let output = item.getOutput();
+    let output = item_f.getOutput();
     let items = getOwnerInventoryItems(body, sessionID);
 
     for (let key in items.to) {
@@ -288,9 +288,9 @@ function mergeItem(pmcData, body, sessionID) {
 * Used to take items from scav inventory into stash or to insert ammo into mags (shotgun ones) and reloading weapon by clicking "Reload"
 * */
 function transferItem(pmcData, body, sessionID) {
-    item.resetOutput();
+    item_f.resetOutput();
 
-    let output = item.getOutput();
+    let output = item_f.getOutput();
 
     for (let item of pmcData.Inventory.items) {
         // From item
@@ -336,9 +336,9 @@ function transferItem(pmcData, body, sessionID) {
 * its used for "reload" if you have weapon in hands and magazine is somewhere else in rig or backpack in equipment
 * */
 function swapItem(pmcData, body, sessionID) {
-    item.resetOutput();
+    item_f.resetOutput();
 
-    let output = item.getOutput();
+    let output = item_f.getOutput();
 
     for (let item of pmcData.Inventory.items) {
         if (item._id === body.item) {

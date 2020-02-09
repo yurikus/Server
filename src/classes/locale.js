@@ -7,9 +7,7 @@ function getLanguages() {
 }
 
 function getMenu(lang = "en") {
-    let base = filepaths.locales[lang.toLowerCase()];
-
-    return json.read(base.menu);
+    return json.read(filepaths.locales[lang.toLowerCase()].menu);
 }
 
 function getGlobal(lang = "en") {
