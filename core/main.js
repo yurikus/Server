@@ -6,4 +6,4 @@ process.stdout.write(String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server" + 
 
 /* load server components */
 require('./interpreter.js');
-require('./server/server.js');
+server.start();

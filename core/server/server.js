@@ -121,8 +121,6 @@ class Server {
         this.httpsPort = settings.server.httpsPort;
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
         this.version = "1.0.0";
-
-        this.start();
     }
 
     putInBuffer(sessionID, data, bufLength) {

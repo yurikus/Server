@@ -31,6 +31,7 @@ class Interpreter {
         global.header_f = require('./server/sendHeader.js');
         global.events_f = require('./server/events.js');
         global.notifier_f = require('./server/notifier.js');
+        global.server = (require('./server/server.js').server);
     }
 
     /* load classes */
