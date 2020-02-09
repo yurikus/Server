@@ -32,10 +32,9 @@ function genericFilepathCacher(type, basepath) {
             case "hideoutScav": filepaths.hideout.scavcase[fileName] = filePath; break;
             case "weather": filepaths.weather[fileName] = filePath; break;
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
-            case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
             case "profileEditions": filepaths.profile.character[fileName] = filePath; break;
-            case "srcResponses": filepaths.src.responses[fileName] = filePath.replace("src", ".."); break;
-            case "srcClasses": filepaths.src.classes[fileName] = filePath.replace("src", ".."); break;
+            case "srcResponses": filepaths.src.responses[fileName] = "../" + filePath; break;
+            case "srcClasses": filepaths.src.classes[fileName] = "../" + filePath; break;
         }
     }
 }
@@ -50,7 +49,6 @@ function quests() {
 
 function traders() {
     genericFilepathCacher("traders", "db/traders");
-    genericFilepathCacher("profileTraders", "db/traders");
 }
 
 function dialogues() {

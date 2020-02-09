@@ -5,8 +5,6 @@ const http = require('http');
 const https = require('https');
 const selfsigned = require('selfsigned');
 
-require('../libs.js');
-
 function showWatermark() {
     let text_1 = "JustEmuTarkov " + server.getVersion();
     let text_2 = "https://justemutarkov.github.io/";
@@ -262,10 +260,6 @@ class Server {
         }
 
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
-    
-        // load server logic
-        interpreter.initializeClasses();
-        interpreter.initializeResponses();
     
         // create servers (https: game, http: launcher)
         let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {

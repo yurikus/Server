@@ -1,7 +1,5 @@
 "use strict";
 
-const logger = require("../classes/logger");
-
 class Router {
     constructor() {
         this.staticRoutes = {};
