@@ -157,7 +157,7 @@ class Server {
         this.httpPort = settings.server.httpPort;
         this.httpsPort = settings.server.httpsPort;
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
-        this.version = "Github B0.12-beta C86039acdf";
+        this.version = "1.0.0";
     }
 
     putInBuffer(sessionID, data, bufLength) {
