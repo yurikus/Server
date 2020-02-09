@@ -19,8 +19,6 @@ function buyItem(pmcData, body, sessionID) {
 
 // Selling item to trader
 function sellItem(pmcData, body, sessionID) {
-    item_f.itemServer.resetOutput();
-
     let money = 0;
     let prices = json.parse(profile_f.getPurchasesData(body.tid, sessionID));
     let output = item_f.itemServer.getOutput();
@@ -81,8 +79,6 @@ function confirmTrading(pmcData, body, sessionID) {
 
 // Ragfair trading
 function confirmRagfairTrading(pmcData, body, sessionID) {
-    item_f.itemServer.resetOutput();
-
     let offers = body.offers;
     let output = item_f.itemServer.getOutput()
 

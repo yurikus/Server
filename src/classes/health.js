@@ -53,9 +53,7 @@ class HealthServer {
         return item_f.itemServer.getOutput();
     }
 
-    offraidEat(pmcData, body, sessionID) {
-        item_f.itemServer.resetOutput();
-        
+    offraidEat(pmcData, body, sessionID) {        
         let output = item_f.itemServer.getOutput();
         let todelete = false;
         let maxResource = undefined;

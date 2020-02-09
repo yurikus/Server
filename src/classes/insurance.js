@@ -155,8 +155,6 @@ function cost(info, sessionID) {
 
 /* add insurance to an item */
 function insure(pmcData, body, sessionID) {
-    item_f.itemServer.resetOutput();
-
     let itemsToPay = [];
 
     // get the price of all items

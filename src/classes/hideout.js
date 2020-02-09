@@ -42,7 +42,6 @@ function HideoutUpgrade(pmcData, body, sessionID) {
 		}
 	}
 	
-	item_f.itemServer.resetOutput();
 	return item_f.itemServer.getOutput();
 }
 
@@ -58,15 +57,12 @@ function HideoutUpgradeComplete(pmcData, body, sessionID) {
 		pmcData.Hideout.Areas[hideoutArea].completeTime = 0;
 		pmcData.Hideout.Areas[hideoutArea].constructing = false;
 	}
-
-	item_f.itemServer.resetOutput();		
+		
 	return item_f.itemServer.getOutput();
 }
 
 // move items from hideout
 function HideoutPutItemsInAreaSlots(pmcData, body, sessionID) {
-	item_f.itemServer.resetOutput();
-
 	let output = item_f.itemServer.getOutput();
 
 	for (let itemToMove in body.items) {
@@ -92,8 +88,6 @@ function HideoutPutItemsInAreaSlots(pmcData, body, sessionID) {
 }
 
 function HideoutTakeItemsFromAreaSlots(pmcData, body, sessionID) {
-	item_f.itemServer.resetOutput();
-
 	let output = item_f.itemServer.getOutput();
 
 	for (let area in pmcData.Hideout.Areas) {
@@ -122,13 +116,11 @@ function HideoutToggleArea(pmcData, body, sessionID) {
 			pmcData.Hideout.Areas[area].active = body.enabled;
 		}
 	}
-
-	item_f.itemServer.resetOutput();		
+		
 	return item_f.itemServer.getOutput();
 }
 
 function HideoutSingleProductionStart(pmcData, body, sessionID) {
-	item_f.itemServer.resetOutput();
 	registerProduction(pmcData, body, sessionID);
 
 	let output = item_f.itemServer.getOutput();
@@ -191,19 +183,15 @@ function HideoutScavCaseProductionStart(pmcData, body, sessionID) {
 		}
 	}
 
-	item_f.itemServer.resetOutput();
 	return item_f.itemServer.getOutput();
 }
 
 function HideoutContinuousProductionStart(pmcData, body, sessionID) {
 	registerProduction(pmcData, body, sessionID);
-	item_f.itemServer.resetOutput();
 	return item_f.itemServer.getOutput();
 }
 
 function HideoutTakeProduction(pmcData, body, sessionID) {
-	item_f.itemServer.resetOutput();
-
 	let output = item_f.itemServer.getOutput();
 
 	for (let receipe in hideoutProduction.data) {	
