@@ -5,35 +5,6 @@ const http = require('http');
 const https = require('https');
 const selfsigned = require('selfsigned');
 
-function showWatermark() {
-    let text_1 = "JustEmuTarkov " + server.getVersion();
-    let text_2 = "https://justemutarkov.github.io/";
-    let diffrence = Math.abs(text_1.length - text_2.length);
-    let whichIsLonger = ((text_1.length >= text_2.length) ? text_1.length : text_2.length);
-    let box_spacing_between_1 = "";
-    let box_spacing_between_2 = "";
-    let box_width = "";
-
-    if (text_1.length >= text_2.length) {
-        for (let i = 0; i < diffrence; i++) {
-            box_spacing_between_2 += " ";
-        }
-    } else {
-        for (let i = 0; i < diffrence; i++) {
-            box_spacing_between_1 += " ";
-        }
-    }
-
-    for (let i = 0; i < whichIsLonger; i++) {
-        box_width += "═";
-    }
-
-    logger.logRequest("╔═" + box_width + "═╗");
-    logger.logRequest("║ " + text_1 + box_spacing_between_1 + " ║");
-    logger.logRequest("║ " + text_2 + box_spacing_between_2 + " ║");
-    logger.logRequest("╚═" + box_width + "═╝");
-}
-
 function getCookies(req) {
     let found = {};
     let cookies = req.headers.cookie;
@@ -142,59 +113,6 @@ function sendResponse(req, resp, body, sessionID) {
     header_f.sendZlibJson(resp, output, sessionID);
 }
 
-function handleRequest(req, resp) {
-    let IP = req.connection.remoteAddress.replace("::ffff:", "");
-    const sessionID = parseInt(getCookies(req)['PHPSESSID']);
-
-    // request without data
-    if (req.method === "GET") {
-        logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
-        sendResponse(req, resp, null, sessionID);
-    }
-
-    // request with data
-    if (req.method === "POST") {
-        req.on('data', function (data) {
-            zlib.inflate(data, function (err, body) {
-                let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
-
-                logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
-                sendResponse(req, resp, jsonData, sessionID);
-            });
-        });
-    }
-
-    // emulib responses
-    if (req.method === "PUT") {
-        req.on('data', function (data) {
-            // receive data
-            if (req.headers.hasOwnProperty("expect")) {
-                const requestLength = req.headers["content-length"] - 0;
-                const sessionID = req.headers.sessionid - 0;
-
-                if (!server.putInBuffer(sessionID, data, requestLength)) {
-                    resp.writeContinue();
-                    return;
-                }
-
-                data = server.getFromBuffer(sessionID);
-            }
-
-            // unpack data
-            zlib.inflate(data, function (err, body) {
-                let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
-
-                logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
-                sendResponse(req, resp, jsonData, sessionID);
-            });
-        });
-    }
-
-    if (settings.autosave.saveOnReceive) {
-        saveHandler.saveOpenSessions();
-    }
-}
-
 class Server {
     constructor() {
         this.buffers = {};
@@ -203,6 +121,8 @@ class Server {
         this.httpsPort = settings.server.httpsPort;
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
         this.version = "1.0.0";
+
+        this.start();
     }
 
     putInBuffer(sessionID, data, bufLength) {
@@ -250,18 +170,108 @@ class Server {
         return {cert: perms.cert, key: perms.private};
     }
 
-    start() {
-        // show our watermark
-        showWatermark();
+    showWatermark() {
+        let text_1 = "JustEmuTarkov " + this.version;
+        let text_2 = "https://justemutarkov.github.io/";
+        let diffrence = Math.abs(text_1.length - text_2.length);
+        let whichIsLonger = ((text_1.length >= text_2.length) ? text_1.length : text_2.length);
+        let box_spacing_between_1 = "";
+        let box_spacing_between_2 = "";
+        let box_width = "";
+    
+        /* calculate space */
+        if (text_1.length >= text_2.length) {
+            for (let i = 0; i < diffrence; i++) {
+                box_spacing_between_2 += " ";
+            }
+        } else {
+            for (let i = 0; i < diffrence; i++) {
+                box_spacing_between_1 += " ";
+            }
+        }
+    
+        for (let i = 0; i < whichIsLonger; i++) {
+            box_width += "═";
+        }
 
-        // set the ip
+        /* reset cursor to begin */
+        process.stdout.write('\u001B[2J\u001B[0;0f');
+    
+        /* show watermark */
+        logger.logRequest("╔═" + box_width + "═╗");
+        logger.logRequest("║ " + text_1 + box_spacing_between_1 + " ║");
+        logger.logRequest("║ " + text_2 + box_spacing_between_2 + " ║");
+        logger.logRequest("╚═" + box_width + "═╝");
+
+        /* set window name */
+        process.stdout.write(String.fromCharCode(27) + ']0;' + text_1 + String.fromCharCode(7));
+    }
+
+    handleRequest(req, resp) {
+        let IP = req.connection.remoteAddress.replace("::ffff:", "");
+        const sessionID = parseInt(getCookies(req)['PHPSESSID']);
+    
+        // request without data
+        if (req.method === "GET") {
+            logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
+            sendResponse(req, resp, null, sessionID);
+        }
+    
+        // request with data
+        if (req.method === "POST") {
+            req.on('data', function (data) {
+                zlib.inflate(data, function (err, body) {
+                    let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
+    
+                    logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
+                    sendResponse(req, resp, jsonData, sessionID);
+                });
+            });
+        }
+    
+        // emulib responses
+        if (req.method === "PUT") {
+            req.on('data', function (data) {
+                // receive data
+                if (req.headers.hasOwnProperty("expect")) {
+                    const requestLength = req.headers["content-length"] - 0;
+                    const sessionID = req.headers.sessionid - 0;
+    
+                    if (!this.putInBuffer(sessionID, data, requestLength)) {
+                        resp.writeContinue();
+                        return;
+                    }
+    
+                    data = this.getFromBuffer(sessionID);
+                }
+    
+                // unpack data
+                zlib.inflate(data, function (err, body) {
+                    let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
+    
+                    logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
+                    sendResponse(req, resp, jsonData, sessionID);
+                });
+            });
+        }
+    
+        if (settings.autosave.saveOnReceive) {
+            saveHandler.saveOpenSessions();
+        }
+    }
+
+    start() {
+        /* show our watermark */
+        this.showWatermark();
+
+        /* set the ip */
         if (settings.server.generateIp === true) {
             this.ip = utility.getLocalIpAddress();
         }
 
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
     
-        // create servers (https: game, http: launcher)
+        /* create server (https: game, http: launcher) */
         let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {
             handleRequest(req, res);
         }).listen(this.httpsPort, this.ip, function() {
@@ -274,7 +284,7 @@ class Server {
             logger.logSuccess("Started launcher server");
         });
 
-        // game server already running
+        /* server is already running */
         httpsServer.on('error', function(e) {
             logger.logError("» Port " + this.httpsPort + " is already in use, check if the server isn't already running");
         });

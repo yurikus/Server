@@ -5,6 +5,10 @@ class Interpreter {
         global.utility = require('./util/utility.js');
         global.logger = (require('./util/logger.js').logger);
         global.json = require('./util/json.js');
+
+        this.initializeExceptions();
+        this.initializeClasses();
+        this.initializeResponses();
     }
 
     /* load classes */
@@ -38,7 +42,6 @@ class Interpreter {
 
         // server logic
         global.router = (require('./router.js').router);
-        global.server = (require('./server/start.js').server);
         global.saveHandler = require('./server/saveHandler.js');
         global["header_f"] = require('./server/sendHeader.js');
         global["events_f"] = require('./server/events.js');
@@ -83,7 +86,7 @@ class Interpreter {
         }
     }
 
-    intializeExceptions() {
+    initializeExceptions() {
         process.on('uncaughtException', (error, promise) => {
             if (logger === typeof "undefined") {
                 return;
