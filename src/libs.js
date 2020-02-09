@@ -12,7 +12,6 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 
 	// setup server
 	global.settings = json.parse(json.read("user/server.config.json"));
-	global.ended_at = 0;
 
 	if (isFirstLaunch) {
 		logger.logSuccess("Main variables setted properly... [" + String(new Date() - time) + "]");
@@ -38,7 +37,6 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 
 	// global data
 	global.items = json.parse(json.read(filepaths.user.cache.items));
-	global.weather = json.parse(json.read(filepaths.user.cache.weather));
 	global.quests = json.parse(json.read(filepaths.user.cache.quests));
 	global.globalSettings = json.parse(json.read(filepaths.user.cache.globals));
 	global.customizationOutfits = json.parse(json.read(filepaths.user.cache.customization_outfits));
@@ -51,36 +49,36 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 
 	// load logic
 	global.server = (require('./server/start.js').server);
-	global.item_f = ((require('./classes/item.js')).item);
 	global.saveHandler = require('./server/saveHandler.js');
 
-	global.locale_f = require('./classes/locale.js');
-	global.keepAlive_f = require('./classes/keepAlive.js');
-	global.health_f = require('./classes/health.js');
-	global.offraid_f = require('./classes/offraid.js');
-	global.header_f = require('./server/sendHeader.js');
-	global.events_f = require('./server/events.js');
-	global.dialogue_f = require('./classes/dialogue.js');
-	global.notifier_f = require('./classes/notifier.js');
-	global.account_f = require('./classes/account.js');
-	global.profile_f = require('./classes/profile.js');
-	global.bots_f = require('./classes/bots.js');
-	global.itm_hf = require('./classes/helpfunc.js');
-	global.quest_f = require('./classes/quest.js');
-	global.note_f = require('./classes/notes.js');
-	global.move_f = require('./classes/move.js');
-	global.status_f = require('./classes/status.js');
-	global.wishList_f = require('./classes/wishList.js');
-	global.trade_f = require('./classes/trade.js');
-	global.customization_f = require('./classes/customization.js');
-	global.hideout_f = require('./classes/hideout.js');
-	global.weaponBuilds_f = require('./classes/userbuilds.js');
-	global.repair_f = require('./classes/repair.js');
-	global.insurance_f = require('./classes/insurance.js');
-	global.trader_f = require('./classes/trader.js');
-	global.ragfair_f = require('./classes/ragfair.js');
-	global.weather_f = require('./classes/weather.js');
-	global.map_f =  require('./classes/map.js');
+	global["item_f"] = ((require('./classes/item.js')).item);
+	global["locale_f"] = require('./classes/locale.js');
+	global["keepAlive_f"] = require('./classes/keepAlive.js');
+	global["health_f"] = require('./classes/health.js');
+	global["offraid_f"] = require('./classes/offraid.js');
+	global["header_f"] = require('./server/sendHeader.js');
+	global["events_f"] = require('./server/events.js');
+	global["dialogue_f"] = require('./classes/dialogue.js');
+	global["notifier_f"] = require('./classes/notifier.js');
+	global["account_f"] = require('./classes/account.js');
+	global["profile_f"] = require('./classes/profile.js');
+	global["bots_f"] = require('./classes/bots.js');
+	global["itm_hf"] = require('./classes/helpfunc.js');
+	global["quest_f"] = require('./classes/quest.js');
+	global["note_f"] = require('./classes/notes.js');
+	global["move_f"] = require('./classes/move.js');
+	global["status_f"] = require('./classes/status.js');
+	global["wishList_f"] = require('./classes/wishList.js');
+	global["trade_f"] = require('./classes/trade.js');
+	global["customization_f"] = require('./classes/customization.js');
+	global["hideout_f"] = require('./classes/hideout.js');
+	global["weaponBuilds_f"] = require('./classes/userbuilds.js');
+	global["repair_f"] = require('./classes/repair.js');
+	global["insurance_f"] = require('./classes/insurance.js');
+	global["trader_f"] = require('./classes/trader.js');
+	global["ragfair_f"] = require('./classes/ragfair.js');
+	global["weather_f"] = require('./classes/weather.js');
+	global["map_f"] =  require('./classes/map.js');
 
 	if (isFirstLaunch) {
 		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");

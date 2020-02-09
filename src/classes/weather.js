@@ -2,6 +2,8 @@
 
 require('../libs.js');
 
+let weather = json.parse(json.read(filepaths.user.cache.weather));
+
 function generate() {
     let output = {"err": 0, "errmsg": null, "data": {}};
 
@@ -26,7 +28,7 @@ function generate() {
         output.data.time = time;
     }
 
-    return JSON.stringify(output);
+    return json.stringify(output);
 }
 
 module.exports.generate = generate;
