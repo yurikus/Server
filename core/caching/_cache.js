@@ -216,14 +216,9 @@ function mod() {
 }
 
 function all() {
-    let force = false;
+    let force = (settings.server.rebuildCache) ? true : false;
     let assortList = Object.keys(filepaths.assort);
     let localesList = Object.keys(filepaths.locales);
-
-    // force if rebuild is required
-    if (mods.isRebuildRequired()) {
-        force = true;
-    }
 
     // generate cache
     if (force || !fs.existsSync("user/cache/items.json")) {
@@ -281,6 +276,8 @@ function all() {
     if (force || !fs.existsSync("user/cache/mods.json")) {
         mod();
     }
+
+    settings.server.rebuild = false;
 }
 
 module.exports.all = all;

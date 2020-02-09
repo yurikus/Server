@@ -1,6 +1,7 @@
 "use strict";
 
 const fs = require('fs');
+const mods = require('./_mods.js');
 
 function flush() {
     filepaths = json.parse(json.read("db/cache/filepaths.json"));
@@ -481,17 +482,12 @@ function routeDatabase() {
 }
 
 function all() {
-    // force rebuilding routes
-    let force = false;
-
-    // force if rebuild is required
     if (mods.isRebuildRequired()) {
-        logger.logWarning("Modslist mismatch, force rebuilding cache");
-        force = true;
+        settings.server.rebuild = true;
     }
 
-    // generate routes
-    if (force || !fs.existsSync("user/cache/filepaths.json")) {
+    if (settings.server.rebuild || !fs.existsSync("user/cache/filepaths.json")) {
+        logger.logWarning("Modslist mismatch, force rebuilding cache");
         routeDatabase();
         mods.load();
         dump();
