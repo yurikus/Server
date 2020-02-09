@@ -89,12 +89,10 @@ function sendResponse(req, resp, body, sessionID) {
     let output = "";
 
     // get response
-    if (req.method === "POST") {
+    if (req.method === "POST" || req.method === "PUT") {
         output = router.getResponse(req, body, sessionID);
-    } else if (req.method === "PUT") {
-        output = router.getResponse(req, json.stringify(body), sessionID);
     } else {
-        output = router.getResponse(req, "{}", sessionID);
+        output = router.getResponse(req, "", sessionID);
     }
 
     if (output === "NOTIFY") {
@@ -160,6 +158,10 @@ class Server {
         this.version = "1.0.0";
     }
 
+    resetBuffer(sessionID) {
+        this.buffers[sessionID] = undefined;
+    }
+
     putInBuffer(sessionID, data, bufLength) {
         if (this.buffers[sessionID] === undefined || this.buffers[sessionID].allocated !== bufLength) {
             this.buffers[sessionID] = {
@@ -219,7 +221,7 @@ class Server {
         if (req.method === "POST") {
             req.on('data', function (data) {
                 zlib.inflate(data, function (err, body) {
-                    let jsonData = ((body !== undefined && body !== "") ? body.toString() : "{}");
+                    let jsonData = ((body !== typeof "undefined" && body !== null && body !== "") ? body.toString() : '{}');
     
                     logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
                     sendResponse(req, resp, jsonData, sessionID);
@@ -229,7 +231,7 @@ class Server {
     
         // emulib responses
         if (req.method === "PUT") {
-            req.on('data', function (data) {
+            req.on('data', function(data) {
                 // receive data
                 if (req.headers.hasOwnProperty("expect")) {
                     const requestLength = parseInt(req.headers["content-length"]);
@@ -238,16 +240,15 @@ class Server {
     
                     if (!server.putInBuffer(sessionID, data, requestLength)) {
                         resp.writeContinue();
-                        return;
                     }
-    
-                    data = server.getFromBuffer(sessionID);
                 }
-    
-                // unpack data
+            }).on('end', function() {
+                data = server.getFromBuffer(sessionID);
+                server.resetBuffer(sessionID);
+
                 zlib.inflate(data, function (err, body) {
-                    let jsonData = ((body !== undefined && body !== "") ? body.toString() : "{}");
-    
+                    let jsonData = ((body !== typeof "undefined" && body !== null && body !== "") ? json.stringify(body) : '{}');
+                    
                     logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
                     sendResponse(req, resp, jsonData, sessionID);
                 });
