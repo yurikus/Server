@@ -5,13 +5,9 @@
 
 "use strict";
 
-function nullResponse(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":null}';
-}
-
 function saveProgress(url, info, sessionID) {
     offraid_f.saveProgress(info, sessionID);
-    return nullResponse;
+    return '{"err":0, "errmsg":null, "data":null}';
 }
 
 router.addStaticRoute("/OfflineRaidSave", saveProgress);

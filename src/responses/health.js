@@ -1,12 +1,8 @@
 "use strict";
 
-function nullResponse(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":null}';
-}
-
 function updateHealth(url, info, sessionID) {
     health_f.healthServer.updateHealth(info, sessionID);
-    return nullResponse;
+    return '{"err":0, "errmsg":null, "data":null}';
 }
 
 router.addStaticRoute("/player/health/events", updateHealth);
