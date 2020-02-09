@@ -198,16 +198,16 @@ function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new 
     let location = body.container.location;
 
     let items = getOwnerInventoryItems(body, sessionID);
-    
+
     if (!("location" in body.container) && body.container.container === "cartridges") {
         let tmp_counter = 0;
-    
+
         for (let item_ammo in items.to) {
             if (items.to[item_ammo].parentId === body.container.id) {
                 tmp_counter++;
             }
         }
-    
+
         location = tmp_counter;//wrong location for first cartrige
     }
 
@@ -292,41 +292,44 @@ function transferItem(pmcData, body, sessionID) {
 
     let output = item_f.getOutput();
 
-    for (let item of pmcData.Inventory.items) {
-        // From item
-        if (item._id === body.item) {
-            let stackItem = 1;
+    let itemFrom = null, itemTo = null;
 
-            if ("upd" in item.upd) {
-                stackItem = item.upd.StackObjectsCount;
-            }
+    for (let iterItem of pmcData.Inventory.items) {
+        if (iterItem._id === body.item) {
+            itemFrom = iterItem;
+        }
+        else if (iterItem._id === body.with) {
+            itemTo = iterItem;
+        }
+        if (itemFrom !== null && itemTo !== null) break;
+    }
 
-            // fixed undefined stackobjectscount
-            if (stackItem === 1) {
-                Object.assign(item, {"upd": {"StackObjectsCount": 1}});
-            }
+    if (itemFrom !== null && itemTo !== null)
+    {
+        let stackFrom = 1;
 
-            if (stackItem > body.count) {
-                item.upd.StackObjectsCount = stackItem - body.count;
-            } else {
-                item.splice(item, 1);
-            }
+        if ("upd" in itemFrom) {
+            stackFrom = itemFrom.upd.StackObjectsCount;
+        } else {
+            Object.assign(itemFrom, {"upd": {"StackObjectsCount": 1}});
         }
 
-        // To item
-        if (item._id === body.with) {
-            let stackItemWith = 1;
-
-            if ("upd" in item) {
-                stackItemWith = item.upd.StackObjectsCount;
-            }
-
-            if (stackItemWith === 1) {
-                Object.assign(item, {"upd": {"StackObjectsCount": 1}});
-            }
-
-            item.upd.StackObjectsCount = stackItemWith + body.count;
+        if (stackFrom > body.count) {
+            itemFrom.upd.StackObjectsCount = stackFrom - body.count;
+        } else {
+            // Moving a full stack onto a smaller stack
+            itemFrom.upd.StackObjectsCount = stackFrom - 1;
         }
+
+        let stackTo = 1;
+
+        if ("upd" in itemTo) {
+            stackTo = itemTo.upd.StackObjectsCount;
+        } else {
+            Object.assign(itemTo, {"upd": {"StackObjectsCount": 1}});
+        }
+
+        itemTo.upd.StackObjectsCount = stackTo + body.count;
     }
 
     return output;
@@ -340,20 +343,20 @@ function swapItem(pmcData, body, sessionID) {
 
     let output = item_f.getOutput();
 
-    for (let item of pmcData.Inventory.items) {
-        if (item._id === body.item) {
-            item.parentId = body.to.id;         // parentId
-            item.slotId = body.to.container;    // slotId
-            item.location = body.to.location    // location
+    for (let iterItem of pmcData.Inventory.items) {
+        if (iterItem._id === body.item) {
+            iterItem.parentId = body.to.id;         // parentId
+            iterItem.slotId = body.to.container;    // slotId
+            iterItem.location = body.to.location    // location
         }
 
-        if (item._id === body.item2) {
-            item.parentId = body.to2.id;
-            item.slotId = body.to2.container;
-            delete item.location;
+        if (iterItem._id === body.item2) {
+            iterItem.parentId = body.to2.id;
+            iterItem.slotId = body.to2.container;
+            delete iterItem.location;
         }
     }
-    
+
     return output;
 }
 
@@ -376,7 +379,7 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
             if (body.count > tmpItem._props.StackMaxSize) {
                 let count = body.count;
                 let calc = body.count - (Math.floor(body.count / tmpItem._props.StackMaxSize) * tmpItem._props.StackMaxSize);
-                
+
                 MaxStacks = (calc > 0) ? MaxStacks + Math.floor(count / tmpItem._props.StackMaxSize) : Math.floor(count / tmpItem._props.StackMaxSize);
 
                 for (let sv = 0; sv < MaxStacks; sv++) {
@@ -466,7 +469,7 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
                                 for (let tmpKey in tmpTraderAssort.data.items) {
                                     if (tmpTraderAssort.data.items[tmpKey].parentId && tmpTraderAssort.data.items[tmpKey].parentId === toDo[0][0]) {
                                         newItem = utility.generateNewItemId();
-                                        
+
                                         let SlotID = tmpTraderAssort.data.items[tmpKey].slotId;
 
                                         if (SlotID === "hideout") {
