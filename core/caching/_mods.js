@@ -316,6 +316,79 @@ function locales(mod) {
     }
 }
 
+function bots() {
+    if (!mod.files.hasOwnProperty("bots")) {
+        return;
+    }
+
+    for (let bot in mod.files.bots) {
+        // users shouldn't modify the bots base
+        if (bot === "base") {
+            continue;
+        }
+        
+        // set active locale
+        let activeBot = mod.files.bots[bot];
+
+        // set static locale data
+        if (activeBot.hasOwnProperty("appearance")) {
+            if (activeBot.appearance.hasOwnProperty("body")) {
+                for (let item in activeBot.appearance.body) {
+                    filepaths.bots[bot].appearance.body[item] = activeBot.appearance.body[item];
+                }
+            }
+
+            if (activeBot.appearance.hasOwnProperty("feet")) {
+                for (let item in activeBot.appearance.feet) {
+                    filepaths.bots[bot].appearance.feet[item] = activeBot.appearance.feet[item];
+                }
+            }
+
+            if (activeBot.appearance.hasOwnProperty("hands")) {
+                for (let item in activeBot.appearance.hands) {
+                    filepaths.bots[bot].appearance.hands[item] = activeBot.appearance.hands[item];
+                }
+            }
+
+            if (activeBot.appearance.hasOwnProperty("head")) {
+                for (let item in activeBot.appearance.head) {
+                    filepaths.bots[bot].appearance.head[item] = activeBot.appearance.head[item];
+                }
+            }
+
+            if (activeBot.appearance.hasOwnProperty("voice")) {
+                for (let item in activeBot.appearance.voice) {
+                    filepaths.bots[bot].appearance.voice[item] = activeBot.appearance.voice[item];
+                }
+            }
+        }
+
+        if (activeBot.hasOwnProperty("experience")) {
+            for (let item in activeBot.experience) {
+                filepaths.bots[bot].experience[item] = activeBot.experience[item];
+            }
+        }
+
+        if (activeBot.hasOwnProperty("health")) {
+            for (let item in activeBot.health) {
+                filepaths.bots[bot].experience[item] = activeBot.health[item];
+            }
+        }
+
+        if (activeBot.hasOwnProperty("inventory")) {
+            for (let item in activeBot.inventory) {
+                filepaths.bots[bot].inventory[item] = activeBot.inventory[item];
+            }
+        }
+
+        if (activeBot.hasOwnProperty("names")) {
+            for (let item in activeBot.names) {
+                filepaths.bots[bot].names[item] = activeBot.names[item];
+            }
+        }
+    }
+}
+
 function isRebuildRequired() {
     let modList = settings.mods.list;
 
@@ -380,6 +453,7 @@ function load() {
         profile(mod);
         assort(mod);
         locales(mod);
+        bots(mod);
     }
 }
 

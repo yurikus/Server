@@ -5,7 +5,6 @@ function getItems(url, info, sessionID) {
 }
 
 function getGlobals(url, info, sessionID) {
-    let globals = globalSettings;
     globals.data.time = Date.now() / 1000;
     return json.stringify(globals);
 }

@@ -110,7 +110,7 @@ class InsuranceServer {
                 }
             };
     
-            events_f.scheduledEventHandler.addToSchedule({
+            events.scheduledEventHandler.addToSchedule({
                 type: "insuranceReturn",
                 sessionId: sessionID,
                 scheduledTime: Date.now() + utility.getRandomInt(trader.data.insurance.min_return_hour * 3600, trader.data.insurance.max_return_hour * 3600) * 1000,
