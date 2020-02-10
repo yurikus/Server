@@ -4,14 +4,13 @@
 class TraderServer {
     constructor() {
         this.traders = {};
+        this.assorts = {};
         this.initializeTraders();
     }
 
     /* Load all the traders into memory. */
     initializeTraders() {
         logger.logWarning("Loading traders into RAM...");
-
-        this.traders = {};
 
         for (let id in filepaths.traders) {
             this.traders[id] = json.parse(json.read(filepaths.traders[id]));
@@ -80,11 +79,11 @@ class TraderServer {
     }
 
     getAssort(traderId) {
-        if (!("assort" in this.traders[traderId])) {
+        if (!("traderId" in this.assorts)) {
             this.generateAssort(traderId);
         }
         
-        return this.traders[traderId].assort;
+        return this.assorts[traderId];
     }
 
     generateAssort(traderId) {
@@ -95,19 +94,22 @@ class TraderServer {
         }
 
         let base = json.parse(json.read(filepaths.user.cache["assort_" + traderId]));
-        let keys = Object.keys(base.data.loyal_level_items);
-        let level = this.traders[traderId].loyalty.currentLevel;
 
         // 1 is min level, 4 is max level
-        for (let i = 1; i < 4; i++) {
-            for (let key of keys) {
-                if (base.data.loyal_level_items[key] > level) {
-                    base = this.removeItemFromAssort(base, key);
+        if (traderId !== "ragfair") {
+            let keys = Object.keys(base.data.loyal_level_items);
+            let level = this.traders[traderId].loyalty.currentLevel;
+
+            for (let i = 1; i < 4; i++) {
+                for (let key of keys) {
+                    if (base.data.loyal_level_items[key] > level) {
+                        base = this.removeItemFromAssort(base, key);
+                    }
                 }
             }
         }
 
-        this.traders[traderId].assort = base;
+        this.assorts[traderId] = base;
     }
 
     generateFence() {
@@ -129,7 +131,7 @@ class TraderServer {
             base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
         }
 
-        this.traders['579dc571d53a0658a154fbec'].assort = base;
+        this.assorts['579dc571d53a0658a154fbec'] = base;
     }
 
     removeItemFromAssort(assort, id) {
