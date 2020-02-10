@@ -1,12 +1,12 @@
 {
-	"Id": "loot_rf_ammo_true (16)633318",
-	"IsStatic": false,
+	"Id": "Lootable_00583",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -174.725647,
-		"y": 0.0460000038,
-		"z": 39.4329224
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,20 +15,68 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d02609aff62a3d371a4c",
+	"Root": "5e3829df28554715256020c6",
 	"Items": [
 		{
-			"_id": "5db5d02609aff62a3d371a4c",
-			"_tpl": "57372ebf2459776862260582"
+			"_id": "5e3829df28554715256020c6",
+			"_tpl": "5909d7cf86f77470ee57d75a"
 		},
 		{
-			"_id": "5db5d02609aff62a3d371a4d",
-			"_tpl": "56dff3afd2720bba668b4567",
-			"parentId": "5db5d02609aff62a3d371a4c",
+			"_id": "5e3829df28554715256020c7",
+			"_tpl": "59d6272486f77466146386ff",
+			"parentId": "5e3829df28554715256020c6",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829df28554715256020c8",
+			"_tpl": "58dd3ad986f77403051cba8f",
+			"parentId": "5e3829df28554715256020c6",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 32
+			}
+		},
+		{
+			"_id": "5e3829df28554715256020c9",
+			"_tpl": "576a581d2459771e7b1bc4f1",
+			"parentId": "5e3829df28554715256020c6",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829df28554715256020ca",
+			"_tpl": "576a5ed62459771e9c2096cb",
+			"parentId": "5e3829df28554715256020c9",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e3829df28554715256020cc",
+			"_tpl": "56d59d3ad2720bdb418b4577",
+			"parentId": "5e3829df28554715256020ca",
 			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 30
+				"StackObjectsCount": 17
 			}
+		},
+		{
+			"_id": "5e3829df28554715256020cb",
+			"_tpl": "576a63cd2459771e796e0e11",
+			"parentId": "5e3829df28554715256020c9",
+			"slotId": "mod_pistol_grip"
 		}
 	]
 }

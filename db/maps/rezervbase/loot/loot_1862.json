@@ -1,12 +1,12 @@
 {
-	"Id": "loot_mix_food_med_ammo (62)666386",
-	"IsStatic": false,
+	"Id": "Lootable_00369",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -101.899292,
-		"y": -5.047,
-		"z": 91.26361
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,29 +15,65 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961386f7740728172cc6",
+	"Root": "5e3829fc2855471525602e9f",
 	"Items": [
 		{
-			"_id": "5dd2961386f7740728172cc6",
-			"_tpl": "57372c21245977670937c6c2"
+			"_id": "5e3829fc2855471525602e9f",
+			"_tpl": "5d6fd13186f77424ad2a8c69"
 		},
 		{
-			"_id": "5dd2961386f7740728172cc7",
-			"_tpl": "56dff061d2720bb5668b4567",
-			"parentId": "5dd2961386f7740728172cc6",
-			"slotId": "cartridges",
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5e3829fc2855471525602ea0",
+			"_tpl": "5af0484c86f7740f02001f7f",
+			"parentId": "5e3829fc2855471525602e9f",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
 			}
 		},
 		{
-			"_id": "5dd2961386f7740728172cc8",
-			"_tpl": "56dff061d2720bb5668b4567",
-			"parentId": "5dd2961386f7740728172cc6",
-			"slotId": "cartridges",
-			"location": 1,
-			"upd": {
-				"StackObjectsCount": 60
+			"_id": "5e3829fc2855471525602ea1",
+			"_tpl": "5448ff904bdc2d6f028b456e",
+			"parentId": "5e3829fc2855471525602e9f",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829fc2855471525602ea2",
+			"_tpl": "573475fb24597737fb1379e1",
+			"parentId": "5e3829fc2855471525602e9f",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829fc2855471525602ea3",
+			"_tpl": "5734770f24597738025ee254",
+			"parentId": "5e3829fc2855471525602e9f",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829fc2855471525602ea4",
+			"_tpl": "573475fb24597737fb1379e1",
+			"parentId": "5e3829fc2855471525602e9f",
+			"slotId": "main",
+			"location": {
+				"x": 4,
+				"y": 0,
+				"r": 0
 			}
 		}
 	]

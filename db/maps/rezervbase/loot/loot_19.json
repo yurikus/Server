@@ -1,25 +1,44 @@
 {
-	"Id": "GunsafeSpawn 1 (7)(Clone)612296",
+	"Id": "loot_ammo_common (22)3932364",
 	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": -41.40045,
-		"y": 19.056097,
-		"z": 174.171753
+		"x": -13.4210205,
+		"y": -4.052,
+		"z": -98.9419861
 	},
 	"Rotation": {
-		"x": 270,
-		"y": 41.01612,
+		"x": 0,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d02309aff62a3d3716b8",
+	"Root": "5e3829dc2855471525601c3a",
 	"Items": [
 		{
-			"_id": "5db5d02309aff62a3d3716b8",
-			"_tpl": "57616a9e2459773c7a400234"
+			"_id": "5e3829dc2855471525601c3a",
+			"_tpl": "57372deb245977685d4159b3"
+		},
+		{
+			"_id": "5e3829dc2855471525601c3b",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e3829dc2855471525601c3a",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e3829dc2855471525601c3c",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e3829dc2855471525601c3a",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }

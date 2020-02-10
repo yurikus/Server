@@ -1,12 +1,12 @@
 {
-	"Id": "loot_mix_food_med_ammo (74)734950",
-	"IsStatic": false,
+	"Id": "Lootable_00283",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 82.05603,
-		"y": -5.629,
-		"z": 22.9130249
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961386f7740728172cd7",
+	"Root": "5e3829fc2855471525602ecb",
 	"Items": [
 		{
-			"_id": "5dd2961386f7740728172cd7",
-			"_tpl": "5734773724597737fd047c14"
+			"_id": "5e3829fc2855471525602ecb",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e3829fc2855471525602ecc",
+			"_tpl": "57347cd0245977445a2d6ff1",
+			"parentId": "5e3829fc2855471525602ecb",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

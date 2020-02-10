@@ -1,12 +1,12 @@
 {
-	"Id": "Lootable_00612",
-	"IsStatic": true,
+	"Id": "loot_mix_food_med_ammo (70)3926912",
+	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": false,
+	"randomRotation": true,
 	"Position": {
-		"x": 0,
-		"y": 0,
-		"z": 0
+		"x": -161.506653,
+		"y": 0.44299984,
+		"z": 54.39691
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,56 +15,29 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2961486f77407281730b4",
+	"Root": "5e382a0468b10c71c31121f5",
 	"Items": [
 		{
-			"_id": "5dd2961486f77407281730b4",
-			"_tpl": "578f87ad245977356274f2cc"
+			"_id": "5e382a0468b10c71c31121f5",
+			"_tpl": "57372c21245977670937c6c2"
 		},
 		{
-			"_id": "5dd2961486f77407281730b5",
-			"_tpl": "56dff026d2720bb8668b4567",
-			"parentId": "5dd2961486f77407281730b4",
-			"slotId": "main",
-			"location": {
-				"x": 0,
-				"y": 0,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 15
-			}
-		},
-		{
-			"_id": "5dd2961486f77407281730b6",
-			"_tpl": "57d14d2524597714373db789",
-			"parentId": "5dd2961486f77407281730b4",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			}
-		},
-		{
-			"_id": "5dd2961486f77407281730b7",
-			"_tpl": "57d152ec245977144076ccdf",
-			"parentId": "5dd2961486f77407281730b6",
-			"slotId": "mod_pistol_grip"
-		},
-		{
-			"_id": "5dd2961486f77407281730b8",
-			"_tpl": "57d1519e24597714373db79d",
-			"parentId": "5dd2961486f77407281730b6",
-			"slotId": "mod_magazine"
-		},
-		{
-			"_id": "5dd2961486f77407281730b9",
-			"_tpl": "573719762459775a626ccbc1",
-			"parentId": "5dd2961486f77407281730b8",
+			"_id": "5e382a0468b10c71c31121f6",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5e382a0468b10c71c31121f5",
 			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 15
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e382a0468b10c71c31121f7",
+			"_tpl": "56dff061d2720bb5668b4567",
+			"parentId": "5e382a0468b10c71c31121f5",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
 			}
 		}
 	]

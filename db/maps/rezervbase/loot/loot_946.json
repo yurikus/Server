@@ -1,12 +1,12 @@
 {
-	"Id": "loot_toospaste_stuff (105)593772",
-	"IsStatic": false,
+	"Id": "Lootable_00090",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -175.498657,
-		"y": -0.316000223,
-		"z": 36.6369324
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d02709aff62a3d371bed",
+	"Root": "5e3829e12855471525602382",
 	"Items": [
 		{
-			"_id": "5db5d02709aff62a3d371bed",
-			"_tpl": "5c13cd2486f774072c757944"
+			"_id": "5e3829e12855471525602382",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e3829e12855471525602383",
+			"_tpl": "5672cb124bdc2d1a0f8b4568",
+			"parentId": "5e3829e12855471525602382",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

@@ -1,25 +1,69 @@
 {
-	"Id": "loot_mix_food_med_ammo (44)622402",
+	"Id": "Loot 135 (10)3936236",
 	"IsStatic": false,
 	"useGravity": true,
 	"randomRotation": true,
 	"Position": {
-		"x": -97.2219849,
-		"y": -8.228296,
-		"z": 92.2290039
+		"x": 191.0122,
+		"y": -5.863,
+		"z": -225.847687
 	},
 	"Rotation": {
-		"x": 0,
-		"y": 0,
+		"x": 0.00000170754731,
+		"y": 134.652985,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d02509aff62a3d37189e",
+	"Root": "5e382a10ecfb65468500d932",
 	"Items": [
 		{
-			"_id": "5db5d02509aff62a3d37189e",
-			"_tpl": "544fb62a4bdc2dfb738b4568"
+			"_id": "5e382a10ecfb65468500d932",
+			"_tpl": "5c488a752e221602b412af63",
+			"upd": {
+				"FireMode": {
+					"FireMode": "single"
+				}
+			}
+		},
+		{
+			"_id": "5e382a10ecfb65468500d933",
+			"_tpl": "5c48a2c22e221602b313fb6c",
+			"parentId": "5e382a10ecfb65468500d932",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5e382a10ecfb65468500d934",
+			"_tpl": "55802d5f4bdc2dac148b458e",
+			"parentId": "5e382a10ecfb65468500d932",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e382a10ecfb65468500d938",
+			"_tpl": "54527a984bdc2d4e668b4567",
+			"parentId": "5e382a10ecfb65468500d934",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
+		},
+		{
+			"_id": "5e382a10ecfb65468500d935",
+			"_tpl": "5c48a14f2e2216152006edd7",
+			"parentId": "5e382a10ecfb65468500d932",
+			"slotId": "mod_handguard"
+		},
+		{
+			"_id": "5e382a10ecfb65468500d936",
+			"_tpl": "5c48a2852e221602b21d5923",
+			"parentId": "5e382a10ecfb65468500d932",
+			"slotId": "mod_barrel"
+		},
+		{
+			"_id": "5e382a10ecfb65468500d937",
+			"_tpl": "5c48a2a42e221602b66d1e07",
+			"parentId": "5e382a10ecfb65468500d936",
+			"slotId": "mod_muzzle"
 		}
 	]
 }
