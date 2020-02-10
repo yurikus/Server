@@ -63,6 +63,7 @@ class Interpreter {
     /* load exception handler */
     initializeExceptions() {
         process.on('uncaughtException', (error, promise) => {
+            logger.logError("Server:" + server.getVersion());
             logger.logError("Trace:");
             logger.logData(error);
         });
