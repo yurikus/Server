@@ -1,5 +1,5 @@
 {
-	"Id": "Lootable_00022",
+	"Id": "Lootable_00029",
 	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
@@ -15,49 +15,53 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d02d1c20ab7c9a5a09f2",
+	"Root": "5e382a297e788532af360866",
 	"Items": [
 		{
-			"_id": "5db5d02d1c20ab7c9a5a09f2",
-			"_tpl": "578f87ad245977356274f2cc"
+			"_id": "5e382a297e788532af360866",
+			"_tpl": "5909d5ef86f77467974efbd8"
 		},
 		{
-			"_id": "5db5d02d1c20ab7c9a5a09f3",
-			"_tpl": "5a1eacb3fcdbcb09800872be",
-			"parentId": "5db5d02d1c20ab7c9a5a09f2",
+			"_id": "5e382a297e788532af360867",
+			"_tpl": "574d967124597745970e7c94",
+			"parentId": "5e382a297e788532af360866",
 			"slotId": "main",
 			"location": {
 				"x": 0,
 				"y": 0,
 				"r": 0
+			},
+			"upd": {
+				"FireMode": {
+					"FireMode": "single"
+				}
 			}
 		},
 		{
-			"_id": "5db5d02d1c20ab7c9a5a09f4",
-			"_tpl": "56dff026d2720bb8668b4567",
-			"parentId": "5db5d02d1c20ab7c9a5a09f2",
-			"slotId": "main",
-			"location": {
-				"x": 1,
-				"y": 0,
-				"r": 0
-			},
-			"upd": {
-				"StackObjectsCount": 20
-			}
+			"_id": "5e382a297e788532af360868",
+			"_tpl": "574dad8024597745964bf05c",
+			"parentId": "5e382a297e788532af360867",
+			"slotId": "mod_stock"
 		},
 		{
-			"_id": "5db5d02d1c20ab7c9a5a09f5",
-			"_tpl": "56dff3afd2720bba668b4567",
-			"parentId": "5db5d02d1c20ab7c9a5a09f2",
-			"slotId": "main",
-			"location": {
-				"x": 2,
-				"y": 0,
-				"r": 0
-			},
+			"_id": "5e382a297e788532af360869",
+			"_tpl": "574db213245977459a2f3f5d",
+			"parentId": "5e382a297e788532af360867",
+			"slotId": "mod_sight_rear"
+		},
+		{
+			"_id": "5e382a297e788532af36086a",
+			"_tpl": "587df3a12459772c28142567",
+			"parentId": "5e382a297e788532af360867",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e382a297e788532af36086b",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5e382a297e788532af36086a",
+			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 12
+				"StackObjectsCount": 7
 			}
 		}
 	]
