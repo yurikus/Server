@@ -1,11 +1,11 @@
 "use strict";
 
 function getLocations(url, info, sessionID) {
-    return map_f.mapServer.generateAll();
+    return location_f.locationServer.generateAll();
 }
 
 function getMap(url, info, sessionID) {
-    return "MAP";
+    return "LOCATION";
 }
 
 router.addStaticRoute("/client/locations", getLocations);

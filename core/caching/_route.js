@@ -140,11 +140,11 @@ function weather() {
     genericFilepathCacher("weather", "db/weather");
 }
 
-function maps() {
-    let inputDir = utility.getDirList("db/maps/");
+function locations() {
+    let inputDir = utility.getDirList("db/locations/");
 
-    for (let mapName of inputDir) {
-        let dirName = "db/maps/" + mapName + "/";
+    for (let locationName of inputDir) {
+        let dirName = "db/locations/" + locationName + "/";
         let baseNode = {"base": dirName + "base.json", "entries": {}, "exits": {}, "waves": {}, "bosses": {}, "loot": {}};
         let subdirs = ["entries", "exits", "waves", "bosses", "loot"];
 
@@ -165,7 +165,7 @@ function maps() {
             baseNode[subdir] = subNode;
         }
 
-        filepaths.maps[mapName] = baseNode;
+        filepaths.locations[locationName] = baseNode;
     }
 }
 
@@ -472,7 +472,7 @@ function routeDatabase() {
     templates();
     assort();
     weather();
-    maps();
+    locations();
     bots();
     locales();
     images();

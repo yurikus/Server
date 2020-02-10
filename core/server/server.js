@@ -140,8 +140,8 @@ function sendResponse(req, resp, body, sessionID) {
         return;
     }
 
-    if (output === "MAP") {
-        header_f.sendTextJson(resp, map_f.mapServer.get(req.url.replace("/api/location/", "")));
+    if (output === "LOCATION") {
+        header_f.sendTextJson(resp, location_f.locationServer.get(req.url.replace("/api/location/", "")));
         return;
     }
 
