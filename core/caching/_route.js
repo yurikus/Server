@@ -175,20 +175,20 @@ function bots() {
     filepaths.bots.base = "db/bots/base.json";
     
     let inputDir = [
-        "db/bots/pmc/bear/",
-        "db/bots/pmc/usec/",
-        "db/bots/scav/assault/",
-        "db/bots/scav/bossbully/",
-        "db/bots/scav/bossgluhar/",
-        "db/bots/scav/bosskilla/",
-        "db/bots/scav/bosskojaniy/",
-        "db/bots/scav/followerbully/",
-        "db/bots/scav/followergluharassault/",
-        "db/bots/scav/followergluharscout/",
-        "db/bots/scav/followergluharsecurity/",
-        "db/bots/scav/followerkojaniy/",
-        "db/bots/scav/marksman/",
-        "db/bots/scav/pmcbot/"
+        "db/bots/bear/",
+        "db/bots/usec/",
+        "db/bots/assault/",
+        "db/bots/bossbully/",
+        "db/bots/bossgluhar/",
+        "db/bots/bosskilla/",
+        "db/bots/bosskojaniy/",
+        "db/bots/followerbully/",
+        "db/bots/followergluharassault/",
+        "db/bots/followergluharscout/",
+        "db/bots/followergluharsecurity/",
+        "db/bots/followerkojaniy/",
+        "db/bots/marksman/",
+        "db/bots/pmcbot/"
     ];
 
     let cacheDir = [
@@ -236,33 +236,33 @@ function bots() {
         }
         
         if (path == 0) {
-            filepaths.bots.pmc.bear = baseNode;
+            filepaths.bots.bear = baseNode;
         } else if (path == 1) {
-            filepaths.bots.pmc.usec = baseNode;
+            filepaths.bots.usec = baseNode;
         } else if (path == 2) {
-            filepaths.bots.scav.assault = baseNode;
+            filepaths.bots.assault = baseNode;
         } else if (path == 3) {
-            filepaths.bots.scav.bossbully = baseNode;
+            filepaths.bots.bossbully = baseNode;
         } else if (path == 4) {
-            filepaths.bots.scav.bossgluhar = baseNode;
+            filepaths.bots.bossgluhar = baseNode;
         } else if (path == 5) {
-            filepaths.bots.scav.bosskilla = baseNode;
+            filepaths.bots.bosskilla = baseNode;
         }  else if (path == 6) {
-            filepaths.bots.scav.bosskojaniy = baseNode;
+            filepaths.bots.bosskojaniy = baseNode;
         } else if (path == 7) {
-            filepaths.bots.scav.followerbully = baseNode;
+            filepaths.bots.followerbully = baseNode;
         } else if (path == 8) {
-            filepaths.bots.scav.followergluharassault = baseNode;
+            filepaths.bots.followergluharassault = baseNode;
         } else if (path == 9) {
-            filepaths.bots.scav.followergluharscout = baseNode;
+            filepaths.bots.followergluharscout = baseNode;
         } else if (path == 10) {
-            filepaths.bots.scav.followergluharsecurity = baseNode;
+            filepaths.bots.followergluharsecurity = baseNode;
         } else if (path == 11) {
-            filepaths.bots.scav.followerkojaniy = baseNode;
+            filepaths.bots.followerkojaniy = baseNode;
         } else if (path == 12) {
-            filepaths.bots.scav.marksman = baseNode;
+            filepaths.bots.marksman = baseNode;
         } else if (path == 13) {
-            filepaths.bots.scav.pmcbot = baseNode;
+            filepaths.bots.pmcbot = baseNode;
         }
     }
 }
