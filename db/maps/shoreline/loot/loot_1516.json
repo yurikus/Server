@@ -1,27 +1,85 @@
 {
-	"Id": "LootFood[5] (45)4375946",
-	"IsStatic": false,
+	"Id": "Lootable_00157",
+	"IsStatic": true,
 	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": -180.751953,
-		"y": -0.301,
-		"z": -74.5200043
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
-		"x": 1.59027736e-15,
-		"y": 15.6177979,
-		"z": -1.08051992e-7
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d02842a81007cb24d315",
+	"Root": "5e3829f91d55576e1a526bbd",
 	"Items": [
 		{
-			"_id": "5db5d02842a81007cb24d315",
-			"_tpl": "59e6918f86f7746c9f75e849",
+			"_id": "5e3829f91d55576e1a526bbd",
+			"_tpl": "5909d7cf86f77470ee57d75a"
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bbe",
+			"_tpl": "5a7ae0c351dfba0017554310",
+			"parentId": "5e3829f91d55576e1a526bbd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bbf",
+			"_tpl": "5a6b5f868dc32e000a311389",
+			"parentId": "5e3829f91d55576e1a526bbe",
+			"slotId": "mod_barrel"
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bc0",
+			"_tpl": "5a6f5e048dc32e00094b97da",
+			"parentId": "5e3829f91d55576e1a526bbe",
+			"slotId": "mod_reciever"
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bc2",
+			"_tpl": "5a6f5d528dc32e00094b97d9",
+			"parentId": "5e3829f91d55576e1a526bc0",
+			"slotId": "mod_sight_rear"
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bc3",
+			"_tpl": "5a6f58f68dc32e000a311390",
+			"parentId": "5e3829f91d55576e1a526bc0",
+			"slotId": "mod_sight_front"
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bc1",
+			"_tpl": "5a718b548dc32e000d46d262",
+			"parentId": "5e3829f91d55576e1a526bbe",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bc4",
+			"_tpl": "56d59d3ad2720bdb418b4577",
+			"parentId": "5e3829f91d55576e1a526bc1",
+			"slotId": "cartridges",
 			"upd": {
-				"StackObjectsCount": 3
+				"StackObjectsCount": 5
+			}
+		},
+		{
+			"_id": "5e3829f91d55576e1a526bc5",
+			"_tpl": "5c5db6f82e2216003a0fe914",
+			"parentId": "5e3829f91d55576e1a526bbd",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
 			}
 		}
 	]
