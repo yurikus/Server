@@ -208,8 +208,8 @@ class Server {
     }
 
     handleRequest(req, resp) {
-        let IP = req.connection.remoteAddress.replace("::ffff:", "");
-        let sessionID = parseInt(getCookies(req)['PHPSESSID']);
+        const IP = req.connection.remoteAddress.replace("::ffff:", "");
+        const sessionID = parseInt(getCookies(req)['PHPSESSID']);
 
         logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
     
@@ -234,10 +234,8 @@ class Server {
                 // receive data
                 if (req.headers.hasOwnProperty("expect")) {
                     const requestLength = parseInt(req.headers["content-length"]);
-                    
-                    sessionID = parseInt(req.headers.sessionid);
     
-                    if (!server.putInBuffer(sessionID, data, requestLength)) {
+                    if (!server.putInBuffer(parseInt(req.headers.sessionid), data, requestLength)) {
                         resp.writeContinue();
                     }
                 }
