@@ -316,7 +316,7 @@ function locales(mod) {
     }
 }
 
-function bots() {
+function bots(mod) {
     if (!mod.files.hasOwnProperty("bots")) {
         return;
     }
