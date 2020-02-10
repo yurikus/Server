@@ -102,7 +102,6 @@ function assort() {
     let dirList = utility.getDirList("db/assort/");
 
     for (let trader in dirList) {
-
         let assortName = dirList[trader];
         let assortFilePath = {"items":{}, "barter_scheme":{}, "loyal_level_items":{}};
         let inputDir = [
@@ -482,9 +481,12 @@ function routeDatabase() {
 }
 
 function all() {
+    mods.detectMissing();
+
     if (mods.isRebuildRequired()) {
         logger.logWarning("Modlist mismatch");
         settings.server.rebuild = true;
+        json.write("user/server.config.json", settings);
     }
 
     if (settings.server.rebuild || !fs.existsSync("user/cache/filepaths.json")) {

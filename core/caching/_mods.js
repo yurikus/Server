@@ -389,6 +389,37 @@ function bots(mod) {
     }
 }
 
+function detectMissing() {
+    let dir = "user/mods/";
+    let mods = utility.getDirList(dir);
+
+    for (let mod of mods) {
+        if (!fs.existsSync(dir + mod + "/mod.config.json")) {
+            logger.logError("Mod " + mod + " is missing mod.config.json");
+            logger.logError("Forcing server shutdown...");
+            process.exit(1);
+        }
+
+        let config = json.parse(json.read(dir + mod + "/mod.config.json"));
+        let found = false;
+
+        for (let installed of settings.mods.list) {
+            if (installed.name === config.name) {
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            continue;
+        }
+
+        logger.logWarning("Mod " + mod + " not installed, adding it to the modlist");
+        settings.mods.list.push({"name": config.name, "author": config.author, "version": config.releases[0].version, "enabled": true});
+        json.write("user/server.config.json", settings);
+    }
+}
+
 function isRebuildRequired() {
     let modList = settings.mods.list;
 
@@ -457,5 +488,6 @@ function load() {
     }
 }
 
+module.exports.detectMissing = detectMissing;
 module.exports.isRebuildRequired = isRebuildRequired;
 module.exports.load = load;
