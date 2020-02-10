@@ -133,12 +133,10 @@ function locations(mod) {
 }
 
 function ragfair(mod) {
-    if (!mod.files.hasOwnProperty("ragfair")) {
-        return;
-    }
-
-    for (let item in mod.files.ragfair) {
-        filepaths.ragfair[item] = mod.files.ragfair[item];
+    if ("ragfair" in mod.files) {
+        for (let item in mod.files.ragfair) {
+            filepaths.ragfair[item] = mod.files.ragfair[item];
+        }
     }
 }
 
