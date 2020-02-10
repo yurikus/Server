@@ -91,20 +91,9 @@ function confirmRagfairTrading(pmcData, body, sessionID) {
         body.scheme_id = 0;
         body.scheme_items = offer.items;
 
-        let tmpOutput = confirmTrading(pmcData, body, sessionID);
-
-        for (let item of tmpOutput.data.items.new) {
-            output.data.items.new.push(item);
-        }
-
-        for (let item of tmpOutput.data.items.change) {
-            output.data.items.change.push(item);
-        }
-
-        for (let item of tmpOutput.data.items.del) {
-            output.data.items.del.push(item);
-        }
+        output = confirmTrading(pmcData, body, sessionID);
     }
+    
     return output;
 }
 
