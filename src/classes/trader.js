@@ -49,7 +49,7 @@ class TraderServer {
         // level up player
         let checkedExp = 0;
 
-        for (let level in globalSettings.data.config.exp.level.exp_table) {
+        for (let level in global.data.config.exp.level.exp_table) {
             if (pmcData.Info.Experience < checkedExp) {
                 break;
             }
