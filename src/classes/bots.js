@@ -79,7 +79,7 @@ function generateBot(bot, role) {
 	}
 
 	// generate bot
-	node = (type === "bear" || type === "usec") ? filepaths.bots.pmc[type] : filepaths.bots.scav[type.toLowerCase()];
+	node = filepaths.bots[type.toLowerCase()];
 
 	bot.Info.Settings.Role = role;
 	bot.Info.Nickname = getRandomValue(node.names);
