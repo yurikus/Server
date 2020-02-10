@@ -121,7 +121,7 @@ function generate(databots) {
 }
 
 function generatePlayerScav() {
-	let scavData = generate({"conditions":[{"Role":"playerScav","Limit":1,"Difficulty":"normal"}]}).data;
+	let scavData = generate({"conditions":[{"Role":"playerScav","Limit":1,"Difficulty":"normal"}]});
 
 	scavData[0].Info.Settings = {};
 	return scavData[0];
