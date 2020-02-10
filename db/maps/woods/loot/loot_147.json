@@ -1,25 +1,44 @@
 {
-	"Id": "loot_morhine (1)2302308",
+	"Id": "LootAmmoBoxesAR (3)2297214",
 	"IsStatic": false,
-	"useGravity": false,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": 232.8751,
-		"y": -1.6738,
-		"z": -73.0974
+		"x": 246.706,
+		"y": -8.109,
+		"z": 129.004
 	},
 	"Rotation": {
 		"x": 0,
-		"y": 266.144867,
+		"y": 0,
 		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5db5d0301d9e8a753205990e",
+	"Root": "5e3829f18e89a76b703a0c52",
 	"Items": [
 		{
-			"_id": "5db5d0301d9e8a753205990e",
-			"_tpl": "544fb3f34bdc2d03748b456a"
+			"_id": "5e3829f18e89a76b703a0c52",
+			"_tpl": "57372fc52459776998772ca1"
+		},
+		{
+			"_id": "5e3829f18e89a76b703a0c53",
+			"_tpl": "56dff4ecd2720b5f5a8b4568",
+			"parentId": "5e3829f18e89a76b703a0c52",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5e3829f18e89a76b703a0c54",
+			"_tpl": "56dff4ecd2720b5f5a8b4568",
+			"parentId": "5e3829f18e89a76b703a0c52",
+			"slotId": "cartridges",
+			"location": 1,
+			"upd": {
+				"StackObjectsCount": 60
+			}
 		}
 	]
 }
