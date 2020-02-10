@@ -55,7 +55,7 @@ class TraderServer {
             }
 
             pmcData.Info.Level = level;
-            checkedExp += globalSettings.data.config.exp.level.exp_table[level].exp;
+            checkedExp += globals.data.config.exp.level.exp_table[level].exp;
         }
 
         // level up traders
