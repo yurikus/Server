@@ -2,7 +2,7 @@
 
 /* show name in window */
 process.stdout.setEncoding('utf8');
-process.stdout.write(String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server" + String.fromCharCode(7));
+process.title = "JustEmuTarkov Server";
 
 /* load server components */
 require('./interpreter.js');

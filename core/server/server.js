@@ -39,7 +39,7 @@ function showWatermark() {
     logger.logRequest("╚═" + box_width + "═╝");
 
     /* set window name */
-    process.stdout.write(String.fromCharCode(27) + ']0;' + text_1 + String.fromCharCode(7));
+    process.title = text_1;
 }
 
 function getCookies(req) {
