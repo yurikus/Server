@@ -383,6 +383,10 @@ function bots(mod) {
 }
 
 function detectMissing() {
+    if (!fs.existsSync("user/mods/")) {
+        return;
+    }
+
     let dir = "user/mods/";
     let mods = utility.getDirList(dir);
 
