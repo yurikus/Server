@@ -91,7 +91,44 @@ function hideout(mod) {
 
 function locations(mod) {
     if ("locations" in mod.files) {
-        // code here
+        for (let location in mod.files.locations) {    
+            if (location === "base") {
+                continue;
+            }
+            
+            // set active locale
+            let activeLocation = mod.files.locations[location];
+
+            if ("entries" in activeLocation) {
+                for (let item in activeLocation.entries) {
+                    filepaths.locations[location].entries[item] = activeLocation.entries[item];
+                }
+            }
+
+            if ("exits" in activeLocation) {
+                for (let item in activeLocation.exits) {
+                    filepaths.locations[location].exits[item] = activeLocation.exits[item];
+                }
+            }
+
+            if ("waves" in activeLocation) {
+                for (let item in activeLocation.waves) {
+                    filepaths.locations[location].waves[item] = activeLocation.waves[item];
+                }
+            }
+
+            if ("bosses" in activeLocation) {
+                for (let item in activeLocation.bosses) {
+                    filepaths.locations[location].bosses[item] = activeLocation.bosses[item];
+                }
+            }
+
+            if ("loot" in activeLocation) {
+                for (let item in activeLocation.loot) {
+                    filepaths.locations[location].loot[item] = activeLocation.loot[item];
+                }
+            }
+        }
     }
 }
 
