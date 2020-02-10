@@ -210,10 +210,11 @@ class Server {
     handleRequest(req, resp) {
         let IP = req.connection.remoteAddress.replace("::ffff:", "");
         let sessionID = parseInt(getCookies(req)['PHPSESSID']);
+
+        logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
     
         // request without data
         if (req.method === "GET") {
-            logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
             sendResponse(req, resp, null, sessionID);
         }
     
@@ -222,8 +223,6 @@ class Server {
             req.on('data', function (data) {
                 zlib.inflate(data, function (err, body) {
                     let jsonData = ((body !== typeof "undefined" && body !== null && body !== "") ? body.toString() : '{}');
-    
-                    logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
                     sendResponse(req, resp, jsonData, sessionID);
                 });
             });
@@ -243,13 +242,11 @@ class Server {
                     }
                 }
             }).on('end', function() {
-                data = server.getFromBuffer(sessionID);
+                let data = server.getFromBuffer(sessionID);
                 server.resetBuffer(sessionID);
 
                 zlib.inflate(data, function (err, body) {
-                    let jsonData = ((body !== typeof "undefined" && body !== null && body !== "") ? json.stringify(body) : '{}');
-                    
-                    logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
+                    let jsonData = ((body !== typeof "undefined" && body !== null && body !== "") ? body.toString() : '{}');
                     sendResponse(req, resp, jsonData, sessionID);
                 });
             });
