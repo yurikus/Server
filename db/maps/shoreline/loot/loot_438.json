@@ -1,12 +1,12 @@
 {
-	"Id": "loot_tushenka5860134",
-	"IsStatic": false,
+	"Id": "Lootable_00142",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -89.92566,
-		"y": 27.5548134,
-		"z": -137.879272
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e3829ec7e788532af35f26c",
+	"Root": "5e3829eaf470ac6fd82e6db9",
 	"Items": [
 		{
-			"_id": "5e3829ec7e788532af35f26c",
-			"_tpl": "57347d7224597744596b4e72"
+			"_id": "5e3829eaf470ac6fd82e6db9",
+			"_tpl": "578f87a3245977356274f2cb"
+		},
+		{
+			"_id": "5e3829eaf470ac6fd82e6dba",
+			"_tpl": "5b43575a86f77424f443fe62",
+			"parentId": "5e3829eaf470ac6fd82e6db9",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829eaf470ac6fd82e6dbb",
+			"_tpl": "56742c284bdc2d98058b456d",
+			"parentId": "5e3829eaf470ac6fd82e6db9",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

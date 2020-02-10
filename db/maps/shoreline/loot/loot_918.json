@@ -1,12 +1,12 @@
 {
-	"Id": "loot_cigarettes (2)5859022",
-	"IsStatic": false,
+	"Id": "Lootable_00269",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -65.5185547,
-		"y": 27.25481,
-		"z": -3.5723877
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e3829f51d55576e1a526760",
+	"Root": "5e3829f37e788532af35f9c1",
 	"Items": [
 		{
-			"_id": "5e3829f51d55576e1a526760",
-			"_tpl": "5734770f24597738025ee254"
+			"_id": "5e3829f37e788532af35f9c1",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5e3829f37e788532af35f9c2",
+			"_tpl": "57347cd0245977445a2d6ff1",
+			"parentId": "5e3829f37e788532af35f9c1",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829f37e788532af35f9c3",
+			"_tpl": "5c06779c86f77426e00dd782",
+			"parentId": "5e3829f37e788532af35f9c1",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

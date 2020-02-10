@@ -1,12 +1,12 @@
 {
-	"Id": "loot_building (76)5860508",
+	"Id": "Loot_barter[2] (51)4380992",
 	"IsStatic": false,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 56.21045,
-		"y": 37.7468071,
-		"z": -150.965332
+		"x": -169.555054,
+		"y": -0.23,
+		"z": -88.578
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,20 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e3829ec7e788532af35f0ab",
+	"Root": "5e3829e8f470ac6fd82e6a70",
 	"Items": [
 		{
-			"_id": "5e3829ec7e788532af35f0ab",
-			"_tpl": "5734795124597738002c6176"
+			"_id": "5e3829e8f470ac6fd82e6a70",
+			"_tpl": "57372e4a24597768553071c2"
+		},
+		{
+			"_id": "5e3829e8f470ac6fd82e6a71",
+			"_tpl": "56dff338d2720bbd668b4569",
+			"parentId": "5e3829e8f470ac6fd82e6a70",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 30
+			}
 		}
 	]
 }

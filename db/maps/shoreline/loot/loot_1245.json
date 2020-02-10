@@ -1,25 +1,47 @@
 {
-	"Id": "loot_shop_goshan_vedodmost5861492",
-	"IsStatic": false,
-	"useGravity": false,
+	"Id": "Lootable_00338",
+	"IsStatic": true,
+	"useGravity": true,
 	"randomRotation": false,
 	"Position": {
-		"x": -76.48059,
-		"y": 27.9598122,
-		"z": -157.719238
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
-		"x": 271.278381,
-		"y": 80.54417,
-		"z": 136.505157
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e3829f51d55576e1a5268d1",
+	"Root": "5e3829f87e788532af35fdd3",
 	"Items": [
 		{
-			"_id": "5e3829f51d55576e1a5268d1",
-			"_tpl": "5ae9a0dd86f7742e5f454a05"
+			"_id": "5e3829f87e788532af35fdd3",
+			"_tpl": "578f87a3245977356274f2cb"
+		},
+		{
+			"_id": "5e3829f87e788532af35fdd4",
+			"_tpl": "5c12688486f77426843c7d32",
+			"parentId": "5e3829f87e788532af35fdd3",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829f87e788532af35fdd5",
+			"_tpl": "57347cd0245977445a2d6ff1",
+			"parentId": "5e3829f87e788532af35fdd3",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

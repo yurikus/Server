@@ -1,12 +1,12 @@
 {
-	"Id": "loot_electron (79)5864982",
-	"IsStatic": false,
+	"Id": "Lootable_00313",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 68.04834,
-		"y": 27.3698082,
-		"z": 48.5916748
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e382a1c7e788532af3600e6",
+	"Root": "5e382a1b68b10c71c3113096",
 	"Items": [
 		{
-			"_id": "5e382a1c7e788532af3600e6",
-			"_tpl": "5d1b392c86f77425243e98fe"
+			"_id": "5e382a1b68b10c71c3113096",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5e382a1b68b10c71c3113097",
+			"_tpl": "590c2b4386f77425357b6123",
+			"parentId": "5e382a1b68b10c71c3113096",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

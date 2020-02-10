@@ -1,12 +1,12 @@
 {
-	"Id": "loot_gazan (2)5864320",
-	"IsStatic": false,
+	"Id": "Lootable_00171",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -6.239624,
-		"y": 28.0448112,
-		"z": 111.496704
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e382a0d28554715256035c0",
+	"Root": "5e382a172855471525603dc7",
 	"Items": [
 		{
-			"_id": "5e382a0d28554715256035c0",
-			"_tpl": "590a3efd86f77437d351a25b"
+			"_id": "5e382a172855471525603dc7",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e382a172855471525603dc8",
+			"_tpl": "5d1b392c86f77425243e98fe",
+			"parentId": "5e382a172855471525603dc7",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

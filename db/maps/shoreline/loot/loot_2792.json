@@ -1,12 +1,12 @@
 {
-	"Id": "loot_jeverly_statue_cat5864428",
-	"IsStatic": false,
+	"Id": "Lootable_00274",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -48.03662,
-		"y": 28.5311089,
-		"z": -215.78833
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,33 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e382a0d28554715256035cc",
+	"Root": "5e382a172855471525603dde",
 	"Items": [
 		{
-			"_id": "5e382a0d28554715256035cc",
-			"_tpl": "59e3658a86f7741776641ac4"
+			"_id": "5e382a172855471525603dde",
+			"_tpl": "578f87b7245977356274f2cd"
+		},
+		{
+			"_id": "5e382a172855471525603ddf",
+			"_tpl": "57347b8b24597737dd42e192",
+			"parentId": "5e382a172855471525603dde",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e382a172855471525603de0",
+			"_tpl": "56742c284bdc2d98058b456d",
+			"parentId": "5e382a172855471525603dde",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

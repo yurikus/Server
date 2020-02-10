@@ -1,12 +1,12 @@
 {
-	"Id": "loot_small_jeverly_money (26)5859118",
-	"IsStatic": false,
+	"Id": "Lootable_00032",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -12.4116211,
-		"y": 28.0938072,
-		"z": 73.28064
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,22 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e3829ec7e788532af35f22f",
+	"Root": "5e3829e9f470ac6fd82e6cfb",
 	"Items": [
 		{
-			"_id": "5e3829ec7e788532af35f22f",
-			"_tpl": "5734758f24597738025ee253"
+			"_id": "5e3829e9f470ac6fd82e6cfb",
+			"_tpl": "5909d50c86f774659e6aaebe"
+		},
+		{
+			"_id": "5e3829e9f470ac6fd82e6cfc",
+			"_tpl": "5d4042a986f7743185265463",
+			"parentId": "5e3829e9f470ac6fd82e6cfb",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }

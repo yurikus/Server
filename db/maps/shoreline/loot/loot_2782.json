@@ -1,25 +1,36 @@
 {
-	"Id": "loot_grenad (9)5869708",
-	"IsStatic": false,
+	"Id": "Lootable_00279",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": -17.30471,
-		"y": 27.451519,
-		"z": -21.7977142
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
-		"x": -0.00000143241459,
-		"y": 0.00000341509417,
-		"z": 0.00000310017072
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5e382a0d28554715256035c2",
+	"Root": "5e382a172855471525603dca",
 	"Items": [
 		{
-			"_id": "5e382a0d28554715256035c2",
-			"_tpl": "5710c24ad2720bc3458b45a3"
+			"_id": "5e382a172855471525603dca",
+			"_tpl": "5909d24f86f77466f56e6855"
+		},
+		{
+			"_id": "5e382a172855471525603dcb",
+			"_tpl": "544fb25a4bdc2dfb738b4567",
+			"parentId": "5e382a172855471525603dca",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
 		}
 	]
 }
