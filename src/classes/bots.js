@@ -117,7 +117,7 @@ function generate(databots) {
 		}
 	}
 
-	return {"err": 0,"errmsg": null, "data": generatedBots};
+	return generatedBots;
 }
 
 function generatePlayerScav() {

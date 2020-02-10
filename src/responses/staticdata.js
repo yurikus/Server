@@ -11,7 +11,7 @@ function getGlobals(url, info, sessionID) {
 }
 
 function getTemplates(url, info, sessionID) {
-    return json.read(filepaths.user.cache.templates);
+    return json.stringify(templates);
 }
 
 router.addStaticRoute("/client/items", getItems);

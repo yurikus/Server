@@ -3,13 +3,13 @@
 let weather = json.parse(json.read(filepaths.user.cache.weather));
 
 function generate() {
-    let output = {"err": 0, "errmsg": null, "data": {}};
+    let output = {};
 
     // set weather
     if (settings.gameplay.location.forceWeatherEnabled) {
-        output.data = weather.data[settings.gameplay.location.forceWeatherId];
+        output = weather.data[settings.gameplay.location.forceWeatherId];
     } else {
-        output.data = weather.data[utility.getRandomInt(0, weather.data.length - 1)];
+        output = weather.data[utility.getRandomInt(0, weather.data.length - 1)];
     }
 
     // replace date and time
@@ -18,15 +18,15 @@ function generate() {
         let date = utility.getDate();
         let datetime = date + " " + time;
 
-        output.data.weather = {};
-        output.data.weather.timestamp = Math.floor(new Date() / 1000);
-        output.data.weather.date = date;
-        output.data.weather.time = datetime;
-        output.data.date = date;
-        output.data.time = time;
+        output.weather = {};
+        output.weather.timestamp = Math.floor(new Date() / 1000);
+        output.weather.date = date;
+        output.weather.time = datetime;
+        output.date = date;
+        output.time = time;
     }
 
-    return json.stringify(output);
+    return output;
 }
 
 module.exports.generate = generate;
