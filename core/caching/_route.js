@@ -485,7 +485,7 @@ function all() {
 
     if (mods.isRebuildRequired()) {
         logger.logWarning("Modlist mismatch");
-        settings.server.rebuild = true;
+        settings.server.rebuildCache = true;
         json.write("user/server.config.json", settings);
     }
 
