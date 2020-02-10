@@ -1,68 +1,64 @@
 {
-	"Id": "Loot_key_lab_arsenal (2)5533060",
+	"Id": "Loot 140 (8)6935798",
 	"IsStatic": false,
-	"useGravity": false,
-	"randomRotation": true,
+	"useGravity": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 184.551025,
-		"y": 3.5221,
-		"z": 182.53421
+		"x": 181.766,
+		"y": 6.541,
+		"z": 173.429
 	},
 	"Rotation": {
-		"x": 90,
-		"y": 222.347092,
+		"x": -0.00000170754731,
+		"y": 102.886421,
 		"z": 0
 	},
-	"IsGroupPosition": true,
-	"GroupPositions": [
-		{
-			"Name": "groupPosition[0]",
-			"Weight": 33,
-			"Position": {
-				"x": 503.981445,
-				"y": 15.641,
-				"z": 93.68913
-			},
-			"Rotation": {
-				"x": 90,
-				"y": -0.00000482967243,
-				"z": 0
-			}
-		},
-		{
-			"Name": "groupPosition[1]",
-			"Weight": 33,
-			"Position": {
-				"x": 417.748535,
-				"y": 2.052,
-				"z": 32.88263
-			},
-			"Rotation": {
-				"x": 90,
-				"y": 320.806274,
-				"z": 0
-			}
-		},
-		{
-			"Name": "groupPosition[2]",
-			"Weight": 33,
-			"Position": {
-				"x": 184.551025,
-				"y": 3.5221,
-				"z": 182.53421
-			},
-			"Rotation": {
-				"x": 90,
-				"y": 222.347092,
-				"z": 0
-			}
-		}
-	],
-	"Root": "5db5d069cd1e3d3a94509058",
+	"IsGroupPosition": false,
+	"GroupPositions": [],
+	"Root": "5e382a14f470ac6fd82e7b4e",
 	"Items": [
 		{
-			"_id": "5db5d069cd1e3d3a94509058",
-			"_tpl": "5c1f79a086f7746ed066fb8f"
+			"_id": "5e382a14f470ac6fd82e7b4e",
+			"_tpl": "5a7ae0c351dfba0017554310"
+		},
+		{
+			"_id": "5e382a14f470ac6fd82e7b4f",
+			"_tpl": "5a6b5f868dc32e000a311389",
+			"parentId": "5e382a14f470ac6fd82e7b4e",
+			"slotId": "mod_barrel"
+		},
+		{
+			"_id": "5e382a14f470ac6fd82e7b50",
+			"_tpl": "5a6f5e048dc32e00094b97da",
+			"parentId": "5e382a14f470ac6fd82e7b4e",
+			"slotId": "mod_reciever"
+		},
+		{
+			"_id": "5e382a14f470ac6fd82e7b51",
+			"_tpl": "5a6f5d528dc32e00094b97d9",
+			"parentId": "5e382a14f470ac6fd82e7b50",
+			"slotId": "mod_sight_rear"
+		},
+		{
+			"_id": "5e382a14f470ac6fd82e7b52",
+			"_tpl": "5a6f58f68dc32e000a311390",
+			"parentId": "5e382a14f470ac6fd82e7b50",
+			"slotId": "mod_sight_front"
+		},
+		{
+			"_id": "5e382a14f470ac6fd82e7b53",
+			"_tpl": "5a718b548dc32e000d46d262",
+			"parentId": "5e382a14f470ac6fd82e7b4e",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5e382a14f470ac6fd82e7b54",
+			"_tpl": "56d59d3ad2720bdb418b4577",
+			"parentId": "5e382a14f470ac6fd82e7b53",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 14
+			}
 		}
 	]
 }

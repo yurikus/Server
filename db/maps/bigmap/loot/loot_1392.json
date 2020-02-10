@@ -1,12 +1,12 @@
 {
-	"Id": "loot_shelter_building_items (13)1704464",
-	"IsStatic": false,
+	"Id": "Lootable_00099",
+	"IsStatic": true,
 	"useGravity": true,
-	"randomRotation": true,
+	"randomRotation": false,
 	"Position": {
-		"x": 471.804779,
-		"y": 3.16867566,
-		"z": -50.029007
+		"x": 0,
+		"y": 0,
+		"z": 0
 	},
 	"Rotation": {
 		"x": 0,
@@ -15,11 +15,50 @@
 	},
 	"IsGroupPosition": false,
 	"GroupPositions": [],
-	"Root": "5dd2955486f774794047c06e",
+	"Root": "5e3829f4ecfb65468500d564",
 	"Items": [
 		{
-			"_id": "5dd2955486f774794047c06e",
-			"_tpl": "5d1c774f86f7746d6620f8db"
+			"_id": "5e3829f4ecfb65468500d564",
+			"_tpl": "578f8782245977354405a1e3"
+		},
+		{
+			"_id": "5e3829f4ecfb65468500d565",
+			"_tpl": "573478bc24597738002c6175",
+			"parentId": "5e3829f4ecfb65468500d564",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5e3829f4ecfb65468500d566",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e3829f4ecfb65468500d564",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 589
+			}
+		},
+		{
+			"_id": "5e3829f4ecfb65468500d567",
+			"_tpl": "5449016a4bdc2d6f028b456f",
+			"parentId": "5e3829f4ecfb65468500d564",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 590
+			}
 		}
 	]
 }
