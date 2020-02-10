@@ -414,7 +414,7 @@ function load() {
 
     for (let element of modList) {
         // skip mod
-        if (element.enabled !== undefined && !element.enabled) {
+        if (!element.enabled) {
             logger.logWarning("Skipping mod " + element.author + "-" + element.name + " v" + element.version);
             continue;
         }
