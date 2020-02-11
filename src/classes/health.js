@@ -19,6 +19,12 @@ class HealthServer {
             "LeftLeg": 0,
             "RightLeg": 0
         };
+
+        return this.healths[sessionID];
+    }
+
+    setHealth(sessionID) {
+        return this.health[sessionID] || this.initializeHealth(sessionID);
     }
 
     offraidHeal(pmcData, body, sessionID) {
@@ -79,7 +85,7 @@ class HealthServer {
         if (maxResource === 1 || todelete === true) {
             output = move_f.removeItem(pmcData, body.item, output, sessionID);
         }
-
+        
         this.healths[sessionID].Hydration += effects.hydration.value;
         this.healths[sessionID].Energy += effects.energy.value;
         this.applyHealth(pmcData, sessionID);
