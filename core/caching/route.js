@@ -1,7 +1,7 @@
 "use strict";
 
 const fs = require('fs');
-const mods = require('./_mods.js');
+const mods = require('./mods.js');
 
 function flush() {
     filepaths = json.parse(json.read("db/cache/filepaths.json"));

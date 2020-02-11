@@ -27,8 +27,8 @@ class Interpreter {
         global.filepaths = json.parse(json.read("db/cache/filepaths.json"));
 
         /* setup routes and cache */
-        const route = require('./caching/_route.js');
-        const cache = require('./caching/_cache.js');
+        const route = require('./caching/route.js');
+        const cache = require('./caching/cache.js');
         route.all();
         cache.all();
 

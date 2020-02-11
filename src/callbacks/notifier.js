@@ -6,11 +6,9 @@
 // and the client would abort the connection due to spam.
 async function sendNotification(sessionID, req, resp, data) {
     let splittedUrl = req.url.split('/');
-    let output = "";
     
     sessionID = splittedUrl[splittedUrl.length - 1].split("?last_id")[0];
-    output = await notifier_f.notifierService.notificationWaitAsync(resp, sessionID);
-    server.sendTextJson(resp, output);
+    server.sendTextJson(resp, (await notifier_f.notifierService.notificationWaitAsync(resp, sessionID)));
 }
 
 server.addRespondCallback("NOTIFY", sendNotification);

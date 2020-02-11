@@ -59,7 +59,7 @@ class NotifierService {
 			}, 15000);
 
 			setInterval(function() {
-				if (this.hasMessagesInQueue(sessionID)) {
+				if (notifier_f.notifierService.hasMessagesInQueue(sessionID)) {
 					resolve();
 				}
 			}, 300);
