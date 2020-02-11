@@ -3,6 +3,7 @@
 class InsuranceServer {
     constructor() {
         this.insured = {};
+        events.scheduledEventHandler.addEvent("insuranceReturn", this.processReturn.bind(this));
     }
 
     /* remove insurance from an item */
@@ -124,6 +125,17 @@ class InsuranceServer {
 
         this.resetSession(sessionID);
     }
+
+    processReturn(event) {
+        // Inject a little bit of a surprise by failing the insurance from time to time ;)
+        if (utility.getRandomInt(0, 99) > settings.gameplay.trading.insureReturnChance) {
+            let insuranceFailedTemplates = json.parse(json.read(filepaths.dialogues[event.data.traderId])).insuranceFailed;
+            event.data.messageContent.templateId = insuranceFailedTemplates[utility.getRandomInt(0, insuranceFailedTemplates.length)];
+            event.data.items = [];
+        }
+    
+        dialogue_f.dialogueServer.addDialogueMessage(event.data.traderId, event.data.messageContent,vevent.sessionId, event.data.items);
+    }
 }
 
 /* calculates insurance cost */
@@ -190,5 +202,4 @@ function insure(pmcData, body, sessionID) {
 }
 
 module.exports.insuranceServer = new InsuranceServer();
-module.exports.insure = insure;
 module.exports.cost = cost;

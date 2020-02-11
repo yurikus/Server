@@ -13,11 +13,17 @@ const fs = require('fs');
 
 class ScheduledEventHandler {
 	constructor(scheduleIntervalMillis) {
-		this.loadSchedule();
+		this.events = {};
 
+		this.loadSchedule();
+		
 		setInterval(() => {
 			this.processSchedule();
 		}, scheduleIntervalMillis);
+	}
+
+	addEvent(type, worker) {
+		this.events[type] = worker;
 	}
 
 	saveToDisk() {
@@ -61,30 +67,18 @@ function compareEvent(a, b) {
 	if (a.scheduledTime < b.scheduledTime) {
 		return -1;
 	}
+
 	if (a.scheduledTime > b.scheduledTime) {
 		return 1;
 	}
+
 	return 0;
 }
 
 function processEvent(event) {
-	switch(event.type) {
-		case "insuranceReturn": processInsuranceReturn(event); break;
+	if (event.type in this.events) {
+		output = this.events[event.type](event);
 	}
-}
-
-function processInsuranceReturn(event) {
-	// Inject a little bit of a surprise by failing the insurance from time to time ;)
-	if (utility.getRandomInt(0, 99) > settings.gameplay.trading.insureReturnChance) {
-		let insuranceFailedTemplates = json.parse(json.read(filepaths.dialogues[event.data.traderId])).insuranceFailed;
-		event.data.messageContent.templateId = insuranceFailedTemplates[utility.getRandomInt(0, insuranceFailedTemplates.length)];
-		event.data.items = [];
-	}
-
-	dialogue_f.dialogueServer.addDialogueMessage(event.data.traderId,
-												 event.data.messageContent,
-												 event.sessionId,
-												 event.data.items);
 }
 
 module.exports.scheduledEventHandler = new ScheduledEventHandler(settings.server.eventPollIntervalSec * 1000);

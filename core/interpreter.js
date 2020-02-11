@@ -28,7 +28,7 @@ class Interpreter {
 
         /* core logic */
         global.router = (require('./server/router.js').router);
-        global.events_f = require('./server/events.js');
+        global.events = require('./server/events.js');
         global.server = (require('./server/server.js').server);
         global.watermark = require('./server/watermark.js');
     }
