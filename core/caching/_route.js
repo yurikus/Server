@@ -457,7 +457,12 @@ function cache() {
     }
 }
 
-function routeDatabase() {
+function loadorder() {
+    logger.logInfo("Routing: loadorder");
+    json.write("user/cache/loadorder.json", json.parse(json.read("src/loadorder.json")));
+}
+
+function route() {
     flush();
     items();
     quests();
@@ -478,10 +483,7 @@ function routeDatabase() {
     profile();
     others();
     cache();
-}
-
-function copyLoadorder() {
-    json.write("user/cache/loadorder.json", json.parse(json.read("src/loadorder.json")));
+    loadorder();
 }
 
 function all() {
@@ -500,11 +502,10 @@ function all() {
     }
 
     /* rebuild filepaths */
-    if (settings.server.rebuild || !fs.existsSync("user/cache/filepaths.json")) {
+    if (!fs.existsSync("user/cache/filepaths.json" || settings.server.rebuild)) {
         logger.logWarning("Force rebuilding cache");
         
-        routeDatabase();
-        copyLoadorder();
+        route();
         mods.load();
 
         dump();
