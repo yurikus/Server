@@ -6,4 +6,5 @@ process.title = "JustEmuTarkov Server";
 
 /* load server components */
 require('./interpreter.js');
+watermark.show();
 server.start();

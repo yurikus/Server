@@ -50,6 +50,35 @@ class NotifierService {
 
 		return this.messageQueue[sessionID].length > 0;
 	}
+
+	async notificationWaitAsync(resp, sessionID) {
+		await new Promise(resolve => {
+			// Timeout after 15 seconds even if no messages have been received to keep the poll requests going.
+			setTimeout(function() {
+				resolve();
+			}, 15000);
+
+			setInterval(function() {
+				if (this.hasMessagesInQueue(sessionID)) {
+					resolve();
+				}
+			}, 300);
+		});
+	
+		let data = [];
+		
+		while (this.hasMessagesInQueue(sessionID)) {
+			let message = this.popMessageFromQueue(sessionID);
+			data.push(json.stringify(message));
+		}
+	
+		// If we timed out and don't have anything to send, just send a ping notification.
+		if (data.length == 0) {
+			data.push('{"type": "ping", "eventId": "ping"}');
+		}
+	
+		return data.join('\n');
+	}
 }
 
 /* Creates a new notification of type "new_message" with the specified dialogueMessage object. */

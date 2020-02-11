@@ -27,11 +27,9 @@ class Interpreter {
 
         /* core logic */
         global.router = (require('./server/router.js').router);
-        global.saveHandler = require('./server/saveHandler.js');
-        global.header_f = require('./server/sendHeader.js');
         global.events_f = require('./server/events.js');
-        global.notifier_f = require('./server/notifier.js');
         global.server = (require('./server/server.js').server);
+        global.watermark = require('./server/watermark.js');
     }
 
     /* load classes */
