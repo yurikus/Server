@@ -1,13 +1,21 @@
 "use strict";
 
+const fs = require('fs');
+
 class Interpreter {
     constructor() {
         this.initializeCore();
         this.initializeExceptions();
+        this.initializeLoadOrder();
         this.initializeData();
         this.initializeClasses();
         this.initializeResponses();
         this.initializeCallbacks();
+    }
+
+    /* load loadorder from cache */
+    initializeLoadOrder() {
+        this.loadorder = json.parse(json.read("user/cache/loadorder.json"));
     }
 
     initializeCore() {
@@ -19,7 +27,6 @@ class Interpreter {
         /* setup core files */
         global.settings = json.parse(json.read("user/server.config.json"));
         global.filepaths = json.parse(json.read("db/cache/filepaths.json"));
-        this.loadorder = json.parse(json.read("src/loadorder.json"));
 
         /* setup routes and cache */
         const route = require('./caching/_route.js');
@@ -32,6 +39,15 @@ class Interpreter {
         global.events = require('./server/events.js');
         global.server = (require('./server/server.js').server);
         global.watermark = require('./server/watermark.js');
+    }
+
+    /* load exception handler */
+    initializeExceptions() {
+        process.on('uncaughtException', (error, promise) => {
+            logger.logError("Server:" + server.getVersion());
+            logger.logError("Trace:");
+            logger.logData(error);
+        });
     }
 
     /* TODO: REFACTOR THIS */
@@ -66,15 +82,6 @@ class Interpreter {
             logger.logInfo("Interpreter: callback " + name);
             require("../" + this.loadorder.callbacks[name]);
         }
-    }
-
-    /* load exception handler */
-    initializeExceptions() {
-        process.on('uncaughtException', (error, promise) => {
-            logger.logError("Server:" + server.getVersion());
-            logger.logError("Trace:");
-            logger.logData(error);
-        });
     }
 }
 

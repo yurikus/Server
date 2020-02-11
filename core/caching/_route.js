@@ -480,23 +480,38 @@ function routeDatabase() {
     cache();
 }
 
+function copyLoadorder() {
+    json.write("user/cache/loadorder.json", json.parse(json.read("src/loadorder.json")));
+}
+
 function all() {
     mods.detectMissing();
 
+    /* check if loadorder is missing */
+    if (!fs.existsSync("user/cache/loadorder.json")) {
+        logger.logWarning("Loadorder mismatch");
+        settings.server.rebuildCache = true;
+    }
+
+    /* check if filepaths need rebuid */
     if (mods.isRebuildRequired()) {
         logger.logWarning("Modlist mismatch");
         settings.server.rebuildCache = true;
-        json.write("user/server.config.json", settings);
     }
 
+    /* rebuild filepaths */
     if (settings.server.rebuild || !fs.existsSync("user/cache/filepaths.json")) {
         logger.logWarning("Force rebuilding cache");
+        
         routeDatabase();
+        copyLoadorder();
         mods.load();
+
         dump();
-    } else {
-        filepaths = json.parse(json.read("user/cache/filepaths.json"));
+        return;
     }
+
+    filepaths = json.parse(json.read("user/cache/filepaths.json"));
 }
 
 module.exports.all = all;

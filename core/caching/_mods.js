@@ -382,6 +382,30 @@ function bots(mod) {
     }
 }
 
+function loadorder(mod) {
+    let loadorder = json.parse(json.read("user/cache/loadorder.json"));
+
+    if ("callback" in mod.src) {
+        for (let item in loadorder.callback) {
+            loadorder.callback[item] = mod.src.callback[item];
+        }
+    }
+
+    if ("classes" in mod.src) {
+        for (let item in loadorder.classes) {
+            loadorder.classes[item] = mod.src.classes[item];
+        }
+    }
+
+    if ("responses" in mod.src) {
+        for (let item in loadorder.responses) {
+            loadorder.responses[item] = mod.src.responses[item];
+        }
+    }
+
+    json.write("user/cache/loadorder.json", loadorder);
+}
+
 function detectMissing() {
     if (!fs.existsSync("user/mods/")) {
         return;
@@ -479,6 +503,7 @@ function load() {
         assort(mod);
         locales(mod);
         bots(mod);
+        loadorder(mod);
     }
 }
 
