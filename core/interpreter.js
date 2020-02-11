@@ -53,7 +53,6 @@ class Interpreter {
     /* TODO: REFACTOR THIS */
     initializeData() {
         global.items = json.parse(json.read(filepaths.user.cache.items));
-        global.quests = json.parse(json.read(filepaths.user.cache.quests));
         global.globals = json.parse(json.read(filepaths.globals));
         global.customizationOutfits = json.parse(json.read(filepaths.user.cache.customization_outfits));
         global.customizationOffers = json.parse(json.read(filepaths.user.cache.customization_offers));

@@ -1,7 +1,9 @@
 "use strict";
 
+const questsCache = json.read(filepaths.user.cache.quests);
+
 function getQuests(url, info, sessionID) {
-    return json.stringify(quests);
+    return questsCache;
 }
 
 router.addStaticRoute("/client/quest/list", getQuests);

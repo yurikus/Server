@@ -20,15 +20,12 @@ function acceptQuest(pmcData, body, sessionID) {
     }); 
 
     // Create a dialog message for starting the quest.
-    let questDb = json.parse(json.read(filepaths.quests[body.qid.toString()]));
-    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid.toString()]));
     // Note that for starting quests, the correct locale field is "description", not "startedMessageText".
-    let messageContent = {
-        templateId: questLocale.description,
-        type: dialogue_f.getMessageTypeValue('questStart')
-    };
-    dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID);
+    let quest = json.parse(json.read(filepaths.quests[body.qid.toString()]));
+    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid.toString()]));
+    let messageContent = {templateId: questLocale.description, type: dialogue_f.getMessageTypeValue('questStart')};
 
+    dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID);
     return item_f.itemServer.getOutput();
 }
 
@@ -40,58 +37,54 @@ function completeQuest(pmcData, body, sessionID) {
         }
     }
 
-    // find Quest data and update trader loyalty
+    // give reward
+    let quest = json.parse(json.read(filepaths.quests[body.qid.toString()]));
     let questRewards = [];
-    for (let quest of quests.data) {
-        if (quest._id !== body.qid) {
-            continue;
-        }
 
-        for (let reward of quest.rewards.Success) {
-            switch (reward.type) {
-                case "Item":
-                    for (let rewardItem of reward.items) {
-                        // Quest rewards bundle up items whose max stack size is 1. Break them up.
-                        let itemTmplData = json.parse(json.read(filepaths.items[rewardItem._tpl]));
+    for (let reward of quest.rewards.Success) {
+        switch (reward.type) {
+            case "Item":
+                for (let rewardItem of reward.items) {
+                    // Quest rewards bundle up items whose max stack size is 1. Break them up.
+                    let itemTmplData = json.parse(json.read(filepaths.items[rewardItem._tpl]));
 
-                        if ("upd" in rewardItem && itemTmplData._props.StackMaxSize === 1) {
-                            let count = rewardItem.upd.StackObjectsCount;
-                            
-                            rewardItem.upd.StackObjectsCount = 1;
-                            
-                            [...Array(count)].forEach(() => {
-                                questRewards.push(rewardItem);
-                            });
+                    if ("upd" in rewardItem && itemTmplData._props.StackMaxSize === 1) {
+                        let count = rewardItem.upd.StackObjectsCount;
+                        
+                        rewardItem.upd.StackObjectsCount = 1;
+                        
+                        [...Array(count)].forEach(() => {
+                            questRewards.push(rewardItem);
+                        });
 
-                            continue;
-                        }
-
-                        questRewards.push(rewardItem);
+                        continue;
                     }
-                    break;
 
-                case "Skill":
-                    pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+                    questRewards.push(rewardItem);
+                }
+                break;
 
-                    for (let skill of pmcData.Skills.Common) {
-                        if (skill.Id === reward.target) {
-                            skill.Progress += parseInt(reward.value);
-                            break;
-                        }
+            case "Skill":
+                pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+
+                for (let skill of pmcData.Skills.Common) {
+                    if (skill.Id === reward.target) {
+                        skill.Progress += parseInt(reward.value);
+                        break;
                     }
-                    break;
+                }
+                break;
 
-                case "Experience":
-                    pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-                    pmcData.Info.Experience += parseInt(reward.value);
-                    break;
+            case "Experience":
+                pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+                pmcData.Info.Experience += parseInt(reward.value);
+                break;
 
-                case "TraderStanding":
-                    pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-                    pmcData.TraderStandings[quest.traderId].currentStanding += parseFloat(reward.value);
-                    trader_f.traderServer.lvlUp(quest.traderId, sessionID);
-                    break;
-            }
+            case "TraderStanding":
+                pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+                pmcData.TraderStandings[quest.traderId].currentStanding += parseFloat(reward.value);
+                trader_f.traderServer.lvlUp(quest.traderId, sessionID);
+                break;
         }
     }
 

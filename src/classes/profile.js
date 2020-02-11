@@ -175,12 +175,13 @@ function getItemTotalPrice(inv, item, memo) {
     let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
     let children = getItemChildren(inv, item);
     let childrenPrice = 0;
+    
     for (let child of children) {
         childrenPrice += getItemTotalPrice(inv, child, memo);
     }
+
     // store it for later use
     memo[item._id] = (basePrice + childrenPrice) * count;
-
     return memo[item._id];
 }
 
