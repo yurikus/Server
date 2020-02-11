@@ -105,7 +105,7 @@ class HealthServer {
     
             /* difference is already applies */
             case "HealthChanged":
-                node[info.item] = info.value;
+                node[info.bodyPart] = info.value;
                 break;
     
             /* store state and make server aware to kill all body parts */
