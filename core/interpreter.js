@@ -1,7 +1,5 @@
 "use strict";
 
-const fs = require('fs');
-
 class Interpreter {
     constructor() {
         this.initializeCore();
