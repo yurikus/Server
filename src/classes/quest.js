@@ -100,11 +100,9 @@ function completeQuest(pmcData, body, sessionID) {
         templateId: questLocale.successMessageText,
         type: dialogue_f.getMessageTypeValue('questSuccess')
     };
-    dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID, questRewards);
 
-    let output = item_f.itemServer.getOutput();
-    output.data.quests = quests.data;
-    return output;
+    dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID, questRewards);
+    return item_f.itemServer.getOutput();
 }
 
 // TODO: handle money
