@@ -3,101 +3,101 @@
 const fs = require('fs');
 
 function cache(mod) {
-    if ("user" in mod.files) {
-        for (let item in mod.files.user.cache) {
-            filepaths.user.cache[item] = mod.files.user.cache[item];
+    if ("user" in mod.db) {
+        for (let item in mod.db.user.cache) {
+            filepaths.user.cache[item] = mod.db.user.cache[item];
         }
     }
 }
 
 function items(mod) {
-    if ("items" in mod.files) {
-        for (let item in mod.files.items) {
-            filepaths.items[item] = mod.files.items[item];
+    if ("items" in mod.db) {
+        for (let item in mod.db.items) {
+            filepaths.items[item] = mod.db.items[item];
         }
     }
 }
 
 function quests(mod) {
-    if ("quests" in mod.files) {
-        for (let item in mod.files.quests) {
-            filepaths.quests[item] = mod.files.quests[item];
+    if ("quests" in mod.db) {
+        for (let item in mod.db.quests) {
+            filepaths.quests[item] = mod.db.quests[item];
         }
     }
 }
 
 function traders(mod) {
-    if ("traders" in mod.files) {
-        for (let item in mod.files.traders) {
-            filepaths.traders[item] = mod.files.traders[item];
-            filepaths.user.profiles.traders[item] = "user/profiles/__REPLACEME__/traders/" + item + ".json";
+    if ("traders" in mod.db) {
+        for (let item in mod.db.traders) {
+            filepaths.traders[item] = mod.db.traders[item];
+            filepaths.user.prodb.traders[item] = "user/prodb/__REPLACEME__/traders/" + item + ".json";
         }
     }
 }
 
 function dialogues(mod) {
-    if ("dialogues" in mod.files) {
-        for (let item in mod.files.dialogues) {
-            filepaths.dialogues[item] = mod.files.dialogues[item];
+    if ("dialogues" in mod.db) {
+        for (let item in mod.db.dialogues) {
+            filepaths.dialogues[item] = mod.db.dialogues[item];
         }
     }
 }
 
 function weather(mod) {
-    if ("weather" in mod.files) {
-        for (let item in mod.files.weather) {
-            filepaths.weather[item] = mod.files.weather[item];
+    if ("weather" in mod.db) {
+        for (let item in mod.db.weather) {
+            filepaths.weather[item] = mod.db.weather[item];
         }
     }
 }
 
 function customization(mod) {
-    if ("customization" in mod.files) {
-        if ("offers" in mod.files.customization) {
-            for (let item in mod.files.customization.offers) {
-                filepaths.customization.offers[item] = mod.files.customization.offers[item];
+    if ("customization" in mod.db) {
+        if ("offers" in mod.db.customization) {
+            for (let item in mod.db.customization.offers) {
+                filepaths.customization.offers[item] = mod.db.customization.offers[item];
             }
         }
 
-        if ("outfits" in mod.files.customization) {
-            for (let item in mod.files.customization.outfits) {
-                filepaths.customization.outfits[item] = mod.files.customization.outfits[item];
+        if ("outfits" in mod.db.customization) {
+            for (let item in mod.db.customization.outfits) {
+                filepaths.customization.outfits[item] = mod.db.customization.outfits[item];
             }
         }
     }
 }
 
 function hideout(mod) {
-    if ("hideout" in mod.files) {
-        if ("areas" in mod.files.hideout) {
-            for (let item in mod.files.hideout.areas) {
-                filepaths.hideout.areas[item] = mod.files.hideout.areas[item];
+    if ("hideout" in mod.db) {
+        if ("areas" in mod.db.hideout) {
+            for (let item in mod.db.hideout.areas) {
+                filepaths.hideout.areas[item] = mod.db.hideout.areas[item];
             }
         }
 
-        if ("production" in mod.files.hideout) {
-            for (let item in mod.files.hideout.production) {
-                filepaths.hideout.production[item] = mod.files.hideout.production[item];
+        if ("production" in mod.db.hideout) {
+            for (let item in mod.db.hideout.production) {
+                filepaths.hideout.production[item] = mod.db.hideout.production[item];
             }
         }
 
-        if ("scavcase" in mod.files.hideout) {
-            for (let item in mod.files.hideout.scavcase) {
-                filepaths.hideout.scavcase[item] = mod.files.hideout.scavcase[item];
+        if ("scavcase" in mod.db.hideout) {
+            for (let item in mod.db.hideout.scavcase) {
+                filepaths.hideout.scavcase[item] = mod.db.hideout.scavcase[item];
             }
         }
     }
 }
 
 function locations(mod) {
-    if ("locations" in mod.files) {
-        for (let location in mod.files.locations) {    
+    if ("locations" in mod.db) {
+        for (let location in mod.db.locations) {    
             if (location === "base") {
                 continue;
             }
             
             // set active locale
-            let activeLocation = mod.files.locations[location];
+            let activeLocation = mod.db.locations[location];
 
             if ("entries" in activeLocation) {
                 for (let item in activeLocation.entries) {
@@ -133,64 +133,64 @@ function locations(mod) {
 }
 
 function ragfair(mod) {
-    if ("ragfair" in mod.files) {
-        for (let item in mod.files.ragfair) {
-            filepaths.ragfair[item] = mod.files.ragfair[item];
+    if ("ragfair" in mod.db) {
+        for (let item in mod.db.ragfair) {
+            filepaths.ragfair[item] = mod.db.ragfair[item];
         }
     }
 }
 
 function templates(mod) {
-    if ("templates" in mod.files) {
-        if ("categories" in mod.files.templates) {
-            for (let item in mod.files.templates.categories) {
-                filepaths.templates.categories[item] = mod.files.templates.categories[item];
+    if ("templates" in mod.db) {
+        if ("categories" in mod.db.templates) {
+            for (let item in mod.db.templates.categories) {
+                filepaths.templates.categories[item] = mod.db.templates.categories[item];
             }
         }
 
-        if ("items" in mod.files.templates) {
-            for (let item in mod.files.templates.items) {
-                filepaths.templates.items[item] = mod.files.templates.items[item];
+        if ("items" in mod.db.templates) {
+            for (let item in mod.db.templates.items) {
+                filepaths.templates.items[item] = mod.db.templates.items[item];
             }
         }
     }
 }
 
 function globals(mod) {
-    if ("globals" in mod.files) {
-        filepaths.user.cache.globals = mod.files.globals;
+    if ("globals" in mod.db) {
+        filepaths.user.cache.globals = mod.db.globals;
     }
 }
 
 function profile(mod) {
-    if ("profile" in mod.files) {
-        if ("character" in mod.files.profile) {
-            for (let item in mod.files.profile.character) {
-                filepaths.profile.character[item] = mod.files.profile.character[item];
+    if ("profile" in mod.db) {
+        if ("character" in mod.db.profile) {
+            for (let item in mod.db.profile.character) {
+                filepaths.profile.character[item] = mod.db.profile.character[item];
             }
         }
         
-        if ("storage" in mod.files.profile) {
-            filepaths.profile.storage = mod.files.profile.storage;
+        if ("storage" in mod.db.profile) {
+            filepaths.profile.storage = mod.db.profile.storage;
         }
     
-        if ("userbuilds" in mod.files.profile) {
-            filepaths.profile.userbuilds = mod.files.profile.userbuilds;
+        if ("userbuilds" in mod.db.profile) {
+            filepaths.profile.userbuilds = mod.db.profile.userbuilds;
         }
     }
 }
 
 function assort(mod) {
-    if ("assort" in mod.files) {
-        for (let assort in mod.files.assort) {
+    if ("assort" in mod.db) {
+        for (let assort in mod.db.assort) {
             // create assort
             if (!(assort in filepaths.assort)) {
-                filepaths.assort[assort] = mod.files.assort[assort];
+                filepaths.assort[assort] = mod.db.assort[assort];
                 continue;
             }
             
             // set active assort
-            let activeAssort = mod.files.assort[assort];
+            let activeAssort = mod.db.assort[assort];
     
             // assort items
             if ("items" in activeAssort) {
@@ -217,16 +217,16 @@ function assort(mod) {
 }
 
 function locales(mod) {
-    if ("locales" in mod.files) {
-        for (let locale in mod.files.locales) {
+    if ("locales" in mod.db) {
+        for (let locale in mod.db.locales) {
             // create locale
             if (!(locale in filepaths.locales)) {
-                filepaths.locales[locale] = mod.files.locales[locale];
+                filepaths.locales[locale] = mod.db.locales[locale];
                 continue;
             }
             
             // set active locale
-            let activeLocale = mod.files.locales[locale];
+            let activeLocale = mod.db.locales[locale];
     
             // set static locale data
             if ("name" in activeLocale) {
@@ -312,15 +312,15 @@ function locales(mod) {
 }
 
 function bots(mod) {
-    if ("bots" in mod.files) {
-        for (let bot in mod.files.bots) {
+    if ("bots" in mod.db) {
+        for (let bot in mod.db.bots) {
             // users shouldn't modify the bots base
             if (bot === "base") {
                 continue;
             }
             
             // set active locale
-            let activeBot = mod.files.bots[bot];
+            let activeBot = mod.db.bots[bot];
     
             // set static locale data
             if ("appearance" in activeBot) {
