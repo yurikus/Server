@@ -99,7 +99,7 @@ class Server {
     }
 
     sendZlibJson(resp, output, sessionID) {
-        resp.writeHead(200, "OK", {'Content-Type': mime['json'], 'content-encoding' : 'deflate', 'Set-Cookie' : 'PHPSESSID=' + sessionID});
+        resp.writeHead(200, "OK", {'Content-Type': this.mime['json'], 'content-encoding' : 'deflate', 'Set-Cookie' : 'PHPSESSID=' + sessionID});
     
         zlib.deflate(output, function (err, buf) {
             resp.end(buf);
@@ -107,13 +107,13 @@ class Server {
     }
     
     sendTextJson(resp, output) {
-        resp.writeHead(200, "OK", {'Content-Type': mime['json']});
+        resp.writeHead(200, "OK", {'Content-Type': this.mime['json']});
         resp.end(output);
     }
     
     sendFile(resp, file) {
         let pathSlic = file.split("/");
-        let type = mime[pathSlic[pathSlic.length -1].split(".")[1]] || mime['txt'];
+        let type = this.mime[pathSlic[pathSlic.length -1].split(".")[1]] || this.mime['txt'];
         let fileStream = fs.createReadStream(file);
     
         fileStream.on('open', function () {
