@@ -6,6 +6,7 @@ class Interpreter {
         this.initializeExceptions();
         this.initializeClasses();
         this.initializeResponses();
+        this.initializeCallbacks();
     }
 
     initializeCore() {
@@ -55,6 +56,14 @@ class Interpreter {
         for (let name in this.loadorder.responses) {
             logger.logInfo("Interpreter: response " + name);
             require("../" + this.loadorder.responses[name]);
+        }
+    }
+
+    /* load callbacks */
+    initializeCallbacks() {
+        for (let name in this.loadorder.callbacks) {
+            logger.logInfo("Interpreter: callback " + name);
+            require("../" + this.loadorder.callbacks[name]);
         }
     }
 

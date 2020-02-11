@@ -31,7 +31,7 @@ class Server {
         this.httpsPort = settings.server.httpsPort;
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
         this.version = "1.0.0";
-        this.mime = mime = {
+        this.mime = {
             txt: 'text/plain',
             jpg: 'image/jpeg',
             png: 'image/png',

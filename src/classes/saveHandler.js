@@ -30,5 +30,4 @@ function saveOpenSessions() {
 }
 
 initialize();
-
 module.exports.saveOpenSessions = saveOpenSessions;
