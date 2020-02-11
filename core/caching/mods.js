@@ -424,6 +424,13 @@ function detectMissing() {
         let config = json.parse(json.read(dir + mod + "/mod.config.json"));
         let found = false;
 
+        if ("files" in config)) {
+            logger.logError("Mod " + mod + " uses old filepath routing");
+            logger.logError("Use db for database files, src for code");
+            logger.logError("Forcing server shutdown...");
+            process.exit(1);
+        }
+
         for (let installed of settings.mods.list) {
             if (installed.name === config.name) {
                 found = true;
