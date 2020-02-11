@@ -137,8 +137,8 @@ class Server {
         }
 
         // execute data received callbacl
-        if (output in this.receiveCallback) {
-            this.receiveCallback[output](sessionID, req, resp, body, output);
+        for (let type in this.receiveCallback) {
+            this.receiveCallback[type](sessionID, req, resp, body, output);
         }
 
         // send response
