@@ -4,6 +4,7 @@ class Interpreter {
     constructor() {
         this.initializeCore();
         this.initializeExceptions();
+        this.initializeData();
         this.initializeClasses();
         this.initializeResponses();
         this.initializeCallbacks();
@@ -33,18 +34,18 @@ class Interpreter {
         global.watermark = require('./server/watermark.js');
     }
 
-    /* load classes */
-    initializeClasses() {
-        /* global data */
-        /* TODO: REFACTOR THIS */
+    /* TODO: REFACTOR THIS */
+    initializeData() {
         global.items = json.parse(json.read(filepaths.user.cache.items));
         global.quests = json.parse(json.read(filepaths.user.cache.quests));
         global.globals = json.parse(json.read(filepaths.globals));
         global.customizationOutfits = json.parse(json.read(filepaths.user.cache.customization_outfits));
         global.customizationOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
         global.templates = json.parse(json.read(filepaths.user.cache.templates));
+    }
 
-        /* external logic */
+    /* load classes */
+    initializeClasses() {
         for (let name in this.loadorder.classes) {
             logger.logInfo("Interpreter: class " + name);
             global[name] = require("../" + this.loadorder.classes[name]);

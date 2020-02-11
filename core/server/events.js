@@ -44,11 +44,13 @@ class ScheduledEventHandler {
 
 		while (this.scheduledEvents.length > 0) {
 			let event = this.scheduledEvents.shift();
+
 			if (event.scheduledTime < now) {
 				processEvent(event);
 				continue;
 
 			}
+			
 			// The schedule is assumed to be sorted based on scheduledTime, so once we
 			// see an event that should not yet be processed, we can exit the loop.
 			this.scheduledEvents.unshift(event);
