@@ -157,7 +157,7 @@ class TraderServer {
         }
 
         logger.logError("assort item id is not valid");
-        return "BAD";
+        return "";
     }
 
     findAndReturnChildren(assort, itemid) {

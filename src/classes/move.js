@@ -172,7 +172,7 @@ function removeItem(profileData, body, output, sessionID) {
     //Find the item and all of it's relates
     if (toDo[0] === undefined || toDo[0] === null || toDo[0] === "undefined") {
         logger.logError("item id is not valid");
-        return "BAD";
+        return "";
     }
 
     removeItemFromProfile(profileData, toDo[0], output);

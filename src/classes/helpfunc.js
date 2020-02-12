@@ -240,12 +240,7 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;
-    let maxStackSize = 50000;
-
-    // adjust maxStackSize for RUN
-    if (currency === "5449016a4bdc2d6f028b456f") {
-        maxStackSize = 500000;
-    }
+    let maxStackSize = 500000;
 
     for (let item of pmcData.Inventory.items) {
         // item is not currency

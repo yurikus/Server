@@ -44,13 +44,12 @@ function sellItem(pmcData, body, sessionID) {
                 output = move_f.removeItem(pmcData, checkID, output, sessionID);
 
                 // add money to return to the player
-                let price_money = prices[item._id][0][0].count;
-
-                if (output !== "BAD") {
-                    money += price_money;
-                } else {
-                    return "";
+                if (output !== "") {
+                    money += parseInt(prices[item._id][0][0].count);
+                    continue;
                 }
+
+                return "";
             }
         }
     }

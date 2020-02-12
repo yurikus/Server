@@ -60,7 +60,7 @@ function bindItem(pmcData, body, sessionID) {
 }
 
 function examineItem(pmcData, body, sessionID) {
-    let returned = "BAD";
+    let returned = "";
 
     // ragfair
     if ("fromOwner" in body && body.fromOwner.type === "RagFair") {
@@ -85,7 +85,7 @@ function examineItem(pmcData, body, sessionID) {
     }
 
     // player inventory
-    if (returned === "BAD") {
+    if (returned === "") {
         for (let item of pmcData.Inventory.items) {
             if (item._id === body.item) {
                 logger.logInfo("Found equipment examing item: " + item._id, "", "", true);
@@ -96,7 +96,7 @@ function examineItem(pmcData, body, sessionID) {
     }
 
     // item not found
-    if (returned === "BAD") {
+    if (returned === "") {
         logger.logError("Cannot find proper item. Stopped.");
         return "";
     }
