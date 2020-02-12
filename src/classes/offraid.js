@@ -117,7 +117,7 @@ function saveProgress(offraidData, sessionID) {
         // set player health now
         health_f.healthServer.applyHealth(pmcData, sessionID);
 
-        // Remove the Lab card now
+        // Remove the Lab card
         removeLabKeyCard(offraidData);
     }
 
@@ -131,14 +131,14 @@ function saveProgress(offraidData, sessionID) {
         return;
     }
 
+    pmcData = setInventory(pmcData, offraidData.profile);
     insurance_f.insuranceServer.resetSession(sessionID);
+    insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
+
+    // remove inventory if player died
     if (isDead) {
-        // remove inventory if player died
         insurance_f.insuranceServer.storeDeadGear(pmcData, sessionID);
         pmcData = deleteInventory(pmcData, sessionID);
-    } else {
-        insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
-        pmcData = setInventory(pmcData, offraidData.profile);
     }
 
     // Send insurance message to player.
