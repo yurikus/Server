@@ -152,4 +152,3 @@ function getStashType(sessionID) {
 
 module.exports.profileServer = new ProfileServer();
 module.exports.getStashType = getStashType;
-module.exports.getPurchasesData = getPurchasesData;
