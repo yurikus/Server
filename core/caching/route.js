@@ -502,12 +502,11 @@ function all() {
     }
 
     /* rebuild filepaths */
-    if (!fs.existsSync("user/cache/filepaths.json" || settings.server.rebuild)) {
-        logger.logWarning("Force rebuilding cache");
+    if (settings.server.rebuildCache || !fs.existsSync("user/cache/filepaths.json")) {
+        logger.logWarning("Force rebuilding routes");
         
         route();
         mods.load();
-
         dump();
         return;
     }
