@@ -203,3 +203,4 @@ function insure(pmcData, body, sessionID) {
 
 module.exports.insuranceServer = new InsuranceServer();
 module.exports.cost = cost;
+module.exports.insure = insure;
