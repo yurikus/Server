@@ -12,6 +12,12 @@
 * 7 - MarkedAsFailed
 */
 
+const questsCache = json.read(filepaths.user.cache.quests);
+
+function getQuestsCache() {
+    return questsCache;
+}
+
 function acceptQuest(pmcData, body, sessionID) {
     pmcData.Quests.push({
         "qid": body.qid.toString(), 
@@ -130,6 +136,7 @@ function handoverQuest(pmcData, body, sessionID) {
     return output;
 }
 
+module.exports.getQuestsCache = getQuestsCache;
 module.exports.acceptQuest = acceptQuest;
 module.exports.completeQuest = completeQuest;
 module.exports.handoverQuest = handoverQuest;
