@@ -21,11 +21,7 @@ function sellItem(pmcData, body, sessionID) {
     let prices = trader_f.getPurchasesData(body.tid, sessionID);
     let output = item_f.itemServer.getOutput();
 
-    // find the items to sell
     for (let i in body.items) {
-        // print item trying to sell
-        logger.logInfo("selling item" + json.stringify(body.items[i]));
-
         // profile inventory, look into it if item exist
         for (let item of pmcData.Inventory.items) {
             let isThereSpace = body.items[i].id.search(" ");

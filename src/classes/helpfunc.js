@@ -240,7 +240,6 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;
-    let maxStackSize = 500000;
 
     for (let item of pmcData.Inventory.items) {
         // item is not currency
@@ -254,6 +253,8 @@ function getMoney(pmcData, amount, body, output, sessionID) {
         }
 
         // too much money for a stack
+        let maxStackSize = (json.parse(json.read(filepaths.items[item._tpl])))._props.StackMaxSize;
+
         if (item.upd.StackObjectsCount + calcAmount > maxStackSize) {
             // calculate difference
             let tmp = item.upd.StackObjectsCount;
