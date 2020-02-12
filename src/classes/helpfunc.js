@@ -310,7 +310,7 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     }
 
     // set current sale sum
-    let saleSum = pmcData.TraderStandings[body.tid].currentSalesSum += amount;
+    let saleSum = pmcData.TraderStandings[body.tid].currentSalesSum + amount;
 
     pmcData.TraderStandings[body.tid].currentSalesSum = saleSum;
     trader_f.traderServer.lvlUp(body.tid, sessionID);
