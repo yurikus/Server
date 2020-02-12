@@ -28,7 +28,6 @@ function loadMod(mod, filepath) {
     filepaths = scanRecursive(filepath, filepaths, mod.db);
     loadorder = scanRecursive(filepath, loadorder, mod.src);
 
-    json.write("user/cache/filepaths.json", filepath);
     json.write("user/cache/loadorder.json", loadorder);
 }
 
