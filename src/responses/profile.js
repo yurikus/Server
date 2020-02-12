@@ -22,7 +22,7 @@ function regenerateScav(url, info, sessionID) {
 
 function changeVoice(url, info, sessionID) {
     profile_f.profileServer.changeVoice(info, sessionID);
-    return nullResponse(url, info, sessionID);
+    return '{"err":0, "errmsg":null, "data":null}';
 }
 
 function changeNickname(url, info, sessionID) {
