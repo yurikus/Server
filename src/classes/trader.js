@@ -190,7 +190,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
             let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
 
             // uses profile information to get the level of the dogtag and multiplies
-            if ("Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
+            if ("upd" in item && "Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
                 price *= item.upd.Dogtag.Level;
             }
 
