@@ -18,7 +18,7 @@ function buyItem(pmcData, body, sessionID) {
 // Selling item to trader
 function sellItem(pmcData, body, sessionID) {
     let money = 0;
-    let prices = json.parse(trader_f.getPurchasesData(body.tid, sessionID));
+    let prices = trader_f.getPurchasesData(body.tid, sessionID);
     let output = item_f.itemServer.getOutput();
 
     // find the items to sell
@@ -44,7 +44,7 @@ function sellItem(pmcData, body, sessionID) {
                 output = move_f.removeItem(pmcData, checkID, output, sessionID);
 
                 // add money to return to the player
-                let price_money = prices.data[item._id][0][0].count;
+                let price_money = prices[item._id][0][0].count;
 
                 if (output !== "BAD") {
                     money += price_money;
