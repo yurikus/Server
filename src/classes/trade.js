@@ -18,7 +18,7 @@ function buyItem(pmcData, body, sessionID) {
 // Selling item to trader
 function sellItem(pmcData, body, sessionID) {
     let money = 0;
-    let prices = json.parse(profile_f.getPurchasesData(body.tid, sessionID));
+    let prices = json.parse(trader_f.getPurchasesData(body.tid, sessionID));
     let output = item_f.itemServer.getOutput();
 
     // find the items to sell
