@@ -174,4 +174,36 @@ class TraderServer {
     }
 }
 
+function getPurchasesData(tmpTraderInfo, sessionID) {
+    let multiplier = 0.9;
+    let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+    let output = {};
+
+    // get sellable items
+    for (let item of pmcData.Inventory.items) {
+        if (item._id !== pmcData.Inventory.equipment
+        && item._id !== pmcData.Inventory.stash
+        && item._id !== pmcData.Inventory.questRaidItems
+        && item._id !== pmcData.Inventory.questStashItems
+        && !itm_hf.isNotSellable(item._tpl)) {
+            // calculate normal price and count
+            let price = (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
+            let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
+
+            // uses profile information to get the level of the dogtag and multiplies
+            if ("Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
+                price *= item.upd.Dogtag.Level;
+            }
+
+            // get real price
+            price = itm_hf.fromRUB(price * count * multiplier, itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency));
+            price = (price > 0 && price !== "NaN" ? price : 1);
+            output[item._id] = [[{"_tpl": item._tpl, "count": price.toFixed(0)}]];
+        }
+    }
+
+    return output;
+}
+
 module.exports.traderServer = new TraderServer();
+module.exports.getPurchasesData = getPurchasesData;

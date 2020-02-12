@@ -138,85 +138,16 @@ function getPmcPath(sessionID) {
 }
 
 function getStashType(sessionID) {
-    let temp = profile_f.profileServer.getPmcProfile(sessionID);
-
-    for (let key in temp.Inventory.items) {
-        if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
-            return temp.Inventory.items[key]._tpl;
-        }
-    }
-
-    logger.logError("Not found Stash: error check character.json", "red");
-    return "NotFound Error";
-}
-
-// returns an array of items that are "direct" children of the given item
-function getItemChildren(inventory, item) {
-    let children = [];
-    for (let it of inventory) {
-        if (it.hasOwnProperty("parentId") && it.parentId === item._id) {
-            children.push(it); // push it, push it!
-        }
-    }
-
-    return children;
-}
-
-// Computes the total price of an item, that is the price
-// of the whole package (item, count, and children)
-// memo is used for memoization to avoid useless computations
-function getItemTotalPrice(inv, item, memo) {
-    // if we have already computed it, we're good
-    if (item._id in memo) {
-        return memo[item._id];
-    }
-
-    let basePrice = (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
-    let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
-    let children = getItemChildren(inv, item);
-    let childrenPrice = 0;
-    
-    for (let child of children) {
-        childrenPrice += getItemTotalPrice(inv, child, memo);
-    }
-
-    // store it for later use
-    memo[item._id] = (basePrice + childrenPrice) * count;
-    return memo[item._id];
-}
-
-// added lastTrader so that we can list prices using the correct currency based on the trader
-function getPurchasesData(tmpTraderInfo, sessionID) {
-    let multiplier = 0.9;
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-    let output = {};
-    let memo = {};
 
-    // get sellable items
     for (let item of pmcData.Inventory.items) {
-        if (item._id !== pmcData.Inventory.equipment
-        && item._id !== pmcData.Inventory.stash
-        && item._id !== pmcData.Inventory.questRaidItems
-        && item._id !== pmcData.Inventory.questStashItems
-        && !itm_hf.isNotSellable(item._tpl)) {
-            let preparePrice = getItemTotalPrice(pmcData.Inventory.items, item, memo);
-
-            // convert the price using the lastTrader's currency
-            preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency));
-
-            // uses profile information to get the level of the dogtag and multiplies
-            // the prepare price after conversion with this factor
-            if ("Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
-                preparePrice = preparePrice * item.upd.Dogtag.Level;
-            }
-
-            preparePrice *= multiplier;
-            preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
-            output[item._id] = [[{"_tpl": item._tpl, "count": preparePrice.toFixed(0)}]];
+        if (item._id === pmcData.Inventory.stash) {
+            return item._tpl;
         }
     }
 
-    return output;
+    logger.logError("No stash found");
+    return "";
 }
 
 module.exports.profileServer = new ProfileServer();
