@@ -20,8 +20,7 @@ function getCustomizationOffers(url, info, sessionID) {
 }
 
 function getProfilePurchases(url, info, sessionID) {
-    // let's grab the traderId from the url
-    return profile_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1), sessionID);
+    return {"err": 0, "errmsg":null, "data": profile_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1), sessionID)};
 }
 
 function getTrader(url, info, sessionID) {

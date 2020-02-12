@@ -496,6 +496,23 @@ function isDogtag(itemId) {
     return itemId === "59f32bb586f774757e1e8442" || itemId === "59f32c3b86f77472a31742f0" ? true : false;
 }
 
+function isNotSellable(itemid) {
+    let items = [
+        "544901bf4bdc2ddf018b456d", //wad of rubles
+        "5449016a4bdc2d6f028b456f", // rubles
+        "569668774bdc2da2298b4568", // euros
+        "5696686a4bdc2da3298b456a" // dolars
+    ];
+
+    for (let tpl of items) {
+        if (itemid === tpl) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 /* Gets the identifier for a child using slotId, locationX and locationY. */
 function getChildId(item) {
     if (!("location" in item)) {
@@ -603,4 +620,5 @@ module.exports.getSize = getSize;
 module.exports.findAndReturnChildren = findAndReturnChildren;
 module.exports.findAndReturnChildrenByItems = findAndReturnChildrenByItems;
 module.exports.isDogtag = isDogtag;
+module.exports.isNotSellable = isNotSellable;
 module.exports.replaceIDs = replaceIDs;

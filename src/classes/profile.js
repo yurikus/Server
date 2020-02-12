@@ -188,54 +188,35 @@ function getItemTotalPrice(inv, item, memo) {
 // added lastTrader so that we can list prices using the correct currency based on the trader
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let multiplier = 0.9;
-    let data = profile_f.profileServer.getPmcProfile(sessionID);
-    let equipment = data.Inventory.equipment;
-    let stash = data.Inventory.stash;
-    let questRaidItems = data.Inventory.questRaidItems;
-    let questStashItems = data.Inventory.questStashItems;
-
-    data = data.Inventory.items; // make data as .items array
-
-    //do not add this items to the list of soldable
-    let notSoldableItems = [
-        "544901bf4bdc2ddf018b456d", //wad of rubles
-        "5449016a4bdc2d6f028b456f", // rubles
-        "569668774bdc2da2298b4568", // euros
-        "5696686a4bdc2da3298b456a" // dolars
-    ];
-
-    //start output string here
-    let purchaseOutput = '{"err": 0,"errmsg":null,"data":{';
-    let outputs = [];
+    let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+    let output = {};
     let memo = {};
 
-    for (let item of data) {
-        if (item._id !== equipment
-        && item._id !== stash
-        && item._id !== questRaidItems
-        && item._id !== questStashItems
-        && !notSoldableItems.includes(item._tpl)) {
-
-            let preparePrice = getItemTotalPrice(data, item, memo);
+    // get sellable items
+    for (let item of pmcData.Inventory.items) {
+        if (item._id !== pmcData.Inventory.equipment
+        && item._id !== pmcData.Inventory.stash
+        && item._id !== pmcData.Inventory.questRaidItems
+        && item._id !== pmcData.Inventory.questStashItems
+        && !itm_hf.isNotSellable(item._tpl)) {
+            let preparePrice = getItemTotalPrice(pmcData.Inventory.items, item, memo);
 
             // convert the price using the lastTrader's currency
             preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency));
 
             // uses profile information to get the level of the dogtag and multiplies
             // the prepare price after conversion with this factor
-            if (itm_hf.isDogtag(item._tpl) && item.upd.hasOwnProperty("Dogtag")) {
+            if ("Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
                 preparePrice = preparePrice * item.upd.Dogtag.Level;
             }
 
             preparePrice *= multiplier;
-
             preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
-            outputs.push('"' + item._id + '":[[{"_tpl": "' + item._tpl + '","count": ' + preparePrice.toFixed(0) + '}]]');
+            output[item._id] = [[{"_tpl": item._tpl, "count": preparePrice.toFixed(0)}]];
         }
     }
 
-    purchaseOutput += outputs.join(',') + "}}"; // end output string here
-    return purchaseOutput;
+    return output;
 }
 
 module.exports.profileServer = new ProfileServer();
