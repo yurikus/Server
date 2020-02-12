@@ -21,11 +21,11 @@ function sellItem(pmcData, body, sessionID) {
     let prices = trader_f.getPurchasesData(body.tid, sessionID);
     let output = item_f.itemServer.getOutput();
 
-    for (let i in body.items) {
-        // profile inventory, look into it if item exist
+    for (let sellItem of body.items) {
         for (let item of pmcData.Inventory.items) {
-            let isThereSpace = body.items[i].id.search(" ");
-            let checkID = body.items[i].id;
+            // profile inventory, look into it if item exist
+            let isThereSpace = sellItem.id.search(" ");
+            let checkID = sellItem.id;
 
             if (isThereSpace !== -1) {
                 checkID = checkID.substr(0, isThereSpace);
@@ -42,7 +42,7 @@ function sellItem(pmcData, body, sessionID) {
                 // add money to return to the player
                 if (output !== "") {
                     money += parseInt(prices[item._id][0][0].count);
-                    continue;
+                    break;
                 }
 
                 return "";
@@ -50,9 +50,8 @@ function sellItem(pmcData, body, sessionID) {
         }
     }
 
-    // get money the item
-    output = itm_hf.getMoney(pmcData, money, body, output, sessionID);
-    return output;
+    // get money the item]
+    return itm_hf.getMoney(pmcData, money, body, output, sessionID);
 }
 
 // separate is that selling or buying
