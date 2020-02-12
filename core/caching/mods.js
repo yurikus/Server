@@ -438,20 +438,6 @@ function detectMissing() {
         let config = json.parse(json.read(dir + mod + "/mod.config.json"));
         let found = false;
 
-        /* check folder naming convention */
-        if (!fs.existsSync(getModFilepath(config) + "mod.config.json")) {
-            logger.logError("Mod " + mod + " uses incorrect folder naming convention");
-            logger.logError("Forcing server shutdown...");
-            process.exit(1);
-        }
-
-        /* check for legacy mods */
-        if ("files" in config) {
-            logger.logError("Mod " + mod + " uses deprecated filepath routing");
-            logger.logError("Forcing server shutdown...");
-            process.exit(1);
-        }
-
         /* check if mod is already in the list */
         for (let installed of settings.mods.list) {
             if (installed.name === config.name) {
