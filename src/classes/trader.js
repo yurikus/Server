@@ -175,7 +175,6 @@ class TraderServer {
 }
 
 function getPurchasesData(tmpTraderInfo, sessionID) {
-    let multiplier = 0.9;
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let output = {};
 
@@ -196,8 +195,10 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
             }
 
             // get real price
-            price = itm_hf.fromRUB(price * count * multiplier, itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency));
+            price = price * count * settings.gameplay.trading.sellMultiplier;
+            price = itm_hf.fromRUB(price, itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency));
             price = (price > 0 && price !== "NaN" ? price : 1);
+            
             output[item._id] = [[{"_tpl": item._tpl, "count": price.toFixed(0)}]];
         }
     }
