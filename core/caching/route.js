@@ -495,6 +495,12 @@ function all() {
         settings.server.rebuildCache = true;
     }
 
+    /* detect if existing mods changed */
+    if (mods.detectChanged()) {
+        logger.logWarning("Mod mismatch");
+        settings.server.rebuildCache = true;
+    }
+
     /* check if filepaths need rebuid */
     if (mods.isRebuildRequired()) {
         logger.logWarning("Modlist mismatch");

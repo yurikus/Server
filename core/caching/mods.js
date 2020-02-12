@@ -395,6 +395,30 @@ function loadorder(mod, filepath) {
     json.write("user/cache/loadorder.json", loadorder);
 }
 
+function detectChanged() {
+    let changed = false;
+
+    for (let mod of settings.mods.list) {
+        if (!fs.existsSync(getModFilepath(mod) + "mod.config.json")) {
+            changed = true;
+            break;
+        }
+
+        let config = json.parse(json.read(getModFilepath(mod) + "mod.config.json"));
+
+        if (mod.name !== config.name || mod.author !== config.author || mod.version !== config.version) {
+            changed = true;
+            break;
+        }
+    }
+
+    if (changed) {
+        settings.mods.list = [];
+    }
+
+    return changed;
+}
+
 function detectMissing() {
     if (!fs.existsSync("user/mods/")) {
         return;
@@ -459,19 +483,11 @@ function isRebuildRequired() {
     }
 
     for (let mod in modlist) {
-        if (modlist[mod].name !== cachedlist[mod].name) {
-            return true;
-        }
-        
-        if (modlist[mod].author !== cachedlist[mod].author) {
-            return true;
-        }
-
-        if (modlist[mod].version !== cachedlist[mod].version) {
-            return true;
-        }
-        
-        if (modlist[mod].enabled !== cachedlist[mod].enabled) {
+        /* check against cached list */
+        if (modlist[mod].name !== cachedlist[mod].name
+        || modlist[mod].author !== cachedlist[mod].author
+        || modlist[mod].version !== cachedlist[mod].version
+        || modlist[mod].enabled !== cachedlist[mod].enabled) {
             return true;
         }
     }
@@ -515,6 +531,7 @@ function load() {
     }
 }
 
+module.exports.detectChanged = detectChanged;
 module.exports.detectMissing = detectMissing;
 module.exports.isRebuildRequired = isRebuildRequired;
 module.exports.load = load;
