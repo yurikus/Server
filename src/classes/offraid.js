@@ -63,9 +63,9 @@ function deleteInventory(pmcData, sessionID) {
     for (let item of pmcData.Inventory.items) {
         // remove normal item
         if (item.parentId === pmcData.Inventory.equipment
-            && item.slotId !== "SecuredContainer"
-            && item.slotId !== "Scabbard"
-            && item.slotId !== "Pockets") {
+        && item.slotId !== "SecuredContainer"
+        && item.slotId !== "Scabbard"
+        && item.slotId !== "Pockets") {
             toDelete.push(item._id);
         }
 
@@ -105,6 +105,7 @@ function saveProgress(offraidData, sessionID) {
         pmcData.Encyclopedia = offraidData.profile.Encyclopedia;
         pmcData.ConditionCounters = offraidData.profile.ConditionCounters;
         pmcData.Quests = offraidData.profile.Quests;
+        
         // For some reason, offraidData seems to drop the latest insured items.
         // It makes more sense to use pmcData's insured items as the source of truth.
         offraidData.profile.InsuredItems = pmcData.InsuredItems;
