@@ -20,15 +20,15 @@ function getQuestsCache() {
 
 function acceptQuest(pmcData, body, sessionID) {
     pmcData.Quests.push({
-        "qid": body.qid.toString(), 
+        "qid": body.qid, 
         "startTime": utility.getTimestamp(), 
         "status": 2
     }); 
 
     // Create a dialog message for starting the quest.
     // Note that for starting quests, the correct locale field is "description", not "startedMessageText".
-    let quest = json.parse(json.read(filepaths.quests[body.qid.toString()]));
-    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid.toString()]));
+    let quest = json.parse(json.read(filepaths.quests[body.qid]));
+    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid]));
     let messageContent = {templateId: questLocale.description, type: dialogue_f.getMessageTypeValue('questStart')};
 
     dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID);
@@ -44,7 +44,7 @@ function completeQuest(pmcData, body, sessionID) {
     }
 
     // give reward
-    let quest = json.parse(json.read(filepaths.quests[body.qid.toString()]));
+    let quest = json.parse(json.read(filepaths.quests[body.qid]));
     let questRewards = [];
 
     for (let reward of quest.rewards.Success) {
@@ -100,8 +100,8 @@ function completeQuest(pmcData, body, sessionID) {
     }
 
     // Create a dialog message for completing the quest.
-    let questDb = json.parse(json.read(filepaths.quests[body.qid.toString()]));
-    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid.toString()]));
+    let questDb = json.parse(json.read(filepaths.quests[body.qid]));
+    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid]));
     let messageContent = {
         templateId: questLocale.successMessageText,
         type: dialogue_f.getMessageTypeValue('questSuccess')
