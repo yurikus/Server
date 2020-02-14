@@ -239,6 +239,7 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
+    let maxStackSize = (json.parse(json.read(filepaths.items[currency])))._props.StackMaxSize;
     let skip = false;
 
     for (let item of pmcData.Inventory.items) {
@@ -251,9 +252,6 @@ function getMoney(pmcData, amount, body, output, sessionID) {
         if (!isItemInStash(pmcData, item)) {
             continue;
         }
-
-        // too much money for a stack
-        let maxStackSize = (json.parse(json.read(filepaths.items[item._tpl])))._props.StackMaxSize;
 
         if (item.upd.StackObjectsCount + calcAmount > maxStackSize) {
             // calculate difference
