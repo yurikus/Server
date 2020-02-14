@@ -59,9 +59,9 @@ function completeQuest(pmcData, body, sessionID) {
                         
                         rewardItem.upd.StackObjectsCount = 1;
                         
-                        [...Array(count)].forEach(() => {
+                        for (let i = 0; i < count; i++) {
                             questRewards.push(rewardItem);
-                        });
+                        };
 
                         continue;
                     }
