@@ -19,11 +19,24 @@ function getQuestsCache() {
 }
 
 function acceptQuest(pmcData, body, sessionID) {
-    pmcData.Quests.push({
-        "qid": body.qid, 
-        "startTime": utility.getTimestamp(), 
-        "status": 2
-    }); 
+    let found = false;
+    // If the quest already exists, update its status
+    for (const q of pmcData.Quests) {
+        if (q.qid == body.qid) {
+            q.startTime = utility.getTimestamp();
+            q.status = "Started";
+            found = true;
+            break;
+        }
+    }
+    // Otherwise, add it
+    if (!found) {
+        pmcData.Quests.push({
+            "qid": body.qid,
+            "startTime": utility.getTimestamp(),
+            "status": "Started"
+        });
+    }
 
     // Create a dialog message for starting the quest.
     // Note that for starting quests, the correct locale field is "description", not "startedMessageText".
@@ -38,7 +51,7 @@ function acceptQuest(pmcData, body, sessionID) {
 function completeQuest(pmcData, body, sessionID) {
     for (let quest in pmcData.Quests) {
         if (pmcData.Quests[quest].qid === body.qid) {
-            pmcData.Quests[quest].status = 4;
+            pmcData.Quests[quest].status = "Success";
             break;
         }
     }
@@ -115,21 +128,15 @@ function completeQuest(pmcData, body, sessionID) {
 function handoverQuest(pmcData, body, sessionID) {    
     let output = item_f.itemServer.getOutput();
     let counter = 0;
-    let found = false;
     
     for (let itemHandover of body.items) {
         counter += itemHandover.count;
         output = move_f.removeItem(pmcData, itemHandover.id, output, sessionID);
     }
 
-    for (let backendCounter in pmcData.BackendCounters) {
-        if (backendCounter === body.conditionId) {
-            pmcData.BackendCounters[body.conditionId].value += counter;
-            found = true;
-        }
-    }
-
-    if (!found) {
+    if (pmcData.BackendCounters.hasOwnProperty(body.conditionId)) {
+        pmcData.BackendCounters[body.conditionId].value += counter;
+    } else {
         pmcData.BackendCounters[body.conditionId] = {"id": body.conditionId, "qid": body.qid, "value": counter};
     }
 
