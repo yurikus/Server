@@ -60,8 +60,8 @@ class HealthServer {
     offraidEat(pmcData, body, sessionID) {        
         let output = item_f.itemServer.getOutput();
         let todelete = false;
-        let maxResource = undefined;
-        let effects = undefined;
+        let maxResource = {};
+        let effects = {};
     
         for (let item of pmcData.Inventory.items) {
             if (item._id === body.item) {

@@ -92,8 +92,8 @@ class LocationServer {
 
         base = filepaths.locations[locationName].loot.dynamic;
 
-        for (let dir = 0; dir + output.Loot.length > max; dir++) {
-            let node = base[dirs[dir]];
+        while (output.Loot.length < max) {
+            let node = base[dirs[utility.getRandomInt(0, dirs.length - 1)]];
             let keys = Object.keys(node);
             let data = json.parse(json.read(node[keys[utility.getRandomInt(0, keys.length - 1)]]));
 
