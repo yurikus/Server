@@ -144,7 +144,7 @@ function locations() {
 
     for (let locationName of inputDir) {
         let dirName = "db/locations/" + locationName + "/";
-        let baseNode = {"base": dirName + "base.json", "entries": {}, "exits": {}, "waves": {}, "bosses": {}, "loot": {}};
+        let baseNode = {"base": dirName + "base.json", "entries": {}, "exits": {}, "waves": {}, "bosses": {}, "loot": {"forced": {}, "static": {}, "dynamic": {}}};
         let subdirs = ["entries", "exits", "waves", "bosses", "loot"];
 
         logger.logInfo("Routing: " + dirName);
@@ -154,11 +154,44 @@ function locations() {
             let inputFiles = (fs.existsSync(dirName + subdir + "/")) ? fs.readdirSync(dirName + subdir + "/") : [];
             let subNode = baseNode[subdir];
 
-            for (let file in inputFiles) {
-                let filePath = dirName + subdir + "/" + inputFiles[file];
-                let fileName = inputFiles[file].replace(".json", "");
+            if (subdir !== "loot") {
+                for (let file in inputFiles) {
+                    let filePath = dirName + subdir + "/" + inputFiles[file];
+                    let fileName = inputFiles[file].replace(".json", "");
 
-                subNode[fileName] = filePath;
+                    subNode[fileName] = filePath;
+                }
+            } else {
+                for (let lootType in baseNode.loot) {
+                    let scanDir1 = dirName + subdir + "/" + lootType + "/";
+
+                    if (!fs.existsSync(scanDir1)) {
+                        continue;
+                    }
+
+                    let subdirList1 = utility.getDirList(scanDir1);
+                    let node1 = {};
+                    
+                    for (let subsubdir of subdirList1) {
+                        let scanDir2 = scanDir1 + subsubdir + "/";
+
+                        if (!fs.existsSync(scanDir2)) {
+                            continue;
+                        }
+
+                        let subdirList2 = fs.readdirSync(scanDir2);
+                        let node2 = {};
+
+                        for (let loot in subdirList2) {
+                            let target = scanDir2 + subdirList2[loot];
+                            node2[subdirList2[loot]] = target;
+                        }
+
+                        node1[subsubdir] = node2;
+                    }
+
+                    baseNode.loot[lootType] = node1;
+                }
             }
 
             baseNode[subdir] = subNode;

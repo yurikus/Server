@@ -44,62 +44,71 @@ class LocationServer {
 
     /* generates a random location preset to use for local session */
     generate(locationName) {
-        let data = this.locations[locationName];
-        let locationLoots = [];
-        let dynLoots = [];
+        let output = this.locations[locationName];
+        let ids = {};
+        let base = {};
 
-        // Regroup loots by Id
-        let staticLoots = new Map();
-        let dynamicLoots = new Map();
-        let allLoots = filepaths.locations[locationName].loot;
-        let keys = Object.keys(allLoots);
-        let n = keys.length;
+        // forced loot
+        base = filepaths.locations[locationName].loot.forced;
 
-        // loop on all possible loots
-        while (n-- > 0) {
-            let loot = json.parse(json.read(allLoots[keys[n]]));
-            let location = loot.IsStatic ? staticLoots : dynamicLoots;
+        for (let dir in base) {
+            for (let loot of base[dir]) {
+                let data = json.parse(json.read(base[dir][loot]));
 
-            if (!location.has(loot.Id)) {
-                location.set(loot.Id, []);
-            }
-
-            location.get(loot.Id).push(loot);
-        }
-
-        // First, add all static loots
-        for (let inst of staticLoots.values()) {
-            let rand = utility.getRandomInt(0, inst.length - 1);
-            locationLoots.push(inst[rand]);
-        }
-
-        // Fill up the rest with dynamic loots
-        let lootCount = settings.gameplay.locationloot[locationName] - locationLoots.length;
-
-        if (lootCount > 0) {
-            for (let inst of dynamicLoots.values()) {
-                let rand = utility.getRandomInt(0, inst.length - 1);
-                dynLoots.push(inst[rand]);
-            }
-
-            if (dynLoots.length > lootCount) {
-                // shuffle and take lootCount
-                let tmp, j, i = dynLoots.length;
-
-                while (i-- > 1) {
-                    j = utility.getRandomInt(0, i);
-                    tmp = dynLoots[i];
-                    dynLoots[i] = dynLoots[j];
-                    dynLoots[j] = tmp;
+                if (data.Id in ids) {
+                    continue;
+                } else {
+                    ids[data.Id] = true;
                 }
 
-                dynLoots.splice(0, dynLoots.length - lootCount);
+                output.Loot.push(data);
             }
         }
 
-        data.Loot = locationLoots.concat(dynLoots);
-        logger.logSuccess("Loot count = " + data.Loot.length);
-        return data;
+        // static loot
+        base = filepaths.locations[locationName].loot.static;
+
+        for (let dir in base) {
+            let node = base[dir];
+            let keys = Object.keys(node);
+            let data = json.parse(json.read(node[keys[utility.getRandomInt(0, keys.length - 1)]]));
+
+            if (data.Id in ids) {
+                continue;
+            } else {
+                ids[data.Id] = true;
+            }
+
+            output.Loot.push(data);
+        }
+
+        // dyanmic loot
+        let dirs = Object.keys(filepaths.locations[locationName].loot.dynamic);
+        let max = output.Loot.length + dirs.length;
+
+        if (settings.gameplay.locationloot[locationName] < max) {
+            max = settings.gameplay.locationloot[locationName];
+        }
+
+        base = filepaths.locations[locationName].loot.dynamic;
+
+        for (let dir = 0; dir + output.Loot.length > max; dir++) {
+            let node = base[dirs[dir]];
+            let keys = Object.keys(node);
+            let data = json.parse(json.read(node[keys[utility.getRandomInt(0, keys.length - 1)]]));
+
+            if (data.Id in ids) {
+                continue;
+            } else {
+                ids[data.Id] = true;
+            }
+
+            output.Loot.push(data);
+        }
+        
+        // done generating
+        logger.logSuccess("Generated location " + locationName);
+        return output;
     }
 
     /* get a location with generated loot data */
@@ -115,7 +124,7 @@ class LocationServer {
 
         // use right id's
         for (let locationName in this.locations) {
-            data[this.locations[locationName]._Id] = this.locations[locationName];
+            data[this.locations[locationName]._Id] = this.locations[locationName]
         }
 
         base.data.locations = data;
