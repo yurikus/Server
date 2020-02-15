@@ -6,8 +6,8 @@
 	"Name": "Factory",
 	"Description": "The industrial estate and facilities of the chemical plant No.16 that were rented out illegally to the TerraGroup company. ",
 	"Scene": {
-		"path": "maps/factory_day_preset.bundle",
-		"rcid": "factory_day.scenespreset.asset"
+	  "path": "maps/factory_day_preset.bundle",
+	  "rcid": "factory_day.scenespreset.asset"
 	},
 	"Area": 0.9,
 	"RequiredPlayerLevel": 0,
@@ -19,8 +19,8 @@
 	"exit_access_time": 60,
 	"exit_time": 1,
 	"Preview": {
-		"path": "",
-		"rcid": ""
+	  "path": "",
+	  "rcid": ""
 	},
 	"IconX": 318,
 	"IconY": 359,
@@ -62,78 +62,354 @@
 	"AccessKeys": [],
 	"MinMaxBots": [],
 	"BotLocationModifier": {
-		"AccuracySpeed": 0.8,
-		"Scattering": 0.8,
-		"GainSight": 0.8,
-		"MarksmanAccuratyCoef": 1,
-		"VisibleDistance": 1,
-		"DistToSleep": 120,
-		"DistToActivate": 100,
-		"MagnetPower": 15
+	  "AccuracySpeed": 0.8,
+	  "Scattering": 0.8,
+	  "GainSight": 0.8,
+	  "MarksmanAccuratyCoef": 1,
+	  "VisibleDistance": 1,
+	  "DistToSleep": 120,
+	  "DistToActivate": 100,
+	  "MagnetPower": 15
 	},
 	"exits": [],
 	"DisabledForScav": false,
 	"Id": "factory4_day",
 	"_Id": "55f2d3fd4bdc2d5f408b4567",
-	"Loot": [],
+	"Loot": [
+	  {
+		"Id": "loot_quest_letter1685434",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": -18.8457,
+		  "y": 0.6842,
+		  "z": 21.6351
+		},
+		"Rotation": {
+		  "x": 338.5508,
+		  "y": 18.1136837,
+		  "z": 80.98495
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e3829fdecfb65468500d6c7",
+		"Items": [
+		  {
+			"_id": "5e3829fdecfb65468500d6c7",
+			"_tpl": "591093bb86f7747caa7bb2ee"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_r1685734",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": 26.3819,
+		  "y": 9.1867,
+		  "z": 38.9887
+		},
+		"Rotation": {
+		  "x": 272.994476,
+		  "y": 134.752258,
+		  "z": 270.002625
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e3829fdecfb65468500d6c8",
+		"Items": [
+		  {
+			"_id": "5e3829fdecfb65468500d6c8",
+			"_tpl": "593a87af86f774122f54a951"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_letter1685434",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": -18.8457,
+		  "y": 0.6842,
+		  "z": 21.6351
+		},
+		"Rotation": {
+		  "x": 338.5508,
+		  "y": 18.1136837,
+		  "z": 80.98495
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e382a097e788532af35fe89",
+		"Items": [
+		  {
+			"_id": "5e382a097e788532af35fe89",
+			"_tpl": "591093bb86f7747caa7bb2ee"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_r1685734",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": 26.3819,
+		  "y": 9.1867,
+		  "z": 38.9887
+		},
+		"Rotation": {
+		  "x": 272.994476,
+		  "y": 134.752258,
+		  "z": 270.002625
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e382a097e788532af35fe8a",
+		"Items": [
+		  {
+			"_id": "5e382a097e788532af35fe8a",
+			"_tpl": "593a87af86f774122f54a951"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_letter1685434",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": -18.8457,
+		  "y": 0.6842,
+		  "z": 21.6351
+		},
+		"Rotation": {
+		  "x": 338.5508,
+		  "y": 18.1136837,
+		  "z": 80.98495
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e382a141d55576e1a527286",
+		"Items": [
+		  {
+			"_id": "5e382a141d55576e1a527286",
+			"_tpl": "591093bb86f7747caa7bb2ee"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_r1685734",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": 26.3819,
+		  "y": 9.1867,
+		  "z": 38.9887
+		},
+		"Rotation": {
+		  "x": 272.994476,
+		  "y": 134.752258,
+		  "z": 270.002625
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e382a141d55576e1a527287",
+		"Items": [
+		  {
+			"_id": "5e382a141d55576e1a527287",
+			"_tpl": "593a87af86f774122f54a951"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_letter1685434",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": -18.8457,
+		  "y": 0.6842,
+		  "z": 21.6351
+		},
+		"Rotation": {
+		  "x": 338.5508,
+		  "y": 18.1136837,
+		  "z": 80.98495
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e3829f01d55576e1a526681",
+		"Items": [
+		  {
+			"_id": "5e3829f01d55576e1a526681",
+			"_tpl": "591093bb86f7747caa7bb2ee"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_r1685734",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": 26.3819,
+		  "y": 9.1867,
+		  "z": 38.9887
+		},
+		"Rotation": {
+		  "x": 272.994476,
+		  "y": 134.752258,
+		  "z": 270.002625
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e382a238e89a76b703a2040",
+		"Items": [
+		  {
+			"_id": "5e382a238e89a76b703a2040",
+			"_tpl": "593a87af86f774122f54a951"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_r1685734",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": 26.3819,
+		  "y": 9.1867,
+		  "z": 38.9887
+		},
+		"Rotation": {
+		  "x": 272.994476,
+		  "y": 134.752258,
+		  "z": 270.002625
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e3829f01d55576e1a526682",
+		"Items": [
+		  {
+			"_id": "5e3829f01d55576e1a526682",
+			"_tpl": "593a87af86f774122f54a951"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_letter1685434",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": -18.8457,
+		  "y": 0.6842,
+		  "z": 21.6351
+		},
+		"Rotation": {
+		  "x": 338.5508,
+		  "y": 18.1136837,
+		  "z": 80.98495
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e3829f1f470ac6fd82e7011",
+		"Items": [
+		  {
+			"_id": "5e3829f1f470ac6fd82e7011",
+			"_tpl": "591093bb86f7747caa7bb2ee"
+		  }
+		]
+	  },
+	  {
+		"Id": "loot_quest_r1685734",
+		"IsStatic": false,
+		"useGravity": false,
+		"randomRotation": false,
+		"Position": {
+		  "x": 26.3819,
+		  "y": 9.1867,
+		  "z": 38.9887
+		},
+		"Rotation": {
+		  "x": 272.994476,
+		  "y": 134.752258,
+		  "z": 270.002625
+		},
+		"IsGroupPosition": false,
+		"GroupPositions": [],
+		"Root": "5e3829f1f470ac6fd82e7012",
+		"Items": [
+		  {
+			"_id": "5e3829f1f470ac6fd82e7012",
+			"_tpl": "593a87af86f774122f54a951"
+		  }
+		]
+	  }
+	],
 	"SpawnAreas": [],
 	"Banners": [
-		{
-			"id": "5464e0404bdc2d2a708b4567",
-			"pic": {
-				"path": "CONTENT/banners/banner_usec.jpg",
-				"rcid": ""
-			}
-		},
-		{
-			"id": "5464e0454bdc2d06708b4567",
-			"pic": {
-				"path": "CONTENT/banners/banner_bear.jpg",
-				"rcid": ""
-			}
-		},
-		{
-			"id": "5803a58524597710ca36fcb2",
-			"pic": {
-				"path": "CONTENT/banners/banner_terragroup.jpg",
-				"rcid": ""
-			}
-		},
-		{
-			"id": "5807bfe124597742a92e0a4c",
-			"pic": {
-				"path": "CONTENT/banners/norvinskzone.jpg",
-				"rcid": ""
-			}
-		},
-		{
-			"id": "5807c3f124597746bf2db2ce",
-			"pic": {
-				"path": "CONTENT/banners/banner_scav.jpg",
-				"rcid": ""
-			}
-		},
-		{
-			"id": "5807be8924597742c603fa19",
-			"pic": {
-				"path": "CONTENT/banners/banner_tarkov.jpg",
-				"rcid": ""
-			}
-		},
-		{
-			"id": "5805f617245977100b2c1f41",
-			"pic": {
-				"path": "CONTENT/banners/tglabs.jpg",
-				"rcid": ""
-			}
-		},
-		{
-			"id": "5c1b857086f77465f465faa4",
-			"pic": {
-				"path": "CONTENT/banners/banner_scavraider.jpg",
-				"rcid": ""
-			}
+	  {
+		"id": "5464e0404bdc2d2a708b4567",
+		"pic": {
+		  "path": "CONTENT/banners/banner_usec.jpg",
+		  "rcid": ""
 		}
+	  },
+	  {
+		"id": "5464e0454bdc2d06708b4567",
+		"pic": {
+		  "path": "CONTENT/banners/banner_bear.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5803a58524597710ca36fcb2",
+		"pic": {
+		  "path": "CONTENT/banners/banner_terragroup.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5807bfe124597742a92e0a4c",
+		"pic": {
+		  "path": "CONTENT/banners/norvinskzone.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5807c3f124597746bf2db2ce",
+		"pic": {
+		  "path": "CONTENT/banners/banner_scav.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5807be8924597742c603fa19",
+		"pic": {
+		  "path": "CONTENT/banners/banner_tarkov.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5805f617245977100b2c1f41",
+		"pic": {
+		  "path": "CONTENT/banners/tglabs.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5c1b857086f77465f465faa4",
+		"pic": {
+		  "path": "CONTENT/banners/banner_scavraider.jpg",
+		  "rcid": ""
+		}
+	  }
 	],
 	"BossLocationSpawn": []
-}
+  }
