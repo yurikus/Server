@@ -3,6 +3,9 @@
 const fs = require("fs");
 const json = require("./json.js");
 
+const inputDir = "input/";
+const outputDir = "db/maps/";
+
 function getDirList(path) {
   return fs.readdirSync(path).filter(function(file) {
     return fs.statSync(path + "/" + file).isDirectory();
@@ -10,23 +13,23 @@ function getDirList(path) {
 }
 
 function getMapName(mapName) {
-  if (mapName.indexOf("bigmap") != -1) {
+  if (mapName.includes("bigmap")) {
     return "bigmap";
-  } else if (mapName.indexOf("develop") != -1) {
+  } else if (mapName.includes("develop")) {
     return "develop";
-  } else if (mapName.indexOf("factory4_day") != -1) {
+  } else if (mapName.includes("factory4_day")) {
     return "factory4_day";
-  } else if (mapName.indexOf("factory4_night") != -1) {
+  } else if (mapName.includes("factory4_night")) {
     return "factory4_night";
-  } else if (mapName.indexOf("interchange") != -1) {
+  } else if (mapName.includes("interchange")) {
     return "interchange";
-  } else if (mapName.indexOf("laboratory") != -1) {
+  } else if (mapName.includes("laboratory")) {
     return "laboratory";
-  } else if (mapName.indexOf("rezervbase") != -1) {
+  } else if (mapName.includes("rezervbase")) {
     return "rezervbase";
-  } else if (mapName.indexOf("shoreline") != -1) {
+  } else if (mapName.includes("shoreline")) {
     return "shoreline";
-  } else if (mapName.indexOf("woods") != -1) {
+  } else if (mapName.includes("woods")) {
     return "woods";
   } else {
     // ERROR
@@ -35,7 +38,6 @@ function getMapName(mapName) {
 }
 
 function getMapLoot() {
-  let inputDir = "dev/input/maps";
   let inputFiles = fs.readdirSync(inputDir);
   let i = 0;
 
@@ -46,13 +48,10 @@ function getMapLoot() {
     let mapName = getMapName(fileName.toLowerCase());
 
     console.log("Splitting: " + filePath);
-    let node =
-      typeof fileData["Location"] === "undefined"
-        ? fileData.Loot
-        : fileData.Location.Loot;
+    let node = ("Location" in fileData) ? fileData.Location.Loot : fileData.Loot;
 
     for (let item in node) {
-      let savePath = "dev/output/maps/" + mapName + "/loot/" + i++ + ".json";
+      let savePath = outputDir + mapName + "/loot/" + i++ + ".json";
       console.log("Loot." + fileName + ": " + item);
       json.write(savePath, node[item]);
     }
@@ -60,14 +59,12 @@ function getMapLoot() {
 }
 
 function stripMapLootDuplicates() {
-  let inputDir = getDirList("dev/output/maps/");
-
-  for (let mapName of inputDir) {
+  for (let mapName of getDirList(outputDir)) {
     if (mapName === "hideout") {
       continue;
     }
 
-    let dirName = "db/maps/" + mapName + "/loot/";
+    let dirName = outputDir + mapName + "/loot/";
     let inputFiles = fs.readdirSync(dirName);
     let mapLoot = {};
     let questLoot = {};
@@ -118,29 +115,44 @@ function stripMapLootDuplicates() {
 }
 
 function renameMapLoot() {
-  let inputDir = getDirList("dev/output/maps/");
-
-  for (let mapName of inputDir) {
+  for (let mapName of getDirList(outputDir)) {
     if (mapName === "hideout") {
       continue;
     }
 
-    let dirName = "dev/output/maps/" + mapName + "/loot/";
+    let dirName = "db/maps/" + mapName + "/loot/";
     let inputFiles = fs.readdirSync(dirName);
 
     console.log("Renaming " + mapName);
 
     for (let file in inputFiles) {
-      fs.renameSync(
-        dirName + inputFiles[file],
-        dirName + "loot_" + file + ".json"
-      );
+      let filePath = dirName + inputFiles[file];
+      let fileData = json.parse(json.read(filePath));
+      let target = "";
+
+      // set target directory
+      if (fileData.IsStatic && fileData.Items.length === 1) {
+        target = dirName + "static/" + fileData.Id + "/" + "loot_" + file + ".json";
+      } else if (fileData.Id.includes("quest_")) {
+        target = dirName + "forced/" + fileData.Id + "/" + "loot_" + file + ".json";
+      } else {
+        target = dirName + "dynamic/" + fileData.Id + "/" + "loot_" + file + ".json";
+      }
+
+      // create missing dir
+      let checkPath = target.substr(0, target.lastIndexOf('/'));
+
+      if (!fs.existsSync(checkPath)) {
+          fs.mkdirSync(checkPath, { recursive: true });
+      }
+
+      // move files
+      fs.renameSync(dirName + inputFiles[file], target);
     }
   }
 }
 
 function getMapLootCount() {
-  let inputDir = "dev/input/maps/";
   let inputFiles = fs.readdirSync(inputDir);
 
   for (let file of inputFiles) {
@@ -153,7 +165,6 @@ function getMapLootCount() {
     console.log(mapName + ".count: " + count);
   }
 }
-
 
 function map() {
   getMapLoot();
