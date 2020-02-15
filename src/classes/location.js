@@ -52,7 +52,7 @@ class LocationServer {
         base = filepaths.locations[locationName].loot.forced;
 
         for (let dir in base) {
-            for (let loot of base[dir]) {
+            for (let loot in base[dir]) {
                 let data = json.parse(json.read(base[dir][loot]));
 
                 if (data.Id in ids) {
