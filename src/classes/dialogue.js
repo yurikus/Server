@@ -83,7 +83,7 @@ class DialogueServer {
 
 			for (let reward of rewards) {
 				reward._id = utility.generateNewItemId();
-				if (reward.slotId === "hideout") {
+				if (!reward.hasOwnProperty("slotId") || reward.slotId === "hideout") {
 					reward.parentId = stashId;
 					reward.slotId = "main";
 				}
