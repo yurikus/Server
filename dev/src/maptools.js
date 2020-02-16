@@ -68,6 +68,7 @@ function stripMapLootDuplicates() {
     let inputFiles = fs.readdirSync(dirName);
     let mapLoot = {};
     let questLoot = {};
+    let staticLoot = {};
 
     console.log("Checking " + mapName);
 
@@ -77,15 +78,16 @@ function stripMapLootDuplicates() {
       let fileName = file.replace(".json", "");
       let fileData = json.parse(json.read(filePath));
 
-      // skip empty containers
-      if (fileData.IsStatic && fileData.Items.length === 1) {
-        continue;
-      }
-
       mapLoot[fileName] = json.stringify(fileData.Items);
 
+      // check quest items separately
       if (fileData.Id.includes("quest_")) {
         questLoot[fileName] = json.stringify(fileData.Position);
+      }
+
+      // check empty containers separately
+      if (fileData.IsStatic && fileData.Items.length === 1) {
+        staticLoot[fileName] = fileData.Id;
       }
     }
 
@@ -98,7 +100,9 @@ function stripMapLootDuplicates() {
         }
 
         // loot already exists
-        if (mapLoot[loot] === mapLoot[file] || (loot in questLoot && file in questLoot && questLoot[loot] === questLoot[file])) {
+        if (mapLoot[loot] === mapLoot[file]
+        || (loot in questLoot && file in questLoot && questLoot[loot] === questLoot[file])
+        || (loot in staticLoot && file in staticLoot && staticLoot[loot] === staticLoot[file])) {
           let target = dirName + file + ".json";
 
           console.log(mapName + ".duplicate: " + loot + ", " + file);

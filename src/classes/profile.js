@@ -39,6 +39,7 @@ class ProfileServer {
             this.initializeProfile(sessionID);
             dialogue_f.dialogueServer.initializeDialogue(sessionID);
             health_f.healthServer.initializeHealth(sessionID);
+            insurance_f.insuranceServer.resetSession(sessionID);
         }
 
         return this.profiles[sessionID][type];

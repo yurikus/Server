@@ -133,7 +133,6 @@ function saveProgress(offraidData, sessionID) {
     }
 
     pmcData = setInventory(pmcData, offraidData.profile);
-    insurance_f.insuranceServer.resetSession(sessionID);
     insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
 
     // remove inventory if player died
