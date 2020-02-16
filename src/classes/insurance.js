@@ -134,7 +134,7 @@ class InsuranceServer {
             event.data.items = [];
         }
     
-        dialogue_f.dialogueServer.addDialogueMessage(event.data.traderId, event.data.messageContent,vevent.sessionId, event.data.items);
+        dialogue_f.dialogueServer.addDialogueMessage(event.data.traderId, event.data.messageContent, event.sessionId, event.data.items);
     }
 }
 
