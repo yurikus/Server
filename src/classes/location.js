@@ -48,6 +48,11 @@ class LocationServer {
         let ids = {};
         let base = {};
 
+        // don't generate loot on hideout
+        if (locationName === "hideout") {
+            return output;
+        }
+
         // forced loot
         base = filepaths.locations[locationName].loot.forced;
 
