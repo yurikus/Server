@@ -64,7 +64,7 @@ class ScheduledEventHandler {
 
 	processEvent(event) {
 		if (event.type in this.eventCallbacks) {
-			output = this.eventCallbacks[event.type](event);
+			this.eventCallbacks[event.type](event);
 		}
 	}
 }
