@@ -112,6 +112,10 @@ function stripMapLootDuplicates() {
           if (file in questLoot) {
             delete questLoot[file];
           }
+
+          if (file in staticLoot) {
+            delete staticLoot[file];
+          }
         }
       }
     }
