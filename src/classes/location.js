@@ -122,9 +122,12 @@ class LocationServer {
         let base = json.parse(json.read("db/cache/locations.json"));
         let data = {};
 
-        // use right id's
+        // use right id's and strip loot
         for (let locationName in this.locations) {
-            data[this.locations[locationName]._Id] = this.locations[locationName]
+            let map = this.locations[locationName];
+
+            map.Loot = [];
+            data[this.locations[locationName]._Id] = map;
         }
 
         base.data.locations = data;
