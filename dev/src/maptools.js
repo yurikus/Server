@@ -139,7 +139,7 @@ function renameMapLoot() {
       let target = "";
 
       // set target directory
-      if (fileData.IsStatic && fileData.Items.length === 1) {
+      if (fileData.IsStatic) {
         target = dirName + "static/" + fileData.Id + "/" + "loot_" + file + ".json";
       } else if (fileData.Id.includes("quest_")) {
         target = dirName + "forced/" + fileData.Id + "/" + "loot_" + file + ".json";
