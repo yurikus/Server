@@ -87,8 +87,6 @@ class InsuranceServer {
     }
 
     /* sends stored insured items as message */
-    // TODO(camo1018): Send insuranceExpired/Complete messages.
-    // TODO(camo1018): Pretty sure items are messed up. Investigate and fix.
     sendInsuredItems(pmcData, sessionID) {
         for (let traderId in this.insured[sessionID]) {
             let trader = trader_f.traderServer.getTrader(traderId);
