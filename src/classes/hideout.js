@@ -228,9 +228,14 @@ function HideoutTakeProduction(pmcData, body, sessionID) {
 		}
 
 		// create item and throw it into profile
+        let id = hideoutProduction.data[receipe].endProduct;
+        if (preset_f.itemPresets.hasPreset(id)) {
+            // replace the base item with its main preset
+            id = preset_f.itemPresets.getStandardPreset(id)._id;
+        }
 		let newReq = {};
 
-		newReq.item_id = hideoutProduction.data[receipe].endProduct;
+		newReq.item_id = id
 		newReq.count = hideoutProduction.data[receipe].count;
 		newReq.tid = "ragfair";
 		return move_f.addItem(pmcData, newReq, output, sessionID, true);	
