@@ -77,7 +77,7 @@ function getOffers(request) {
         for (let p1 in categorySearch) {
             for (let search in linkedSearch) {
                 if (p1 == search) {
-                    offers.push(createOffer(search, linkedSearch[search]));
+                    offers.push(...createOffer(search, linkedSearch[search]));
                 }
             }
         }
@@ -88,7 +88,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers) {
-            offers.push(createOffer(price, offers_tpl[price]));
+            offers.push(...createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -97,7 +97,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers.push(createOffer(price, offers_tpl[price]));
+            offers.push(...createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -211,7 +211,7 @@ function createOfferFromBuild(buildItems,response) {
             if (curItem === itemFromBuild) {
                 for (let item of templates.data.Items) {
                     if (item.Id === itemFromBuild) {
-                        response.data.offers.push(createOffer(curItem, item.Price));
+                        response.data.offers.push(...createOffer(curItem, item.Price));
                         break;
                     }
                 }
@@ -226,24 +226,38 @@ function createOfferFromBuild(buildItems,response) {
 
 function createOffer(template, price) {
     let offerBase = json.parse(json.read(filepaths.ragfair.offer));
+    let offers = [];
 
+    // Preset
     if (preset_f.itemPresets.hasPreset(template)) {
-        let preset = preset_f.itemPresets.getStandardPreset(template);
-        let mods = preset._items;
-        offerBase._id = preset._id;
-        offerBase.root = mods[0]._id;
-        mods[0].upd = offerBase.items[0].upd;
-        offerBase.items = mods;
+        let presets = preset_f.itemPresets.getPresets(template);
+        for (let p of presets) {
+            let offer = itm_hf.clone(offerBase);
+            let mods = p._items;
+            let rub = 0;
+            for (let it of mods) {
+                // TODO handles cartridges if it *really* matters
+                rub += itm_hf.getItemPrice(it._tpl);
+            }
+            mods[0].upd = mods[0].upd || {}; // append the stack count
+            mods[0].upd.StackObjectsCount = offerBase.items[0].upd.StackObjectsCount;
+            offer._id = p._id;               // The offer's id is now the preset's id
+            offer.root = mods[0]._id;        // Sets the main part of the weapon
+            offer.items = mods;
+            offer.requirements[0].count = Math.round(rub * settings.gameplay.trading.ragfairMultiplier);
+            offers.push(offer);
+        }
     }
-    else {
-        offerBase._id = template;
-        offerBase.items[0]._tpl = template;
-    }
+
+    // Single item
+    offerBase._id = template;
+    offerBase.items[0]._tpl = template;
     offerBase.requirements[0].count = Math.round(price * settings.gameplay.trading.ragfairMultiplier);
-	//offerBase.startTime = utility.getTimestamp() - 1000;
+    offers.push(offerBase);
+    //offerBase.startTime = utility.getTimestamp() - 1000;
     //offerBase.endTime = utility.getTimestamp() + 43200;
 
-    return offerBase;
+    return offers;
 }
 
 module.exports.getOffers = getOffers;

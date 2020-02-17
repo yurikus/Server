@@ -15,6 +15,10 @@ class ItemPresets {
         this.lookup = reverse;
     }
 
+    isPreset(id) {
+        return globals.data.ItemPresets.hasOwnProperty(id);
+    }
+
     hasPreset(templateId) {
         return this.lookup.hasOwnProperty(templateId);
     }
@@ -26,7 +30,6 @@ class ItemPresets {
         const presets = [];
         const ids = this.lookup[templateId];
         for (const id of ids) {
-            console.log("id = " + id);
             presets.push(globals.data.ItemPresets[id]);
         }
         return presets;
