@@ -355,9 +355,16 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
     let PlayerStash = itm_hf.getPlayerStash(sessionID);
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
-    let tmpTraderAssort = trader_f.traderServer.getAssort(body.tid);
+    let items;
+    if (body.item_id in globals.data.ItemPresets) {
+        items = globals.data.ItemPresets[body.item_id]._items;
+        body.item_id = items[0]._id;
+    }
+    else {
+        items = trader_f.traderServer.getAssort(body.tid).data.items;
+    }
 
-    for (let item of tmpTraderAssort.data.items) {
+    for (let item of items) {
         if (item._id === body.item_id) {
             let MaxStacks = 1;
             let StacksValue = [];
@@ -390,7 +397,7 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
                 pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
                 let StashFS_2D = itm_hf.recheckInventoryFreeSpace(pmcData, sessionID);
-                let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTraderAssort.data.items);
+                let ItemSize = itm_hf.getSize(item._tpl, item._id, items);
                 let tmpSizeX = ItemSize[0];
                 let tmpSizeY = ItemSize[1];
 
@@ -454,16 +461,16 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
                                     break;
                                 }
 
-                                for (let tmpKey in tmpTraderAssort.data.items) {
-                                    if (tmpTraderAssort.data.items[tmpKey].parentId && tmpTraderAssort.data.items[tmpKey].parentId === toDo[0][0]) {
+                                for (let tmpKey in items) {
+                                    if (items[tmpKey].parentId && items[tmpKey].parentId === toDo[0][0]) {
                                         newItem = utility.generateNewItemId();
 
-                                        let SlotID = tmpTraderAssort.data.items[tmpKey].slotId;
+                                        let SlotID = items[tmpKey].slotId;
 
                                         if (SlotID === "hideout") {
                                             output.data.items.new.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
+                                                "_tpl": items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
                                                 "slotId": SlotID,
                                                 "location": {"x": x, "y": y, "r": "Horizontal"},
@@ -472,16 +479,16 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
 
                                             pmcData.Inventory.items.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
+                                                "_tpl": items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
-                                                "slotId": tmpTraderAssort.data.items[tmpKey].slotId,
+                                                "slotId": items[tmpKey].slotId,
                                                 "location": {"x": x, "y": y, "r": "Horizontal"},
                                                 "upd": upd
                                             });
                                         } else {
                                             output.data.items.new.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
+                                                "_tpl": items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
                                                 "slotId": SlotID,
                                                 "upd": upd
@@ -489,14 +496,14 @@ function addItem(pmcData, body, output, sessionID, foundInRaid = false) {
 
                                             pmcData.Inventory.items.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
+                                                "_tpl": items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
-                                                "slotId": tmpTraderAssort.data.items[tmpKey].slotId,
+                                                "slotId": items[tmpKey].slotId,
                                                 "upd": upd
                                             });
                                         }
 
-                                        toDo.push([tmpTraderAssort.data.items[tmpKey]._id, newItem]);
+                                        toDo.push([items[tmpKey]._id, newItem]);
                                     }
                                 }
 

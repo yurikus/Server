@@ -227,8 +227,18 @@ function createOfferFromBuild(buildItems,response) {
 function createOffer(template, price) {
     let offerBase = json.parse(json.read(filepaths.ragfair.offer));
 
-    offerBase._id = template;
-    offerBase.items[0]._tpl = template;
+    if (preset_f.itemPresets.hasPreset(template)) {
+        let preset = preset_f.itemPresets.getStandardPreset(template);
+        let mods = preset._items;
+        offerBase._id = preset._id;
+        offerBase.root = mods[0]._id;
+        mods[0].upd = offerBase.items[0].upd;
+        offerBase.items = mods;
+    }
+    else {
+        offerBase._id = template;
+        offerBase.items[0]._tpl = template;
+    }
     offerBase.requirements[0].count = Math.round(price * settings.gameplay.trading.ragfairMultiplier);
 	//offerBase.startTime = utility.getTimestamp() - 1000;
     //offerBase.endTime = utility.getTimestamp() + 43200;
