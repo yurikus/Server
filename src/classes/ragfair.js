@@ -87,7 +87,7 @@ function getOffers(request) {
         let offers_tpl = getLinkedSearchList(request.linkedSearchId,response);
         let offers = [];
 
-        for (let price in offers) {
+        for (let price in offers_tpl) {
             offers.push(...createOffer(price, offers_tpl[price]));
         }
 
