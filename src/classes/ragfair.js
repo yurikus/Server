@@ -116,12 +116,9 @@ function getLinkedSearchList(linkedSearchId, response) {
         for (let itemSlot of itemLink._props.Slots) {
             for (let itemSlotFilter of itemSlot._props.filters) {
                 for (let mod of itemSlotFilter.Filter) {
-                    for (let item of templates.data.Items) {
-                        if (item.Id === mod) {
-                            tableOfItems[mod] = item.Price;
-                            response.data.categories[mod] = 1;
-                        }
-                    }
+                    let item = itm_hf.getTemplateItem(mod);
+                    tableOfItems[mod] = item.Price;
+                    response.data.categories[mod] = 1;
                 }
             }
         }
@@ -129,12 +126,9 @@ function getLinkedSearchList(linkedSearchId, response) {
 
     if ("Chambers" in itemLink._props) {
         for (let patron of itemLink._props.Chambers[0]._props.filters[0].Filter) {
-            for (let item of templates.data.Items) {
-                if (item.Id === patron) {
-                    tableOfItems[patron] = item.Price;
-                    response.data.categories[patron] = 1;
-                }
-            }
+            let item = itm_hf.getTemplateItem(patron);
+            tableOfItems[patron] = item.Price;
+            response.data.categories[patron] = 1;
         }
     }
 
@@ -190,12 +184,8 @@ function getCategoryList(handbookId) {
         if (isCateg === false) {
             for (let curItem in items.data) {
                 if (curItem === handbookId) {
-                    for (let item of templates.data.Items) {
-                        if (item.Id === handbookId) {
-                            tableOfItems[curItem] = item.Price;
-                        }
-                    }
-
+                    let item = itm_hf.getTemplateItem(handbookId);
+                    tableOfItems[curItem] = item.Price;
                     break;
                 }
             }
@@ -209,13 +199,8 @@ function createOfferFromBuild(buildItems,response) {
     for (var itemFromBuild in buildItems) {
         for (let curItem in items.data) {
             if (curItem === itemFromBuild) {
-                for (let item of templates.data.Items) {
-                    if (item.Id === itemFromBuild) {
-                        response.data.offers.push(...createOffer(curItem, item.Price));
-                        break;
-                    }
-                }
-
+                let item = itm_hf.getTemplateItem(itemFromBuild);
+                response.data.offers.push(...createOffer(curItem, item.Price));
                 break;
             }
         }
@@ -237,7 +222,7 @@ function createOffer(template, price) {
             let rub = 0;
             for (let it of mods) {
                 // TODO handles cartridges if it *really* matters
-                rub += itm_hf.getItemPrice(it._tpl);
+                rub += itm_hf.getTemplateItem(it._tpl).Price;
             }
             mods[0].upd = mods[0].upd || {}; // append the stack count
             mods[0].upd.StackObjectsCount = offerBase.items[0].upd.StackObjectsCount;
