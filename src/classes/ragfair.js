@@ -77,7 +77,7 @@ function getOffers(request) {
         for (let p1 in categorySearch) {
             for (let search in linkedSearch) {
                 if (p1 == search) {
-                    offers.push(createOffer(search, linkedSearch[search]));
+                    offers.push(...createOffer(search, linkedSearch[search]));
                 }
             }
         }
@@ -87,8 +87,8 @@ function getOffers(request) {
         let offers_tpl = getLinkedSearchList(request.linkedSearchId,response);
         let offers = [];
 
-        for (let price in offers) {
-            offers.push(createOffer(price, offers_tpl[price]));
+        for (let price in offers_tpl) {
+            offers.push(...createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -97,7 +97,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers.push(createOffer(price, offers_tpl[price]));
+            offers.push(...createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -116,12 +116,9 @@ function getLinkedSearchList(linkedSearchId, response) {
         for (let itemSlot of itemLink._props.Slots) {
             for (let itemSlotFilter of itemSlot._props.filters) {
                 for (let mod of itemSlotFilter.Filter) {
-                    for (let item of templates.data.Items) {
-                        if (item.Id === mod) {
-                            tableOfItems[mod] = item.Price;
-                            response.data.categories[mod] = 1;
-                        }
-                    }
+                    let item = itm_hf.getTemplateItem(mod);
+                    tableOfItems[mod] = item.Price;
+                    response.data.categories[mod] = 1;
                 }
             }
         }
@@ -129,12 +126,9 @@ function getLinkedSearchList(linkedSearchId, response) {
 
     if ("Chambers" in itemLink._props) {
         for (let patron of itemLink._props.Chambers[0]._props.filters[0].Filter) {
-            for (let item of templates.data.Items) {
-                if (item.Id === patron) {
-                    tableOfItems[patron] = item.Price;
-                    response.data.categories[patron] = 1;
-                }
-            }
+            let item = itm_hf.getTemplateItem(patron);
+            tableOfItems[patron] = item.Price;
+            response.data.categories[patron] = 1;
         }
     }
 
@@ -190,12 +184,8 @@ function getCategoryList(handbookId) {
         if (isCateg === false) {
             for (let curItem in items.data) {
                 if (curItem === handbookId) {
-                    for (let item of templates.data.Items) {
-                        if (item.Id === handbookId) {
-                            tableOfItems[curItem] = item.Price;
-                        }
-                    }
-
+                    let item = itm_hf.getTemplateItem(handbookId);
+                    tableOfItems[curItem] = item.Price;
                     break;
                 }
             }
@@ -209,13 +199,8 @@ function createOfferFromBuild(buildItems,response) {
     for (var itemFromBuild in buildItems) {
         for (let curItem in items.data) {
             if (curItem === itemFromBuild) {
-                for (let item of templates.data.Items) {
-                    if (item.Id === itemFromBuild) {
-                        response.data.offers.push(createOffer(curItem, item.Price));
-                        break;
-                    }
-                }
-
+                let item = itm_hf.getTemplateItem(itemFromBuild);
+                response.data.offers.push(...createOffer(curItem, item.Price));
                 break;
             }
         }
@@ -226,14 +211,38 @@ function createOfferFromBuild(buildItems,response) {
 
 function createOffer(template, price) {
     let offerBase = json.parse(json.read(filepaths.ragfair.offer));
+    let offers = [];
 
+    // Preset
+    if (preset_f.itemPresets.hasPreset(template)) {
+        let presets = preset_f.itemPresets.getPresets(template);
+        for (let p of presets) {
+            let offer = itm_hf.clone(offerBase);
+            let mods = p._items;
+            let rub = 0;
+            for (let it of mods) {
+                // TODO handles cartridges if it *really* matters
+                rub += itm_hf.getTemplateItem(it._tpl).Price;
+            }
+            mods[0].upd = mods[0].upd || {}; // append the stack count
+            mods[0].upd.StackObjectsCount = offerBase.items[0].upd.StackObjectsCount;
+            offer._id = p._id;               // The offer's id is now the preset's id
+            offer.root = mods[0]._id;        // Sets the main part of the weapon
+            offer.items = mods;
+            offer.requirements[0].count = Math.round(rub * settings.gameplay.trading.ragfairMultiplier);
+            offers.push(offer);
+        }
+    }
+
+    // Single item
     offerBase._id = template;
     offerBase.items[0]._tpl = template;
     offerBase.requirements[0].count = Math.round(price * settings.gameplay.trading.ragfairMultiplier);
-	//offerBase.startTime = utility.getTimestamp() - 1000;
+    offers.push(offerBase);
+    //offerBase.startTime = utility.getTimestamp() - 1000;
     //offerBase.endTime = utility.getTimestamp() + 43200;
 
-    return offerBase;
+    return offers;
 }
 
 module.exports.getOffers = getOffers;

@@ -601,6 +601,20 @@ function replaceIDs(pmcData, items) {
     return items;
 }
 
+//TODO change templates.data.Items to a dictionary to avoid all those loops
+function getTemplateItem(templateId) {
+    for (let template of templates.data.Items) {
+        if (template.Id === templateId) {
+            return template;
+        }
+    }
+    return false;
+}
+
+function clone(x) {
+    return json.parse(json.stringify(x));
+}
+
 module.exports.recheckInventoryFreeSpace = recheckInventoryFreeSpace;
 module.exports.getCurrency = getCurrency;
 module.exports.inRUB = inRUB;
@@ -616,3 +630,5 @@ module.exports.findAndReturnChildrenByItems = findAndReturnChildrenByItems;
 module.exports.isDogtag = isDogtag;
 module.exports.isNotSellable = isNotSellable;
 module.exports.replaceIDs = replaceIDs;
+module.exports.getTemplateItem = getTemplateItem;
+module.exports.clone = clone;
