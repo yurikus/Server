@@ -132,6 +132,19 @@ function getLinkedSearchList(linkedSearchId, response) {
         }
     }
 
+    if (itemLink._props.hasOwnProperty("Cartridges")
+    && itemLink._props.Cartridges.length // it seems cartridges only has 0 or 1 element
+    && itemLink._props.Cartridges[0].hasOwnProperty("_props")
+    && itemLink._props.Cartridges[0]._props.hasOwnProperty("filters")
+    && itemLink._props.Cartridges[0]._props.filters.length // it seems filters only has 1 element
+    && itemLink._props.Cartridges[0]._props.filters[0].hasOwnProperty("Filter")) {
+        let filters = itemLink._props.Cartridges[0]._props.filters[0].Filter;
+        for (let filter of filters) {
+            let item = itm_hf.getTemplateItem(filter);
+            tableOfItems[filter] = item.Price;
+            response.data.categories[filter] = 1;
+        }
+    }
     return tableOfItems;
 }
 
