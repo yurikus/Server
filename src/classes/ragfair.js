@@ -76,8 +76,8 @@ function getOffers(request) {
 
         for (let p1 in categorySearch) {
             for (let search in linkedSearch) {
-                if (p1 == search) {
-                    offers.push(...createOffer(search, linkedSearch[search]));
+                if (p1 === search) {
+                    offers.concat(createOffer(search, linkedSearch[search]));
                 }
             }
         }
@@ -88,7 +88,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers.push(...createOffer(price, offers_tpl[price]));
+            offers.concat(createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -97,7 +97,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers.push(...createOffer(price, offers_tpl[price]));
+            offers.concat(createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -117,6 +117,7 @@ function getLinkedSearchList(linkedSearchId, response) {
             for (let itemSlotFilter of itemSlot._props.filters) {
                 for (let mod of itemSlotFilter.Filter) {
                     let item = itm_hf.getTemplateItem(mod);
+
                     tableOfItems[mod] = item.Price;
                     response.data.categories[mod] = 1;
                 }
@@ -127,6 +128,7 @@ function getLinkedSearchList(linkedSearchId, response) {
     if ("Chambers" in itemLink._props) {
         for (let patron of itemLink._props.Chambers[0]._props.filters[0].Filter) {
             let item = itm_hf.getTemplateItem(patron);
+
             tableOfItems[patron] = item.Price;
             response.data.categories[patron] = 1;
         }
@@ -139,12 +141,15 @@ function getLinkedSearchList(linkedSearchId, response) {
     && itemLink._props.Cartridges[0]._props.filters.length // it seems filters only has 1 element
     && itemLink._props.Cartridges[0]._props.filters[0].hasOwnProperty("Filter")) {
         let filters = itemLink._props.Cartridges[0]._props.filters[0].Filter;
+
         for (let filter of filters) {
             let item = itm_hf.getTemplateItem(filter);
+
             tableOfItems[filter] = item.Price;
             response.data.categories[filter] = 1;
         }
     }
+    
     return tableOfItems;
 }
 
@@ -153,11 +158,11 @@ function getCategoryList(handbookId) {
     let isCateg = false;
 
     // if its "mods" great-parent category, do double recursive loop
-    if (handbookId == "5b5f71a686f77447ed5636ab") {
+    if (handbookId === "5b5f71a686f77447ed5636ab") {
         for (let categ2 of templates.data.Categories) {
             if (categ2.ParentId === "5b5f71a686f77447ed5636ab") {
                 for (let categ3 of templates.data.Categories) {
-                    if (categ3.ParentId == categ2.Id) {
+                    if (categ3.ParentId === categ2.Id) {
                         for (let item of templates.data.Items) {
                             if (item.ParentId === categ3.Id) {
                                 tableOfItems[item.Id] = item.Price;
@@ -209,11 +214,11 @@ function getCategoryList(handbookId) {
 }
 
 function createOfferFromBuild(buildItems,response) {
-    for (var itemFromBuild in buildItems) {
+    for (let itemFromBuild in buildItems) {
         for (let curItem in items.data) {
             if (curItem === itemFromBuild) {
                 let item = itm_hf.getTemplateItem(itemFromBuild);
-                response.data.offers.push(...createOffer(curItem, item.Price));
+                response.data.offers.concat(reateOffer(curItem, item.Price));
                 break;
             }
         }
@@ -229,16 +234,20 @@ function createOffer(template, price) {
     // Preset
     if (preset_f.itemPresets.hasPreset(template)) {
         let presets = preset_f.itemPresets.getPresets(template);
+        
         for (let p of presets) {
             let offer = itm_hf.clone(offerBase);
             let mods = p._items;
             let rub = 0;
+            
             for (let it of mods) {
-                // TODO handles cartridges if it *really* matters
+                // TODO handles cartridges
                 rub += itm_hf.getTemplateItem(it._tpl).Price;
             }
+            
             mods[0].upd = mods[0].upd || {}; // append the stack count
             mods[0].upd.StackObjectsCount = offerBase.items[0].upd.StackObjectsCount;
+
             offer._id = p._id;               // The offer's id is now the preset's id
             offer.root = mods[0]._id;        // Sets the main part of the weapon
             offer.items = mods;
