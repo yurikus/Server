@@ -51,14 +51,9 @@ function quests() {
 
 function languages() {
     let base = json.parse(json.read("db/cache/languages.json"));
-    let inputFiles = filepaths.locales;
-    let inputNames = Object.keys(inputFiles);
-    let i = 0;
 
-    for (let file in inputFiles) {
-        let locale = filepaths.locales[inputNames[i++]];
-        let fileData = json.parse(json.read(locale.name));
-        
+    for (let file of Object.keys(filepaths.locales)) {
+        let fileData = json.parse(json.read(filepaths.locales[file][file]));
         base.data.push(fileData);
     }
 
