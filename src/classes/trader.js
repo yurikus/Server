@@ -5,6 +5,8 @@ class TraderServer {
     constructor() {
         this.traders = {};
         this.assorts = {};
+        this.customization = {};
+
         this.initializeTraders();
     }
 
@@ -14,6 +16,16 @@ class TraderServer {
 
         for (let id in filepaths.traders) {
             this.traders[id] = json.parse(json.read(filepaths.traders[id]));
+        }
+    }
+
+    initializeCustomization() {
+        logger.logWarning("Loading customization into RAM...");
+
+        for (let id in filepaths.traders) {
+            if ("customization_" + id in filepaths.user.cache) {
+                this.customization[id] = json.parse(json.read(filepaths.user.cache["customization_" + id]));
+            }
         }
     }
 
@@ -172,6 +184,10 @@ class TraderServer {
         list.push(itemid);// it's required
         return list;
     }
+
+    getCustomization(traderId) {
+        return this.customization[traderId];
+    }
 }
 
 function getPurchasesData(tmpTraderInfo, sessionID) {
@@ -206,21 +222,5 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     return output;
 }
 
-function getCustomization(url) {
-    let output = [];
-    let offers = customizationOffers;
-    let splittedUrl = url.split('/');
-    let tmpTraderInfo = splittedUrl[splittedUrl.length - 2];
-
-    for (let offer of offers.data) {
-        if (offer.tid === tmpTraderInfo) {
-            output.push(offer);
-        }
-    }
-
-    return output;
-}
-
 module.exports.traderServer = new TraderServer();
 module.exports.getPurchasesData = getPurchasesData;
-module.exports.getCustomization = getCustomization;
