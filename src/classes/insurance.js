@@ -148,7 +148,6 @@ function cost(info, sessionID) {
             for (let item of pmcData.Inventory.items) {
                 if (item._id === key) {
                     let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
-
                     items[template.Id] = Math.round(template.Price * settings.gameplay.trading.insureMultiplier);
                     break;
                 }
@@ -170,11 +169,7 @@ function insure(pmcData, body, sessionID) {
         for (let item of pmcData.Inventory.items) {
             if (item._id === key) {
                 let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
-
-                itemsToPay.push({
-                    "id": item._id,
-                    "count": Math.round(template.Price * settings.gameplay.trading.insureMultiplier)
-                });
+                itemsToPay.push({"id": item._id, "count": Math.round(template.Price * settings.gameplay.trading.insureMultiplier)});
                 break;
             }
         }
