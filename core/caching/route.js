@@ -1,7 +1,139 @@
 "use strict";
 
 const fs = require('fs');
-const mods = require('./mods.js');
+
+function getModFilepath(mod) {
+    return "user/mods/" + mod.author + "-" + mod.name + "-" + mod.version + "/";
+}
+
+function scanRecursiveMod(filepath, baseNode, modNode) {
+    if (typeof modNode === "object") {
+        for (let node in modNode) {
+            baseNode[node] = scanRecursiveMod(filepath, baseNode[node], modNode[node]);
+        }
+    }
+
+    if (typeof modNode === "string") {
+        baseNode = filepath + modNode;
+    }
+
+    return baseNode;
+}
+
+function loadMod(mod, filepath) {
+    logger.logInfo("Loading mod " + mod.author + "-" + mod.name + "-" + mod.version);
+
+    let loadorder = json.parse(json.read("user/cache/loadorder.json"));
+
+    filepaths = scanRecursiveMod(filepath, filepaths, mod.db);
+    loadorder = scanRecursiveMod(filepath, loadorder, mod.src);
+
+    json.write("user/cache/loadorder.json", loadorder);
+}
+
+function detectChangedMods() {
+    let changed = false;
+
+    for (let mod of settings.mods.list) {
+        if (!fs.existsSync(getModFilepath(mod) + "mod.config.json")) {
+            changed = true;
+            break;
+        }
+
+        let config = json.parse(json.read(getModFilepath(mod) + "mod.config.json"));
+
+        if (mod.name !== config.name || mod.author !== config.author || mod.version !== config.version) {
+            changed = true;
+            break;
+        }
+    }
+
+    if (changed) {
+        settings.mods.list = [];
+    }
+
+    return changed;
+}
+
+function detectMissingMods() {
+    if (!fs.existsSync("user/mods/")) {
+        return;
+    }
+
+    let dir = "user/mods/";
+    let mods = utility.getDirList(dir);
+
+    for (let mod of mods) {
+        /* check if config exists */
+        if (!fs.existsSync(dir + mod + "/mod.config.json")) {
+            logger.logError("Mod " + mod + " is missing mod.config.json");
+            logger.logError("Forcing server shutdown...");
+            process.exit(1);
+        }
+
+        let config = json.parse(json.read(dir + mod + "/mod.config.json"));
+        let found = false;
+
+        /* check if mod is already in the list */
+        for (let installed of settings.mods.list) {
+            if (installed.name === config.name) {
+                logger.logWarning("Mod " + mod + " has already been added; skipping mod");
+                found = true;
+                break;
+            }
+        }
+
+        /* add mod to the list */
+        if (!found) {
+            logger.logWarning("Mod " + mod + " not installed, adding it to the modlist");
+            settings.mods.list.push({"name": config.name, "author": config.author, "version": config.version, "enabled": true});
+            settings.server.rebuildCache = true;
+            json.write("user/server.config.json", settings);
+        }
+    }
+}
+
+function isRebuildRequired() {
+    if (!fs.existsSync("user/cache/mods.json")) {
+        return true;
+    }
+
+    let modlist = settings.mods.list;
+    let cachedlist = json.parse(json.read("user/cache/mods.json"));
+
+    if (modlist.length !== cachedlist.length) {
+        return true;
+    }
+
+    for (let mod in modlist) {
+        /* check against cached list */
+        if (modlist[mod].name !== cachedlist[mod].name
+        || modlist[mod].author !== cachedlist[mod].author
+        || modlist[mod].version !== cachedlist[mod].version
+        || modlist[mod].enabled !== cachedlist[mod].enabled) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function loadAllMods() {
+    let modList = settings.mods.list;
+
+    for (let element of modList) {
+        // skip mod
+        if (!element.enabled) {
+            logger.logWarning("Skipping mod " + element.author + "-" + element.name + "-" + element.version);
+            continue;
+        }
+
+        // apply mod
+        let filepath = getModFilepath(element);
+        let mod = json.parse(json.read(filepath + "mod.config.json"));
+        loadMod(mod, filepath);
+    }
+}
 
 function flush() {
     filepaths = {};
@@ -13,7 +145,7 @@ function dump() {
     json.write("user/cache/res.json", res);
 }
 
-function scanRecursive(filepath) {
+function scanRecursiveRoute(filepath) {
     let baseNode = {};
     let directories = utility.getDirList(filepath);
     let files = fs.readdirSync(filepath);
@@ -35,18 +167,15 @@ function scanRecursive(filepath) {
 
     // deep tree search
     for (let node of directories) {
-        baseNode[node] = scanRecursive(filepath + node + "/");
+        baseNode[node] = scanRecursiveRoute(filepath + node + "/");
     }
 
     return baseNode;
 }
 
 function routeAll() {
-    filepaths = scanRecursive("db/");
-    res = scanRecursive("res/");
-
-    console.log(filepaths);
-    console.log(res);
+    filepaths = scanRecursiveRoute("db/");
+    res = scanRecursiveRoute("res/");
 }
 
 function others() {
@@ -103,7 +232,7 @@ function route() {
 }
 
 function all() {
-    mods.detectMissing();
+    detectMissingMods();
 
     /* check if loadorder is missing */
     if (!fs.existsSync("user/cache/loadorder.json")) {
@@ -112,13 +241,13 @@ function all() {
     }
 
     /* detect if existing mods changed */
-    if (mods.detectChanged()) {
+    if (detectChangedMods()) {
         logger.logWarning("Mod mismatch");
         settings.server.rebuildCache = true;
     }
 
     /* check if filepaths need rebuid */
-    if (mods.isRebuildRequired()) {
+    if (isRebuildRequired()) {
         logger.logWarning("Modlist mismatch");
         settings.server.rebuildCache = true;
     }
@@ -128,8 +257,9 @@ function all() {
         logger.logWarning("Force rebuilding routes");
         
         route();
-        mods.load();
+        loadAllMods();
         dump();
+
         return;
     }
 
