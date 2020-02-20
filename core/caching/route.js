@@ -5,10 +5,12 @@ const mods = require('./mods.js');
 
 function flush() {
     filepaths = {};
+    res = {};
 }
 
 function dump() {
     json.write("user/cache/filepaths.json", filepaths);
+    json.write("user/cache/res.json", res);
 }
 
 function scanRecursive(filepath) {
@@ -41,40 +43,10 @@ function scanRecursive(filepath) {
 
 function routeAll() {
     filepaths = scanRecursive("db/");
+    res = scanRecursive("res/");
+
     console.log(filepaths);
-}
-
-function images() {
-    logger.logInfo("Routing: images");
-
-    let inputDir = [
-        "res/banners/",
-        "res/handbook/",
-        "res/hideout/",
-        "res/quest/",
-        "res/trader/",
-    ];
-
-    for (let path in inputDir) {
-        let inputFiles = fs.readdirSync(inputDir[path]);
-        
-        for (let file in inputFiles) {
-            let filePath = inputDir[path] + inputFiles[file];
-            let fileName = inputFiles[file].replace(".png", "").replace(".jpg", "");
-
-            if (path == 0) {
-                filepaths.images.banners[fileName] = filePath;
-            } else if (path == 1) {
-                filepaths.images.handbook[fileName] = filePath;
-            } else if (path == 2) {
-                filepaths.images.hideout[fileName] = filePath;
-            } else if (path == 3) {
-                filepaths.images.quest[fileName] = filePath;
-            } else if (path == 4) {
-                filepaths.images.trader[fileName] = filePath;
-            }
-        }
-    }
+    console.log(res);
 }
 
 function others() {
@@ -111,11 +83,9 @@ function others() {
         }
     };
 
-    let assortList = utility.getDirList("db/assort/");
-
-    for (let assort in assortList) {
-        filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + assortList[assort] + ".json";
-        filepaths.user.cache["customization_" + assortList[assort]] = "user/cache/customization_" + assortList[assort] + ".json";
+    for (let assort of utility.getDirList("db/assort/")) {
+        filepaths.user.cache["assort_" + assort] = "user/cache/assort_" + assort + ".json";
+        filepaths.user.cache["customization_" + assort] = "user/cache/customization_" + assort + ".json";
     }
 }
 
@@ -128,7 +98,6 @@ function route() {
     flush();
 
     routeAll();
-    images();
     others();
     loadorder();
 }
@@ -165,6 +134,7 @@ function all() {
     }
 
     filepaths = json.parse(json.read("user/cache/filepaths.json"));
+    res = json.parse(json.read("user/cache/res.json"));
 }
 
 module.exports.all = all;

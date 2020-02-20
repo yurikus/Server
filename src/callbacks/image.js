@@ -1,26 +1,25 @@
 "use strict";
 
 function sendImage(sessionID, req, resp, body) {
-    let splittedUrl = req.url.split('/');
-    let fileName = splittedUrl[splittedUrl.length - 1].replace(".jpg", "").replace(".png", "");
+    let fileName = splittedUrl[splittedUrl.length - 1].split('.').slice(0, -1).join('.');
     let baseNode = {};
 
     // get images to look through
     if (req.url.includes("/quest")) {
         logger.logInfo("[IMG.quests]:" + req.url);
-        baseNode = filepaths.images.quest;
+        baseNode = res.quest;
     } else if (req.url.includes("/handbook")) {
         logger.logInfo("[IMG.handbook]:" + req.url);
-        baseNode = filepaths.images.handbook;
+        baseNode = res.handbook;
     } else if (req.url.includes("/avatar")) {
         logger.logInfo("[IMG.trader]:" + req.url);
-        baseNode = filepaths.images.trader;
+        baseNode = res.trader;
     } else if (req.url.includes("/banners")) {
         logger.logInfo("[IMG.banners]:" + req.url);
-        baseNode = filepaths.images.banners;
+        baseNode = res.banners;
     } else {
         logger.logInfo("[IMG.hideout]:" + req.url);
-        baseNode = filepaths.images.hideout;
+        baseNode = res.hideout;
     }
 
     // send image
