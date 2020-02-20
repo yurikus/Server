@@ -40,7 +40,7 @@ class TraderServer {
         for (let traderId in this.traders) {
             let trader = this.traders[traderId];
 
-            if (traderId === "ragfair") {
+            if (traderId === "54cb57776803fa99248b456e") {
                 continue;
             }
 
@@ -108,7 +108,7 @@ class TraderServer {
         let base = json.parse(json.read(filepaths.user.cache["assort_" + traderId]));
 
         // 1 is min level, 4 is max level
-        if (traderId !== "ragfair") {
+        if (traderId !== "54cb57776803fa99248b456e") {
             let keys = Object.keys(base.data.loyal_level_items);
             let level = this.traders[traderId].loyalty.currentLevel;
 
@@ -126,7 +126,7 @@ class TraderServer {
 
     generateFence() {
         let base = json.parse(json.read("db/cache/assort.json"));
-        let names = Object.keys(filepaths.assort.ragfair.loyal_level_items);
+        let names = Object.keys(filepaths.assort["54cb57776803fa99248b456e"].loyal_level_items);
         let added = [];
 
         for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
@@ -138,9 +138,9 @@ class TraderServer {
             }
 
             added.push(id);
-            base.data.items.push(json.parse(json.read(filepaths.assort.ragfair.items[id])));
-            base.data.barter_scheme[id] = json.parse(json.read(filepaths.assort.ragfair.barter_scheme[id]));
-            base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
+            base.data.items.push(json.parse(json.read(filepaths.assort["54cb57776803fa99248b456e"].items[id])));
+            base.data.barter_scheme[id] = json.parse(json.read(filepaths.assort["54cb57776803fa99248b456e"].barter_scheme[id]));
+            base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort["54cb57776803fa99248b456e"].loyal_level_items[id]));
         }
 
         this.assorts['579dc571d53a0658a154fbec'] = base;

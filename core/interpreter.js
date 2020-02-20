@@ -52,8 +52,6 @@ class Interpreter {
     initializeData() {
         global.items = json.parse(json.read(filepaths.user.cache.items));
         global.globals = json.parse(json.read(filepaths.globals));
-        global.customizationOutfits = json.parse(json.read(filepaths.user.cache.customization_outfits));
-        global.customizationOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
         global.templates = json.parse(json.read(filepaths.user.cache.templates));
     }
 

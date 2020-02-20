@@ -69,10 +69,6 @@ function examineItem(pmcData, body, sessionID) {
 
     // trader
     if ("fromOwner" in body && body.fromOwner.type === "Trader") {
-        if (body.fromOwner.id === "579dc571d53a0658a154fbec") {
-            body.fromOwner.id = "ragfair";
-        }
-
         let tmpTraderAssort = trader_f.traderServer.getAssort(body.fromOwner.id);
 
         for (let item of tmpTraderAssort.data.items) {

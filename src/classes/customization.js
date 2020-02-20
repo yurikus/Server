@@ -1,5 +1,11 @@
 "use strict";
 
+const customization = json.parse(json.read(filepaths.user.cache.customization));
+
+function getCustomization() {
+	return customization;
+}
+
 function getPath(sessionID) {
 	let path = filepaths.user.profiles.storage;
 	return path.replace("__REPLACEME__", sessionID);
@@ -59,6 +65,7 @@ function buyClothing(pmcData, body, sessionID) {
 	return output;
 }
 
+module.exports.getCustomization = getCustomization;
 module.exports.getPath = getPath;
 module.exports.wearClothing = wearClothing;
 module.exports.buyClothing = buyClothing;

@@ -18,7 +18,6 @@ function genericCacher(cachename, filepathNode, output = "") {
         switch (cachename) {
             case "quests.json":
             case "traders.json":
-            case "customization_offers.json":
             case "hideout_areas.json":
             case "hideout_production.json":
             case "hideout_scavcase.json":
@@ -31,7 +30,7 @@ function genericCacher(cachename, filepathNode, output = "") {
                 base.data[fileName] = fileData;
             break;
 
-            case "customization_outfits.json":
+            case "customization.json":
                 fileName = inputNames[i++];
                 base.data[fileName] = fileData;
             break;
@@ -67,12 +66,8 @@ function languages() {
     json.write("user/cache/languages.json", base);
 }
 
-function customizationOutfits() {
-    genericCacher("customization_outfits.json", filepaths.customization.outfits);
-}
-
-function customizationOffers() {
-    genericCacher("customization_offers.json", filepaths.customization.offers);
+function customization() {
+    genericCacher("customization.json", filepaths.customization);
 }
 
 function hideoutAreas() {
@@ -233,12 +228,8 @@ function all() {
         languages();
     }
 
-    if (force || !fs.existsSync("user/cache/customization_outfits.json")) {
-        customizationOutfits();
-    }
-
-    if (force || !fs.existsSync("user/cache/customization_offers.json")) {
-        customizationOffers();
+    if (force || !fs.existsSync("user/cache/customization.json")) {
+        customization();
     }
 
     if (force || !fs.existsSync("user/cache/hideout_areas.json")) {
