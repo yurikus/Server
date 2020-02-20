@@ -206,5 +206,20 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     return output;
 }
 
+function getCustomization() {
+    let output = [];
+    let offers = customizationOffers;
+    let splittedUrl = url.split('/');
+
+    for (let offer of offers.data) {
+        if (offer.tid === splittedUrl[splittedUrl.length - 2]) {
+            output.push(offer);
+        }
+    }
+
+    return output;
+}
+
 module.exports.traderServer = new TraderServer();
 module.exports.getPurchasesData = getPurchasesData;
+module.exports.getCustomization = getCustomization;
