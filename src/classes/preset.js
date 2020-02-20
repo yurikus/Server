@@ -56,6 +56,20 @@ class ItemPresets {
 
         return allPresets[0];
     }
+
+    getBaseItemTpl(presetId) {
+        if (this.isPreset(presetId)) {
+            let preset = globals.data.ItemPresets[presetId];
+
+            for (let item of preset._items) {
+                if (preset._parent === item._id) {
+                    return item._tpl;
+                }
+            }
+        }
+
+        return "";
+    }
 }
 
 module.exports.itemPresets = new ItemPresets();
