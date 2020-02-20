@@ -95,6 +95,10 @@ function examineItem(pmcData, body, sessionID) {
         }
     }
 
+    if (preset_f.itemPresets.isPreset(returned)) {
+        returned = preset_f.itemPresets.getBaseItemTpl(returned);
+    }
+
     // item not found
     if (returned === "") {
         logger.logError("Cannot find proper item. Stopped.");
