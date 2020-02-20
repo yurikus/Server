@@ -5,7 +5,7 @@ function getTraderList(url, info, sessionID) {
 }
 
 function getCustomization(url, info, sessionID) {
-    return json.stringify({"err": 0, "errmsg": null, "data": trader_f.getCustomization()});
+    return json.stringify({"err": 0, "errmsg": null, "data": trader_f.getCustomization(url)});
 }
 
 function getProfilePurchases(url, info, sessionID) {
