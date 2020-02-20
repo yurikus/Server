@@ -1,13 +1,13 @@
 "use strict";
 
-const customization = json.parse(json.read(filepaths.user.cache.customization));
+const customization = json.parse(json.read(db.user.cache.customization));
 
 function getCustomization() {
 	return customization;
 }
 
 function getPath(sessionID) {
-	let path = filepaths.user.profiles.storage;
+	let path = db.user.profiles.storage;
 	return path.replace("__REPLACEME__", sessionID);
 }
 
@@ -42,7 +42,7 @@ function buyClothing(pmcData, body, sessionID) {
     for (let key of body.items) {
         for (let item of pmcData.Inventory.items) {
             if (item._id === key) {
-                let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
+                let template = json.parse(json.read(db.templates.items[item._tpl]));
                 itemsToPay.push({"id": item._id, "count": Math.round(template.Price)});
                 break;
             }

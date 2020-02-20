@@ -64,7 +64,7 @@ function sortOffers(request, offers) {
 }
 
 function getOffers(request) {
-    let response = json.parse(json.read(filepaths.ragfair.search));
+    let response = json.parse(json.read(db.ragfair.search));
 
     if (Object.entries(request.buildItems).length != 0) {
         createOfferFromBuild(request.buildItems,response);
@@ -228,7 +228,7 @@ function createOfferFromBuild(buildItems,response) {
 }
 
 function createOffer(template, price, usePresets = true) {
-    let offerBase = json.parse(json.read(filepaths.ragfair.offer));
+    let offerBase = json.parse(json.read(db.ragfair.offer));
     let offers = [];
 
     // Preset

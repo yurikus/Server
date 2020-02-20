@@ -25,7 +25,7 @@ function loadMod(mod, filepath) {
 
     let loadorder = json.parse(json.read("user/cache/loadorder.json"));
 
-    filepaths = scanRecursiveMod(filepath, filepaths, mod.db);
+    db = scanRecursiveMod(filepath, db, mod.db);
     loadorder = scanRecursiveMod(filepath, loadorder, mod.src);
 
     json.write("user/cache/loadorder.json", loadorder);
@@ -136,12 +136,12 @@ function loadAllMods() {
 }
 
 function flush() {
-    filepaths = {};
+    db = {};
     res = {};
 }
 
 function dump() {
-    json.write("user/cache/filepaths.json", filepaths);
+    json.write("user/cache/db.json", db);
     json.write("user/cache/res.json", res);
 }
 
@@ -174,20 +174,20 @@ function scanRecursiveRoute(filepath) {
 }
 
 function routeAll() {
-    filepaths = scanRecursiveRoute("db/");
+    db = scanRecursiveRoute("db/");
     res = scanRecursiveRoute("res/");
 }
 
 function others() {
-    filepaths.globals = "db/globals.json";
-    filepaths.hideout.settings = "db/hideout/settings.json";
+    db.globals = "db/globals.json";
+    db.hideout.settings = "db/hideout/settings.json";
 
-    filepaths.ragfair = {
+    db.ragfair = {
         "offer": "db/ragfair/offer.json",
         "search": "db/ragfair/search.json"
     }
 
-    filepaths.user = {
+    db.user = {
         "config": "user/server.config.json",
         "events_schedule": "user/events/schedule.json",
         "profiles": {
@@ -213,8 +213,8 @@ function others() {
     };
 
     for (let assort of utility.getDirList("db/assort/")) {
-        filepaths.user.cache["assort_" + assort] = "user/cache/assort_" + assort + ".json";
-        filepaths.user.cache["customization_" + assort] = "user/cache/customization_" + assort + ".json";
+        db.user.cache["assort_" + assort] = "user/cache/assort_" + assort + ".json";
+        db.user.cache["customization_" + assort] = "user/cache/customization_" + assort + ".json";
     }
 }
 
@@ -246,14 +246,14 @@ function all() {
         settings.server.rebuildCache = true;
     }
 
-    /* check if filepaths need rebuid */
+    /* check if db need rebuid */
     if (isRebuildRequired()) {
         logger.logWarning("Modlist mismatch");
         settings.server.rebuildCache = true;
     }
 
-    /* rebuild filepaths */
-    if (settings.server.rebuildCache || !fs.existsSync("user/cache/filepaths.json")) {
+    /* rebuild db */
+    if (settings.server.rebuildCache || !fs.existsSync("user/cache/db.json")) {
         logger.logWarning("Force rebuilding routes");
         
         route();
@@ -263,7 +263,7 @@ function all() {
         return;
     }
 
-    filepaths = json.parse(json.read("user/cache/filepaths.json"));
+    db = json.parse(json.read("user/cache/db.json"));
     res = json.parse(json.read("user/cache/res.json"));
 }
 

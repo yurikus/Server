@@ -1,8 +1,8 @@
 "use strict";
 
-const hideoutAreas = json.parse(json.read(filepaths.user.cache.hideout_areas));
-const hideoutProduction = json.parse(json.read(filepaths.user.cache.hideout_production));
-const hideoutScavcase = json.parse(json.read(filepaths.user.cache.hideout_scavcase));
+const hideoutAreas = json.parse(json.read(db.user.cache.hideout_areas));
+const hideoutProduction = json.parse(json.read(db.user.cache.hideout_production));
+const hideoutScavcase = json.parse(json.read(db.user.cache.hideout_scavcase));
 
 function HideoutUpgrade(pmcData, body, sessionID) {
 	for (let itemToPay of body.items) {
@@ -162,7 +162,7 @@ function HideoutScavCaseProductionStart(pmcData, body, sessionID) {
 		}
 	}
 
-	let hideoutScavcase = json.parse(json.read(filepaths.user.cache.hideout_scavcase));
+	let hideoutScavcase = json.parse(json.read(db.user.cache.hideout_scavcase));
 
 	for (let receipe in hideoutScavcase.data) {	
 		if (body.recipeId == hideoutScavcase.data[receipe]._id) {

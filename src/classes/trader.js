@@ -14,17 +14,17 @@ class TraderServer {
     initializeTraders() {
         logger.logWarning("Loading traders into RAM...");
 
-        for (let id in filepaths.traders) {
-            this.traders[id] = json.parse(json.read(filepaths.traders[id]));
+        for (let id in db.traders) {
+            this.traders[id] = json.parse(json.read(db.traders[id]));
         }
     }
 
     initializeCustomization() {
         logger.logWarning("Loading customization into RAM...");
 
-        for (let id in filepaths.traders) {
-            if ("customization_" + id in filepaths.user.cache) {
-                this.customization[id] = json.parse(json.read(filepaths.user.cache["customization_" + id]));
+        for (let id in db.traders) {
+            if ("customization_" + id in db.user.cache) {
+                this.customization[id] = json.parse(json.read(db.user.cache["customization_" + id]));
             }
         }
     }
@@ -105,7 +105,7 @@ class TraderServer {
             return;
         }
 
-        let base = json.parse(json.read(filepaths.user.cache["assort_" + traderId]));
+        let base = json.parse(json.read(db.user.cache["assort_" + traderId]));
 
         // 1 is min level, 4 is max level
         if (traderId !== "54cb57776803fa99248b456e") {
@@ -126,7 +126,7 @@ class TraderServer {
 
     generateFence() {
         let base = json.parse(json.read("db/cache/assort.json"));
-        let names = Object.keys(filepaths.assort["54cb57776803fa99248b456e"].loyal_level_items);
+        let names = Object.keys(db.assort["54cb57776803fa99248b456e"].loyal_level_items);
         let added = [];
 
         for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
@@ -138,9 +138,9 @@ class TraderServer {
             }
 
             added.push(id);
-            base.data.items.push(json.parse(json.read(filepaths.assort["54cb57776803fa99248b456e"].items[id])));
-            base.data.barter_scheme[id] = json.parse(json.read(filepaths.assort["54cb57776803fa99248b456e"].barter_scheme[id]));
-            base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort["54cb57776803fa99248b456e"].loyal_level_items[id]));
+            base.data.items.push(json.parse(json.read(db.assort["54cb57776803fa99248b456e"].items[id])));
+            base.data.barter_scheme[id] = json.parse(json.read(db.assort["54cb57776803fa99248b456e"].barter_scheme[id]));
+            base.data.loyal_level_items[id] = json.parse(json.read(db.assort["54cb57776803fa99248b456e"].loyal_level_items[id]));
         }
 
         this.assorts['579dc571d53a0658a154fbec'] = base;

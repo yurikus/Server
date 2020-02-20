@@ -12,7 +12,7 @@
 * 7 - MarkedAsFailed
 */
 
-const questsCache = json.read(filepaths.user.cache.quests);
+const questsCache = json.read(db.user.cache.quests);
 
 function getQuestsCache() {
     return questsCache;
@@ -40,8 +40,8 @@ function acceptQuest(pmcData, body, sessionID) {
 
     // Create a dialog message for starting the quest.
     // Note that for starting quests, the correct locale field is "description", not "startedMessageText".
-    let quest = json.parse(json.read(filepaths.quests[body.qid]));
-    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid]));
+    let quest = json.parse(json.read(db.quests[body.qid]));
+    let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
     let messageContent = {templateId: questLocale.description, type: dialogue_f.getMessageTypeValue('questStart')};
 
     dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID);
@@ -57,7 +57,7 @@ function completeQuest(pmcData, body, sessionID) {
     }
 
     // give reward
-    let quest = json.parse(json.read(filepaths.quests[body.qid]));
+    let quest = json.parse(json.read(db.quests[body.qid]));
     let questRewards = [];
 
     for (let reward of quest.rewards.Success) {
@@ -65,7 +65,7 @@ function completeQuest(pmcData, body, sessionID) {
             case "Item":
                 for (let rewardItem of reward.items) {
                     // Quest rewards bundle up items whose max stack size is 1. Break them up.
-                    let itemTmplData = json.parse(json.read(filepaths.items[rewardItem._tpl]));
+                    let itemTmplData = json.parse(json.read(db.items[rewardItem._tpl]));
 
                     if ("upd" in rewardItem && itemTmplData._props.StackMaxSize === 1) {
                         let count = rewardItem.upd.StackObjectsCount;
@@ -113,8 +113,8 @@ function completeQuest(pmcData, body, sessionID) {
     }
 
     // Create a dialog message for completing the quest.
-    let questDb = json.parse(json.read(filepaths.quests[body.qid]));
-    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid]));
+    let questDb = json.parse(json.read(db.quests[body.qid]));
+    let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
     let messageContent = {
         templateId: questLocale.successMessageText,
         type: dialogue_f.getMessageTypeValue('questSuccess')

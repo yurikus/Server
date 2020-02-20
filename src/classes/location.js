@@ -12,10 +12,10 @@ class LocationServer {
         logger.logWarning("Loading locations into RAM...");
 
         this.locations = {};
-        let keys = Object.keys(filepaths.locations);
+        let keys = Object.keys(db.locations);
 
         for (let locationName of keys) {
-            let node = filepaths.locations[locationName];
+            let node = db.locations[locationName];
             let location = json.parse(json.read(node.base));
 
             // set infill locations
@@ -54,7 +54,7 @@ class LocationServer {
         }
 
         // forced loot
-        base = filepaths.locations[locationName].loot.forced;
+        base = db.locations[locationName].loot.forced;
 
         for (let dir in base) {
             for (let loot in base[dir]) {
@@ -71,7 +71,7 @@ class LocationServer {
         }
 
         // static loot
-        base = filepaths.locations[locationName].loot.static;
+        base = db.locations[locationName].loot.static;
 
         for (let dir in base) {
             let node = base[dir];
@@ -88,14 +88,14 @@ class LocationServer {
         }
 
         // dyanmic loot
-        let dirs = Object.keys(filepaths.locations[locationName].loot.dynamic);
+        let dirs = Object.keys(db.locations[locationName].loot.dynamic);
         let max = output.Loot.length + dirs.length;
 
         if (settings.gameplay.locationloot[locationName] < max) {
             max = settings.gameplay.locationloot[locationName];
         }
 
-        base = filepaths.locations[locationName].loot.dynamic;
+        base = db.locations[locationName].loot.dynamic;
 
         while (output.Loot.length < max) {
             let node = base[dirs[utility.getRandomInt(0, dirs.length - 1)]];

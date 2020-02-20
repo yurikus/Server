@@ -102,7 +102,7 @@ function examineItem(pmcData, body, sessionID) {
     }
 
     // item found
-    let data = json.parse(json.read(filepaths.items[returned]));
+    let data = json.parse(json.read(db.items[returned]));
 
     pmcData.Info.Experience += data._props.ExamineExperience;
     pmcData.Encyclopedia[returned] = true;

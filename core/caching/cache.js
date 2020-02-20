@@ -42,18 +42,18 @@ function genericCacher(cachename, filepathNode, output = "") {
 }
 
 function items() {
-    genericCacher("items.json", filepaths.items);
+    genericCacher("items.json", db.items);
 }
 
 function quests() {
-    genericCacher("quests.json", filepaths.quests);
+    genericCacher("quests.json", db.quests);
 }
 
 function languages() {
     let base = json.parse(json.read("db/cache/languages.json"));
 
-    for (let file of Object.keys(filepaths.locales)) {
-        let fileData = json.parse(json.read(filepaths.locales[file][file]));
+    for (let file of Object.keys(db.locales)) {
+        let fileData = json.parse(json.read(db.locales[file][file]));
         base.data.push(fileData);
     }
 
@@ -62,23 +62,23 @@ function languages() {
 }
 
 function customization() {
-    genericCacher("customization.json", filepaths.customization);
+    genericCacher("customization.json", db.customization);
 }
 
 function hideoutAreas() {
-    genericCacher("hideout_areas.json", filepaths.hideout.areas);
+    genericCacher("hideout_areas.json", db.hideout.areas);
 }
 
 function hideoutProduction() {
-    genericCacher("hideout_production.json", filepaths.hideout.production);
+    genericCacher("hideout_production.json", db.hideout.production);
 }
 
 function hideoutScavcase() {
-    genericCacher("hideout_scavcase.json", filepaths.hideout.scavcase);
+    genericCacher("hideout_scavcase.json", db.hideout.scavcase);
 }
 
 function weather() {
-    genericCacher("weather.json", filepaths.weather);
+    genericCacher("weather.json", db.weather);
 }
 
 function templates() {
@@ -91,7 +91,7 @@ function templates() {
     ];
 
     for (let path in inputDir) {
-        let inputFiles = filepaths.templates[inputDir[path]];
+        let inputFiles = db.templates[inputDir[path]];
 
         for (let file in inputFiles) {
             let filePath = inputFiles[file];
@@ -113,7 +113,7 @@ function assorts(trader) {
     logger.logInfo("Caching: assort_" + trader + ".json");
 
     let base = json.parse(json.read("db/cache/assort.json"));
-    let inputNode = filepaths.assort[trader];
+    let inputNode = db.assort[trader];
     let inputDir = [
         "items",
         "barter_scheme",
@@ -146,7 +146,7 @@ function assorts(trader) {
 
 function locales(locale) {
     let base = json.parse(json.read("db/cache/locale.json"));
-    let inputNode = filepaths.locales[locale];
+    let inputNode = db.locales[locale];
     let inputDir = [
         "mail",
         "quest",
@@ -207,8 +207,8 @@ function mod() {
 
 function all() {
     let force = settings.server.rebuildCache;
-    let assortList = Object.keys(filepaths.assort);
-    let localesList = Object.keys(filepaths.locales);
+    let assortList = Object.keys(db.assort);
+    let localesList = Object.keys(db.locales);
 
     // generate cache
     if (force || !fs.existsSync("user/cache/items.json")) {

@@ -79,7 +79,7 @@ function generateBot(bot, role, sessionID) {
 	}
 
 	// generate bot
-	node = filepaths.bots[type.toLowerCase()];
+	node = db.bots[type.toLowerCase()];
 
 	bot.Info.Settings.Role = role;
 	bot.Info.Nickname = getRandomValue(node.names);
@@ -108,7 +108,7 @@ function generate(info, sessionID) {
 
 	for (let condition of info.conditions) {
 		for (let i = 0; i < condition.Limit; i++)  {
-			let bot = json.parse(json.read(filepaths.bots.base));
+			let bot = json.parse(json.read(db.bots.base));
 
 			bot._id = "bot" + utility.getRandomIntEx(99999999);
 			bot.Info.Settings.BotDifficulty = condition.Difficulty;

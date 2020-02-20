@@ -239,7 +239,7 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
-    let maxStackSize = (json.parse(json.read(filepaths.items[currency])))._props.StackMaxSize;
+    let maxStackSize = (json.parse(json.read(db.items[currency])))._props.StackMaxSize;
     let skip = false;
 
     for (let item of pmcData.Inventory.items) {

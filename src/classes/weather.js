@@ -1,6 +1,6 @@
 "use strict";
 
-let weather = json.parse(json.read(filepaths.user.cache.weather));
+let weather = json.parse(json.read(db.user.cache.weather));
 
 function generate() {
     let output = {};

@@ -24,7 +24,7 @@ class Interpreter {
 
         /* setup core files */
         global.settings = json.parse(json.read("user/server.config.json"));
-        global.filepaths = {};
+        global.db = {};
         global.res = {};
 
         /* setup routes and cache */
@@ -51,9 +51,9 @@ class Interpreter {
 
     /* TODO: REFACTOR THIS */
     initializeData() {
-        global.items = json.parse(json.read(filepaths.user.cache.items));
-        global.globals = json.parse(json.read(filepaths.globals));
-        global.templates = json.parse(json.read(filepaths.user.cache.templates));
+        global.items = json.parse(json.read(db.user.cache.items));
+        global.globals = json.parse(json.read(db.globals));
+        global.templates = json.parse(json.read(db.user.cache.templates));
     }
 
     /* load classes */
