@@ -77,7 +77,7 @@ function getOffers(request) {
         for (let p1 in categorySearch) {
             for (let search in linkedSearch) {
                 if (p1 === search) {
-                    offers.concat(createOffer(search, linkedSearch[search]));
+                    offers = offers.concat(createOffer(search, linkedSearch[search]));
                 }
             }
         }
@@ -88,7 +88,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers.concat(createOffer(price, offers_tpl[price]));
+            offers = offers.concat(createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -97,7 +97,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers.concat(createOffer(price, offers_tpl[price]));
+            offers = offers.concat(createOffer(price, offers_tpl[price]));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -218,7 +218,7 @@ function createOfferFromBuild(buildItems,response) {
         for (let curItem in items.data) {
             if (curItem === itemFromBuild) {
                 let item = itm_hf.getTemplateItem(itemFromBuild);
-                response.data.offers.concat(reateOffer(curItem, item.Price));
+                response.data.offers = response.data.offers.concat(createOffer(curItem, item.Price));
                 break;
             }
         }
