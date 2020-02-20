@@ -203,7 +203,7 @@ function others() {
             "locations": "user/cache/locations.json",
             "languages": "user/cache/languages.json",
             "customization": "user/cache/customization.json",
-            "Hideout_areas": "user/cache/hideout_areas.json",
+            "hideout_areas": "user/cache/hideout_areas.json",
             "hideout_production": "user/cache/hideout_production.json",
             "hideout_scavcase": "user/cache/hideout_scavcase.json",
             "weather": "user/cache/weather.json",
