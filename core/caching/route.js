@@ -4,25 +4,21 @@ const fs = require('fs');
 const mods = require('./mods.js');
 
 function flush() {
-    filepaths = json.parse(json.read("db/cache/filepaths.json"));
+    filepaths = {};
 }
 
 function dump() {
     json.write("user/cache/filepaths.json", filepaths);
 }
 
-function scanRecursive(filepath, baseNode) {
+function scanRecursive(filepath) {
+    let baseNode = {};
     let directories = utility.getDirList(filepath);
     let files = fs.readdirSync(filepath);
 
-    // deep tree search
-    for (let node in directories) {
-        baseNode[node] = scanRecursive(filepath + directories[node] + "/", baseNode[node]);
-    }
-
     // remove all directories from files
-    for (directory of directories) {
-        for (file in files) {
+    for (let directory of directories) {
+        for (let file in files) {
             if (files[file] === directory) {
                 files.splice(file, 1);
             }
@@ -31,16 +27,54 @@ function scanRecursive(filepath, baseNode) {
 
     // make sure to remove the file extention
     for (let node in files) {
-        let splitted = node.split(".");
-        let fileName = node.replace(splitted[splitted.length - 1], "");
+        let fileName = files[node].split('.').slice(0, -1).join('.');
         baseNode[fileName] = filepath + files[node];
+    }
+
+    // deep tree search
+    for (let node of directories) {
+        baseNode[node] = scanRecursive(filepath + node + "/");
     }
 
     return baseNode;
 }
 
 function routeAll() {
-    filepaths = scanRecursive("db/", filepaths);
+    filepaths = scanRecursive("db/");
+    console.log(filepaths);
+}
+
+function images() {
+    logger.logInfo("Routing: images");
+
+    let inputDir = [
+        "res/banners/",
+        "res/handbook/",
+        "res/hideout/",
+        "res/quest/",
+        "res/trader/",
+    ];
+
+    for (let path in inputDir) {
+        let inputFiles = fs.readdirSync(inputDir[path]);
+        
+        for (let file in inputFiles) {
+            let filePath = inputDir[path] + inputFiles[file];
+            let fileName = inputFiles[file].replace(".png", "").replace(".jpg", "");
+
+            if (path == 0) {
+                filepaths.images.banners[fileName] = filePath;
+            } else if (path == 1) {
+                filepaths.images.handbook[fileName] = filePath;
+            } else if (path == 2) {
+                filepaths.images.hideout[fileName] = filePath;
+            } else if (path == 3) {
+                filepaths.images.quest[fileName] = filePath;
+            } else if (path == 4) {
+                filepaths.images.trader[fileName] = filePath;
+            }
+        }
+    }
 }
 
 function others() {
