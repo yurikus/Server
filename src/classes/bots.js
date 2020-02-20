@@ -18,7 +18,7 @@ function addDogtag(bot, sessionID) {
 				"Side": bot.Info.Side,
 				"Level": bot.Info.Level,
 				"Time": (new Date().toISOString().replace(".000Z", "")),
-				"Status": ("Killed by " + (pmcData.Info.Nickname)),
+				"Status": "Killed by ",
 				"KillerName": pmcData.Info.Nickname,
 				"WeaponName": "JET Reverse Engineering"
 			}
