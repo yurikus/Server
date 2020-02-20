@@ -206,7 +206,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     return output;
 }
 
-function getCustomization() {
+function getCustomization(url) {
     let output = [];
     let offers = customizationOffers;
     let splittedUrl = url.split('/');
