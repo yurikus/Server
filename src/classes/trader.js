@@ -210,9 +210,10 @@ function getCustomization(url) {
     let output = [];
     let offers = customizationOffers;
     let splittedUrl = url.split('/');
+    let tmpTraderInfo = splittedUrl[splittedUrl.length - 2];
 
     for (let offer of offers.data) {
-        if (offer.tid === splittedUrl[splittedUrl.length - 2]) {
+        if (offer.tid === tmpTraderInfo) {
             output.push(offer);
         }
     }
