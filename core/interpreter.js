@@ -6,15 +6,9 @@ class Interpreter {
         this.initializeExceptions();
         this.initializeLoadOrder();
         this.initializeClasses();
-        this.initializeResponses();
-        this.initializeCallbacks();
     }
 
-    /* load loadorder from cache */
-    initializeLoadOrder() {
-        this.loadorder = json.parse(json.read("user/cache/loadorder.json"));
-    }
-
+    /* load core functionality */
     initializeCore() {
         /* setup utilites */
         global.utility = require('./util/utility.js');
@@ -27,7 +21,7 @@ class Interpreter {
         global.res = {};
 
         /* setup routes and cache */
-        const route = require('./route.js');
+        const route = require('./server/route.js');
         route.all();
 
         /* core logic */
@@ -46,27 +40,16 @@ class Interpreter {
         });
     }
 
+    /* load loadorder from cache */
+    initializeLoadOrder() {
+        this.loadorder = json.parse(json.read("user/cache/loadorder.json"));
+    }
+
     /* load classes */
     initializeClasses() {
-        for (let name in this.loadorder.classes) {
+        for (let name in this.loadorder) {
             logger.logInfo("Interpreter: class " + name);
-            global[name] = require("../" + this.loadorder.classes[name]);
-        }
-    }
-
-    /* load responses */
-    initializeResponses() {
-        for (let name in this.loadorder.responses) {
-            logger.logInfo("Interpreter: response " + name);
-            require("../" + this.loadorder.responses[name]);
-        }
-    }
-
-    /* load callbacks */
-    initializeCallbacks() {
-        for (let name in this.loadorder.callbacks) {
-            logger.logInfo("Interpreter: callback " + name);
-            require("../" + this.loadorder.callbacks[name]);
+            global[name] = require("../" + this.loadorder[name]);
         }
     }
 }

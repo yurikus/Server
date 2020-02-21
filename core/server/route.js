@@ -34,7 +34,8 @@ function loadMod(mod, filepath) {
     }
 
     if ("src" in mod) {
-        loadorder = scanRecursiveMod(filepath, loadorder, mod.src);
+        let src = scanRecursiveMod(filepath, src, mod.src);
+        json.write("user/cache/loadorder.json", src);
     }
 }
 
@@ -150,7 +151,6 @@ function flush() {
 function dump() {
     json.write("user/cache/db.json", db);
     json.write("user/cache/res.json", res);
-    json.write("user/cache/loadorder.json", loadorder);
 }
 
 function scanRecursiveRoute(filepath) {
@@ -184,7 +184,7 @@ function scanRecursiveRoute(filepath) {
 function routeAll() {
     db = scanRecursiveRoute("db/");
     res = scanRecursiveRoute("res/");
-    loadorder = json.parse(json.read("src/loadorder.json"));
+    json.write("user/cache/loadorder.json", json.parse(json.read("src/loadorder.json")))
 
     /* add important server paths */
     db.user = {
