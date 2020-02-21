@@ -1,7 +1,7 @@
 "use strict";
 
 class ItemPresets {
-    constructor() {
+    initialize() {
         const presets = Object.values(globals.data.ItemPresets);
         const reverse = {};
 
