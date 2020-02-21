@@ -208,7 +208,7 @@ class Server {
     
         // execute start callback
         for (let type in this.startCallback) {
-            this.startCallback[type](sessionID, req, resp, body, output);
+            this.startCallback[type]();
         }
 
         /* create server (https: game, http: launcher) */
