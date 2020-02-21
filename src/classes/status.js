@@ -111,6 +111,9 @@ function examineItem(pmcData, body, sessionID) {
 }
 
 function readEncyclopedia(pmcData, body, sessionID) {
+    for (let id of body.ids) {
+        pmcData.Encyclopedia[id] = true;
+    }
     return item_f.itemServer.getOutput();
 }
 
