@@ -188,6 +188,7 @@ class TraderServer {
 
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+    let currency = itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency);
     let output = {};
 
     // get sellable items
@@ -208,10 +209,10 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 
             // get real price
             price = price * count * settings.gameplay.trading.sellMultiplier;
-            price = itm_hf.fromRUB(price, itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency));
+            price = itm_hf.fromRUB(price, currency);
             price = (price > 0 && price !== "NaN" ? price : 1);
             
-            output[item._id] = [[{"_tpl": item._tpl, "count": price.toFixed(0)}]];
+            output[item._id] = [[{"_tpl": currency, "count": price.toFixed(0)}]];
         }
     }
 
