@@ -1,7 +1,5 @@
 "use strict";
 
-const _lookup = createLookup();
-
 /* A reverse lookup for templates */
 function createLookup() {
     let lookup = {
@@ -33,20 +31,20 @@ function createLookup() {
 }
 
 function getTemplatePrice(x) {
-    return (x in _lookup.items.byId) ? _lookup.items.byId[x] : 1;
+    return (x in tplLookup.items.byId) ? tplLookup.items.byId[x] : 1;
 }
 
 /* all items in template with the given parent category */
 function templatesWithParent(x) {
-    return (x in _lookup.items.byParent) ? _lookup.items.byParent[x] : [];
+    return (x in tplLookup.items.byParent) ? tplLookup.items.byParent[x] : [];
 }
 
 function isCategory(x) {
-    return x in _lookup.categories.byId;
+    return x in tplLookup.categories.byId;
 }
 
 function childrenCategories(x) {
-    return (x in _lookup.categories.byParent) ? _lookup.categories.byParent[x] : [];
+    return (x in tplLookup.categories.byParent) ? tplLookup.categories.byParent[x] : [];
 }
 
 /* Made a 2d array table with 0 - free slot and 1 - used slot
@@ -646,6 +644,7 @@ function arrayIntersect(a, b) {
     return a.filter(x => b.includes(x));
 }
 
+module.exports.createLookup = createLookup;
 module.exports.getTemplatePrice = getTemplatePrice;
 module.exports.templatesWithParent = templatesWithParent;
 module.exports.isCategory = isCategory;
