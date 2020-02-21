@@ -1,7 +1,7 @@
 "use strict";
 
-function loadPresets() {
+function load() {
     preset_f.itemPresets.initialize();
 }
 
-server.addStartCallback("loadPresets", loadPresets);
+server.addStartCallback("loadPresets", load);

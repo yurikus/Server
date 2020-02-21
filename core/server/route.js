@@ -106,6 +106,18 @@ function isRebuildRequired() {
         return true;
     }
 
+    if (!fs.existsSync("user/cache/db.json")) {
+        return true;
+    }
+
+    if (!fs.existsSync("user/cache/res.json")) {
+        return true;
+    }
+
+    if (!fs.existsSync("user/cache/loadorder.json")) {
+        return true;
+    }
+
     let modlist = settings.mods.list;
     let cachedlist = json.parse(json.read("user/cache/mods.json"));
 
@@ -204,18 +216,18 @@ function all() {
 
     /* detect if existing mods changed */
     if (detectChangedMods()) {
-        logger.logWarning("Mod mismatch");
+        logger.logWarning("Modlist mismatch");
         settings.server.rebuildCache = true;
     }
 
     /* check if db need rebuid */
     if (isRebuildRequired()) {
-        logger.logWarning("Modlist mismatch");
+        logger.logWarning("Rebuild required");
         settings.server.rebuildCache = true;
     }
 
     /* rebuild db */
-    if (settings.server.rebuildCache || !fs.existsSync("user/cache/db.json")) {
+    if (settings.server.rebuildCache) {
         logger.logWarning("Rebuilding routes");
         
         flush();

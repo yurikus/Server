@@ -1,3 +1,7 @@
 "use strict";
 
-server.addStartCallback("loadWeather", weather_f.initialize);
+function load() {
+    weather_f.initialize();
+}
+
+server.addStartCallback("loadWeather", load);

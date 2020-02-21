@@ -1,3 +1,7 @@
 "use strict";
 
-server.addStartCallback("loadStaticdata", staticdata_f.initialize);
+function load() {
+    staticdata_f.initialize();
+}
+
+server.addStartCallback("loadStaticdata", load);

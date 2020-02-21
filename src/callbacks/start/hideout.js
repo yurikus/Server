@@ -1,3 +1,7 @@
 "use strict";
 
-server.addStartCallback("loadHideout", hideout_f.initialize);
+function load() {
+    hideout_f.initialize();
+}
+
+server.addStartCallback("loadHideout", load);

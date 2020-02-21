@@ -6,5 +6,4 @@ function saveCallback(sessionID, req, resp, body, output) {
     }
 }
 
-server.addStartCallback("savehandler", saveHandler.initialize());
 server.addReceiveCallback("SAVE", saveCallback);

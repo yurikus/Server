@@ -1,3 +1,7 @@
 "use strict";
 
-server.addStartCallback("loadCustomization", customization_f.initialize);
+function load() {
+    customization_f.initialize();
+}
+
+server.addStartCallback("loadCustomization", load);

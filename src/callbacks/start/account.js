@@ -1,7 +1,7 @@
 "use strict";
 
-function initialize() {
+function load() {
     account_f.accountServer.initialize();
 }
 
-server.addStartCallback("loadAccounts", initialize);
+server.addStartCallback("loadAccounts", load);

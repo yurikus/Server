@@ -1,3 +1,7 @@
 "use strict";
 
-server.addStartCallback("loadQuests", quest_f.initialize);
+function load() {
+    quest_f.initialize();
+}
+
+server.addStartCallback("loadQuests", load);

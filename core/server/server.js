@@ -207,7 +207,10 @@ class Server {
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
     
         // execute start callback
+        console.log(this.startCallback);
+
         for (let type in this.startCallback) {
+            console.log(type);
             this.startCallback[type]();
         }
 
