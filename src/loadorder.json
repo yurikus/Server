@@ -59,9 +59,22 @@
         "wishlist": "src/responses/wishlist.js"
     },
     "callbacks": {
-        "notifier": "src/callbacks/notifier.js",
-        "savehandler": "src/callbacks/savehandler.js",
-        "image": "src/callbacks/image.js",
-        "location": "src/callbacks/location.js"
+        "routeMissing": "src/callbacks/route/missing.js",
+
+        "cacheModlist": "src/callbacks/cache/modlist.js",
+        "cacheGeneric": "src/callbacks/cache/generic.js",
+        "cacheLanguages": "src/callbacks/cache/languages.js",
+        "cacheTemplates": "src/callbacks/cache/templates.js",
+        "cacheAssort": "src/callbacks/cache/assort.js",
+        "cacheLocales": "src/callbacks/cache/locales.js",
+        "cacheDone": "src/callbacks/cache/done.js",
+
+        "loadStaticdata": "src/callbacks/start/staticdata.js",
+        
+
+        "notifierResponse": "src/callbacks/response/notifier.js",
+        "savehandlerResponse": "src/callbacks/response/savehandler.js",
+        "imageResponse": "src/callbacks/response/image.js",
+        "locationResponse": "src/callbacks/response/location.js"
     }
 }

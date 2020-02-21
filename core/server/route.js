@@ -25,10 +25,17 @@ function loadMod(mod, filepath) {
 
     let loadorder = json.parse(json.read("user/cache/loadorder.json"));
 
-    db = scanRecursiveMod(filepath, db, mod.db);
-    loadorder = scanRecursiveMod(filepath, loadorder, mod.src);
+    if ("db" in mod) {
+        db = scanRecursiveMod(filepath, db, mod.db);
+    }
 
-    json.write("user/cache/loadorder.json", loadorder);
+    if ("res" in mod) {
+        res = scanRecursiveMod(filepath, res, mod.res);
+    }
+
+    if ("src" in mod) {
+        loadorder = scanRecursiveMod(filepath, loadorder, mod.src);
+    }
 }
 
 function detectChangedMods() {
@@ -143,6 +150,7 @@ function flush() {
 function dump() {
     json.write("user/cache/db.json", db);
     json.write("user/cache/res.json", res);
+    json.write("user/cache/loadorder.json", loadorder);
 }
 
 function scanRecursiveRoute(filepath) {
@@ -176,66 +184,13 @@ function scanRecursiveRoute(filepath) {
 function routeAll() {
     db = scanRecursiveRoute("db/");
     res = scanRecursiveRoute("res/");
-}
+    loadorder = json.parse(json.read("src/loadorder.json"));
 
-function others() {
-    db.globals = "db/globals.json";
-    db.hideout.settings = "db/hideout/settings.json";
-
-    db.ragfair = {
-        "offer": "db/ragfair/offer.json",
-        "search": "db/ragfair/search.json"
-    }
-
+    /* add important server paths */
     db.user = {
         "config": "user/server.config.json",
-        "events_schedule": "user/events/schedule.json",
-        "profiles": {
-            "list": "user/profiles/list.json",
-            "character": "user/profiles/__REPLACEME__/character.json",
-            "dialogue": "user/profiles/__REPLACEME__/dialogue.json",
-            "storage": "user/profiles/__REPLACEME__/storage.json",
-            "userbuilds": "user/profiles/__REPLACEME__/userbuilds.json"
-        },
-        "cache": {
-            "items": "user/cache/items.json",
-            "quests": "user/cache/quests.json",
-            "locations": "user/cache/locations.json",
-            "languages": "user/cache/languages.json",
-            "customization": "user/cache/customization.json",
-            "hideout_areas": "user/cache/hideout_areas.json",
-            "hideout_production": "user/cache/hideout_production.json",
-            "hideout_scavcase": "user/cache/hideout_scavcase.json",
-            "weather": "user/cache/weather.json",
-            "templates": "user/cache/templates.json",
-            "mods": "user/cache/mods.json"
-        }
-    };
-
-    for (let trader of utility.getDirList("db/assort/")) {
-        db.user.cache["assort_" + trader] = "user/cache/assort_" + trader + ".json";
-
-        if (fs.existsSync("db/assort/" + trader + "/customization/")) {
-            db.user.cache["customization_" + trader] = "user/cache/customization_" + trader + ".json";
-        }
+        "events_schedule": "user/events/schedule.json"
     }
-
-    for (let locale of utility.getDirList("db/locales/")) {
-        db.user.cache["locale_" + locale] = "user/cache/locale_" + locale + ".json";
-    }
-}
-
-function loadorder() {
-    logger.logInfo("Routing: loadorder");
-    json.write("user/cache/loadorder.json", json.parse(json.read("src/loadorder.json")));
-}
-
-function route() {
-    flush();
-
-    routeAll();
-    others();
-    loadorder();
 }
 
 function all() {
@@ -261,9 +216,10 @@ function all() {
 
     /* rebuild db */
     if (settings.server.rebuildCache || !fs.existsSync("user/cache/db.json")) {
-        logger.logWarning("Force rebuilding routes");
+        logger.logWarning("Rebuilding routes");
         
-        route();
+        flush();
+        routeAll();
         loadAllMods();
         dump();
 

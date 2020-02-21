@@ -5,7 +5,6 @@ class Interpreter {
         this.initializeCore();
         this.initializeExceptions();
         this.initializeLoadOrder();
-        this.initializeData();
         this.initializeClasses();
         this.initializeResponses();
         this.initializeCallbacks();
@@ -28,10 +27,8 @@ class Interpreter {
         global.res = {};
 
         /* setup routes and cache */
-        const route = require('./caching/route.js');
-        const cache = require('./caching/cache.js');
+        const route = require('./route.js');
         route.all();
-        cache.all();
 
         /* core logic */
         global.router = (require('./server/router.js').router);
@@ -47,13 +44,6 @@ class Interpreter {
             logger.logError("Trace:");
             logger.logData(error);
         });
-    }
-
-    /* TODO: REFACTOR THIS */
-    initializeData() {
-        global.items = json.parse(json.read(db.user.cache.items));
-        global.globals = json.parse(json.read(db.globals));
-        global.templates = json.parse(json.read(db.user.cache.templates));
     }
 
     /* load classes */
