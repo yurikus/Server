@@ -212,9 +212,16 @@ function others() {
         }
     };
 
-    for (let assort of utility.getDirList("db/assort/")) {
-        db.user.cache["assort_" + assort] = "user/cache/assort_" + assort + ".json";
-        db.user.cache["customization_" + assort] = "user/cache/customization_" + assort + ".json";
+    for (let trader of utility.getDirList("db/assort/")) {
+        db.user.cache["assort_" + trader] = "user/cache/assort_" + trader + ".json";
+
+        if (fs.existsSync("db/assort/" + trader + "/customization/")) {
+            db.user.cache["customization_" + trader] = "user/cache/customization_" + trader + ".json";
+        }
+    }
+
+    for (let locale of utility.getDirList("db/locales/")) {
+        db.user.cache["locale_" + locale] = "user/cache/locale_" + locale + ".json";
     }
 }
 
