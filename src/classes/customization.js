@@ -1,6 +1,10 @@
 "use strict";
 
-const customization = json.parse(json.read(db.user.cache.customization));
+let customization = undefined;
+
+function initialize() {
+	customization = json.parse(json.read(db.user.cache.customization));
+}
 
 function getCustomization() {
 	return customization;
@@ -65,6 +69,7 @@ function buyClothing(pmcData, body, sessionID) {
 	return output;
 }
 
+module.exports.initialize = initialize;
 module.exports.getCustomization = getCustomization;
 module.exports.getPath = getPath;
 module.exports.wearClothing = wearClothing;

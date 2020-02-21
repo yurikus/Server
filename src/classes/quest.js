@@ -12,7 +12,11 @@
 * 7 - MarkedAsFailed
 */
 
-const questsCache = json.read(db.user.cache.quests);
+let questsCache = undefined;
+
+function initialize() {
+    questsCache = json.read(db.user.cache.quests);
+}
 
 function getQuestsCache() {
     return questsCache;
@@ -143,6 +147,7 @@ function handoverQuest(pmcData, body, sessionID) {
     return output;
 }
 
+module.exports.initialize = initialize;
 module.exports.getQuestsCache = getQuestsCache;
 module.exports.acceptQuest = acceptQuest;
 module.exports.completeQuest = completeQuest;

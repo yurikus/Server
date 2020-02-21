@@ -7,9 +7,9 @@
     "cacheassort_c": "src/callbacks/cache/assort.js",
     "cachelocales_c": "src/callbacks/cache/locales.js",
     "cachedone_c": "src/callbacks/cache/done.js",
-    "loadstaticdata_c": "src/callbacks/start/staticdata.js",
 
     "saveHandler": "src/classes/savehandler.js",
+    "staticdata_f": "src/classes/staticdata.js",
     "item_f": "src/classes/item.js",
     "locale_f": "src/classes/locale.js",
     "keepAlive_f": "src/classes/keepalive.js",
@@ -38,6 +38,7 @@
     "weather_f": "src/classes/weather.js",
     "location_f": "src/classes/location.js",
 
+    "item_r": "src/responses/item.js",
     "bots_r": "src/responses/bots.js",
     "customization_r": "src/responses/customization.js",
     "dialogue_r": "src/responses/dialogue.js",
@@ -65,6 +66,12 @@
     "userbuilds_r": "src/responses/userbuilds.js",
     "weather_r": "src/responses/weather.js",
     "wishlist_r": "src/responses/wishlist.js",
+
+    "loadstaticdata_c": "src/callbacks/start/staticdata.js",
+    "loadcustomization_c": "src/callbacks/start/customization.js",
+    "hideout_c": "src/callbacks/start/hideout.js",
+    "quest_c": "src/callbacks/start/quest.js",
+    "weather_c": "src/callbacks/start/weather.js",
 
     "notifier_c": "src/callbacks/response/notifier.js",
     "savehandler_c": "src/callbacks/response/savehandler.js",

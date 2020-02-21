@@ -11,10 +11,7 @@ class LocationServer {
     initializeLocations() {
         logger.logWarning("Loading locations into RAM...");
 
-        this.locations = {};
-        let keys = Object.keys(db.locations);
-
-        for (let locationName of keys) {
+        for (let locationName in db.locations) {
             let node = db.locations[locationName];
             let location = json.parse(json.read(node.base));
 
