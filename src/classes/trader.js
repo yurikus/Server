@@ -40,10 +40,6 @@ class TraderServer {
         for (let traderId in this.traders) {
             let trader = this.traders[traderId];
 
-            if (traderId === "54cb57776803fa99248b456e") {
-                continue;
-            }
-
             trader.loyalty.currentLevel = pmcData.TraderStandings[traderId].currentLevel;
             trader.loyalty.currentStanding = pmcData.TraderStandings[traderId].currentStanding;
             trader.loyalty.currentSalesSum = pmcData.TraderStandings[traderId].currentSalesSum;
@@ -108,7 +104,7 @@ class TraderServer {
         let base = json.parse(json.read(db.user.cache["assort_" + traderId]));
 
         // 1 is min level, 4 is max level
-        if (traderId !== "54cb57776803fa99248b456e") {
+        if (traderId !== "579dc571d53a0658a154fbec") {
             let keys = Object.keys(base.data.loyal_level_items);
             let level = this.traders[traderId].loyalty.currentLevel;
 
@@ -126,7 +122,7 @@ class TraderServer {
 
     generateFence() {
         let base = json.parse(json.read("db/cache/assort.json"));
-        let names = Object.keys(db.assort["54cb57776803fa99248b456e"].loyal_level_items);
+        let names = Object.keys(db.assort["579dc571d53a0658a154fbec"].loyal_level_items);
         let added = [];
 
         for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
@@ -138,9 +134,9 @@ class TraderServer {
             }
 
             added.push(id);
-            base.data.items.push(json.parse(json.read(db.assort["54cb57776803fa99248b456e"].items[id])));
-            base.data.barter_scheme[id] = json.parse(json.read(db.assort["54cb57776803fa99248b456e"].barter_scheme[id]));
-            base.data.loyal_level_items[id] = json.parse(json.read(db.assort["54cb57776803fa99248b456e"].loyal_level_items[id]));
+            base.data.items.push(json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].items[id])));
+            base.data.barter_scheme[id] = json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].barter_scheme[id]));
+            base.data.loyal_level_items[id] = json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].loyal_level_items[id]));
         }
 
         this.assorts['579dc571d53a0658a154fbec'] = base;
