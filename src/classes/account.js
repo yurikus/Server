@@ -6,6 +6,10 @@
 */
 class AccountServer {
     constructor() {
+        this.accounts = {};
+    }
+
+    initialize() {
         this.accounts = json.parse(json.read(db.user.profiles.list));
     }
 

@@ -1,6 +1,10 @@
 "use strict";
 
 function routeMissing() {
+    if (!settings.server.rebuildCache) {
+        return;
+    }
+    
     db.user = {
         "profiles": {
             "list": "user/profiles/list.json",
@@ -35,6 +39,8 @@ function routeMissing() {
     for (let locale of utility.getDirList("db/locales/")) {
         db.user.cache["locale_" + locale] = "user/cache/locale_" + locale + ".json";
     }
+
+    json.write("user/cache/db.json", db);
 }
 
 server.addStartCallback("routeMissing", routeMissing);
