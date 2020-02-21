@@ -210,7 +210,7 @@ class Server {
         console.log(this.startCallback);
 
         for (let type in this.startCallback) {
-            console.log(type);
+            logger.logWarning("Executing callback type " + type);
             this.startCallback[type]();
         }
 

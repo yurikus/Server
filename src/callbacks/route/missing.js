@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-function routeMissing() {
+function route() {
     if (!settings.server.rebuildCache) {
         return;
     }
@@ -45,4 +45,4 @@ function routeMissing() {
     json.write("user/cache/db.json", db);
 }
 
-server.addStartCallback("routeMissing", routeMissing);
+server.addStartCallback("routeMissing", route);
