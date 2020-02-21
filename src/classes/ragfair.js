@@ -99,9 +99,10 @@ function isInFilter(id, item, slot) {
 }
 
 /* Because of presets, categories are not always 1 */
-function countCategories(offers, response) {
+function countCategories(response) {
     let categ = {};
-    for (let offer of offers) {
+
+    for (let offer of response.data.offers) {
         let item = offer.items[0]; // only the first item can have presets
 
         categ[item._tpl] = categ[item._tpl] || 0;
@@ -155,7 +156,7 @@ function getOffers(request) {
     }
 
     response.data.offers = sortOffers(request, offers);
-    countCategories(offers, response);
+    countCategories(response);
 
     return json.stringify(response);
 }
@@ -200,6 +201,7 @@ function getCategoryList(handbookId) {
         if (itm_hf.isCategory(handbookId)) {
             // list all item of the category
             result = result.concat(itm_hf.templatesWithParent(handbookId));
+
             for (let categ of itm_hf.childrenCategories(handbookId)) {
                 result = result.concat(itm_hf.templatesWithParent(categ));
             }
