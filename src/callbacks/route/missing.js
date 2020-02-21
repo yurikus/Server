@@ -7,27 +7,26 @@ function route() {
         return;
     }
     
-    db.user = {
-        "profiles": {
-            "list": "user/profiles/list.json",
-            "character": "user/profiles/__REPLACEME__/character.json",
-            "dialogue": "user/profiles/__REPLACEME__/dialogue.json",
-            "storage": "user/profiles/__REPLACEME__/storage.json",
-            "userbuilds": "user/profiles/__REPLACEME__/userbuilds.json"
-        },
-        "cache": {
-            "items": "user/cache/items.json",
-            "quests": "user/cache/quests.json",
-            "locations": "user/cache/locations.json",
-            "languages": "user/cache/languages.json",
-            "customization": "user/cache/customization.json",
-            "hideout_areas": "user/cache/hideout_areas.json",
-            "hideout_production": "user/cache/hideout_production.json",
-            "hideout_scavcase": "user/cache/hideout_scavcase.json",
-            "weather": "user/cache/weather.json",
-            "templates": "user/cache/templates.json",
-            "mods": "user/cache/mods.json"
-        }
+    db.user.profiles = {
+        "list": "user/profiles/list.json",
+        "character": "user/profiles/__REPLACEME__/character.json",
+        "dialogue": "user/profiles/__REPLACEME__/dialogue.json",
+        "storage": "user/profiles/__REPLACEME__/storage.json",
+        "userbuilds": "user/profiles/__REPLACEME__/userbuilds.json"
+    },
+    
+    db.user.cache = {
+        "items": "user/cache/items.json",
+        "quests": "user/cache/quests.json",
+        "locations": "user/cache/locations.json",
+        "languages": "user/cache/languages.json",
+        "customization": "user/cache/customization.json",
+        "hideout_areas": "user/cache/hideout_areas.json",
+        "hideout_production": "user/cache/hideout_production.json",
+        "hideout_scavcase": "user/cache/hideout_scavcase.json",
+        "weather": "user/cache/weather.json",
+        "templates": "user/cache/templates.json",
+        "mods": "user/cache/mods.json"
     };
 
     for (let trader of utility.getDirList("db/assort/")) {
