@@ -77,7 +77,7 @@ function getOffers(request) {
         for (let p1 in categorySearch) {
             for (let search in linkedSearch) {
                 if (p1 === search) {
-                    offers = offers.concat(createOffer(search, linkedSearch[search]));
+                    offers = offers.concat(createOffer(search, linkedSearch[search], request.onlyFunctional));
                 }
             }
         }
@@ -88,7 +88,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers = offers.concat(createOffer(price, offers_tpl[price]));
+            offers = offers.concat(createOffer(price, offers_tpl[price], request.onlyFunctional));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -97,7 +97,7 @@ function getOffers(request) {
         let offers = [];
 
         for (let price in offers_tpl) {
-            offers = offers.concat(createOffer(price, offers_tpl[price]));
+            offers = offers.concat(createOffer(price, offers_tpl[price], request.onlyFunctional));
         }
 
         response.data.offers = sortOffers(request, offers);
@@ -218,7 +218,7 @@ function createOfferFromBuild(buildItems,response) {
         for (let curItem in items.data) {
             if (curItem === itemFromBuild) {
                 let item = itm_hf.getTemplateItem(itemFromBuild);
-                response.data.offers = response.data.offers.concat(createOffer(curItem, item.Price, false));
+                response.data.offers = response.data.offers.concat(createOffer(curItem, item.Price, false, false));
                 break;
             }
         }
@@ -227,7 +227,7 @@ function createOfferFromBuild(buildItems,response) {
     return response
 }
 
-function createOffer(template, price, usePresets = true) {
+function createOffer(template, price, onlyFunc, usePresets = true) {
     let offerBase = json.parse(json.read(db.ragfair.offer));
     let offers = [];
 
@@ -256,17 +256,19 @@ function createOffer(template, price, usePresets = true) {
         }
     }
 
-    // Single item
-    let rubPrice = Math.round(price * settings.gameplay.trading.ragfairMultiplier);
-    offerBase._id = template;
-    offerBase.items[0]._tpl = template;
-    offerBase.requirements[0].count = rubPrice;
-    offerBase.itemsCost = rubPrice;
-    offerBase.requirementsCost = rubPrice;
-    offerBase.summaryCost = rubPrice;
-    offers.push(offerBase);
-    //offerBase.startTime = utility.getTimestamp() - 1000;
-    //offerBase.endTime = utility.getTimestamp() + 43200;
+    if (!preset_f.itemPresets.hasPreset(template) || !onlyFunc) {
+        // Single item
+        let rubPrice = Math.round(price * settings.gameplay.trading.ragfairMultiplier);
+        offerBase._id = template;
+        offerBase.items[0]._tpl = template;
+        offerBase.requirements[0].count = rubPrice;
+        offerBase.itemsCost = rubPrice;
+        offerBase.requirementsCost = rubPrice;
+        offerBase.summaryCost = rubPrice;
+        offers.push(offerBase);
+        //offerBase.startTime = utility.getTimestamp() - 1000;
+        //offerBase.endTime = utility.getTimestamp() + 43200;
+    }
 
     return offers;
 }
