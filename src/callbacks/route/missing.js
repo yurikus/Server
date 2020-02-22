@@ -8,7 +8,7 @@ function route() {
     }
     
     db.user.profiles = {
-        "list": "user/profiles/list.json",
+        "list": "user/profiles.config.json",
         "character": "user/profiles/__REPLACEME__/character.json",
         "dialogue": "user/profiles/__REPLACEME__/dialogue.json",
         "storage": "user/profiles/__REPLACEME__/storage.json",
