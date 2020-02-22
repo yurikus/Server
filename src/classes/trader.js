@@ -61,7 +61,7 @@ class TraderServer {
                 break;
             }
 
-            pmcData.Info.Level = level;
+            pmcData.Info.Level = parseInt(level);
             checkedExp += globals.data.config.exp.level.exp_table[level].exp;
         }
 

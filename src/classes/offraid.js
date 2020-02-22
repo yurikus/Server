@@ -110,6 +110,10 @@ function saveProgress(offraidData, sessionID) {
         // It makes more sense to use pmcData's insured items as the source of truth.
         offraidData.profile.InsuredItems = pmcData.InsuredItems;
 
+        // add experience points
+        pmcData.Info.Experience += pmcData.Stats.TotalSessionExperience;
+        pmcData.Stats.TotalSessionExperience = 0;
+
         // level 69 cap to prevent visual bug occuring at level 70
         if (pmcData.Info.Experience > 13129881) {
             pmcData.Info.Experience = 13129881;
@@ -130,18 +134,18 @@ function saveProgress(offraidData, sessionID) {
     if (isPlayerScav) {
         scavData = setInventory(scavData, offraidData.profile);
         return;
+    } else {
+        pmcData = setInventory(pmcData, offraidData.profile);
     }
 
-    pmcData = setInventory(pmcData, offraidData.profile);
+    // remove inventory if player died and send insurance items
     insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
 
-    // remove inventory if player died
     if (isDead) {
         insurance_f.insuranceServer.storeDeadGear(pmcData, sessionID);
         pmcData = deleteInventory(pmcData, sessionID);
     }
 
-    // Send insurance message to player.
     insurance_f.insuranceServer.sendInsuredItems(pmcData, sessionID);
 }
 

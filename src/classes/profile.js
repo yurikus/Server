@@ -46,14 +46,7 @@ class ProfileServer {
     }
 
     getPmcProfile(sessionID) {
-        let pmcData = this.getProfile(sessionID, 'pmc');
-
-        if (pmcData.Stats.TotalSessionExperience > 0) {
-            pmcData.Info.Experience += pmcData.Stats.TotalSessionExperience;
-            pmcData.Stats.TotalSessionExperience = 0;
-        }
-
-        return pmcData;
+        return this.getProfile(sessionID, 'pmc');
     }
 
     getScavProfile(sessionID) {
