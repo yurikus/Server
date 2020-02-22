@@ -6,6 +6,16 @@ function getRandomValue(node) {
 }
 
 function addDogtag(bot, sessionID) {
+	let weaponArray = [
+		'A Magical Force',
+		'Goose With A Knife',
+		'Spartan Laser',
+		'Smashed Vodka Bottle',
+		'Heart Attack',
+		'Arrow To The Knee'
+	];
+	let randomNumber = Math.floor(Math.random()*weaponArray.length);
+	
 	let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 	let dogtagItem = {
 		_id: utility.generateNewItemId(),
@@ -20,7 +30,7 @@ function addDogtag(bot, sessionID) {
 				"Time": (new Date().toISOString()),
 				"Status": "Killed by ",
 				"KillerName": pmcData.Info.Nickname,
-				"WeaponName": "Randomize me daddy -AW"
+				"WeaponName": weaponArray[randomNumber]
 			}
 		}
 	}
