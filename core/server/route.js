@@ -7,14 +7,18 @@ function getModFilepath(mod) {
 }
 
 function scanRecursiveMod(filepath, baseNode, modNode) {
-    if (typeof modNode === "object") {
-        for (let node in modNode) {
-            baseNode[node] = scanRecursiveMod(filepath, baseNode[node], modNode[node]);
-        }
-    }
-
     if (typeof modNode === "string") {
         baseNode = filepath + modNode;
+    }
+
+    if (typeof modNode === "object") {
+        for (let node in modNode) {
+            if (!(node in baseNode)) {
+                baseNode[node] = {};
+            }
+
+            baseNode[node] = scanRecursiveMod(filepath, baseNode[node], modNode[node]);
+        }
     }
 
     return baseNode;
@@ -23,7 +27,7 @@ function scanRecursiveMod(filepath, baseNode, modNode) {
 function loadMod(mod, filepath) {
     logger.logInfo("Loading mod " + mod.author + "-" + mod.name + "-" + mod.version);
 
-    let loadorder = json.parse(json.read("user/cache/loadorder.json"));
+    let src = json.parse(json.read("user/cache/loadorder.json"));
 
     if ("db" in mod) {
         db = scanRecursiveMod(filepath, db, mod.db);
@@ -34,7 +38,7 @@ function loadMod(mod, filepath) {
     }
 
     if ("src" in mod) {
-        let src = scanRecursiveMod(filepath, src, mod.src);
+        src = scanRecursiveMod(filepath, src, mod.src);
         json.write("user/cache/loadorder.json", src);
     }
 }
