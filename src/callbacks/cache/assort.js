@@ -51,7 +51,7 @@ function cache() {
             let base = [];
 
             for (let file in db.assort[trader].customization) {
-                base.data.push(json.parse(json.read(db.assort[trader].customization[file])));
+                base.push(json.parse(json.read(db.assort[trader].customization[file])));
             }
 
             base.crc = utility.adlerGen(json.stringify(base));
