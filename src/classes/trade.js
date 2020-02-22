@@ -72,14 +72,16 @@ function confirmRagfairTrading(pmcData, body, sessionID) {
 
     for (let offer of offers) {
         pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-        body = {};
-        body.Action = "TradingConfirm";
-        body.type = "buy_from_trader";
-        body.tid = "579dc571d53a0658a154fbec";
-        body.item_id = offer.id;
-        body.count = offer.count;
-        body.scheme_id = 0;
-        body.scheme_items = offer.items;
+
+        body = {
+            "Action": "TradingConfirm",
+            "type": "buy_from_trader",
+            "tid": "579dc571d53a0658a154fbec",
+            "item_id": offer.id,
+            "count": offer.count,
+            "scheme_id": 0,
+            "scheme_items": offer.items
+        };
 
         output = confirmTrading(pmcData, body, sessionID);
     }

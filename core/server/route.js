@@ -106,19 +106,10 @@ function detectMissingMods() {
 }
 
 function isRebuildRequired() {
-    if (!fs.existsSync("user/cache/mods.json")) {
-        return true;
-    }
-
-    if (!fs.existsSync("user/cache/db.json")) {
-        return true;
-    }
-
-    if (!fs.existsSync("user/cache/res.json")) {
-        return true;
-    }
-
-    if (!fs.existsSync("user/cache/loadorder.json")) {
+    if (!fs.existsSync("user/cache/mods.json")
+    || !fs.existsSync("user/cache/db.json")
+    || !fs.existsSync("user/cache/res.json")
+    || !fs.existsSync("user/cache/loadorder.json")) {
         return true;
     }
 
@@ -146,13 +137,11 @@ function loadAllMods() {
     let modList = settings.mods.list;
 
     for (let element of modList) {
-        // skip mod
         if (!element.enabled) {
             logger.logWarning("Skipping mod " + element.author + "-" + element.name + "-" + element.version);
             continue;
         }
 
-        // apply mod
         let filepath = getModFilepath(element);
         let mod = json.parse(json.read(filepath + "mod.config.json"));
         loadMod(mod, filepath);
