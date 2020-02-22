@@ -221,15 +221,19 @@ function createOffer(template, onlyFunc, usePresets = true) {
     // Preset
     if (usePresets && preset_f.itemPresets.hasPreset(template)) {
         let presets = preset_f.itemPresets.getPresets(template);
+        
         for (let p of presets) {
             let offer = itm_hf.clone(offerBase);
             let mods = p._items;
             let rub = 0;
+
             for (let it of mods) {
                 rub += itm_hf.getTemplatePrice(it._tpl);
             }
+
             mods[0].upd = mods[0].upd || {}; // append the stack count
             mods[0].upd.StackObjectsCount = offerBase.items[0].upd.StackObjectsCount;
+
             offer._id = p._id;               // The offer's id is now the preset's id
             offer.root = mods[0]._id;        // Sets the main part of the weapon
             offer.items = mods;

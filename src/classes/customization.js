@@ -16,19 +16,16 @@ function getPath(sessionID) {
 }
 
 function wearClothing(pmcData, body, sessionID) {
-	// in case there is more suites to be wear
 	for (let i = 0; i < body.suites.length; i++) {
 		let suite = customization.data[body.suites[i]];
 
 		// this parent reffers to Lower Node
 		if (suite._parent == "5cd944d01388ce000a659df9") {
-			// do only feet
 			pmcData.Customization.Feet = suite._props.Feet;
 		}
 
 		// this parent reffers to Upper Node
 		if (suite._parent == "5cd944ca1388ce03a44dc2a4") {
-			// do only body and hands
 			pmcData.Customization.Body = suite._props.Body;
 			pmcData.Customization.Hands = suite._props.Hands;
 		}
@@ -47,7 +44,11 @@ function buyClothing(pmcData, body, sessionID) {
         for (let item of pmcData.Inventory.items) {
             if (item._id === key) {
                 let template = json.parse(json.read(db.templates.items[item._tpl]));
-                itemsToPay.push({"id": item._id, "count": Math.round(template.Price)});
+				
+				itemsToPay.push({
+					"id": item._id,
+					"count": Math.round(template.Price)
+				});
                 break;
             }
         }

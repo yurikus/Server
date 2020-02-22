@@ -103,7 +103,15 @@ function hideoutPutItemsInAreaSlots(pmcData, body, sessionID) {
 					continue;
 				}
 
-				let slot_to_add = {"item": [{"_id": inventoryItem._id, "_tpl": inventoryItem._tpl, "upd": inventoryItem.upd}]}
+				let slot_to_add = {
+					"item": [
+						{
+							"_id": inventoryItem._id,
+							"_tpl": inventoryItem._tpl,
+							"upd": inventoryItem.upd
+						}
+					]
+				};
 
 				pmcData.Hideout.Areas[area].slots.push(slot_to_add);
 				output = move_f.removeItem(pmcData, inventoryItem._id, output, sessionID);
@@ -122,11 +130,11 @@ function hideoutTakeItemsFromAreaSlots(pmcData, body, sessionID) {
 			continue;
 		}
 
-		let newReq = {};
-
-		newReq.item_id = pmcData.Hideout.Areas[area].slots[0].item[0]._tpl;
-		newReq.count = 1;
-		newReq.tid = "579dc571d53a0658a154fbec";
+		let newReq = {
+			"item_id": pmcData.Hideout.Areas[area].slots[0].item[0]._tpl,
+			"count": 1,
+			"tid": "579dc571d53a0658a154fbec"
+		};
 		
 		output = move_f.addItem(pmcData, newReq, output, sessionID);
 		
@@ -236,8 +244,8 @@ function hideoutTakeProduction(pmcData, body, sessionID) {
 		// create item and throw it into profile
 		let id = production.data[receipe].endProduct;
 		
+		// replace the base item with its main preset
         if (preset_f.itemPresets.hasPreset(id)) {
-            // replace the base item with its main preset
             id = preset_f.itemPresets.getStandardPreset(id)._id;
         }
 		
@@ -262,12 +270,13 @@ function hideoutTakeProduction(pmcData, body, sessionID) {
 
 			// give items BEFORE deleting the production
 			for (let itemProd of pmcData.Hideout.Production[prod].Products) {
-				let newReq = {};
-
 				pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-				newReq.item_id = itemProd._tpl;
-				newReq.count = 1;
-				newReq.tid = "579dc571d53a0658a154fbec";
+
+				let newReq = {
+					"item_id": itemProd._tpl,
+					"count": 1,
+					"tid": "579dc571d53a0658a154fbec"
+				};
 
 				output = move_f.addItem(pmcData, newReq, output, sessionID, true);
 			}

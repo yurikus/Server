@@ -92,31 +92,31 @@ class InsuranceServer {
             let trader = trader_f.traderServer.getTrader(traderId);
             let dialogueTemplates = json.parse(json.read(db.dialogues[traderId]));
             let messageContent = {
-                templateId: dialogueTemplates.insuranceStart[utility.getRandomInt(0, dialogueTemplates.insuranceStart.length - 1)],
-                type: dialogue_f.getMessageTypeValue("npcTrader")
+                "templateId": dialogueTemplates.insuranceStart[utility.getRandomInt(0, dialogueTemplates.insuranceStart.length - 1)],
+                "type": dialogue_f.getMessageTypeValue("npcTrader")
             };
     
             dialogue_f.dialogueServer.addDialogueMessage(traderId, messageContent, sessionID);
         
             messageContent = {
-                templateId: dialogueTemplates.insuranceFound[utility.getRandomInt(0, dialogueTemplates.insuranceFound.length - 1)],
-                type: dialogue_f.getMessageTypeValue("insuranceReturn"),
-                maxStorageTime: trader.data.insurance.max_storage_time * 3600,
-                systemData: {
-                    date: utility.getDate(),
-                    time: utility.getTime(),
-                    location: pmcData.Info.EntryPoint
+                "templateId": dialogueTemplates.insuranceFound[utility.getRandomInt(0, dialogueTemplates.insuranceFound.length - 1)],
+                "type": dialogue_f.getMessageTypeValue("insuranceReturn"),
+                "maxStorageTime": trader.data.insurance.max_storage_time * 3600,
+                "systemData": {
+                    "date": utility.getDate(),
+                    "time": utility.getTime(),
+                    "location": pmcData.Info.EntryPoint
                 }
             };
     
             events.scheduledEventHandler.addToSchedule({
-                type: "insuranceReturn",
-                sessionId: sessionID,
-                scheduledTime: Date.now() + utility.getRandomInt(trader.data.insurance.min_return_hour * 3600, trader.data.insurance.max_return_hour * 3600) * 1000,
-                data: {
-                    traderId: traderId,
-                    messageContent: messageContent,
-                    items: this.insured[sessionID][traderId]
+                "type": "insuranceReturn",
+                "sessionId": sessionID,
+                "scheduledTime": Date.now() + utility.getRandomInt(trader.data.insurance.min_return_hour * 3600, trader.data.insurance.max_return_hour * 3600) * 1000,
+                "data": {
+                    "traderId": traderId,
+                    "messageContent": messageContent,
+                    "items": this.insured[sessionID][traderId]
                 }
             });
         }
@@ -138,7 +138,7 @@ class InsuranceServer {
 
 /* calculates insurance cost */
 function cost(info, sessionID) {
-    let output = {"err": 0, "errmsg": null, "data": {}};
+    let output = {};
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
     for (let trader of info.traders) {
@@ -154,10 +154,10 @@ function cost(info, sessionID) {
             }
         }
 
-        output.data[trader] = items;
+        output[trader] = items;
     }
 
-    return json.stringify(output);
+    return output;
 }
 
 /* add insurance to an item */
@@ -169,7 +169,11 @@ function insure(pmcData, body, sessionID) {
         for (let item of pmcData.Inventory.items) {
             if (item._id === key) {
                 let template = json.parse(json.read(db.templates.items[item._tpl]));
-                itemsToPay.push({"id": item._id, "count": Math.round(template.Price * settings.gameplay.trading.insureMultiplier)});
+
+                itemsToPay.push({
+                    "id": item._id,
+                    "count": Math.round(template.Price * settings.gameplay.trading.insureMultiplier)
+                });
                 break;
             }
         }
@@ -185,7 +189,10 @@ function insure(pmcData, body, sessionID) {
     for (let key of body.items) {
         for (let item of pmcData.Inventory.items) {
             if (item._id === key) {
-                pmcData.InsuredItems.push({"tid": body.tid, "itemId": item._id});
+                pmcData.InsuredItems.push({
+                    "tid": body.tid,
+                    "itemId": item._id
+                });
                 break;
             }
         }

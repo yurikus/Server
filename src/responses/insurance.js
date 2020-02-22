@@ -1,7 +1,7 @@
 "use strict";
 
 function getInsuranceCost(url, info, sessionID) {
-    return insurance_f.cost(info, sessionID);
+    return json.stringify({"err": 0, "errmsg": null, "data": insurance_f.cost(info, sessionID)});
 }
 
 router.addStaticRoute("/client/insurance/items/list/cost", getInsuranceCost);
