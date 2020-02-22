@@ -75,7 +75,7 @@ function confirmRagfairTrading(pmcData, body, sessionID) {
         body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";
-        body.tid = "54cb57776803fa99248b456e";
+        body.tid = "579dc571d53a0658a154fbec";
         body.item_id = offer.id;
         body.count = offer.count;
         body.scheme_id = 0;
