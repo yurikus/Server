@@ -20,7 +20,7 @@ function addDogtag(bot, sessionID) {
 				"Time": (new Date().toISOString()),
 				"Status": "Killed by ",
 				"KillerName": pmcData.Info.Nickname,
-				"WeaponName": "A Magical Force"
+				"WeaponName": "Randomize me daddy -AW"
 			}
 		}
 	}
