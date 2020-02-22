@@ -1,6 +1,7 @@
 "use strict";
 
 function sendImage(sessionID, req, resp, body) {
+    let splittedUrl = req.url.split('/');
     let fileName = splittedUrl[splittedUrl.length - 1].split('.').slice(0, -1).join('.');
     let baseNode = {};
 
