@@ -182,11 +182,21 @@ class TraderServer {
     }
 
     getCustomization(traderId) {
-        if (!("traderId" in this.customization)) {
+        if (!("traderId" in this.customization) && "customization_" + traderId in db.user.cache) {
             this.customization[traderId] = json.parse(json.read(db.user.cache["customization_" + traderId]));
         }
         
         return this.customization[traderId];
+    }
+
+    getAllCustomization() {
+        let output = [];
+
+        for (let traderId in this.customization) {
+            output = output.concat(this.customization[traderId]);
+        }
+
+        return output;
     }
 }
 

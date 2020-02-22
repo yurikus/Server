@@ -180,7 +180,7 @@ function insure(pmcData, body, sessionID) {
     }
 
     // pay the item	to profile
-    if (!itm_hf.payMoney(pmcData, {scheme_items: itemsToPay, tid: body.tid}, sessionID)) {
+    if (!itm_hf.payMoney(pmcData, {"scheme_items": itemsToPay, "tid": body.tid}, sessionID)) {
         logger.LogError("no money found");
         return "";
     }

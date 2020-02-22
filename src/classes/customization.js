@@ -36,32 +36,35 @@ function wearClothing(pmcData, body, sessionID) {
 
 function buyClothing(pmcData, body, sessionID) {
 	let output = item_f.itemServer.getOutput();
+	let assort = trader_f.traderServer.getAllCustomization();
 	let storage = json.parse(json.read(getPath(sessionID)));
 	let itemsToPay = [];
 
-    // get the price of all items
-    for (let key of body.items) {
-        for (let item of pmcData.Inventory.items) {
-            if (item._id === key) {
-                let template = json.parse(json.read(db.templates.items[item._tpl]));
-				
-				itemsToPay.push({
-					"id": item._id,
-					"count": Math.round(template.Price)
-				});
-                break;
-            }
+    /* find items to pay */
+    for (let outfit of assort) {
+		if (outfit.suiteId === body.offer) {
+			console.log("found");
+
+        	for (let item of outfit.requirements.itemRequirements) {
+                itemsToPay.push({
+                    "id": item._tpl,
+                    "count": item.count
+                });
+			}
+
+			break;
         }
-    }
+	}
 
-    // pay the item	to profile
-    if (!itm_hf.payMoney(pmcData, {scheme_items: itemsToPay, tid: body.tid}, sessionID)) {
-        logger.LogError("no money found");
-        return "";
-    }
+	if (itemsToPay.length > 0) {
+		if (!itm_hf.payMoney(pmcData, {"scheme_items": itemsToPay, "tid": body.tid}, sessionID)) {
+			logger.LogError("no money found");
+			return "";
+		}
+	}
 
-	for (let offer of trader_f.traderServer.getCustomization(body.tid)) {
-		if (body.offer == offer._id) {
+	for (let offer of assort) {
+		if (body.offer == offer.suiteId) {
 			storage.data.suites.push(offer.suiteId);
 		}
 	}
