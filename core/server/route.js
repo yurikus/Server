@@ -89,7 +89,7 @@ function detectMissingMods() {
         /* check if mod is already in the list */
         for (let installed of settings.mods.list) {
             if (installed.name === config.name) {
-                logger.logWarning("Mod " + mod + " has already been added; skipping mod");
+                logger.logInfo("Mod " + mod + " is installed");
                 found = true;
                 break;
             }

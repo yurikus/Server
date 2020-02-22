@@ -1,10 +1,13 @@
 "use strict";
 
+const fs = require('fs');
+
 function cache() {
     if (!settings.server.rebuildCache) {
         return;
     }
 
+    /* assort */
     for (let trader in db.traders) {
         logger.logInfo("Caching: assort_" + trader + ".json");
 
@@ -38,6 +41,22 @@ function cache() {
 
         base.crc = utility.adlerGen(json.stringify(base.data));
         json.write("user/cache/assort_" + trader + ".json", base);
+    }
+
+    /* customization */
+    for (let trader in db.traders) {
+        if ("customization" in db.assort[trader]) {
+            logger.logInfo("Caching: customization_" + trader + ".json");
+
+            let base = [];
+
+            for (let file in db.assort[trader].customization) {
+                base.data.push(json.parse(json.read(db.assort[trader].customization[file])));
+            }
+
+            base.crc = utility.adlerGen(json.stringify(base));
+            json.write("user/cache/customization_" + trader + ".json", base);
+        }
     }
 }
 

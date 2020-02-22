@@ -182,6 +182,10 @@ class TraderServer {
     }
 
     getCustomization(traderId) {
+        if (!("traderId" in this.customization)) {
+            this.customization[traderId] = json.parse(json.read(db.user.cache["customization_" + traderId]));
+        }
+        
         return this.customization[traderId];
     }
 }
