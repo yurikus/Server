@@ -215,6 +215,12 @@ function getCategoryList(handbookId) {
 }
 
 function createOffer(template, onlyFunc, usePresets = true) {
+    // Some slot filters reference bad items
+    if (!(template in global.items.data)) {
+        logger.logWarning("Item " + template + " does not exist");
+        return [];
+    }
+
     let offerBase = json.parse(json.read(db.ragfair.offer));
     let offers = [];
 
