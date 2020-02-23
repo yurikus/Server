@@ -13,9 +13,9 @@ compile({
 	console.log(">>>Changing ICON...");
 	childProcess.execFile('dev/bin/ResourceHacker.exe', [
 		'-open',
-		'EmuTarkov-Server-Uncompressed.exe',
+		'EmuTarkov-Server.exe',
 		'-save',
-		'EmuTarkov-Server-Uncompressed.exe',
+		'EmuTarkov-Server.exe',
 		'-action',
 		'addoverwrite',
 		'-res',
