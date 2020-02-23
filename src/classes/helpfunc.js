@@ -30,12 +30,8 @@ function createLookup() {
     return lookup;
 }
 
-function templateExists(x) {
-    return x in tplLookup.items.byId;
-}
-
 function getTemplatePrice(x) {
-    return templateExists(x) ? tplLookup.items.byId[x] : 1;
+    return (x in tplLookup.items.byId) ? tplLookup.items.byId[x] : 1;
 }
 
 /* all items in template with the given parent category */
@@ -648,7 +644,6 @@ function arrayIntersect(a, b) {
     return a.filter(x => b.includes(x));
 }
 
-module.exports.templateExists = templateExists;
 module.exports.createLookup = createLookup;
 module.exports.getTemplatePrice = getTemplatePrice;
 module.exports.templatesWithParent = templatesWithParent;
