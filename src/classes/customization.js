@@ -36,36 +36,36 @@ function wearClothing(pmcData, body, sessionID) {
 
 function buyClothing(pmcData, body, sessionID) {
 	let output = item_f.itemServer.getOutput();
-	let assort = trader_f.traderServer.getAllCustomization();
 	let storage = json.parse(json.read(getPath(sessionID)));
-	let itemsToPay = [];
+	let offers = trader_f.traderServer.getAllCustomization();
 
-    /* find items to pay */
-    for (let outfit of assort) {
-		if (outfit.suiteId === body.offer) {
-			console.log("found");
+	for (let sellItem in body.items) {
+		for (let item in pmcData.Inventory.items) {
+			if (pmcData.Inventory.items[item]._id === sellItem.id) {
+				if (pmcData.Inventory.items[item].upd.StackObjectsCount > sellItem.count) {
+					pmcData.Inventory.items[item].upd.StackObjectsCount -= sellItem.count;
 
-        	for (let item of outfit.requirements.itemRequirements) {
-                itemsToPay.push({
-                    "id": item._tpl,
-                    "count": item.count
-                });
+					output.data.items.change.push({
+                        "_id": pmcData.Inventory.items[item]._id,
+                        "_tpl": pmcData.Inventory.items[item]._tpl,
+                        "parentId": pmcData.Inventory.items[item].parentId,
+                        "slotId": pmcData.Inventory.items[item].slotId,
+                        "location": pmcData.Inventory.items[item].location,
+                        "upd": {"StackObjectsCount": pmcData.Inventory.items[item].upd.StackObjectsCount}
+					});
+					break;
+				} else if (pmcData.Inventory.items[item].upd.StackObjectsCount === sellItem.count && sellItem.del === true) {
+					output.data.items.del.push({"_id": sellItem.id});
+                    pmcData.Inventory.items.splice(item, 1);					
+				}
 			}
-
-			break;
-        }
-	}
-
-	if (itemsToPay.length > 0) {
-		if (!itm_hf.payMoney(pmcData, {"scheme_items": itemsToPay, "tid": body.tid}, sessionID)) {
-			logger.LogError("no money found");
-			return "";
 		}
 	}
 
-	for (let offer of assort) {
-		if (body.offer == offer.suiteId) {
+	for (let offer of offers) {
+		if (body.offer === offer._id) {
 			storage.data.suites.push(offer.suiteId);
+			break;
 		}
 	}
 

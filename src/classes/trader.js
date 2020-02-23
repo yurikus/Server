@@ -193,7 +193,7 @@ class TraderServer {
         let output = [];
 
         for (let traderId in this.customization) {
-            output = output.concat(this.customization[traderId]);
+            output = output.concat(this.getCustomization(traderId));
         }
 
         return output;
