@@ -24,15 +24,17 @@ function getQuestsCache() {
 
 function acceptQuest(pmcData, body, sessionID) {
     let found = false;
+
     // If the quest already exists, update its status
-    for (const q of pmcData.Quests) {
-        if (q.qid == body.qid) {
-            q.startTime = utility.getTimestamp();
-            q.status = "Started";
+    for (const quest of pmcData.Quests) {
+        if (quest.qid === body.qid) {
+            quest.startTime = utility.getTimestamp();
+            quest.status = "Started";
             found = true;
             break;
         }
     }
+
     // Otherwise, add it
     if (!found) {
         pmcData.Quests.push({
