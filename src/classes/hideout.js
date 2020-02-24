@@ -167,7 +167,7 @@ function hideoutSingleProductionStart(pmcData, body, sessionID) {
 	return output;
 }
 
-function scavCaseProductionStart(pmcData, body, sessionID) {
+function hideoutScavCaseProductionStart(pmcData, body, sessionID) {
 	for (let moneyToEdit of body.items) {
 		for (let inventoryItem in pmcData.Inventory.items) {
 			if (pmcData.Inventory.items[inventoryItem]._id === moneyToEdit.id) {
@@ -311,5 +311,5 @@ module.exports.hideoutTakeItemsFromAreaSlots = hideoutTakeItemsFromAreaSlots;
 module.exports.hideoutToggleArea = hideoutToggleArea;
 module.exports.hideoutSingleProductionStart  = hideoutSingleProductionStart;
 module.exports.hideoutContinuousProductionStart = hideoutContinuousProductionStart;
-module.exports.scavCaseProductionStart = scavCaseProductionStart;
+module.exports.hideoutScavCaseProductionStart = hideoutScavCaseProductionStart;
 module.exports.hideoutTakeProduction = hideoutTakeProduction;
