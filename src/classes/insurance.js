@@ -78,7 +78,9 @@ class InsuranceServer {
     storeDeadGear(pmcData, sessionID) {
         for (let insuredItem of pmcData.InsuredItems) {
             for (let item of pmcData.Inventory.items) {
-                if (insuredItem.itemId === item._id) {
+                if (insuredItem.itemId === item._id
+                && item.slotId !== "Scabbard"
+                && item.slotId !== "Pockets") {
                     this.addGearToSend(pmcData, insuredItem, item, sessionID);
                     break;
                 }
