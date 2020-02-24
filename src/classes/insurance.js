@@ -38,6 +38,11 @@ class InsuranceServer {
 
     /* adds gear to store */
     addGearToSend(pmcData, insuredItem, actualItem, sessionID) {
+        // don't send insured scabbard or secured container
+        if (item.slotId === "Scabbard" || item.slotId === "SecuredContainer") {
+            return;
+        }
+
         // Mark root-level items for later.
         if (actualItem.parentId === pmcData.Inventory.equipment) {
             actualItem.slotId = "hideout";
@@ -78,9 +83,7 @@ class InsuranceServer {
     storeDeadGear(pmcData, sessionID) {
         for (let insuredItem of pmcData.InsuredItems) {
             for (let item of pmcData.Inventory.items) {
-                if (insuredItem.itemId === item._id
-                && item.slotId !== "Scabbard"
-                && item.slotId !== "Pockets") {
+                if (insuredItem.itemId === item._id) {
                     this.addGearToSend(pmcData, insuredItem, item, sessionID);
                     break;
                 }
