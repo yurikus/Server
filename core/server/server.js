@@ -28,7 +28,6 @@ class Server {
         this.receiveCallback = {};
         this.respondCallback = {};
         this.ip = settings.server.ip;
-        this.httpPort = settings.server.httpPort;
         this.httpsPort = settings.server.httpsPort;
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
         this.version = "1.0.0";
@@ -80,10 +79,6 @@ class Server {
 
     getIp() {
         return this.ip;
-    }
-
-    getHttpPort() {
-        return this.httpPort;
     }
 
     getHttpsPort() {
@@ -220,19 +215,9 @@ class Server {
             logger.logSuccess("Started game server");
         });
 
-        let httpServer = http.createServer((req, res) => {
-            this.handleRequest(req, res);
-        }).listen(this.httpPort, this.ip, function() {
-            logger.logSuccess("Started launcher server");
-        });
-
         /* server is already running */
         httpsServer.on('error', function(e) {
             logger.logError("» Port " + this.httpsPort + " is already in use, check if the server isn't already running");
-        });
-
-        httpServer.on('error', function(e) {
-            logger.logError("» Port " + this.httpPort + " is already in use, check if the server isn't already running");
         });
     }
 }
