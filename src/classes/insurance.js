@@ -39,7 +39,7 @@ class InsuranceServer {
     /* adds gear to store */
     addGearToSend(pmcData, insuredItem, actualItem, sessionID) {
         // don't send insured scabbard or secured container
-        if (item.slotId === "Scabbard" || item.slotId === "SecuredContainer") {
+        if (insuredItem.slotId === "Scabbard" || insuredItem.slotId === "SecuredContainer") {
             return;
         }
 
