@@ -251,7 +251,6 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 						price = price * count * settings.gameplay.trading.sellMultiplier;
 						price = itm_hf.fromRUB(price, currency);
 						price = (price > 0 && price !== "NaN" ? price : 1);
-						logger.logInfo("real price: " + price);
 						totalprice += price;			
 					}
 				}
