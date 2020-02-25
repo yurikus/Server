@@ -79,10 +79,8 @@ class DialogueServer {
 			items.data = [];
 
 			rewards = itm_hf.replaceIDs(null, rewards);
-			// TODO(camo1018): Orphaned items need to be promoted to main stash.
 
 			for (let reward of rewards) {
-				reward._id = utility.generateNewItemId();
 				if (!reward.hasOwnProperty("slotId") || reward.slotId === "hideout") {
 					reward.parentId = stashId;
 					reward.slotId = "main";

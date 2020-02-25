@@ -250,9 +250,13 @@ function createOffer(template, onlyFunc, usePresets = true) {
 
     // Single item
     if (!preset_f.itemPresets.hasPreset(template) || !onlyFunc) {
+        let rubPrice = Math.round(itm_hf.getTemplatePrice(template) * settings.gameplay.trading.ragfairMultiplier);
         offerBase._id = template;
         offerBase.items[0]._tpl = template;
-        offerBase.requirements[0].count = Math.round(itm_hf.getTemplatePrice(template) * settings.gameplay.trading.ragfairMultiplier);
+        offerBase.requirements[0].count = rubPrice;
+        offerBase.itemsCost = rubPrice;
+        offerBase.requirementsCost = rubPrice;
+        offerBase.summaryCost = rubPrice;
         offers.push(offerBase);
     }
 
