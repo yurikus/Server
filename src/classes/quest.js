@@ -22,14 +22,48 @@ function getQuestsCache() {
     return questsCache;
 }
 
+/* Gets a flat list of reward items for the given quest and state
+* input: quest, a quest object
+* input: state, the quest status that holds the items (Started, Success, Fail)
+* output: an array of items with the correct maxStack
+*/
+function getQuestRewardItems(quest, state) {
+    let questRewards = [];
+
+    for (let reward of quest.rewards[state]) {
+        if ("Item" === reward.type) {
+            for (let rewardItem of reward.items) {
+
+                let itemTmplData = json.parse(json.read(db.items[rewardItem._tpl]));
+
+                if ("upd" in rewardItem && "StackObjectsCount" in rewardItem.upd && itemTmplData._props.StackMaxSize === 1) {
+                    let count = rewardItem.upd.StackObjectsCount;
+
+                    rewardItem.upd.StackObjectsCount = 1;
+
+                    for (let i = 0; i < count; i++) {
+                        questRewards.push(itm_hf.clone(rewardItem));
+                    }
+                }
+                else {
+                    questRewards.push(rewardItem);
+                }
+            }
+        }
+    }
+
+    return questRewards;
+}
+
 function acceptQuest(pmcData, body, sessionID) {
+    let state = "Started";
     let found = false;
 
     // If the quest already exists, update its status
     for (const quest of pmcData.Quests) {
         if (quest.qid === body.qid) {
             quest.startTime = utility.getTimestamp();
-            quest.status = "Started";
+            quest.status = state;
             found = true;
             break;
         }
@@ -40,7 +74,7 @@ function acceptQuest(pmcData, body, sessionID) {
         pmcData.Quests.push({
             "qid": body.qid,
             "startTime": utility.getTimestamp(),
-            "status": "Started"
+            "status": state
         });
     }
 
@@ -49,46 +83,29 @@ function acceptQuest(pmcData, body, sessionID) {
     let quest = json.parse(json.read(db.quests[body.qid]));
     let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
     let messageContent = {templateId: questLocale.description, type: dialogue_f.getMessageTypeValue('questStart')};
+    let questRewards = getQuestRewardItems(quest, state);
 
-    dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID);
+    dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID, questRewards);
+
     return item_f.itemServer.getOutput();
 }
 
 function completeQuest(pmcData, body, sessionID) {
+    let state = "Success";
+
     for (let quest in pmcData.Quests) {
         if (pmcData.Quests[quest].qid === body.qid) {
-            pmcData.Quests[quest].status = "Success";
+            pmcData.Quests[quest].status = state;
             break;
         }
     }
 
     // give reward
     let quest = json.parse(json.read(db.quests[body.qid]));
-    let questRewards = [];
+    let questRewards = getQuestRewardItems(quest, state);
 
     for (let reward of quest.rewards.Success) {
         switch (reward.type) {
-            case "Item":
-                for (let rewardItem of reward.items) {
-                    // Quest rewards bundle up items whose max stack size is 1. Break them up.
-                    let itemTmplData = json.parse(json.read(db.items[rewardItem._tpl]));
-
-                    if ("upd" in rewardItem && itemTmplData._props.StackMaxSize === 1) {
-                        let count = rewardItem.upd.StackObjectsCount;
-                        
-                        rewardItem.upd.StackObjectsCount = 1;
-                        
-                        for (let i = 0; i < count; i++) {
-                            questRewards.push(rewardItem);
-                        }
-
-                        continue;
-                    }
-
-                    questRewards.push(rewardItem);
-                }
-                break;
-
             case "Skill":
                 pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
@@ -113,20 +130,16 @@ function completeQuest(pmcData, body, sessionID) {
         }
     }
 
-    // De-dupe quest rewards.
-    if (questRewards.length > 0) {
-        questRewards = itm_hf.replaceIDs(pmcData, questRewards);
-    }
-
     // Create a dialog message for completing the quest.
     let questDb = json.parse(json.read(db.quests[body.qid]));
     let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
     let messageContent = {
         templateId: questLocale.successMessageText,
         type: dialogue_f.getMessageTypeValue('questSuccess')
-    };
+    }
 
     dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID, questRewards);
+
     return item_f.itemServer.getOutput();
 }
 
