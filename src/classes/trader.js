@@ -236,9 +236,9 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 				elem.forEach(each);
 			}
 			else {
-				// calculate normal price and count
 				for (let childItem of pmcData.Inventory.items) {
 					if(childItem._id === elem) {
+						// calculate normal price and count
 						let price = (items.data[childItem._tpl]._props.CreditsPrice >= 1 ? items.data[childItem._tpl]._props.CreditsPrice : 1);
 						let count = (typeof childItem.upd !== "undefined" ? (typeof childItem.upd.StackObjectsCount !== "undefined" ? childItem.upd.StackObjectsCount : 1) : 1);
 
@@ -251,6 +251,8 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 						price = price * count * settings.gameplay.trading.sellMultiplier;
 						price = itm_hf.fromRUB(price, currency);
 						price = (price > 0 && price !== "NaN" ? price : 1);
+						
+						// total price of the item
 						totalprice += price;			
 					}
 				}
