@@ -227,40 +227,38 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questRaidItems
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl)) {
-            let allIDs = findAndReturnItemChildren(pmcData, item._id);
-			let totalprice = 0;
-            
-            // Recursive loop to go through a nested multidimentional array of all the children IDs + item ID
-			allIDs.forEach(function each(elem) {
-				if (Array.isArray(elem)) {
-					elem.forEach(each);
-				}
-				else {
-					// calculate normal price and count
-					for (let childItem of pmcData.Inventory.items) {
-						if(childItem._id === elem) {
-							let price = (items.data[childItem._tpl]._props.CreditsPrice >= 1 ? items.data[childItem._tpl]._props.CreditsPrice : 1);
-							let count = (typeof childItem.upd !== "undefined" ? (typeof childItem.upd.StackObjectsCount !== "undefined" ? childItem.upd.StackObjectsCount : 1) : 1);
-					
-							// uses profile information to get the level of the dogtag and multiplies
-							if ("upd" in childItem && "Dogtag" in childItem.upd && itm_hf.isDogtag(childItem._tpl)) {
-								price *= childItem.upd.Dogtag.Level;
-							}
-							
-							// get real price
-							price = price * count * settings.gameplay.trading.sellMultiplier;
-							price = itm_hf.fromRUB(price, currency);
-							price = (price > 0 && price !== "NaN" ? price : 1);
-							logger.logInfo("real price: " + price);
-							totalprice += price;			
+		let allIDs = findAndReturnItemChildren(pmcData, item._id);
+		let totalprice = 0;
+
+		// Recursive loop to go through a nested multidimentional array of all the children IDs + item ID
+		allIDs.forEach(function each(elem) {
+			if (Array.isArray(elem)) {
+				elem.forEach(each);
+			}
+			else {
+				// calculate normal price and count
+				for (let childItem of pmcData.Inventory.items) {
+					if(childItem._id === elem) {
+						let price = (items.data[childItem._tpl]._props.CreditsPrice >= 1 ? items.data[childItem._tpl]._props.CreditsPrice : 1);
+						let count = (typeof childItem.upd !== "undefined" ? (typeof childItem.upd.StackObjectsCount !== "undefined" ? childItem.upd.StackObjectsCount : 1) : 1);
+
+						// uses profile information to get the level of the dogtag and multiplies
+						if ("upd" in childItem && "Dogtag" in childItem.upd && itm_hf.isDogtag(childItem._tpl)) {
+							price *= childItem.upd.Dogtag.Level;
 						}
+
+						// get real price
+						price = price * count * settings.gameplay.trading.sellMultiplier;
+						price = itm_hf.fromRUB(price, currency);
+						price = (price > 0 && price !== "NaN" ? price : 1);
+						logger.logInfo("real price: " + price);
+						totalprice += price;			
 					}
-						
 				}
-			});
-            
-            output[item._id] = [[{"_tpl": currency, "count": totalprice.toFixed(0)}]];
-        }
+			}
+		});
+		output[item._id] = [[{"_tpl": currency, "count": totalprice.toFixed(0)}]];
+	}
     }
 
     return output;
