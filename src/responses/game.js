@@ -24,10 +24,15 @@ function validateGameVersion(url, info, sessionID) {
     return nullResponse(url, info, sessionID);
 }
 
+function groupStatus(url, info, sessionID) {
+    return '{"err": 0, "errmsg": null, "data": null}';   
+}
+
 router.addStaticRoute("/client/game/profile/select", selectProfile);
 router.addStaticRoute("/client/profile/status", getProfileStatus);
 router.addStaticRoute("/client/server/list", getServer);
 router.addStaticRoute("/client/game/version/validate", validateGameVersion);
 router.addStaticRoute("/client/game/config", getGameConfig);
 router.addStaticRoute("/client/game/logout", nullResponse);
+router.addStaticRoute("/client/match/group/status", groupStatus);
 router.addStaticRoute("/client/match/exit", nullResponse);

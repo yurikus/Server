@@ -8,6 +8,8 @@ function initialize() {
 
 		process.on('SIGINT', (code) => {
 			saveHandler.saveOpenSessions();
+			logger.logInfo("Ctrl-C, exiting ...");
+			process.exit(1);
 		});
 	}
 	

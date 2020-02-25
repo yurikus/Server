@@ -39,28 +39,6 @@ function addDogtag(bot, sessionID) {
 	return bot;
 }
 
-function removeSecureContainer(bot) {
-	let idsToRemove = [];
-
-	for (let item of bot.Inventory.items) {
-        if (item.slotId === "SecuredContainer") {
-			idsToRemove = itm_hf.findAndReturnChildren(bot, item._id);
-        }
-	}
-	
-	if (idsToRemove.length > 0) {
-		for (let itemId of idsToRemove) {
-			for (let index in bot.Inventory.items) {
-				if (bot.Inventory.items[index]._id === itemId) {
-					bot.Inventory.items.splice(index, 1);
-				}
-			}
-		}
-	}
-
-	return bot;
-}
-
 function generateBot(bot, role, sessionID) {
 	let type = (role === "cursedAssault") ? "assault" : role;
 	let node = {};
@@ -106,9 +84,6 @@ function generateBot(bot, role, sessionID) {
 	if (type === "usec" || type === "bear") {
 		bot = addDogtag(bot, sessionID);
 	}
-
-	// remove secure container
-	bot = removeSecureContainer(bot);
 	
 	return bot;
 }
