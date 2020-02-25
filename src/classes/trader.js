@@ -202,17 +202,17 @@ class TraderServer {
 
 //Find children IDs of item to sell
 function findAndReturnItemChildren(pmcData, itemID) {
-        let list = [];
+	let list = [];
 
-		for (let childItem of pmcData.Inventory.items) {
-			if(childItem.parentId === itemID) {
-				list.push(findAndReturnItemChildren(pmcData, childItem._id));
-			}
+	for (let childItem of pmcData.Inventory.items) {
+		if(childItem.parentId === itemID) {
+			list.push(findAndReturnItemChildren(pmcData, childItem._id));
 		}
+	}
 
-        list.push(itemID);// it's required
-		
-		return list;
+	list.push(itemID);// it's required
+
+	return list;
 }
 
 function getPurchasesData(tmpTraderInfo, sessionID) {
