@@ -228,7 +228,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questRaidItems
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl)) {
-		let allIDs = findAndReturnItemChildren(pmcData, item._id);
+		let allIDs = findAndReturnChildren(pmcData, item._id);
 		let totalprice = 0;
 
 		// Recursive loop to go through a nested multidimentional array of all the children IDs + item ID
