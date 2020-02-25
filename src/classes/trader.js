@@ -151,7 +151,7 @@ class TraderServer {
 
         // find and delete all related items
         if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-            let ids_toremove = this.findAndReturnChildren(assort, toDo[0]);
+            let ids_toremove = findAndReturnChildren(assort, toDo[0]);
 
             for (let i in ids_toremove) {
                 for (let a in assort.data.items) {
@@ -166,19 +166,6 @@ class TraderServer {
 
         logger.logError("assort item id is not valid");
         return "";
-    }
-
-    findAndReturnChildren(assort, itemid) {
-        let list = [];
-
-        for (let childitem of assort.data.items) {
-            if (childitem.parentId === itemid) {
-                list.push.apply(list, this.findAndReturnChildren(assort, childitem._id));
-            }
-        }
-
-        list.push(itemid);// it's required
-        return list;
     }
 
     getCustomization(traderId) {
@@ -200,19 +187,33 @@ class TraderServer {
     }
 }
 
-//Find children IDs of item to sell
-function findAndReturnItemChildren(pmcData, itemID) {
-	let list = [];
-
-	for (let childItem of pmcData.Inventory.items) {
-		if(childItem.parentId === itemID) {
-			list.push(findAndReturnItemChildren(pmcData, childItem._id));
+function findAndReturnChildren(object, itemID) {
+        let list = [];
+		
+		// If trader assort
+		if ("data" in object) {
+			for (let childitem of object.data.items) {
+				if (childitem.parentId === itemID) {
+					list.push(findAndReturnChildren(object, childitem._id));
+				}
+			}
 		}
-	}
+		// If PMC inventory
+		else if ("Inventory" in object) {
+			for (let childItem of object.Inventory.items) {
+				if(childItem.parentId === itemID) {
+					list.push(findAndReturnChildren(object, childItem._id));
+				}
+			}
+		}
+		// Else throw error
+		else {
+			console.log("findAndReturnChildren( ) error thrown, not trader assort or PMC inventory.");
+			return "";
+		}
 
-	list.push(itemID);// it's required
-
-	return list;
+        list.push(itemID); // it's required
+        return list;
 }
 
 function getPurchasesData(tmpTraderInfo, sessionID) {
@@ -227,7 +228,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questRaidItems
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl)) {
-		let allIDs = findAndReturnItemChildren(pmcData, item._id);
+		let allIDs = findAndReturnChildren(pmcData, item._id);
 		let totalprice = 0;
 
 		// Recursive loop to go through a nested multidimentional array of all the children IDs + item ID
