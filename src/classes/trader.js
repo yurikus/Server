@@ -220,6 +220,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let currency = itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency);
     let output = {};
+    let memo = {};
 
     // get sellable items
     for (let item of pmcData.Inventory.items) {
@@ -228,6 +229,12 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questRaidItems
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl)) {
+		// if we have already have the price memorized return its value
+		if (item._id in memo) {
+			output[item._id] = [[{"_tpl": currency, "count": memo[item._id].toFixed(0)}]];
+			continue;
+		}
+		
 		let allIDs = findAndReturnChildren(pmcData, item._id);
 		let totalprice = 0;
 
@@ -253,12 +260,13 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 						price = itm_hf.fromRUB(price, currency);
 						price = (price > 0 && price !== "NaN" ? price : 1);
 						
-						// total price of the item
+						// total price of the item and its attachments
 						totalprice += price;			
 					}
 				}
 			}
 		});
+		memo[item._id] = totalprice;
 		output[item._id] = [[{"_tpl": currency, "count": totalprice.toFixed(0)}]];
 	}
     }
