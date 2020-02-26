@@ -30,7 +30,7 @@ class TraderServer {
     }
 
     getTrader(id) {
-        return {err: 0, errmsg: "", data: this.traders[id]};
+        return {err: 0, errmsg: null, data: this.traders[id]};
     }
 
     getAllTraders(sessionID) {
