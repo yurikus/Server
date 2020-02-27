@@ -5,6 +5,7 @@ cache:
   directories:
     - "node_modules"
 before_script:
+  - node ./dev/src/setup-ci.js
   - node ./core/main.js &
   - sleep 60
 script:

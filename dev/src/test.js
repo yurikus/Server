@@ -9,17 +9,9 @@ const expect = require('chai').expect;
 // Global config stuff
 let settings = JSON.parse(readJson(__dirname + "/../../user/server.config.json"));
 
-// Setup our custom https port for travis ci
-settings.server.httpsPort = 8080;
-
 const url = settings.server.ip;
 const port = settings.server.httpsPort;
 const gameVersion = '0.12.3.5985';
-
-// Update our settings file
-fs.writeFile("../../user/server.config.json", json.stringify(settings, null, 2), function writeJSON(err) {
-  if (err) return console.log(err);
-});
 
 let integer = 0;
 
