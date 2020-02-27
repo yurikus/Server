@@ -285,7 +285,7 @@ describe('Client', function() {
   describe('/OfflineRaidSave', function() {
     it('should save offline raid data', async function() {
       const path = '/OfflineRaidSave';
-      const data = readJson(__dirname + "/../db/offlineRaidprofile.json");
+      const data = readJson("../db/offlineRaidprofile.json");
 
       let res = await send(url, port, path, data, 1);
       const jsonData = parseData(res);
