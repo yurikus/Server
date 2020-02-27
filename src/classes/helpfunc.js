@@ -498,21 +498,33 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 * List is backward first item is the furthest child and last item is main item
 * returns all child items ids in array, includes itself and children
 * */
-function findAndReturnChildren(pmcData, itemid) {
-    return findAndReturnChildrenByItems(pmcData.Inventory.items, itemid);
+function findAndReturnChildren(object, itemID) {
+	// If trader assort
+	if ("data" in object) {
+		return findAndReturnChildrenByItems(object.data.items, itemID);
+	}
+	// If bot/PMC inventory
+	else if ("Inventory" in object) {
+		return findAndReturnChildrenByItems(object.Inventory.items, itemID);
+	}
+	// Else throw error
+	else {
+		logger.logError("itm_hf.findAndReturnChildren( ) error, not trader assort or bot/PMC inventory.");
+		return "";
+	}
 }
 
-function findAndReturnChildrenByItems(items, itemid) {
-    let list = [];
+function findAndReturnChildrenByItems(items, itemID) {
+	let list = [];
 
-    for (let childitem of items) {
-        if (childitem.parentId === itemid) {
-            list.push.apply(list, findAndReturnChildrenByItems(items, childitem._id));
-        }
-    }
+	for (let childitem of items) {
+		if (childitem.parentId === itemID) {
+			list.push.apply(list, findAndReturnChildrenByItems(items, childitem._id));
+		}
+	}
 
-    list.push(itemid);// it's required
-    return list;
+	list.push(itemID); // Push the parent item, it's required
+	return list;
 }
 
 /* Is Dogtag
