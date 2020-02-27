@@ -7,9 +7,7 @@ settings.server.httpsPort = 8080;
 
 console.log(settings.server.httpsPort);
 
-fs.writeFile(__dirname + "/../../user/server.config.json", JSON.stringify(settings), 'utf8', function writeJSON(err) {
-  if (err) return console.log(err);
-});
+fs.writeFileSync(__dirname + "/../../user/server.config.json", JSON.stringify(settings), 'utf8');
 
 console.log('Modified output...');
 console.log(settings);
