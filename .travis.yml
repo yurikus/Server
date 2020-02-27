@@ -6,15 +6,14 @@ cache:
     - "node_modules"
 before_script:
   - ls
+  - cd /home/travis/build/TheNullBoolean/Server/dev/db/
+  - ls
   - node ./dev/src/setup-ci.js
   - npm i pm2 -g
   - pm2 start core/main.js
-  - pm2 list
   - sleep 15
-  - pm2 list
 script:
   - npm run test
 after_script:
-  - pm2 list
   - pm2 stop all
   - pm2 kill

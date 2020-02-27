@@ -109,6 +109,8 @@ describe('Client', function() {
       let res = await send(url, port, path, data, 1);
       const jsonData = parseData(res);
 
+      console.log(jsonData);
+
       jsonData.err.should.equal(0);
       jsonData.data.length.should.equal(2); // Should have 2 profiles
     });
@@ -270,31 +272,31 @@ describe('Client', function() {
     });
   });
 
-  describe('/client/trading/api/getTradersList', function() {
-    it('should get a list of traders', async function() {
-      const path = '/client/trading/api/getTradersList';
-      const data = '';
+  // describe('/client/trading/api/getTradersList', function() {
+  //   it('should get a list of traders', async function() {
+  //     const path = '/client/trading/api/getTradersList';
+  //     const data = '';
 
-      let res = await send(url, port, path, data, 1);
-      const jsonData = parseData(res);
+  //     let res = await send(url, port, path, data, 1);
+  //     const jsonData = parseData(res);
 
-      jsonData.err.should.equal(0);
-    });
-  });
+  //     jsonData.err.should.equal(0);
+  //   });
+  // });
 
-  describe('/OfflineRaidSave', function() {
-    it('should save offline raid data', async function() {
-      const path = '/OfflineRaidSave';
+  // describe('/OfflineRaidSave', function() {
+  //   it('should save offline raid data', async function() {
+  //     const path = '/OfflineRaidSave';
       
-      console.log(process.cwd());
-      const data = readJson(`${process.cwd()}/dev/db/offlineRaidProfile.json`); // "../db/offlineRaidProfile.json");
+  //     console.log(process.cwd());
+  //     const data = readJson(`${process.cwd()}/dev/db/offlineRaidProfile.json`); // "../db/offlineRaidProfile.json");
 
-      let res = await send(url, port, path, data, 1);
-      const jsonData = parseData(res);
+  //     let res = await send(url, port, path, data, 1);
+  //     const jsonData = parseData(res);
 
-      jsonData.err.should.equal(0);
-    });
-  });
+  //     jsonData.err.should.equal(0);
+  //   });
+  // });
 
 });
 
