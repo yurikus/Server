@@ -64,7 +64,7 @@ class AccountServer {
 }
 
 function getPath(sessionID) {
-    return __dirname + `/user/profiles/${sessionID}/`;
+    return "user/profiles/" + sessionID + "/";
 }
 
 module.exports.accountServer = new AccountServer();
