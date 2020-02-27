@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 let settings = JSON.parse(readJson(__dirname + "/../../user/server.config.json"));
 
 // Setup our custom https port for travis ci
