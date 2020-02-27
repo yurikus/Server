@@ -8,7 +8,7 @@ before_script:
   - ls
   - node ./dev/src/setup-ci.js
   - npm i pm2 -g
-  - pm2 start core/main.js --name server
+  - pm2 start core/main.js
   - pm2 list
   - sleep 15
   - pm2 list
@@ -16,5 +16,5 @@ script:
   - npm run test
 after_script:
   - pm2 list
-  - pm2 stop server
+  - pm2 stop all
   - pm2 kill
