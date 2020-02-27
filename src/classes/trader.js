@@ -143,15 +143,13 @@ class TraderServer {
     }
 
     removeItemFromAssort(assort, id) {
-        let toDo = [id];
-
-        // delete assort keys
+	// delete assort keys
         delete assort.data.barter_scheme[id];
         delete assort.data.loyal_level_items[id];
 
         // find and delete all related items
-        if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-            let ids_toremove = findAndReturnChildren(assort, toDo[0]);
+        if (id !== undefined && id !== null && id !== "undefined") {
+            let ids_toremove = itm_hf.findAndReturnChildren(assort, id);
 
             for (let i in ids_toremove) {
                 for (let a in assort.data.items) {
@@ -187,35 +185,6 @@ class TraderServer {
     }
 }
 
-function findAndReturnChildren(object, itemID) {
-        let list = [];
-		
-		// If trader assort
-		if ("data" in object) {
-			for (let childitem of object.data.items) {
-				if (childitem.parentId === itemID) {
-					list.push(findAndReturnChildren(object, childitem._id));
-				}
-			}
-		}
-		// If PMC inventory
-		else if ("Inventory" in object) {
-			for (let childItem of object.Inventory.items) {
-				if(childItem.parentId === itemID) {
-					list.push(findAndReturnChildren(object, childItem._id));
-				}
-			}
-		}
-		// Else throw error
-		else {
-			console.log("findAndReturnChildren( ) error thrown, not trader assort or PMC inventory.");
-			return "";
-		}
-
-        list.push(itemID); // it's required
-        return list;
-}
-
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let currency = itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency);
@@ -235,7 +204,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 			continue;
 		}
 		
-		let allIDs = findAndReturnChildren(pmcData, item._id);
+		let allIDs = itm_hf.findAndReturnChildren(pmcData, item._id);
 		let totalprice = 0;
 
 		// Recursive loop to go through a nested multidimentional array of all the children IDs + item ID
