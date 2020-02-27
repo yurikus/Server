@@ -287,7 +287,7 @@ describe('Client', function() {
       const path = '/OfflineRaidSave';
       
       console.log(process.cwd());
-      const data = readJson("../db/offlineRaidProfile.json");
+      const data = readJson(`${process.cwd()}/dev/db/offlineRaidProfile.json`); // "../db/offlineRaidProfile.json");
 
       let res = await send(url, port, path, data, 1);
       const jsonData = parseData(res);
