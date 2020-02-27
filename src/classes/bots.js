@@ -5,6 +5,31 @@ function getRandomValue(node) {
 	return json.parse(json.read(node[keys[utility.getRandomInt(0, keys.length - 1)]]));
 }
 
+function removeSecureContainer(bot) {
+	let idsToRemove = [];
+
+	for (let item of bot.Inventory.items) {
+        	if (item.slotId === "SecuredContainer") {
+			idsToRemove = itm_hf.findAndReturnChildren(bot, item._id);
+        	}
+	}
+
+	idsToRemove.forEach(function each(elem) {
+		if (Array.isArray(elem)) {
+			elem.forEach(each);
+		}
+		else {
+			for (let index in bot.Inventory.items) {
+				if(bot.Inventory.items[index]._id === elem) {
+					bot.Inventory.items.splice(index, 1);
+				}
+			}
+		}
+	});
+
+	return bot;
+}
+
 function addDogtag(bot, sessionID) {
 	let weaponArray = [
 		'A Magical Force',
@@ -84,6 +109,8 @@ function generateBot(bot, role, sessionID) {
 	if (type === "usec" || type === "bear") {
 		bot = addDogtag(bot, sessionID);
 	}
+	// remove secure container
+	bot = removeSecureContainer(bot);
 	
 	return bot;
 }
