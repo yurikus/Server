@@ -5,9 +5,11 @@ class TraderServer {
     constructor() {
         this.traders = {};
         this.assorts = {};
+        this.customizationArray = {};
         this.customization = {};
 
         this.initializeTraders();
+        this.initializeCustomization();
     }
 
     /* Load all the traders into memory. */
@@ -24,8 +26,11 @@ class TraderServer {
 
         for (let id in db.traders) {
             if ("customization_" + id in db.user.cache) {
-                this.customization[id] = json.parse(json.read(db.user.cache["customization_" + id]));
+                this.customizationArray[id] = json.parse(json.read(db.user.cache["customization_" + id]));
             }
+        }
+        if ("customization" in db.user.cache) {
+            this.customization = json.parse(json.read(db.user.cache["customization"]));
         }
     }
 
@@ -168,19 +173,29 @@ class TraderServer {
         return "";
     }
 
-    getCustomization(traderId) {
-        if (!("traderId" in this.customization) && "customization_" + traderId in db.user.cache) {
-            this.customization[traderId] = json.parse(json.read(db.user.cache["customization_" + traderId]));
+    getCustomization(traderId, sessionID) {
+
+        let suitList = [];
+        if (traderId in this.customizationArray) {
+            let suitArray = this.customizationArray[traderId];
+            for (let suit of suitArray) {
+                if (suit.suiteId in this.customization.data) {
+                    let side = this.customization.data[suit.suiteId]._props.Side[0];
+                    let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+                    if (side === pmcData.Info.Side) {
+                        suitList.push(suit);
+                    }
+                }
+            }
         }
-        
-        return this.customization[traderId];
+        return suitList;
     }
 
-    getAllCustomization() {
+    getAllCustomization(sessionID) {
         let output = [];
 
-        for (let traderId in this.customization) {
-            output = output.concat(this.getCustomization(traderId));
+        for (let traderId in this.customizationArray) {
+            output = output.concat(this.getCustomization(traderId, sessionID));
         }
 
         return output;

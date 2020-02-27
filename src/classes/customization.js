@@ -37,7 +37,7 @@ function wearClothing(pmcData, body, sessionID) {
 function buyClothing(pmcData, body, sessionID) {
 	let output = item_f.itemServer.getOutput();
 	let storage = json.parse(json.read(getPath(sessionID)));
-	let offers = trader_f.traderServer.getAllCustomization();
+	let offers = trader_f.traderServer.getAllCustomization(sessionID);
 
 	for (let sellItem in body.items) {
 		for (let item in pmcData.Inventory.items) {
