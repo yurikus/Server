@@ -8,6 +8,6 @@ cache:
 before_script:
   - node ./dev/src/setup-ci.js
   - node ./core/main.js &
-  - sleep 30
+  - sleep 15
 script:
   - npm run test
