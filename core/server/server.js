@@ -228,11 +228,11 @@ class Server {
 
         /* server is already running */
         httpsServer.on('error', function(e) {
-            logger.logError("» Port " + this.httpsPort + " is already in use, check if the server isn't already running");
+            logger.logError("» Port " + e.port + " is already in use, check if the server isn't already running");
         });
 
         httpServer.on('error', function(e) {
-            logger.logError("» Port " + this.httpPort + " is already in use, check if the server isn't already running");
+            logger.logError("» Port " + e.port + " is already in use, check if the server isn't already running");
         });
     }
 }
