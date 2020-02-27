@@ -15,7 +15,7 @@ class ProfileServer {
     }
 
     loadProfilesFromDisk(sessionID) {
-        this.profiles[sessionID]['pmc'] = json.parse(json.read(__dirname + getPmcPath(sessionID)));
+        this.profiles[sessionID]['pmc'] = json.parse(json.read("./" + getPmcPath(sessionID)));
         this.generateScav(sessionID);
     }
 
