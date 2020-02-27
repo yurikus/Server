@@ -499,19 +499,18 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 * returns all child items ids in array, includes itself and children
 * */
 function findAndReturnChildren(object, itemID) {
-	// If trader assort
+	// trader assort
 	if ("data" in object) {
 		return findAndReturnChildrenByItems(object.data.items, itemID);
-	}
-	// If bot/PMC inventory
+    }
+    
+	// bot/PMC inventory
 	else if ("Inventory" in object) {
 		return findAndReturnChildrenByItems(object.Inventory.items, itemID);
-	}
-	// Else throw error
-	else {
-		logger.logError("itm_hf.findAndReturnChildren( ) error, not trader assort or bot/PMC inventory.");
-		return "";
-	}
+    }
+	
+    logger.logError("itm_hf.findAndReturnChildren( ) error, not trader assort or bot/PMC inventory.");
+    return "";
 }
 
 function findAndReturnChildrenByItems(items, itemID) {
@@ -523,7 +522,8 @@ function findAndReturnChildrenByItems(items, itemID) {
 		}
 	}
 
-	list.push(itemID); // Push the parent item, it's required
+    // push the parent item, it's required
+	list.push(itemID);
 	return list;
 }
 
