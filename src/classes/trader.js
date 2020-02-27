@@ -22,11 +22,13 @@ class TraderServer {
     initializeCustomization() {
         logger.logWarning("Loading customization into RAM...");
 
-        for (let id in db.traders) {
-            if ("customization_" + id in db.user.cache) {
-                this.customization[id] = json.parse(json.read(db.user.cache["customization_" + id]));
-            }
-        }
+	if (db.user.cache !== undefined && db.user.cache !== null && db.user.cache !== "undefined") {
+        	for (let id in db.traders) {
+            		if ("customization_" + id in db.user.cache) {
+                		this.customization[id] = json.parse(json.read(db.user.cache["customization_" + id]));
+            		}
+        	}
+	}
     }
 
     getTrader(id) {
