@@ -8,7 +8,9 @@ before_script:
   - npm i pm2 -g
   - pm2 start core/main.js --name server
   - pm2 list
-  - sleep 30
+  - sleep 60
+  - pm2 list
+  - pm2 logs
 script:
   - npm run test
 after_script:
