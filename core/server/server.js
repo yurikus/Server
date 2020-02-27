@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const zlib = require('zlib');
-const http = require('http');
 const https = require('https');
 const selfsigned = require('selfsigned');
 
@@ -212,7 +211,7 @@ class Server {
         let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {
             this.handleRequest(req, res);
         }).listen(this.httpsPort, this.ip, function() {
-            logger.logSuccess("Started game server");
+            logger.logSuccess("Started server");
         });
 
         /* server is already running */
