@@ -1,13 +1,19 @@
 language: node_js
 os: windows
-node_js: 
+node_js:
   - "node"
 cache:
   directories:
     - "node_modules"
 before_script:
   - node ./dev/src/setup-ci.js
-  - node ./core/main.js &
+  - npm i pm2 -g
+  - pm2 start core/main.js --name server
+  - pm2 list
   - sleep 15
+  - pm2 list
 script:
   - npm run test
+after_script:
+  - pm2 list
+  - pm2 stop server
