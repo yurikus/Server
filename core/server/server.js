@@ -216,13 +216,13 @@ class Server {
         /* create server (https: game, http: launcher) */
         let httpsServer = https.createServer(this.generateCertifcate(), (req, res) => {
             this.handleRequest(req, res);
-        }).listen(this.httpsPort, this.ip, function() {
+        }).listen(this.httpsPort || 443, this.ip, function() {
             logger.logSuccess("Started game server");
         });
 
         let httpServer = http.createServer((req, res) => {
             this.handleRequest(req, res);
-        }).listen(this.httpPort, this.ip, function() {
+        }).listen(this.httpPort || 80, this.ip, function() {
             logger.logSuccess("Started launcher server");
         });
 
