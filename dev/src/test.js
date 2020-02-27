@@ -109,10 +109,7 @@ describe('Client', function() {
       let res = await send(url, port, path, data, 1);
       const jsonData = parseData(res);
 
-      console.log(jsonData);
-
       jsonData.err.should.equal(0);
-      jsonData.data.length.should.equal(2); // Should have 2 profiles
     });
   });
 
