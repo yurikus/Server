@@ -30,11 +30,18 @@
   "bugs": {
     "url": "https://github.com/justemutarkov/EmuTarkov-Server/issues"
   },
+  "scripts": {
+    "test": "mocha dev/src/test.js"
+  },
   "homepage": "https://justemutarkov.github.io",
   "dependencies": {
     "upx": "^1.0.0",
     "nexe": "^3.3.0",
     "adler32": "^0.1.7",
     "selfsigned": "^1.10.7"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.0"
   }
 }
