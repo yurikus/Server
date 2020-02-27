@@ -5,6 +5,12 @@ cache:
   directories:
     - "node_modules"
 before_script:
-  - node ./core/main.js &
+  - npm i pm2 -g
+  - pm2 start core/main.js --name server
+  - pm2 list
+  - sleep 30
 script:
   - npm run test
+after_script:
+  - pm2 list
+  - pm2 stop server
