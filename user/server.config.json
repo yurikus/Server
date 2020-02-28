@@ -2,7 +2,6 @@
 	"server": {
 		"ip": "127.0.0.1",
 		"generateIp": false,
-		"httpPort": 80,
 		"httpsPort": 443,
 		"eventPollIntervalSec": 60,
 		"rebuildCache": false
@@ -57,6 +56,13 @@
 		}
 	},
 	"mods": {
-		"list": []
+		"list": [
+			{
+				"name": "AllMissingKeys",
+				"author": "EmuTarkov",
+				"version": "1.0.0",
+				"enabled": true
+			}
+		]
 	}
 }

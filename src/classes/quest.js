@@ -143,14 +143,34 @@ function completeQuest(pmcData, body, sessionID) {
     return item_f.itemServer.getOutput();
 }
 
-// TODO: handle money
-function handoverQuest(pmcData, body, sessionID) {    
+function handoverQuest(pmcData, body, sessionID) {
+    const quest = json.parse(json.read(db.quests[body.qid]));
     let output = item_f.itemServer.getOutput();
+    let value = 0;
     let counter = 0;
-    
+    let amount;
+
+    // Get quest condition item count
+    for (let condition of quest.conditions.AvailableForFinish) {
+        if (condition._parent === "HandoverItem" && condition._props.id === body.conditionId) {
+            value = condition._props.value;
+            break;
+        }
+    }
+
+    if (value === 0) {
+        logger.logError("Quest handover error: condition not found or incorrect value. qid=" + body.qid + ", condition=" + body.conditionId);
+        return output;
+    }
+
     for (let itemHandover of body.items) {
-        counter += itemHandover.count;
-        output = move_f.removeItem(pmcData, itemHandover.id, output, sessionID);
+        amount = Math.min(itemHandover.count, value - counter);
+        counter += amount;
+        changeItemStack(pmcData, itemHandover.id, itemHandover.count - amount, output);
+
+        if (counter === value) {
+            break;
+        }
     }
 
     if (pmcData.BackendCounters.hasOwnProperty(body.conditionId)) {
@@ -160,6 +180,32 @@ function handoverQuest(pmcData, body, sessionID) {
     }
 
     return output;
+}
+
+/* Sets the item stack to value, or delete the item if value <= 0 */
+// TODO maybe merge this function and the one from customization
+function changeItemStack(pmcData, id, value, output) {
+    for (let item in pmcData.Inventory.items) {
+        if (pmcData.Inventory.items[item]._id === id) {
+            if (value > 0) {
+                pmcData.Inventory.items[item].upd.StackObjectsCount = value;
+
+                output.data.items.change.push({
+                    "_id": pmcData.Inventory.items[item]._id,
+                    "_tpl": pmcData.Inventory.items[item]._tpl,
+                    "parentId": pmcData.Inventory.items[item].parentId,
+                    "slotId": pmcData.Inventory.items[item].slotId,
+                    "location": pmcData.Inventory.items[item].location,
+                    "upd": { "StackObjectsCount": pmcData.Inventory.items[item].upd.StackObjectsCount }
+                });
+            } else {
+                output.data.items.del.push({ "_id": id });
+                pmcData.Inventory.items.splice(item, 1);
+            }
+
+            break;
+        }
+    }
 }
 
 module.exports.initialize = initialize;

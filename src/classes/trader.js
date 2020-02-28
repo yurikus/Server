@@ -19,16 +19,6 @@ class TraderServer {
         }
     }
 
-    initializeCustomization() {
-        logger.logWarning("Loading customization into RAM...");
-
-        for (let id in db.traders) {
-            if ("customization_" + id in db.user.cache) {
-                this.customization[id] = json.parse(json.read(db.user.cache["customization_" + id]));
-            }
-        }
-    }
-
     getTrader(id) {
         return {err: 0, errmsg: null, data: this.traders[id]};
     }
@@ -143,15 +133,13 @@ class TraderServer {
     }
 
     removeItemFromAssort(assort, id) {
-        let toDo = [id];
-
-        // delete assort keys
+	// delete assort keys
         delete assort.data.barter_scheme[id];
         delete assort.data.loyal_level_items[id];
 
         // find and delete all related items
-        if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-            let ids_toremove = findAndReturnChildren(assort, toDo[0]);
+        if (id !== undefined && id !== null && id !== "undefined") {
+            let ids_toremove = itm_hf.findAndReturnChildren(assort, id);
 
             for (let i in ids_toremove) {
                 for (let a in assort.data.items) {
@@ -187,40 +175,10 @@ class TraderServer {
     }
 }
 
-function findAndReturnChildren(object, itemID) {
-        let list = [];
-		
-		// If trader assort
-		if ("data" in object) {
-			for (let childitem of object.data.items) {
-				if (childitem.parentId === itemID) {
-					list.push(findAndReturnChildren(object, childitem._id));
-				}
-			}
-		}
-		// If PMC inventory
-		else if ("Inventory" in object) {
-			for (let childItem of object.Inventory.items) {
-				if(childItem.parentId === itemID) {
-					list.push(findAndReturnChildren(object, childItem._id));
-				}
-			}
-		}
-		// Else throw error
-		else {
-			console.log("findAndReturnChildren( ) error thrown, not trader assort or PMC inventory.");
-			return "";
-		}
-
-        list.push(itemID); // it's required
-        return list;
-}
-
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let currency = itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency);
     let output = {};
-    let memo = {};
 
     // get sellable items
     for (let item of pmcData.Inventory.items) {
@@ -229,46 +187,22 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questRaidItems
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl)) {
-		// if we have already have the price memorized return its value
-		if (item._id in memo) {
-			output[item._id] = [[{"_tpl": currency, "count": memo[item._id].toFixed(0)}]];
-			continue;
-		}
-		
-		let allIDs = findAndReturnChildren(pmcData, item._id);
-		let totalprice = 0;
+            // calculate normal price and count
+            let price = (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
+            let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
 
-		// Recursive loop to go through a nested multidimentional array of all the children IDs + item ID
-		allIDs.forEach(function each(elem) {
-			if (Array.isArray(elem)) {
-				elem.forEach(each);
-			}
-			else {
-				for (let childItem of pmcData.Inventory.items) {
-					if(childItem._id === elem) {
-						// calculate normal price and count
-						let price = (items.data[childItem._tpl]._props.CreditsPrice >= 1 ? items.data[childItem._tpl]._props.CreditsPrice : 1);
-						let count = (typeof childItem.upd !== "undefined" ? (typeof childItem.upd.StackObjectsCount !== "undefined" ? childItem.upd.StackObjectsCount : 1) : 1);
+            // uses profile information to get the level of the dogtag and multiplies
+            if ("upd" in item && "Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
+                price *= item.upd.Dogtag.Level;
+            }
 
-						// uses profile information to get the level of the dogtag and multiplies
-						if ("upd" in childItem && "Dogtag" in childItem.upd && itm_hf.isDogtag(childItem._tpl)) {
-							price *= childItem.upd.Dogtag.Level;
-						}
-
-						// get real price
-						price = price * count * settings.gameplay.trading.sellMultiplier;
-						price = itm_hf.fromRUB(price, currency);
-						price = (price > 0 && price !== "NaN" ? price : 1);
-						
-						// total price of the item and its attachments
-						totalprice += price;			
-					}
-				}
-			}
-		});
-		memo[item._id] = totalprice;
-		output[item._id] = [[{"_tpl": currency, "count": totalprice.toFixed(0)}]];
-	}
+            // get real price
+            price = price * count * settings.gameplay.trading.sellMultiplier;
+            price = itm_hf.fromRUB(price, currency);
+            price = (price > 0 && price !== "NaN" ? price : 1);
+            
+            output[item._id] = [[{"_tpl": currency, "count": price.toFixed(0)}]];
+        }
     }
 
     return output;
