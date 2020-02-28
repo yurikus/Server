@@ -499,8 +499,14 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 * returns all child items ids in array, includes itself and children
 * */
 function findAndReturnChildren(pmcData, itemid) {
-    return findAndReturnChildrenByItems(pmcData.data.items, itemid);
-    //return findAndReturnChildrenByItems(pmcData.Inventory.items, itemid); //apparently PmcData does not contain any "Inventory" object
+    if(pmcData.Inventory == null) //if finding children from trader assort loading, just a temp workaround
+    { 
+        return findAndReturnChildrenByItems(pmcData.data.items, itemid); 
+    } 
+    else
+    { 
+        return findAndReturnChildrenByItems(pmcData.Inventory.items, itemid);
+    }
 }
 
 function findAndReturnChildrenByItems(items, itemid) {
