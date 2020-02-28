@@ -3,6 +3,9 @@
 const fs = require('fs');
 const json = require('./json.js');
 
+const inputDir = "dev/input/";
+const outputDir = "dev/output/";
+
 function genericSplitter(type, basepath, basefile) {
     let file = json.parse(json.read(basefile));
 
@@ -16,22 +19,22 @@ function genericSplitter(type, basepath, basefile) {
             case "hideoutAreas":
             case "hideoutProd":
             case "hideoutScav":
-                output = "db/" + basepath + "/" + file.data[element]._id + ".json";
+                output = outputDir + basepath + "/" + file.data[element]._id + ".json";
                 json.write(output, file.data[element]);
                 break;
 
             case "languages":
-                output = "db/" + basepath + "/" + file.data[element].ShortName + ".json";
+                output = outputDir + basepath + "/" + file.data[element].ShortName + ".json";
                 json.write(output, file.data[element]);
                 break;
 
             case "customOutfits":
-                output = "db/" + basepath + "/" + element + ".json";
+                output = outputDir + basepath + "/" + element + ".json";
                 json.write(output, file.data[element]);
                 break;
 
             case "customOffers":
-                output = "db/" + basepath + "/" + file.data[element].suiteId + ".json";
+                output = outputDir + basepath + "/" + file.data[element].suiteId + ".json";
                 json.write(output, file.data[element]);
                 break;
         }
@@ -41,22 +44,22 @@ function genericSplitter(type, basepath, basefile) {
 }
 
 function items() {
-    genericSplitter("items", "items", "input/prod.escapefromtarkov.com.client.items.txt");
+    genericSplitter("items", "items", inputDir + "prod.escapefromtarkov.com.client.items.txt");
 }
 
 function quests() {
-    genericSplitter("quests", "quests", "input/prod.escapefromtarkov.com.client.quest.list.txt");
+    genericSplitter("quests", "quests", inputDir + "prod.escapefromtarkov.com.client.quest.list.txt");
 }
 
 function traders() {
-    genericSplitter("traders", "traders", "input/trading.escapefromtarkov.com.client.trading.api.getTradersList.txt");
+    genericSplitter("traders", "traders", inputDir + "trading.escapefromtarkov.com.client.trading.api.getTradersList.txt");
 }
 
 function locations() {
-    let file = json.parse(json.read("input/prod.escapefromtarkov.com.client.locations.txt"));
+    let file = json.parse(json.read(inputDir + "prod.escapefromtarkov.com.client.locations.txt"));
 
     for (let element in file.data.locations) {
-        let output = "db/locations/" + element + ".json";
+        let output = outputDir + "locations/" + element + ".json";
 
         json.write(output, file.data.locations[element]);
         console.log("done: " + output);
@@ -64,31 +67,31 @@ function locations() {
 }
 
 function language() {
-    genericSplitter("languages", "locales/languages", "input/prod.escapefromtarkov.com.client.languages.txt");
+    genericSplitter("languages", "locales/languages", inputDir + "prod.escapefromtarkov.com.client.languages.txt");
 }
 
 function customizationOutfits() {
-    genericSplitter("customOutfits", "customization/outfits", "input/prod.escapefromtarkov.com.client.customization.txt");
+    genericSplitter("customOutfits", "customization/outfits", inputDir + "prod.escapefromtarkov.com.client.customization.txt");
 }
 
 function customizationOffers() {
-    genericSplitter("customOffers", "customization/offers", "input/trading.escapefromtarkov.com.client.trading.customization.5ac3b934156ae10c4430e83c.offers.txt");
+    genericSplitter("customOffers", "customization/offers", inputDir + "trading.escapefromtarkov.com.client.trading.customization.5ac3b934156ae10c4430e83c.offers.txt");
 }
 
 function hideoutAreas() {
-    genericSplitter("hideoutAreas", "hideout/areas", "input/prod.escapefromtarkov.com.client.hideout.areas.txt");
+    genericSplitter("hideoutAreas", "hideout/areas", inputDir + "prod.escapefromtarkov.com.client.hideout.areas.txt");
 }
 
 function hideoutProduction() {
-    genericSplitter("hideoutProd", "hideout/production", "input/prod.escapefromtarkov.com.client.hideout.production.recipes.txt");
+    genericSplitter("hideoutProd", "hideout/production", inputDir + "prod.escapefromtarkov.com.client.hideout.production.recipes.txt");
 }
 
 function hideoutScavcase() {
-    genericSplitter("hideoutScav", "hideout/scavcase", "input/prod.escapefromtarkov.com.client.hideout.production.scavcase.recipes.txt");
+    genericSplitter("hideoutScav", "hideout/scavcase", inputDir + "prod.escapefromtarkov.com.client.hideout.production.scavcase.recipes.txt");
 }
 
 function templates() {
-    let file = json.parse(json.read("input/prod.escapefromtarkov.com.client.handbook.templates.txt"));
+    let file = json.parse(json.read(inputDir + "prod.escapefromtarkov.com.client.handbook.templates.txt"));
 
     for (let element in file.data) {
         let key = file.data[element];
@@ -96,7 +99,7 @@ function templates() {
         for (let target in key) {
 	        let output = key[target].Id;
 
-            output = "db/templates/" + element.toLowerCase() + "/" + output + ".json";
+            output = outputDir + "templates/" + element.toLowerCase() + "/" + output + ".json";
             json.write(output, key[target]);
             console.log("done: " + output);
         }
@@ -104,7 +107,7 @@ function templates() {
 }
 
 function assortHelper(assortFile, shortName) {
-    let file = json.parse(json.read("input/" + assortFile));
+    let file = json.parse(json.read(inputDir + assortFile));
 
     for (let element in file.data) {
         let key = file.data[element];
@@ -118,11 +121,11 @@ function assortHelper(assortFile, shortName) {
                     key[target].upd = {UnlimitedCount: true, StackObjectsCount: 500000};
                 }
 
-                output = "db/assort/" + shortName + "/"  + "items" + "/" + key[target]._id + ".json";
+                output = outputDir + "assort/" + shortName + "/"  + "items" + "/" + key[target]._id + ".json";
             } else if (element === "barter_scheme") {
-                output = "db/assort/" + shortName + "/"  + "barter" + "/" + target + ".json";
+                output = outputDir + "assort/" + shortName + "/"  + "barter" + "/" + target + ".json";
             } else if (element === "loyal_level_items") {
-                output = "db/assort/" + shortName + "/"  + "level" + "/" + target + ".json";
+                output = outputDir + "assort/" + shortName + "/"  + "level" + "/" + target + ".json";
             }
 
             json.write(output, key[target]);
@@ -142,11 +145,11 @@ function assort() {
 }
 
 function localesHelper(language, shortName) {
-    let file = json.parse(json.read("input/" + language));
+    let file = json.parse(json.read(inputDir + language));
 
     for (let element in file.data) {
         if (element === "interface" || element === "error") {
-            let output = "db/locales/" + shortName + "/" + element +  ".json";
+            let output = outputDir + "locales/" + shortName + "/" + element +  ".json";
 
             json.write(output, file.data[element]);
             console.log("done: " + output);
@@ -156,7 +159,7 @@ function localesHelper(language, shortName) {
         let key = file.data[element];
 
         for (let target in key) {
-            let output = "db/locales/" + shortName + "/"  + element + "/" + target + ".json";
+            let output = outputDir + "locales/" + shortName + "/"  + element + "/" + target + ".json";
 
             json.write(output, key[target]);
             console.log("done: " + output);
@@ -175,12 +178,12 @@ function locales() {
     localesHelper("prod.escapefromtarkov.com.client.locale.ch.txt", "ch");
 }
 
-function generateEverythingTrader() {
-    let inputFiles = fs.readdirSync("db/items/");
-    let itemFiles = fs.readdirSync("db/templates/items/");
+function generateRagfairTrader() {
+    let inputFiles = fs.readdirSync(outputDir + "items/");
+    let itemFiles = fs.readdirSync(outputDir + "templates/items/");
 
     for (let file in inputFiles) {
-        let filePath = "db/items/" + inputFiles[file];
+        let filePath = outputDir + "items/" + inputFiles[file];
         let fileData = json.parse(json.read(filePath));
         let fileName = fileData._id;
         let price = 0;
@@ -191,7 +194,7 @@ function generateEverythingTrader() {
 
         // get item price
         for (let itemFile in itemFiles) {
-            let template = json.parse(json.read("db/templates/items/" + itemFiles[itemFile]));
+            let template = json.parse(json.read(outputDir + "templates/items/" + itemFiles[itemFile]));
 
             if (fileData._id === template.Id) {
                 price = template.Price;
@@ -204,9 +207,9 @@ function generateEverythingTrader() {
         }
 
         // save everything
-        json.write("db/assort/579dc571d53a0658a154fbec/items/" + fileName + ".json", {_id: fileData._id, _tpl: fileData._id, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
-        json.write("db/assort/579dc571d53a0658a154fbec/barter_Scheme/" + fileName + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
-        json.write("db/assort/579dc571d53a0658a154fbec/loyal_level_items/" + fileName + ".json", 1);
+        json.write(outputDir + "assort/579dc571d53a0658a154fbec/items/" + fileName + ".json", {_id: fileData._id, _tpl: fileData._id, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
+        json.write(outputDir + "assort/579dc571d53a0658a154fbec/barter_Scheme/" + fileName + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
+        json.write(outputDir + "assort/579dc571d53a0658a154fbec/loyal_level_items/" + fileName + ".json", 1);
 
         console.log("done: 579dc571d53a0658a154fbec <- " + fileName);
     }
@@ -225,4 +228,4 @@ module.exports.hideoutScavcase = hideoutScavcase;
 module.exports.templates = templates;
 module.exports.assort = assort;
 module.exports.locales = locales;
-module.exports.generateEverythingTrader = generateEverythingTrader;
+module.exports.generateRagfairTrader = generateRagfairTrader;
