@@ -3,8 +3,8 @@
 const fs = require('fs');
 const json = require('./json.js');
 
-const inputDir = "dev/input/";
-const outputDir = "dev/output/";
+const inputDir = "input/";
+const outputDir = "output/";
 
 function genericSplitter(type, basepath, basefile) {
     let file = json.parse(json.read(basefile));
