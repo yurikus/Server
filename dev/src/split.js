@@ -168,12 +168,12 @@ function localesHelper(language, shortName) {
 }
 
 function locales() {
-	localesHelper("prod.escapefromtarkov.com.client.locale.en.txt", "en");
-	localesHelper("prod.escapefromtarkov.com.client.locale.ru.txt", "ru");
-	localesHelper("prod.escapefromtarkov.com.client.locale.ge.txt", "ge");
-	localesHelper("prod.escapefromtarkov.com.client.locale.fr.txt", "fr");
-	localesHelper("prod.escapefromtarkov.com.client.locale.po.txt", "po");
-	localesHelper("prod.escapefromtarkov.com.client.locale.es.txt", "es");
+    localesHelper("prod.escapefromtarkov.com.client.locale.en.txt", "en");
+    localesHelper("prod.escapefromtarkov.com.client.locale.ru.txt", "ru");
+    localesHelper("prod.escapefromtarkov.com.client.locale.ge.txt", "ge");
+    localesHelper("prod.escapefromtarkov.com.client.locale.fr.txt", "fr");
+    localesHelper("prod.escapefromtarkov.com.client.locale.po.txt", "po");
+    localesHelper("prod.escapefromtarkov.com.client.locale.es.txt", "es");
     localesHelper("prod.escapefromtarkov.com.client.locale.es-mx.txt", "es-mx");
     localesHelper("prod.escapefromtarkov.com.client.locale.ch.txt", "ch");
 }
@@ -215,17 +215,29 @@ function generateRagfairTrader() {
     }
 }
 
-module.exports.items = items;
-module.exports.quests = quests;
-module.exports.traders = traders;
-module.exports.locations = locations;
-module.exports.language = language;
-module.exports.customizationOutfits = customizationOutfits;
-module.exports.customizationOffers = customizationOffers;
-module.exports.hideoutAreas = hideoutAreas;
-module.exports.hideoutProduction = hideoutProduction;
-module.exports.hideoutScavcase = hideoutScavcase;
-module.exports.templates = templates;
-module.exports.assort = assort;
-module.exports.locales = locales;
-module.exports.generateRagfairTrader = generateRagfairTrader;
+function splitAll() {
+    console.log("Splitting files...");
+
+    items();
+/*
+    quests();
+    traders();
+    locations();
+    language();
+    customizationOutfits();
+    customizationOffers();
+    hideoutAreas();
+    hideoutProduction();
+    hideoutScavcase();
+*/
+    templates();
+/*
+    assort();
+    locales();
+*/
+    generateRagfairTrader();
+
+    console.log("Splitting done");
+}
+
+splitAll();
