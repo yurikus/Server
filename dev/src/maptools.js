@@ -3,8 +3,8 @@
 const fs = require("fs");
 const json = require("./json.js");
 
-const inputDir = "input/maps/";
-const outputDir = "output/maps/";
+const inputDir = "input/locations/";
+const outputDir = "output/locations/";
 
 function getDirList(path) {
   return fs.readdirSync(path).filter(function(file) {

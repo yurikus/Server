@@ -1,3 +1,3 @@
 @echo off
-node src/split.js
+node src/splittools.js
 pause
