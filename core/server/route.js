@@ -97,6 +97,9 @@ function detectMissingMods() {
 
         /* add mod to the list */
         if (!found) {
+            if (!config.version) {
+                return logger.logError("Mod " + mod + " not installed, requires updating to r23+");
+            }
             logger.logWarning("Mod " + mod + " not installed, adding it to the modlist");
             settings.mods.list.push({"name": config.name, "author": config.author, "version": config.version, "enabled": true});
             settings.server.rebuildCache = true;
@@ -225,6 +228,7 @@ function all() {
         
         flush();
         routeAll();
+        detectMissingMods();
         loadAllMods();
         dump();
 
