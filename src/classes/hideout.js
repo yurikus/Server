@@ -50,7 +50,7 @@ function hideoutUpgrade(pmcData, body, sessionID) {
 }
 
 // validating the upgrade
-// TODO: apply bonusses or is it automatically applied? 
+// TODO: apply bonuses or is it automatically applied?
 function hideoutUpgradeComplete(pmcData, body, sessionID) {
 	for (let hideoutArea of pmcData.Hideout.Areas) {
 		if (hideoutArea.type !== body.areaType) {
@@ -67,7 +67,7 @@ function hideoutUpgradeComplete(pmcData, body, sessionID) {
 			for (let item of pmcData.Inventory.items) {
 				let counter = 0;
 
-				for (let bonus of pmcData.Bonusses) {
+				for (let bonus of pmcData.Bonuses) {
 					if (bonus.type === "StashSize") {
 						counter++;
 					}
