@@ -59,7 +59,7 @@ class AccountServer {
         let info = json.parse(text);
         let sessionID = this.exists(info);
 
-        return sessionID.toString();
+        return json.stringify({profileId: sessionID});
     }
 }
 
