@@ -97,7 +97,7 @@ function detectMissingMods() {
 
         /* add mod to the list */
         if (!found) {
-            if (!config.version || config.files) {
+            if (!config.version || config.files || config.filepaths) {
                 logger.logError(`Mod ${mod} is out of date and not compatible with this version of EmuTarkov`);
                 logger.logError("Forcing server shutdown...");
                 process.exit(1);
