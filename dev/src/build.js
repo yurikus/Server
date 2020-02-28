@@ -7,7 +7,7 @@ const { compile } = require('nexe');
 console.log(">>>STARTING BUILD...");
 compile({
 	input: 'core/main.js',
-    output: 'EmuTarkov-Server-Uncompressed',
+	output: 'EmuTarkov-Server-Uncompressed',
 	build: false,
 	ico: 'dev/res/icon.ico'
 }).then(function(err) {
