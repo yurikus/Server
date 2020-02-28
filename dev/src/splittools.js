@@ -179,11 +179,13 @@ function locales() {
 }
 
 function generateRagfairTrader() {
-    let inputFiles = fs.readdirSync(outputDir + "items/");
-    let itemFiles = fs.readdirSync(outputDir + "templates/items/");
+    let itemFiles = fs.readdirSync(outputDir + "items/");
+    let templateFiles = fs.readdirSync(outputDir + "templates/items/");
+    let globalFiles = (json.parse(json.read(inputDir + "prod.escapefromtarkov.com.client.globals.txt")).data.ItemPresets);
 
-    for (let file in inputFiles) {
-        let filePath = outputDir + "items/" + inputFiles[file];
+    /*
+    for (let file in itemFiles) {
+        let filePath = outputDir + "items/" + itemFiles[file];
         let fileData = json.parse(json.read(filePath));
         let fileName = fileData._id;
         let price = 0;
@@ -193,17 +195,13 @@ function generateRagfairTrader() {
         }
 
         // get item price
-        for (let itemFile in itemFiles) {
-            let template = json.parse(json.read(outputDir + "templates/items/" + itemFiles[itemFile]));
+        for (let itemFile in templateFiles) {
+            let template = json.parse(json.read(outputDir + "templates/items/" + templateFiles[itemFile]));
 
             if (fileData._id === template.Id) {
                 price = template.Price;
                 break;
             }
-        }
-
-        if (price === 0 || price === 1 || price === 100) {
-            continue;
         }
 
         // save everything
@@ -213,13 +211,48 @@ function generateRagfairTrader() {
 
         console.log("done: 579dc571d53a0658a154fbec <- " + fileName);
     }
+    */
+
+    /* presets */
+    for (let file in globalFiles) {
+        let presetId = globalFiles[file]._id;
+        let price = 0;
+
+        for (let item of globalFiles[file]._items) {
+            if (item._id !== globalFiles[file]._parent) {
+                /* attachment */
+                if (item.parentId === globalFiles[file]._parent) {
+                    item.parentId = presetId;
+                }
+
+                // get item price
+                for (let templateFile in templateFiles) {
+                    let template = json.parse(json.read(outputDir + "templates/items/" + templateFiles[templateFile]));
+
+                    if (item._tpl === template.Id) {
+                        price = template.Price;
+                        break;
+                    }
+                }
+
+                json.write(outputDir + "assort/ragfair/items/" + item._id + ".json", item);
+                console.log("done: ragfair <- " + item._id);
+            }
+        }
+
+        /* base item */
+        json.write(outputDir + "assort/ragfair/items/" + presetId + ".json", {_id: presetId, _tpl: globalFiles[file]._items[0]._tpl, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
+        json.write(outputDir + "assort/ragfair/barter_Scheme/" + presetId + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
+        json.write(outputDir + "assort/ragfair/loyal_level_items/" + presetId + ".json", 1);
+        console.log("done: ragfair <- " + presetId);
+    }
 }
 
 function splitAll() {
     console.log("Splitting files...");
 
-    items();
 /*
+    items();
     quests();
     traders();
     locations();
@@ -229,12 +262,11 @@ function splitAll() {
     hideoutAreas();
     hideoutProduction();
     hideoutScavcase();
-*/
     templates();
-/*
     assort();
     locales();
 */
+
     generateRagfairTrader();
 
     console.log("Splitting done");
