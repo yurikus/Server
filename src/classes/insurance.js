@@ -16,10 +16,10 @@ class InsuranceServer {
             return;
         }
     
-        let ids_toremove = itm_hf.findAndReturnChildren(pmcData, toDo[0]); //get all ids related to this item, +including this item itself
-    
-        for (let i in ids_toremove) { //remove one by one all related items and itself
-            for (let a in pmcData.Inventory.items) {	//find correct item by id and delete it
+        let ids_toremove = itm_hf.findAndReturnChildren(pmcData, toDo[0]); // get all ids related to this item, +including this item itself
+
+        for (let i in ids_toremove) { // remove one by one all related items and itself
+            for (let a in pmcData.Inventory.items) {	// find correct item by id and delete it
                 if (pmcData.Inventory.items[a]._id === ids_toremove[i]) {
                     for (let insurance in pmcData.InsuredItems) {
                         if (pmcData.InsuredItems[insurance].itemId == ids_toremove[i]) {
@@ -54,26 +54,25 @@ class InsuranceServer {
     }
 
     /* store lost pmc gear */
-    storeLostGear(pmcData, offraidData, sessionID) {
+    storeLostGear(pmcData, offraidData, preRaidGear, sessionID) {
         console.log(offraidData);
 
+        // Build a hash table to reduce loops
+        const preRaidGearHash = {};
+        preRaidGear.forEach(i => preRaidGearHash[i._id] = i);
+
+        // Build a hash of offRaidGear
+        const offRaidGearHash = {};
+        offraidData.profile.Inventory.items.forEach(i => offRaidGearHash[i._id] = i);
+
         for (let insuredItem of pmcData.InsuredItems) {
-            let found = false;
-
-            /* find item */
-            for (let item of offraidData.profile.Inventory.items) {
-                if (insuredItem.itemId === item._id) {
-                    found = true;
-                    break;
-                }
-            }
-
-            /* item is lost */
-            if (!found) {
-                for (let item of pmcData.Inventory.items) {
-                    if (insuredItem.itemId === item._id) {
-                        this.addGearToSend(pmcData, insuredItem, item, sessionID);
-                    }
+            
+            if (preRaidGearHash[insuredItem.itemId]) {
+                // This item exists in preRaidGear, meaning we brought it into the raid...
+                // Check if we brought it out of the raid
+                if (!offRaidGearHash[insuredItem.itemId]) {
+                    // We didn't bring this item out! We must've lost it.
+                    this.addGearToSend(pmcData, insuredItem, preRaidGearHash[insuredItem.itemId], sessionID);
                 }
             }
         }
