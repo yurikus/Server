@@ -97,8 +97,10 @@ function detectMissingMods() {
 
         /* add mod to the list */
         if (!found) {
-            if (!config.version) {
-                return logger.logError("Mod " + mod + " not installed, requires updating to r23+");
+            if (!config.version || config.files) {
+                logger.logError(`Mod ${mod} is out of date and not compatible with this version of JET`);
+                logger.logError("Forcing server shutdown...");
+                process.exit(1);
             }
             logger.logWarning("Mod " + mod + " not installed, adding it to the modlist");
             settings.mods.list.push({"name": config.name, "author": config.author, "version": config.version, "enabled": true});
