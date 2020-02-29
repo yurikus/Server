@@ -134,7 +134,7 @@ function renameMapLoot() {
       continue;
     }
 
-    let dirName = "db/maps/" + mapName + "/loot/";
+    let dirName = outputDir + mapName + "/loot/";
     let inputFiles = fs.readdirSync(dirName);
 
     console.log("Renaming " + mapName);
@@ -181,8 +181,8 @@ function getMapLootCount() {
 }
 
 function map() {
-  getMapLoot();
-  stripMapLootDuplicates();
+  //getMapLoot();
+  //stripMapLootDuplicates();
   renameMapLoot();
   getMapLootCount();
 }

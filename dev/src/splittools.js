@@ -206,7 +206,7 @@ function generateRagfairTrader() {
 
         // save everything
         json.write(outputDir + "assort/ragfair/items/" + fileName + ".json", {_id: fileData._id, _tpl: fileData._id, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
-        json.write(outputDir + "assort/ragfair/barter_Scheme/" + fileName + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
+        json.write(outputDir + "assort/ragfair/barter_scheme/" + fileName + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
         json.write(outputDir + "assort/ragfair/loyal_level_items/" + fileName + ".json", 1);
 
         console.log("done: ragfair <- " + fileName);
