@@ -129,6 +129,10 @@ function stripMapLootDuplicates() {
           if (file in emptyLoot) {
             delete emptyLoot[file];
           }
+
+          if (file in multipleLoot) {
+            delete multipleLoot[file];
+          }
         }
       }
     }
