@@ -94,7 +94,7 @@ class TraderServer {
         let base = json.parse(json.read(db.user.cache["assort_" + traderId]));
 
         // 1 is min level, 4 is max level
-        if (traderId !== "579dc571d53a0658a154fbec") {
+        if (traderId !== "ragfair") {
             let keys = Object.keys(base.data.loyal_level_items);
             let level = this.traders[traderId].loyalty.currentLevel;
 
