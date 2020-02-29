@@ -193,8 +193,8 @@ function getMapLootCount() {
 }
 
 function map() {
-  //getMapLoot();
-  //stripMapLootDuplicates();
+  getMapLoot();
+  stripMapLootDuplicates();
   renameMapLoot();
   getMapLootCount();
 }
