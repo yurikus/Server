@@ -69,6 +69,7 @@ function stripMapLootDuplicates() {
     let mapLoot = {};
     let emptyLoot = {};
     let multipleLoot = {};
+    let questLoot = {};
 
     console.log("Checking " + mapName);
 
@@ -85,6 +86,7 @@ function stripMapLootDuplicates() {
         emptyLoot[fileName] = fileData.Id;
       }
 
+      // check multiple tpl
       if (fileData.Items.length > 1) {
         let tmp = [];
 
@@ -94,6 +96,11 @@ function stripMapLootDuplicates() {
 
         tmp.splice(0, 1);
         multipleLoot[fileName] = json.stringify(tmp);
+      }
+
+      // check quest items separately	
+      if (fileData.Id.includes("quest_")) {	
+        questLoot[fileName] = json.stringify(fileData.Position);	
       }
     }
 
@@ -108,7 +115,8 @@ function stripMapLootDuplicates() {
         // loot already exists
         if (mapLoot[loot] === mapLoot[file]
         || (loot in emptyLoot && file in emptyLoot && emptyLoot[loot] === emptyLoot[file])
-        || (loot in multipleLoot && file in multipleLoot && multipleLoot[loot] === multipleLoot[file])) {
+        || (loot in multipleLoot && file in multipleLoot && multipleLoot[loot] === multipleLoot[file])
+        || (loot in questLoot && file in questLoot && questLoot[loot] === questLoot[file])) {
           let target = dirName + file + ".json";
 
           console.log(mapName + ".duplicate: " + loot + ", " + file);
@@ -121,6 +129,10 @@ function stripMapLootDuplicates() {
 
           if (file in multipleLoot) {
             delete multipleLoot[file];
+          }
+
+          if (file in questLoot) {	
+            delete questLoot[file];	
           }
         }
       }
