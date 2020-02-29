@@ -3,7 +3,7 @@
 const fs = require("fs");
 const json = require("./json.js");
 
-const inputDir = "input/locations/";
+const inputDir = "input/maps/";
 const outputDir = "output/locations/";
 
 function getDirList(path) {
