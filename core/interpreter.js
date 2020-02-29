@@ -47,7 +47,7 @@ class Interpreter {
 
     /* load classes */
     initializeClasses() {
-        logger.logWarning("Interpreter: loading classes...");
+        logger.logInfo("Interpreter: loading classes...");
 
         for (let name in this.loadorder) {
             global[name] = require("../" + this.loadorder[name]);

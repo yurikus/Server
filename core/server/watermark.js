@@ -1,8 +1,8 @@
 "use strict";
 
 function show() {
-    let text_1 = "JustEmuTarkov " + server.version;
-    let text_2 = "https://justemutarkov.github.io/";
+    let text_1 = "JRT " + server.version;
+    let text_2 = "https://";
     let diffrence = Math.abs(text_1.length - text_2.length);
     let whichIsLonger = ((text_1.length >= text_2.length) ? text_1.length : text_2.length);
     let box_spacing_between_1 = "";

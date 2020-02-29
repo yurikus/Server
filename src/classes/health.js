@@ -29,13 +29,11 @@ class HealthServer {
 
     offraidHeal(pmcData, body, sessionID) {
         let output = item_f.itemServer.getOutput();
-    
-        // healing body part
-        for (let bdpart in pmcData.Health.BodyParts) {
-            if (bdpart === body.part) {
-                this.healths[sessionID][bdpart] += body.count;
-            }
-        }
+
+        this.healths[sessionID][body.part] = 
+            Math.min(
+                pmcData.Health.BodyParts[body.part].Health.Current + body.count, 
+                pmcData.Health.BodyParts[body.part].Health.Maximum);
     
         // update medkit used (hpresource)
         for (let item of pmcData.Inventory.items) {

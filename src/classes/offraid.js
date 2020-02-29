@@ -87,6 +87,61 @@ function deleteInventory(pmcData, sessionID) {
     return pmcData;
 }
 
+function getPlayerGear(items) {
+    // Player Slots we care about
+    const inventorySlots = [
+        'FirstPrimaryWeapon',
+        'SecondPrimaryWeapon',
+        'Holster',
+        'Headwear',
+        'Earpiece',
+        'Eyewear',
+        'FaceCover',
+        'ArmorVest',
+        'TacticalVest',
+        'Backpack',
+        'pocket1',
+        'pocket2',
+        'pocket3',
+        'pocket4',
+    ];
+
+    let inventoryItems = [];
+
+    // Get an array of root player items
+    for (let item of items) {
+        if (inventorySlots.includes(item.slotId)) {
+            inventoryItems.push(item);
+        }
+    }
+
+    // Loop through these items and get all of their children
+    let newItems = inventoryItems;
+    while (newItems.length > 0) {
+        let foundItems = [];
+        
+        for (let item of newItems) {
+            // Find children of this item
+            for (let newItem of items) {
+                if (newItem.parentId === item._id) {
+                    foundItems.push(newItem);
+                }
+            }
+        }
+
+        // Add these new found items to our list of inventory items
+        inventoryItems = [
+            ...inventoryItems,
+            ...foundItems,
+        ];
+
+        // Now find the children of these items
+        newItems = foundItems;
+    }
+
+    return inventoryItems;
+}
+
 function saveProgress(offraidData, sessionID) {
     if (!settings.gameplay.inraid.saveLootEnabled) {
         return;
@@ -96,6 +151,7 @@ function saveProgress(offraidData, sessionID) {
     let scavData = profile_f.profileServer.getScavProfile(sessionID);
     const isPlayerScav = offraidData.isPlayerScav;
     const isDead = offraidData.exit !== "survived" && offraidData.exit !== "runner";
+    const preRaidGear = isPlayerScav ? [] : getPlayerGear(pmcData.Inventory.items);
 
     // set pmc data
     if (!isPlayerScav) {
@@ -139,7 +195,7 @@ function saveProgress(offraidData, sessionID) {
     }
 
     // remove inventory if player died and send insurance items
-    insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, sessionID);
+    insurance_f.insuranceServer.storeLostGear(pmcData, offraidData, preRaidGear, sessionID);
 
     if (isDead) {
         insurance_f.insuranceServer.storeDeadGear(pmcData, sessionID);

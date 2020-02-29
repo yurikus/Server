@@ -12,20 +12,10 @@ class TraderServer {
 
     /* Load all the traders into memory. */
     initializeTraders() {
-        logger.logWarning("Loading traders into RAM...");
+        logger.logInfo("Loading traders into RAM...");
 
         for (let id in db.traders) {
             this.traders[id] = json.parse(json.read(db.traders[id]));
-        }
-    }
-
-    initializeCustomization() {
-        logger.logWarning("Loading customization into RAM...");
-
-        for (let id in db.traders) {
-            if ("customization_" + id in db.user.cache) {
-                this.customization[id] = json.parse(json.read(db.user.cache["customization_" + id]));
-            }
         }
     }
 
@@ -143,15 +133,13 @@ class TraderServer {
     }
 
     removeItemFromAssort(assort, id) {
-        let toDo = [id];
-
-        // delete assort keys
+	      // delete assort keys
         delete assort.data.barter_scheme[id];
         delete assort.data.loyal_level_items[id];
 
         // find and delete all related items
-        if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-            let ids_toremove = this.findAndReturnChildren(assort, toDo[0]);
+        if (id !== undefined && id !== null && id !== "undefined") {
+            let ids_toremove = itm_hf.findAndReturnChildren(assort, id);
 
             for (let i in ids_toremove) {
                 for (let a in assort.data.items) {
@@ -166,19 +154,6 @@ class TraderServer {
 
         logger.logError("assort item id is not valid");
         return "";
-    }
-
-    findAndReturnChildren(assort, itemid) {
-        let list = [];
-
-        for (let childitem of assort.data.items) {
-            if (childitem.parentId === itemid) {
-                list.push.apply(list, this.findAndReturnChildren(assort, childitem._id));
-            }
-        }
-
-        list.push(itemid);// it's required
-        return list;
     }
 
     getCustomization(traderId) {

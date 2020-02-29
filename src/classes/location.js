@@ -9,7 +9,7 @@ class LocationServer {
 
     /* Load all the locations into memory. */
     initializeLocations() {
-        logger.logWarning("Loading locations into RAM...");
+        logger.logInfo("Loading locations into RAM...");
 
         for (let locationName in db.locations) {
             let node = db.locations[locationName];

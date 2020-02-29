@@ -2,7 +2,7 @@
 
 /* show name in window */
 process.stdout.setEncoding('utf8');
-process.title = "JustEmuTarkov Server";
+process.title = "JRT Server";
 
 /* load server components */
 require('./interpreter.js');

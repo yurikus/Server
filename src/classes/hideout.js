@@ -50,7 +50,7 @@ function hideoutUpgrade(pmcData, body, sessionID) {
 }
 
 // validating the upgrade
-// TODO: apply bonusses or is it automatically applied? 
+// TODO: apply bonuses or is it automatically applied?
 function hideoutUpgradeComplete(pmcData, body, sessionID) {
 	for (let hideoutArea of pmcData.Hideout.Areas) {
 		if (hideoutArea.type !== body.areaType) {
@@ -67,7 +67,7 @@ function hideoutUpgradeComplete(pmcData, body, sessionID) {
 			for (let item of pmcData.Inventory.items) {
 				let counter = 0;
 
-				for (let bonus of pmcData.Bonusses) {
+				for (let bonus of pmcData.Bonuses) {
 					if (bonus.type === "StashSize") {
 						counter++;
 					}
@@ -167,7 +167,7 @@ function hideoutSingleProductionStart(pmcData, body, sessionID) {
 	return output;
 }
 
-function scavCaseProductionStart(pmcData, body, sessionID) {
+function hideoutScavCaseProductionStart(pmcData, body, sessionID) {
 	for (let moneyToEdit of body.items) {
 		for (let inventoryItem in pmcData.Inventory.items) {
 			if (pmcData.Inventory.items[inventoryItem]._id === moneyToEdit.id) {
@@ -311,5 +311,5 @@ module.exports.hideoutTakeItemsFromAreaSlots = hideoutTakeItemsFromAreaSlots;
 module.exports.hideoutToggleArea = hideoutToggleArea;
 module.exports.hideoutSingleProductionStart  = hideoutSingleProductionStart;
 module.exports.hideoutContinuousProductionStart = hideoutContinuousProductionStart;
-module.exports.scavCaseProductionStart = scavCaseProductionStart;
+module.exports.hideoutScavCaseProductionStart = hideoutScavCaseProductionStart;
 module.exports.hideoutTakeProduction = hideoutTakeProduction;

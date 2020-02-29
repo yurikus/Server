@@ -31,7 +31,7 @@ class Server {
         this.httpPort = settings.server.httpPort;
         this.httpsPort = settings.server.httpsPort;
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
-        this.version = "dev-r23";
+        this.version = "42.6047.1";
         this.mime = {
             txt: 'text/plain',
             jpg: 'image/jpeg',
@@ -207,7 +207,7 @@ class Server {
         this.backendUrl = "https://" + this.ip + ":" + this.httpsPort;
     
         // execute start callback
-        logger.logWarning("Executing callbacks...");
+        logger.logInfo("Executing callbacks...");
 
         for (let type in this.startCallback) {
             this.startCallback[type]();

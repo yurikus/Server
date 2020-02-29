@@ -22,23 +22,59 @@ function getQuestsCache() {
     return questsCache;
 }
 
+/* Gets a flat list of reward items for the given quest and state
+* input: quest, a quest object
+* input: state, the quest status that holds the items (Started, Success, Fail)
+* output: an array of items with the correct maxStack
+*/
+function getQuestRewardItems(quest, state) {
+    let questRewards = [];
+
+    for (let reward of quest.rewards[state]) {
+        if ("Item" === reward.type) {
+            for (let rewardItem of reward.items) {
+
+                let itemTmplData = json.parse(json.read(db.items[rewardItem._tpl]));
+
+                if ("upd" in rewardItem && "StackObjectsCount" in rewardItem.upd && itemTmplData._props.StackMaxSize === 1) {
+                    let count = rewardItem.upd.StackObjectsCount;
+
+                    rewardItem.upd.StackObjectsCount = 1;
+
+                    for (let i = 0; i < count; i++) {
+                        questRewards.push(itm_hf.clone(rewardItem));
+                    }
+                }
+                else {
+                    questRewards.push(rewardItem);
+                }
+            }
+        }
+    }
+
+    return questRewards;
+}
+
 function acceptQuest(pmcData, body, sessionID) {
+    let state = "Started";
     let found = false;
+
     // If the quest already exists, update its status
-    for (const q of pmcData.Quests) {
-        if (q.qid == body.qid) {
-            q.startTime = utility.getTimestamp();
-            q.status = "Started";
+    for (const quest of pmcData.Quests) {
+        if (quest.qid === body.qid) {
+            quest.startTime = utility.getTimestamp();
+            quest.status = state;
             found = true;
             break;
         }
     }
+
     // Otherwise, add it
     if (!found) {
         pmcData.Quests.push({
             "qid": body.qid,
             "startTime": utility.getTimestamp(),
-            "status": "Started"
+            "status": state
         });
     }
 
@@ -47,46 +83,29 @@ function acceptQuest(pmcData, body, sessionID) {
     let quest = json.parse(json.read(db.quests[body.qid]));
     let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
     let messageContent = {templateId: questLocale.description, type: dialogue_f.getMessageTypeValue('questStart')};
+    let questRewards = getQuestRewardItems(quest, state);
 
-    dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID);
+    dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID, questRewards);
+
     return item_f.itemServer.getOutput();
 }
 
 function completeQuest(pmcData, body, sessionID) {
+    let state = "Success";
+
     for (let quest in pmcData.Quests) {
         if (pmcData.Quests[quest].qid === body.qid) {
-            pmcData.Quests[quest].status = "Success";
+            pmcData.Quests[quest].status = state;
             break;
         }
     }
 
     // give reward
     let quest = json.parse(json.read(db.quests[body.qid]));
-    let questRewards = [];
+    let questRewards = getQuestRewardItems(quest, state);
 
     for (let reward of quest.rewards.Success) {
         switch (reward.type) {
-            case "Item":
-                for (let rewardItem of reward.items) {
-                    // Quest rewards bundle up items whose max stack size is 1. Break them up.
-                    let itemTmplData = json.parse(json.read(db.items[rewardItem._tpl]));
-
-                    if ("upd" in rewardItem && itemTmplData._props.StackMaxSize === 1) {
-                        let count = rewardItem.upd.StackObjectsCount;
-                        
-                        rewardItem.upd.StackObjectsCount = 1;
-                        
-                        for (let i = 0; i < count; i++) {
-                            questRewards.push(rewardItem);
-                        }
-
-                        continue;
-                    }
-
-                    questRewards.push(rewardItem);
-                }
-                break;
-
             case "Skill":
                 pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
@@ -111,31 +130,47 @@ function completeQuest(pmcData, body, sessionID) {
         }
     }
 
-    // De-dupe quest rewards.
-    if (questRewards.length > 0) {
-        questRewards = itm_hf.replaceIDs(pmcData, questRewards);
-    }
-
     // Create a dialog message for completing the quest.
     let questDb = json.parse(json.read(db.quests[body.qid]));
     let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
     let messageContent = {
         templateId: questLocale.successMessageText,
         type: dialogue_f.getMessageTypeValue('questSuccess')
-    };
+    }
 
     dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID, questRewards);
+
     return item_f.itemServer.getOutput();
 }
 
-// TODO: handle money
-function handoverQuest(pmcData, body, sessionID) {    
+function handoverQuest(pmcData, body, sessionID) {
+    const quest = json.parse(json.read(db.quests[body.qid]));
     let output = item_f.itemServer.getOutput();
+    let value = 0;
     let counter = 0;
-    
+    let amount;
+
+    // Get quest condition item count
+    for (let condition of quest.conditions.AvailableForFinish) {
+        if (condition._parent === "HandoverItem" && condition._props.id === body.conditionId) {
+            value = condition._props.value;
+            break;
+        }
+    }
+
+    if (value === 0) {
+        logger.logError("Quest handover error: condition not found or incorrect value. qid=" + body.qid + ", condition=" + body.conditionId);
+        return output;
+    }
+
     for (let itemHandover of body.items) {
-        counter += itemHandover.count;
-        output = move_f.removeItem(pmcData, itemHandover.id, output, sessionID);
+        amount = Math.min(itemHandover.count, value - counter);
+        counter += amount;
+        changeItemStack(pmcData, itemHandover.id, itemHandover.count - amount, output);
+
+        if (counter === value) {
+            break;
+        }
     }
 
     if (pmcData.BackendCounters.hasOwnProperty(body.conditionId)) {
@@ -145,6 +180,32 @@ function handoverQuest(pmcData, body, sessionID) {
     }
 
     return output;
+}
+
+/* Sets the item stack to value, or delete the item if value <= 0 */
+// TODO maybe merge this function and the one from customization
+function changeItemStack(pmcData, id, value, output) {
+    for (let item in pmcData.Inventory.items) {
+        if (pmcData.Inventory.items[item]._id === id) {
+            if (value > 0) {
+                pmcData.Inventory.items[item].upd.StackObjectsCount = value;
+
+                output.data.items.change.push({
+                    "_id": pmcData.Inventory.items[item]._id,
+                    "_tpl": pmcData.Inventory.items[item]._tpl,
+                    "parentId": pmcData.Inventory.items[item].parentId,
+                    "slotId": pmcData.Inventory.items[item].slotId,
+                    "location": pmcData.Inventory.items[item].location,
+                    "upd": { "StackObjectsCount": pmcData.Inventory.items[item].upd.StackObjectsCount }
+                });
+            } else {
+                output.data.items.del.push({ "_id": id });
+                pmcData.Inventory.items.splice(item, 1);
+            }
+
+            break;
+        }
+    }
 }
 
 module.exports.initialize = initialize;

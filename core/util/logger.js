@@ -81,11 +81,11 @@ class Logger {
     }
 
     logWarning(text) {
-        this.log("[WARNING] " + text, "white", "yellow");
+        this.log("[WARNING] " + text, "yellow", "black");
     }
 
     logSuccess(text) {
-        this.log("[SUCCESS] " + text, "white", "green");
+        this.log("[SUCCESS] " + text, "green", "black");
     }
 
     logInfo(text) {
