@@ -205,11 +205,11 @@ function generateRagfairTrader() {
         }
 
         // save everything
-        json.write(outputDir + "assort/579dc571d53a0658a154fbec/items/" + fileName + ".json", {_id: fileData._id, _tpl: fileData._id, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
-        json.write(outputDir + "assort/579dc571d53a0658a154fbec/barter_Scheme/" + fileName + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
-        json.write(outputDir + "assort/579dc571d53a0658a154fbec/loyal_level_items/" + fileName + ".json", 1);
+        json.write(outputDir + "assort/ragfair/items/" + fileName + ".json", {_id: fileData._id, _tpl: fileData._id, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
+        json.write(outputDir + "assort/ragfair/barter_Scheme/" + fileName + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
+        json.write(outputDir + "assort/ragfair/loyal_level_items/" + fileName + ".json", 1);
 
-        console.log("done: 579dc571d53a0658a154fbec <- " + fileName);
+        console.log("done: ragfair <- " + fileName);
     }
 
     /* presets */
@@ -242,9 +242,9 @@ function generateRagfairTrader() {
         /* base item */
         for (let item of globalFiles[file]._items) {
             if (item._id === globalFiles[file]._parent) {
-                json.write(outputDir + "assort/579dc571d53a0658a154fbec/items/" + presetId + ".json", {_id: presetId, _tpl: item._tpl, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
-                json.write(outputDir + "assort/579dc571d53a0658a154fbec/barter_scheme/" + presetId + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
-                json.write(outputDir + "assort/579dc571d53a0658a154fbec/loyal_level_items/" + presetId + ".json", 1);
+                json.write(outputDir + "assort/ragfair/items/" + presetId + ".json", {_id: presetId, _tpl: item._tpl, parentId: "hideout", slotId: "hideout", upd: {UnlimitedCount: true, StackObjectsCount: 500000}});
+                json.write(outputDir + "assort/ragfair/barter_scheme/" + presetId + ".json", [[{count: price, _tpl: "5449016a4bdc2d6f028b456f"}]]);
+                json.write(outputDir + "assort/ragfair/loyal_level_items/" + presetId + ".json", 1);
                 console.log("done: ragfair <- " + presetId);
                 break;
             }
