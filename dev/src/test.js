@@ -10,7 +10,7 @@ const expect = require('chai').expect;
 let settings = JSON.parse(readJson(__dirname + "/../../user/server.config.json"));
 
 const url = settings.server.ip;
-const port = settings.server.httpsPort;
+const port = settings.server.port;
 const gameVersion = '0.12.3.5985';
 
 let integer = 0;
