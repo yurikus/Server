@@ -5,11 +5,8 @@ class TraderServer {
     constructor() {
         this.traders = {};
         this.assorts = {};
-        this.customizationArray = {};
-        this.customization = {};
 
         this.initializeTraders();
-        this.initializeCustomization();
     }
 
     /* Load all the traders into memory. */
@@ -18,19 +15,6 @@ class TraderServer {
 
         for (let id in db.traders) {
             this.traders[id] = json.parse(json.read(db.traders[id]));
-        }
-    }
-
-    initializeCustomization() {
-        logger.logWarning("Loading customization into RAM...");
-
-        for (let id in db.traders) {
-            if ("customization_" + id in db.user.cache) {
-                this.customizationArray[id] = json.parse(json.read(db.user.cache["customization_" + id]));
-            }
-        }
-        if ("customization" in db.user.cache) {
-            this.customization = json.parse(json.read(db.user.cache["customization"]));
         }
     }
 
@@ -174,17 +158,14 @@ class TraderServer {
     }
 
     getCustomization(traderId, sessionID) {
-
+        let suitArray = json.parse(json.read(db.user.cache["customization_" + traderId]));
         let suitList = [];
-        if (traderId in this.customizationArray) {
-            let suitArray = this.customizationArray[traderId];
-            for (let suit of suitArray) {
-                if (suit.suiteId in this.customization.data) {
-                    let side = this.customization.data[suit.suiteId]._props.Side[0];
-                    let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-                    if (side === pmcData.Info.Side) {
-                        suitList.push(suit);
-                    }
+        for (let suit of suitArray) {
+            if (suit.suiteId in customization_f.getCustomization().data) {
+                let side = customization_f.getCustomization().data[suit.suiteId]._props.Side[0];
+                let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+                if (side === pmcData.Info.Side) {
+                    suitList.push(suit);
                 }
             }
         }
