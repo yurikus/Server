@@ -99,7 +99,23 @@ function stripMapLootDuplicates() {
       }
 
       // check quest items separately	
-      if (fileData.Id.includes("quest_")) {	
+     if (fileData.Id.includes("quest_")
+      || fileData.Id.includes("controller_")
+      || fileData.Id.includes("giroscope")
+      || fileData.Id.includes("controller1")
+      || fileData.Id.includes("case_0060")
+      || fileData.Id.includes("loot_letter")
+      || fileData.Id.includes("blood_probe")
+      || fileData.Id.includes("loot_letter")
+      || fileData.Id.includes("009_2_doc")
+      || fileData.Id.includes("010_4_flash")
+      || fileData.Id.includes("009_1_nout")
+      || fileData.Id.includes("008_5_key")
+      || fileData.Id.includes("010_5_drive")
+      || fileData.Id.includes("loot 56(28)")
+      || fileData.Id.includes("loot_case")
+      || fileData.Id.includes("SAS")
+      || fileData.Id.includes("chem_container")){ {	
         questLoot[fileName] = json.stringify(fileData.Position);	
       }
     }
