@@ -102,21 +102,20 @@ function isInFilter(id, item, slot) {
 function countCategories(response) {
     let categ = {};
 
-    for (let offer of response.data.offers) {
+    for (let offer of response.offers) {
         let item = offer.items[0]; // only the first item can have presets
 
         categ[item._tpl] = categ[item._tpl] || 0;
         categ[item._tpl]++;
     }
-
     // not in search mode, add back non-weapon items
-    for (let c in response.data.categories) {
+    for (let c in response.categories) {
         if (!categ[c]) {
             categ[c] = 1;
         }
     }
 
-    response.data.categories = categ;
+    response.categories = categ;
 }
 
 function getOffers(request) {
@@ -125,7 +124,7 @@ function getOffers(request) {
     let offers = [];
 
     if (!request.linkedSearchId && !request.neededSearchId) {
-        response.categories = (trader_f.getAssort("ragfair")).data.loyal_level_items;
+        response.categories = (trader_f.traderServer.getAssort("ragfair")).data.loyal_level_items;
     }
 
     if (request.buildCount) {
