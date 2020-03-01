@@ -154,7 +154,7 @@ function handoverQuest(pmcData, body, sessionID) {
 
     for (let condition of quest.conditions.AvailableForFinish) {
         if (condition._props.id === body.conditionId && types.includes(condition._parent)) {
-            value = condition._props.value;
+            value = parseInt(condition._props.value);
             handoverMode = condition._parent === types[0];
 
             break;
