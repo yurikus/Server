@@ -5,7 +5,6 @@ class TraderServer {
     constructor() {
         this.traders = {};
         this.assorts = {};
-        this.customization = {};
 
         this.initializeTraders();
     }
@@ -156,19 +155,26 @@ class TraderServer {
         return "";
     }
 
-    getCustomization(traderId) {
-        if (!("traderId" in this.customization) && "customization_" + traderId in db.user.cache) {
-            this.customization[traderId] = json.parse(json.read(db.user.cache["customization_" + traderId]));
+    getCustomization(traderId, sessionID) {
+        let suitArray = json.parse(json.read(db.user.cache["customization_" + traderId]));
+        let suitList = [];
+        for (let suit of suitArray) {
+            if (suit.suiteId in customization_f.getCustomization().data) {
+                let side = customization_f.getCustomization().data[suit.suiteId]._props.Side[0];
+                let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+                if (side === pmcData.Info.Side) {
+                    suitList.push(suit);
+                }
+            }
         }
-        
-        return this.customization[traderId];
+        return suitList;
     }
 
-    getAllCustomization() {
+    getAllCustomization(sessionID) {
         let output = [];
 
-        for (let traderId in this.customization) {
-            output = output.concat(this.getCustomization(traderId));
+        for (let traderId in this.customizationArray) {
+            output = output.concat(this.getCustomization(traderId, sessionID));
         }
 
         return output;
