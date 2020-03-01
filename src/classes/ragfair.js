@@ -120,12 +120,12 @@ function countCategories(response) {
 }
 
 function getOffers(request) {
-    let response = json.parse(json.read(db.ragfair.search));
+    let response = {"categories": {}, "offers": [], "offersCount": 10, "selectedCategory": "5b5f78dc86f77409407a7f8e"};
     let itemsToAdd = [];
     let offers = [];
 
-    if (request.linkedSearchId || request.neededSearchId) {
-        response.categories = {};
+    if (!request.linkedSearchId && !request.neededSearchId) {
+        response.categories = (trader_f.getAssort("ragfair")).data.loyal_level_items;
     }
 
     if (request.buildCount) {
@@ -151,8 +151,8 @@ function getOffers(request) {
         }
     }
 
-    for (let it of itemsToAdd) {
-        offers = offers.concat(createOffer(it, request.onlyFunctional, request.buildCount === 0));
+    for (let item of itemsToAdd) {
+        offers = offers.concat(createOffer(item, request.onlyFunctional, request.buildCount === 0));
     }
 
     response.offers = sortOffers(request, offers);
