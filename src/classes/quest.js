@@ -29,26 +29,60 @@ function getQuestsCache() {
 */
 function getQuestRewardItems(quest, state) {
     let questRewards = [];
+    let targets = {}; // {targetId: [[item1, mod1, ...][item2, mod2, ...][...]]}
 
+    // First pass, fix stacks
+    for (let reward of quest.rewards[state]) {
+        if ("Item" === reward.type) {
+            targets[reward.target] = [];
+
+            for (let rewardItem of reward.items) {
+                // we're only interested in the main item here
+                if (rewardItem._id === reward.target) {
+                    let maxStack = json.parse(json.read(db.items[rewardItem._tpl]))._props.StackMaxSize;
+
+                    if (!("upd" in rewardItem)) {
+                        rewardItem.upd = {}
+                    }
+
+                    if (!("StackObjectsCount" in rewardItem.upd)) {
+                        rewardItem.upd.StackObjectsCount = 1;
+                    }
+
+                    let count = rewardItem.upd.StackObjectsCount;
+
+                    // create as many stacks as needed
+                    while (count !== 0) {
+                        let amount = Math.min(count, maxStack);
+                        let newStack = itm_hf.clone(rewardItem);
+
+                        newStack.upd.StackObjectsCount = amount;
+                        count -= amount;
+                        targets[reward.target].push([newStack]);
+                    }
+                }
+            }
+        }
+    }
+
+    // Second pass, add item attachments to each target, if any
     for (let reward of quest.rewards[state]) {
         if ("Item" === reward.type) {
             for (let rewardItem of reward.items) {
-
-                let itemTmplData = json.parse(json.read(db.items[rewardItem._tpl]));
-
-                if ("upd" in rewardItem && "StackObjectsCount" in rewardItem.upd && itemTmplData._props.StackMaxSize === 1) {
-                    let count = rewardItem.upd.StackObjectsCount;
-
-                    rewardItem.upd.StackObjectsCount = 1;
-
-                    for (let i = 0; i < count; i++) {
-                        questRewards.push(itm_hf.clone(rewardItem));
+                if (rewardItem._id !== reward.target) {
+                    // all base items will receive the same attachments
+                    for (let target of targets[reward.target]) {
+                        target.push(itm_hf.clone(rewardItem));
                     }
                 }
-                else {
-                    questRewards.push(rewardItem);
-                }
             }
+        }
+    }
+
+    // Finally, fix ids
+    for (let target in targets) {
+        for (let items of targets[target]) {
+            questRewards = questRewards.concat(itm_hf.replaceIDs(null, items));
         }
     }
 
