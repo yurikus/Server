@@ -125,7 +125,7 @@ function getOffers(request) {
     let offers = [];
 
     if (request.linkedSearchId || request.neededSearchId) {
-        response.data.categories = {};
+        response.categories = {};
     }
 
     if (request.buildCount) {
@@ -155,10 +155,9 @@ function getOffers(request) {
         offers = offers.concat(createOffer(it, request.onlyFunctional, request.buildCount === 0));
     }
 
-    response.data.offers = sortOffers(request, offers);
+    response.offers = sortOffers(request, offers);
     countCategories(response);
-
-    return json.stringify(response);
+    return response;
 }
 
 function getLinkedSearchList(linkedSearchId) {
