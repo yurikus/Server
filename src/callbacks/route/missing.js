@@ -32,7 +32,7 @@ function route() {
     for (let trader in db.traders) {
         db.user.cache["assort_" + trader] = "user/cache/assort_" + trader + ".json";
 
-        if ("customization" in db.assorts[trader]) {
+        if ("customization" in db.assort[trader]) {
             db.user.cache["customization_" + trader] = "user/cache/customization_" + trader + ".json";
         }
     }
