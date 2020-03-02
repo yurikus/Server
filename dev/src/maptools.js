@@ -38,11 +38,11 @@ function getMapName(mapName) {
 }
 
 function getMapLoot() {
-  let inputFiles = fs.readdirSync(inputDir);
+  let inputFiles = fs.readdirSync(inputDir + "all/");
   let i = 0;
 
   for (let file of inputFiles) {
-    let filePath = inputDir + file;
+    let filePath = inputDir + "all/" + file;
     let fileName = file.replace(".json", "");
     let fileData = json.parse(json.read(filePath));
     let mapName = getMapName(fileName.toLowerCase());
@@ -59,6 +59,26 @@ function getMapLoot() {
 }
 
 function stripMapLootDuplicates() {
+  const questLootTypes = [
+    "quest_",
+    "controller_",
+    "giroscope",
+    "controller1",
+    "case_0060",
+    "loot_letter",
+    "blood_probe",
+    "loot_letter",
+    "009_2_doc",
+    "010_4_flash",
+    "009_1_nout",
+    "008_5_key",
+    "010_5_drive",
+    "loot 56(28)",
+    "loot_case",
+    "SAS",
+    "chem_container",
+  ];
+
   for (let mapName of getDirList(outputDir)) {
     if (mapName === "hideout") {
       continue;
@@ -70,8 +90,25 @@ function stripMapLootDuplicates() {
     let emptyLoot = {};
     let multipleLoot = {};
     let questLoot = {};
+    let mapkeys = {};
 
     console.log("Checking " + mapName);
+
+    // get all map keys
+    for (let file of fs.readdirSync(inputDir + "source/")) {
+      let filePath = inputDir + "source/" + file;
+      let fileName = file.replace(".json", "");
+      let fileData = json.parse(json.read(filePath));
+      let map = getMapName(fileName.toLowerCase());
+  
+      if (map === mapName) {
+        let node = ("Location" in fileData) ? fileData.Location.Loot : fileData.Loot;
+
+        for (let item in node) {
+          mapkeys[node[item].Id] = true;
+        }
+      }
+    }
 
     // get all items
     for (let file of inputFiles) {
@@ -98,31 +135,46 @@ function stripMapLootDuplicates() {
         multipleLoot[fileName] = json.stringify(tmp);
       }
 
-      // check quest items separately	
-     if (fileData.Id.includes("quest_")
-      || fileData.Id.includes("controller_")
-      || fileData.Id.includes("giroscope")
-      || fileData.Id.includes("controller1")
-      || fileData.Id.includes("case_0060")
-      || fileData.Id.includes("loot_letter")
-      || fileData.Id.includes("blood_probe")
-      || fileData.Id.includes("loot_letter")
-      || fileData.Id.includes("009_2_doc")
-      || fileData.Id.includes("010_4_flash")
-      || fileData.Id.includes("009_1_nout")
-      || fileData.Id.includes("008_5_key")
-      || fileData.Id.includes("010_5_drive")
-      || fileData.Id.includes("loot 56(28)")
-      || fileData.Id.includes("loot_case")
-      || fileData.Id.includes("SAS")
-      || fileData.Id.includes("chem_container")){ {	
-        questLoot[fileName] = json.stringify(fileData.Position);	
+      // check quest items separately
+      for (let type of questLootTypes) {
+        if (fileData.Id.includes(type)) {
+          questLoot[fileName] = json.stringify(fileData.Position);	
+        }
       }
     }
 
     // check for items to remove
     for (let loot in mapLoot) {
+      let data = json.parse(json.read(dirName + loot + ".json"));
+      
+      // if key doesn't exist
+      if (!(data.Id in mapkeys) && data.IsStatic === true) {
+        let target = dirName + loot + ".json";
+
+        console.log(mapName + ".duplicate: " + loot + ", " + data.Id);
+        fs.unlinkSync(target);
+        delete mapLoot[loot];
+
+        if (loot in emptyLoot) {
+          delete emptyLoot[loot];
+        }
+
+        if (loot in multipleLoot) {
+          delete multipleLoot[loot];
+        }
+
+        if (loot in questLoot) {	
+          delete questLoot[loot];	
+        }
+
+        continue;
+      }
+
       for (let file in mapLoot) {
+        if (!(loot) in mapLoot) {
+          continue;
+        }
+
         // don't check the same file
         if (loot === file) {
           continue;
@@ -195,10 +247,10 @@ function renameMapLoot() {
 }
 
 function getMapLootCount() {
-  let inputFiles = fs.readdirSync(inputDir);
+  let inputFiles = fs.readdirSync(inputDir + "all/");
 
   for (let file of inputFiles) {
-    let filePath = inputDir + file;
+    let filePath = inputDir + "all/" + file;
     let fileName = file.replace(".json", "");
     let fileData = json.parse(json.read(filePath));
     let mapName = getMapName(fileName.toLowerCase());
