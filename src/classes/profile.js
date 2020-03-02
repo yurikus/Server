@@ -56,7 +56,6 @@ class ProfileServer {
     createProfile(info, sessionID) {
         let account = account_f.accountServer.find(sessionID);
         let folder = account_f.getPath(account.id);
-
         let pmcData = json.parse(json.read(db.profile[account.edition]["character_" + info.side.toLowerCase()]));
         let storage = json.parse(json.read(db.profile[account.edition]["storage_" + info.side.toLowerCase()]));
 

@@ -29,7 +29,7 @@ function route() {
         "mods": "user/cache/mods.json"
     };
 
-    for (let trader of utility.getDirList("db/assort/")) {
+    for (let trader in db.traders) {
         db.user.cache["assort_" + trader] = "user/cache/assort_" + trader + ".json";
 
         if (fs.existsSync("db/assort/" + trader + "/customization/")) {
