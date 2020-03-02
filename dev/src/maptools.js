@@ -60,10 +60,9 @@ function getMapLoot() {
 
 function stripMapLootDuplicates() {
   const questLootTypes = [
-    "quest_",
-    "controller_",
+    "quest",
     "giroscope",
-    "controller1",
+    "controller",
     "case_0060",
     "loot_letter",
     "blood_probe",
@@ -77,6 +76,14 @@ function stripMapLootDuplicates() {
     "loot_case",
     "SAS",
     "chem_container",
+    "huntsman_001_message2284354",
+    "loot_shop_goshan_vedodmost5861492",
+    "loot_shop_oli_vedodmost5860728",
+    "loot_shop_idea_vedodmost5868202",
+    "loot_shop_oli_vedodmost_part25862028",
+    "loot_book_venskiy5864616",
+    "loot_book_osnovu5868064",
+    "Loot 56 (28)6937524"
   ];
 
   for (let mapName of getDirList(outputDir)) {
