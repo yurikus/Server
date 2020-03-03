@@ -22,6 +22,35 @@ function getQuestsCache() {
     return questsCache;
 }
 
+function processReward(reward) {
+    let rewardItems = [];
+    let targets;
+    let mods = [];
+
+    // separate base item and mods, fix stacks
+    for (let item of reward.items) {
+        if (item._id === reward.target) {
+            targets = itm_hf.splitStack(item);
+        }
+        else {
+            mods.push(item);
+        }
+    }
+
+    // add mods to the base items, fix ids
+    for (let target of targets) {
+        let items = [ target ];
+
+        for (let mod of mods) {
+            items.push(itm_hf.clone(mod));
+        }
+
+        rewardItems = rewardItems.concat(itm_hf.replaceIDs(null, items));
+    }
+
+    return rewardItems;
+}
+
 /* Gets a flat list of reward items for the given quest and state
 * input: quest, a quest object
 * input: state, the quest status that holds the items (Started, Success, Fail)
@@ -29,60 +58,10 @@ function getQuestsCache() {
 */
 function getQuestRewardItems(quest, state) {
     let questRewards = [];
-    let targets = {}; // {targetId: [[item1, mod1, ...][item2, mod2, ...][...]]}
 
-    // First pass, fix stacks
     for (let reward of quest.rewards[state]) {
         if ("Item" === reward.type) {
-            targets[reward.target] = [];
-
-            for (let rewardItem of reward.items) {
-                // we're only interested in the main item here
-                if (rewardItem._id === reward.target) {
-                    let maxStack = json.parse(json.read(db.items[rewardItem._tpl]))._props.StackMaxSize;
-
-                    if (!("upd" in rewardItem)) {
-                        rewardItem.upd = {}
-                    }
-
-                    if (!("StackObjectsCount" in rewardItem.upd)) {
-                        rewardItem.upd.StackObjectsCount = 1;
-                    }
-
-                    let count = rewardItem.upd.StackObjectsCount;
-
-                    // create as many stacks as needed
-                    while (count !== 0) {
-                        let amount = Math.min(count, maxStack);
-                        let newStack = itm_hf.clone(rewardItem);
-
-                        newStack.upd.StackObjectsCount = amount;
-                        count -= amount;
-                        targets[reward.target].push([newStack]);
-                    }
-                }
-            }
-        }
-    }
-
-    // Second pass, add item attachments to each target, if any
-    for (let reward of quest.rewards[state]) {
-        if ("Item" === reward.type) {
-            for (let rewardItem of reward.items) {
-                if (rewardItem._id !== reward.target) {
-                    // all base items will receive the same attachments
-                    for (let target of targets[reward.target]) {
-                        target.push(itm_hf.clone(rewardItem));
-                    }
-                }
-            }
-        }
-    }
-
-    // Finally, fix ids
-    for (let target in targets) {
-        for (let items of targets[target]) {
-            questRewards = questRewards.concat(itm_hf.replaceIDs(null, items));
+            questRewards = questRewards.concat(processReward(reward));
         }
     }
 
