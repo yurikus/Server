@@ -40,7 +40,7 @@ function buyClothing(pmcData, body, sessionID) {
 	let offers = trader_f.traderServer.getAllCustomization(sessionID);
 
 	// check if outfit already exists
-	for (let suiteId of storage) {
+	for (let suiteId of storage.data.suites) {
 		if (suiteId === body.offer) {
 			return output;
 		}
