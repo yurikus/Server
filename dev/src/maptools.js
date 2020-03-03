@@ -155,7 +155,7 @@ function stripMapLootDuplicates() {
       let data = json.parse(json.read(dirName + loot + ".json"));
       
       // if key doesn't exist
-      if (!(data.Id in mapkeys) && data.IsStatic === true) {
+      if (!(data.Id in mapkeys) && (data.IsStatic === true || loot in questLoot)) {
         let target = dirName + loot + ".json";
 
         console.log(mapName + ".duplicate: " + loot + ", " + data.Id);
