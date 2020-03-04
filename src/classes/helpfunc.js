@@ -699,6 +699,7 @@ module.exports.templatesWithParent = templatesWithParent;
 module.exports.isCategory = isCategory;
 module.exports.childrenCategories = childrenCategories;
 module.exports.recheckInventoryFreeSpace = recheckInventoryFreeSpace;
+module.exports.isMoneyTpl = isMoneyTpl;
 module.exports.getCurrency = getCurrency;
 module.exports.inRUB = inRUB;
 module.exports.fromRUB = fromRUB;
