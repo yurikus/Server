@@ -194,7 +194,23 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl)) {
             // calculate normal price and count
-            let price = (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
+
+            let price = 0;
+            for(let childItemId of itm_hf.findAndReturnChildren(pmcData,item._id) )
+            {
+                let childitemTpl = itm_hf.findInventoryItemById(pmcData,childItemId);
+                if(childitemTpl != false)//in case of findItemByid didn't work
+                {
+                    childitemTpl = childitemTpl._tpl;
+                    price = price + (items.data[childitemTpl]._props.CreditsPrice >= 1 ? items.data[childitemTpl]._props.CreditsPrice : 1);
+                }
+                else
+                {
+                    price = price + (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
+                }
+
+            }
+
             let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
 
             // uses profile information to get the level of the dogtag and multiplies
