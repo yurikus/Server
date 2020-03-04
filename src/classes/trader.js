@@ -193,25 +193,26 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questRaidItems
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl)) {
-            // calculate normal price and count
 
             let price = 0;
+            //find all child of the item and sum the price 
             for(let childItemId of itm_hf.findAndReturnChildren(pmcData,item._id) )
             {
-                let childitemTpl = itm_hf.findInventoryItemById(pmcData,childItemId);
-                if(childitemTpl != false)//in case of findItemByid didn't work
+                let childitem = itm_hf.findInventoryItemById(pmcData,childItemId);//find template to retrive price later
+                if(childitem != false)//in case of findItemByid didn't work
                 {
-                    childitemTpl = childitemTpl._tpl;
-                    price = price + (items.data[childitemTpl]._props.CreditsPrice >= 1 ? items.data[childitemTpl]._props.CreditsPrice : 1);
+                    let tempPrice = (items.data[childitem._tpl]._props.CreditsPrice >= 1 ? items.data[childitem._tpl]._props.CreditsPrice : 1);
+                    let count = (typeof childitem.upd !== "undefined" ? (typeof childitem.upd.StackObjectsCount !== "undefined" ? childitem.upd.StackObjectsCount : 1) : 1);
+                    tempPrice = tempPrice * count;
+                    price = price + tempPrice;
                 }
                 else
                 {
-                    price = price + (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
+                    price = (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
+                    let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
+                    price = price * count;
                 }
-
             }
-
-            let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
 
             // uses profile information to get the level of the dogtag and multiplies
             if ("upd" in item && "Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
@@ -219,7 +220,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
             }
 
             // get real price
-            price = price * count * settings.gameplay.trading.sellMultiplier;
+            price = price * settings.gameplay.trading.sellMultiplier;
             price = itm_hf.fromRUB(price, currency);
             price = (price > 0 && price !== "NaN" ? price : 1);
             
