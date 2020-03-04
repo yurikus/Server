@@ -181,6 +181,9 @@ class TraderServer {
     }
 }
 
+/*
+    function to calculate the price of each player items in the inventory when selling
+*/
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let currency = itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency);
@@ -218,6 +221,22 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
             if ("upd" in item && "Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
                 price *= item.upd.Dogtag.Level;
             }
+
+            //meds calculation
+            let hpresource = (typeof item.upd !== "undefined" ? (typeof item.upd.MedKit !== "undefined" ? item.upd.MedKit.HpResource : 0) : 0);  
+            if(hpresource > 0)
+            {
+                let maxHp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
+                price = price * (hpresource/maxHp);
+            }
+
+            //weapons and armor calculation
+            let repairable = (typeof item.upd !== "undefined" ? (typeof item.upd.Repairable !== "undefined" ? item.upd.Repairable : 1) : 1);  
+            if(repairable != 1 )
+            {
+                price = price * (repairable.Durability/repairable.MaxDurability)
+            }
+
 
             // get real price
             price = price * settings.gameplay.trading.sellMultiplier;
