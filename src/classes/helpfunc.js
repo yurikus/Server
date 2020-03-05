@@ -246,7 +246,7 @@ function findItemById(items, id) {
 
 /*
 * Find in the player profile the template of an given id
-* input : character data
+* input : character data, item id from inventory
 * output : the whole item object, false if not found
 */
 function findInventoryItemById(pmcData,idToFind)

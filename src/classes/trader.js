@@ -186,7 +186,8 @@ class TraderServer {
 */
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-    let currency = itm_hf.getCurrency(trader_f.traderServer.getTrader(tmpTraderInfo, sessionID).data.currency);
+    let traderData = trader_f.traderServer.getTrader(tmpTraderInfo, sessionID);
+    let currency = itm_hf.getCurrency(traderData.data.currency);
     let output = {};
 
     // get sellable items
@@ -195,7 +196,8 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.stash
         && item._id !== pmcData.Inventory.questRaidItems
         && item._id !== pmcData.Inventory.questStashItems
-        && !itm_hf.isNotSellable(item._tpl)) {
+        && !itm_hf.isNotSellable(item._tpl) 
+        && traderFilter(traderData.data.sell_category,item._tpl) ) {
 
             let price = 0;
             //find all child of the item and sum the price 
@@ -248,6 +250,31 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     }
 
     return output;
+}
+
+/*
+check if an item is allowed to be sold to a trader
+input : array of handbook categories, itemTpl of inventory
+output : boolean
+*/
+function traderFilter(traderFilters,tplToCheck)
+{
+    let found = false;
+    for(let filter of traderFilters)
+    {
+        for(let subcateg of itm_hf.childrenCategories(filter) )
+        {
+            for(let itemCategory of itm_hf.templatesWithParent(subcateg) )
+            {
+                if( itemCategory == tplToCheck)
+                {
+                    found = true;
+                    break;
+                }
+            }
+        }
+    }
+    return found;
 }
 
 module.exports.traderServer = new TraderServer();
