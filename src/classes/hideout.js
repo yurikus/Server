@@ -111,10 +111,18 @@ function putItemsInAreaSlots(pmcData, body, sessionID) {
 							"upd": inventoryItem.upd
 						}
 					]
-				};
-
-				pmcData.Hideout.Areas[area].slots.push(slot_to_add);
+				}
+				let slot_position = parseInt(itemToMove);
+				if(pmcData.Hideout.Areas[area].slots[slot_position] === undefined)
+				{
+					pmcData.Hideout.Areas[area].slots.push(slot_to_add)
+				}
+				else
+				{
+					pmcData.Hideout.Areas[area].slots.splice(slot_position, 1, slot_to_add);
+				}
 				output = move_f.removeItem(pmcData, inventoryItem._id, output, sessionID);
+
 			}
 		}
 	}
@@ -126,19 +134,44 @@ function takeItemsFromAreaSlots(pmcData, body, sessionID) {
 	let output = item_f.itemServer.getOutput();
 
 	for (let area in pmcData.Hideout.Areas) {
-		if (pmcData.Hideout.Areas[area].type !== body.areaType) {
-			continue;
+		if (pmcData.Hideout.Areas[area].type !== body.areaType) { continue; }
+
+		if(pmcData.Hideout.Areas[area].type == 4)
+		{	
+			let itemToMove = pmcData.Hideout.Areas[area].slots[body.slots[0]].item[0];
+			let newReq = {
+				"item_id": itemToMove._tpl,
+				"count": 1,
+				"tid": "ragfair"
+			};
+			output = move_f.addItem(pmcData, newReq, output, sessionID);
+
+			pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+			output.data.items.new[0].upd = itemToMove.upd;
+
+			for( let item in pmcData.Inventory.items )
+			{
+				if( pmcData.Inventory.items[item]._id == output.data.items.new[0]._id)
+				{
+					pmcData.Inventory.items[item].upd = itemToMove.upd;
+				}
+			}
+			pmcData.Hideout.Areas[area].slots[body.slots[0]] = {"item" : null};			
+		}
+		else
+		{
+			let newReq = {
+				"item_id": pmcData.Hideout.Areas[area].slots[0].item[0]._tpl,
+				"count": 1,
+				"tid": "ragfair"
+			};
+			
+			output = move_f.addItem(pmcData, newReq, output, sessionID);
+			pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+			pmcData.Hideout.Areas[area].slots.splice(0, 1);
 		}
 
-		let newReq = {
-			"item_id": pmcData.Hideout.Areas[area].slots[0].item[0]._tpl,
-			"count": 1,
-			"tid": "ragfair"
-		};
-		
-		output = move_f.addItem(pmcData, newReq, output, sessionID);
-		pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-		pmcData.Hideout.Areas[area].slots.splice(0, 1);
+
 	}
 
 	return output;
