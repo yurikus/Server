@@ -106,10 +106,27 @@ function generate(info, sessionID) {
 }
 
 function generatePlayerScav() {
-	let scavData = generate({"conditions":[{"Role":"playerScav","Limit":1,"Difficulty":"normal"}]});
+    let scavData = generate({"conditions":[{"Role":"playerScav","Limit":1,"Difficulty":"normal"}]});
+    let items = scavData[0].Inventory.items;
 
-	scavData[0].Info.Settings = {};
-	return scavData[0];
+    // Remove secured container
+    for (let item of items) {
+        if (item.slotId === "SecuredContainer") {
+            let toRemove = itm_hf.findAndReturnChildrenByItems(items, item._id);
+            let n = items.length;
+
+            while (n --> 0) {
+                if (toRemove.includes(items[n]._id)) {
+                    items.splice(n, 1);
+                }
+            }
+
+            break;
+        }
+    }
+
+    scavData[0].Info.Settings = {};
+    return scavData[0];
 }
 
 module.exports.generate = generate;
