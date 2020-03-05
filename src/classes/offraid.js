@@ -155,7 +155,6 @@ function saveProgress(offraidData, sessionID) {
 
     // set pmc data
     if (!isPlayerScav) {
-
         pmcData.Info.Level = offraidData.profile.Info.Level;
         pmcData.Skills = offraidData.profile.Skills;
         pmcData.Stats = offraidData.profile.Stats;
@@ -190,6 +189,7 @@ function saveProgress(offraidData, sessionID) {
     // set profile equipment to the raid equipment
     if (isPlayerScav) {
         scavData = setInventory(scavData, offraidData.profile);
+        profile_f.profileServer.setScavProfile(sessionID, scavData);
         return;
     } else {
         pmcData = setInventory(pmcData, offraidData.profile);
