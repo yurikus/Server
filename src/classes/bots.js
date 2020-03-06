@@ -5,17 +5,13 @@ function getRandomValue(node) {
 	return json.parse(json.read(node[keys[utility.getRandomInt(0, keys.length - 1)]]));
 }
 
+// TODO: read from file
 function addDogtag(bot, sessionID) {
 	let weaponArray = [
-		'A Magical Force',
-		'Goose With A Knife',
-		'Spartan Laser',
-		'Smashed Vodka Bottle',
-		'Heart Attack',
-		'Arrow To The Knee'
+		"EmuTarkov reverse engineering"
 	];
-	let randomNumber = Math.floor(Math.random()*weaponArray.length);
-	
+
+	let randomNumber = Math.floor(Math.random() * weaponArray.length);
 	let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 	let dogtagItem = {
 		_id: utility.generateNewItemId(),
