@@ -119,7 +119,7 @@ class TraderServer {
         let names = Object.keys(db.assort["579dc571d53a0658a154fbec"].loyal_level_items);
         let added = [];
 
-        for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
+        for (let i = 0; i < gameplayConfig.trading.fenceAssortSize; i++) {
             let id = names[utility.getRandomInt(0, names.length - 1)];
 
             if (added.includes(id)) {

@@ -40,12 +40,12 @@ function generateBot(bot, role, sessionID) {
 	let node = {};
 
 	// chance to spawn simulated PMC players
-	if ((type === "assault" || type === "marksman" || type === "pmcBot") && settings.gameplay.bots.pmcEnabled) {
+	if ((type === "assault" || type === "marksman" || type === "pmcBot") && gameplayConfig.bots.pmcEnabled) {
 		let spawnChance = utility.getRandomInt(0, 99);
 		let sideChance = utility.getRandomInt(0, 99);
 
-		if (spawnChance < settings.gameplay.bots.pmcSpawnChance) {
-			if (sideChance < settings.gameplay.bots.pmcUsecChance) {
+		if (spawnChance < gameplayConfig.bots.pmcSpawnChance) {
+			if (sideChance < gameplayConfig.bots.pmcUsecChance) {
 				bot.Info.Side = "Usec";
 				type = "usec";
 			} else {

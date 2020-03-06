@@ -35,7 +35,7 @@ function markFoundItems(pmcData, offraidData, isPlayerScav) {
         }
 
         // mark item found in raid
-        if (offraidItem.hasOwnProperty("upd")) {
+        if ("upd" in offraidItem) {
             offraidItem.upd["SpawnedInSession"] = true;
         } else {
             offraidItem["upd"] = {"SpawnedInSession": true};
@@ -143,7 +143,7 @@ function getPlayerGear(items) {
 }
 
 function saveProgress(offraidData, sessionID) {
-    if (!settings.gameplay.inraid.saveLootEnabled) {
+    if (!gameplayConfig.inraid.saveLootEnabled) {
         return;
     }
 
