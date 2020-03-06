@@ -37,9 +37,14 @@ function updatePlayerHideout(sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let receipes = json.parse(json.read(db.user.cache.hideout_production));
     let btcFarmLevel;
-    let btcFarmCGs;
+    let solarPowerLevel = 0;
+    let btcFarmCGs = 0;
     let isGeneratorOn;
 
+    for( let area of pmcData.Hideout.Areas)
+    {
+        if(area.type == 18){solarPowerLevel = area.level}
+    }
     for (let area in pmcData.Hideout.Areas) 
     {
         switch(pmcData.Hideout.Areas[area].type)
@@ -48,7 +53,7 @@ function updatePlayerHideout(sessionID) {
                 isGeneratorOn = pmcData.Hideout.Areas[area].active;
                 if(isGeneratorOn == true)
                 {
-                    pmcData.Hideout.Areas[area] = updateFuel(pmcData.Hideout.Areas[area],false);//i know solapower is always false but let me find a workaround later
+                    pmcData.Hideout.Areas[area] = updateFuel(pmcData.Hideout.Areas[area],solarPowerLevel);//i know solapower is always false but let me find a workaround later
                 }
                 break;
 
@@ -74,28 +79,35 @@ function updatePlayerHideout(sessionID) {
         let needGenerator = false;
         for(let receipe of receipes.data)
         {
-            if(receipe._id == pmcData.Hideout.Production[prod].RecipeId && receipe.continuous == true)
+            if(receipe._id == pmcData.Hideout.Production[prod].RecipeId )
             {
-                needGenerator = true;
-            }
-        
-            if(receipe._id != "5d5c205bd582a50d042a3c0e")
-            {
-                let time_elapsed = (Math.floor(Date.now() / 1000) - pmcData.Hideout.Production[prod].StartTime) - pmcData.Hideout.Production[prod].Progress;
-                if(needGenerator == true && isGeneratorOn == false)
+                if(receipe.continuous == true)
                 {
-                    time_elapsed = time_elapsed*0.2;
+                    needGenerator = true;
                 }
-                pmcData.Hideout.Production[prod].Progress += time_elapsed; 
-                //if progress > receive.prod time then stop
-                if(pmcData.Hideout.Production[prod].Progress > receipe.productionTime)
+
+                if(pmcData.Hideout.Production[prod].RecipeId == "5d5c205bd582a50d042a3c0e") //if its btcFarm
                 {
-                    pmcData.Hideout.Production[prod].inProgress = false;
+                    if(isGeneratorOn == true)
+                    {
+                        pmcData.Hideout.Production[prod] = updateBitcoinFarm(pmcData.Hideout.Production[prod],receipe,btcFarmLevel,btcFarmCGs);
+                    }
                 }
-            }
-            else
-            {
-                //CHECK BITCOIN FARM
+                else
+                {
+                    let time_elapsed = (Math.floor(Date.now() / 1000) - pmcData.Hideout.Production[prod].StartTime) - pmcData.Hideout.Production[prod].Progress;
+                    if(needGenerator == true && isGeneratorOn == false)
+                    {
+                        time_elapsed = time_elapsed*0.2;
+                    }
+                    pmcData.Hideout.Production[prod].Progress += time_elapsed; 
+
+                    /*
+                    if(pmcData.Hideout.Production[prod].Progress > receipe.productionTime)
+                    {
+                        pmcData.Hideout.Production[prod].inProgress = false;
+                    }*/
+                }
             }
         }
     }
@@ -106,7 +118,7 @@ function updateFuel(generatorArea,solarPower)
 {   
     let decreaseFuel = 0.0665;
 
-    if(solarPower == true){ decreaseFuel = 0.0332; }
+    if(solarPower == 1){ decreaseFuel = 0.0332; }
 
     for (let i = 0; i < generatorArea.slots.length; i++) 
     {
@@ -127,7 +139,6 @@ function updateFuel(generatorArea,solarPower)
             console.log("Generator : " + resourceValue + " fuel left on slot " + (i+1) )
             break;//break here to avoid update all the fuel tanks
         }
-
     }
     return generatorArea;
 }
@@ -135,7 +146,6 @@ function updateFuel(generatorArea,solarPower)
 function updateAirFilters(airFilterArea)
 {
     let decreaseValue = 0.00417;
-
 
     for (let i = 0; i < airFilterArea.slots.length;  i++) 
     { 
@@ -155,11 +165,36 @@ function updateAirFilters(airFilterArea)
             airFilterArea.slots[i].item[0].upd = { "StackObjectsCount": 1,"Resource": {"Value": resourceValue} } ;
             console.log("air filters : " + resourceValue +" left on tank " + (i+1) )
             break;
-            
         }
-        
     }
     return airFilterArea;
+}
+
+function updateBitcoinFarm(btcProd,farmReceipe,btcFarmLevel,btcFarmCGs)
+{
+    //console.log("bitcoin farm : level "+ btcFarmLevel + " & cgs = " +btcFarmCGs)
+
+    let time_elapsed = 120;
+    let speedBoost = 2940/(3*btcFarmCGs+46)^-2 //this is an invert function from tarkov wiki, very usefull
+
+    time_elapsed = time_elapsed - speedBoost;
+  
+    btcProd.Progress += time_elapsed; 
+
+    if(btcProd.Progress > 72000 && btcProd.Products[0] === undefined)
+    {
+        //btcProd.Products[0].push({ id: newid(), tpl:farmReceipe.Endproduct,upd:{stackthingblablabal:1}})
+    }
+    if(btcProd.Progress > 144000 && btcProd.Products[1] === undefined && btcFarmLevel > 1)
+    {
+        //add a second btc
+    }
+    if(btcProd.Progress > 216000 && btcProd.Products[2] === undefined && btcFarmLevel > 2)
+    {
+        //add a third btc
+    }
+    
+    return btcProd;
 }
 
 module.exports.main = main;
