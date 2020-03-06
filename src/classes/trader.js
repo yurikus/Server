@@ -15,6 +15,7 @@ class TraderServer {
 
         for (let id in db.assort) {
             this.traders[id] = json.parse(json.read(db.assort[id].base));
+            this.traders[id].sell_category = Object.keys(json.parse(json.read(db.assort[id].categories)));
         }
     }
 
@@ -189,61 +190,66 @@ class TraderServer {
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let traderData = trader_f.traderServer.getTrader(tmpTraderInfo, sessionID);
+    let traderCategories = json.parse(json.read(db.assort[tmpTraderInfo].categories));
     let currency = itm_hf.getCurrency(traderData.data.currency);
     let output = {};
 
     // get sellable items
     for (let item of pmcData.Inventory.items) {
-        if (item._id !== pmcData.Inventory.equipment
-        && item._id !== pmcData.Inventory.stash
-        && item._id !== pmcData.Inventory.questRaidItems
-        && item._id !== pmcData.Inventory.questStashItems
-        && !itm_hf.isNotSellable(item._tpl) 
-        && traderFilter(traderData.data.sell_category,item._tpl) ) {
-            let price = 0;
+        let category = traderFilter(traderData.data.sell_category, item._tpl);
+        let price = 0;
 
-            //find all child of the item and sum the price 
-            for (let childItemId of itm_hf.findAndReturnChildren(pmcData,item._id)) {
-                let childitem = itm_hf.findInventoryItemById(pmcData,childItemId);
-                
-                //in case of findItemByid didn't work
-                if (childitem !== false) {
-                    let tempPrice = (items.data[childitem._tpl]._props.CreditsPrice >= 1) ? items.data[childitem._tpl]._props.CreditsPrice : 1;
-                    let count = ("upd" in childitem && "StackObjectsCount" in childitem.upd) ? childitem.upd.StackObjectsCount : 1;
-                    price = price + (tempPrice * count);
-                } else {
-                    let count = ("upd" in item && "StackObjectsCount" in item.upd) ? childitem.upd.StackObjectsCount : 1;
-                    price = ((items.data[item._tpl]._props.CreditsPrice >= 1) ? items.data[item._tpl]._props.CreditsPrice : 1) * count;
-                }
-            }
-
-            // uses profile information to get the level of the dogtag and multiplies
-            if ("upd" in item && "Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
-                price *= item.upd.Dogtag.Level;
-            }
-
-            // meds calculation
-            let hpresource = ("upd" in item && "Medkit" in item.upd) ? item.upd.MedKit.HpResource : 0;  
-            
-            if (hpresource > 0) {
-                let maxHp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
-                price *= (hpresourc / maxHp);
-            }
-
-            //weapons and armor calculation
-            let repairable = ("upd" in item && "Repairable" in item.upd) ? item.upd.Repairable : 1;
-
-            if (repairable !== 1 ) {
-                price *= (repairable.Durability / repairable.MaxDurability)
-            }
-
-            // get real price
-            price *= settings.gameplay.trading.sellMultiplier;
-            price = itm_hf.fromRUB(price, currency);
-            price = (price > 0 && price !== "NaN" ? price : 1);
-            
-            output[item._id] = [[{"_tpl": currency, "count": price.toFixed(0)}]];
+        if (item._id === pmcData.Inventory.equipment
+        || item._id === pmcData.Inventory.stash
+        || item._id === pmcData.Inventory.questRaidItems
+        || item._id === pmcData.Inventory.questStashItems
+        || itm_hf.isNotSellable(item._tpl) 
+        || category === "") {
+            continue;
         }
+
+        // find all child of the item and sum the price 
+        for (let childItemId of itm_hf.findAndReturnChildren(pmcData, item._id)) {
+            let childitem = itm_hf.findInventoryItemById(pmcData, childItemId);
+            
+            if (childitem === false) {
+                // root item
+                let count = ("upd" in item && "StackObjectsCount" in item.upd) ? childitem.upd.StackObjectsCount : 1;
+                price = ((items.data[item._tpl]._props.CreditsPrice >= 1) ? items.data[item._tpl]._props.CreditsPrice : 1) * count;
+            } else {
+                // child item
+                let tempPrice = (items.data[childitem._tpl]._props.CreditsPrice >= 1) ? items.data[childitem._tpl]._props.CreditsPrice : 1;
+                let count = ("upd" in childitem && "StackObjectsCount" in childitem.upd) ? childitem.upd.StackObjectsCount : 1;
+                price = price + (tempPrice * count);
+            }
+        }
+
+        // dogtag calculation
+        if ("upd" in item && "Dogtag" in item.upd && itm_hf.isDogtag(item._tpl)) {
+            price *= item.upd.Dogtag.Level;
+        }
+
+        // meds calculation
+        let hpresource = ("upd" in item && "Medkit" in item.upd) ? item.upd.MedKit.HpResource : 0;  
+        
+        if (hpresource > 0) {
+            let maxHp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
+            price *= (hpresourc / maxHp);
+        }
+
+        // weapons and armor calculation
+        let repairable = ("upd" in item && "Repairable" in item.upd) ? item.upd.Repairable : 1;
+
+        if (repairable !== 1 ) {
+            price *= (repairable.Durability / repairable.MaxDurability)
+        }
+
+        // get real price
+        price *= traderCategories[category];
+        price = itm_hf.fromRUB(price, currency);
+        price = (price > 0 && price !== "NaN") ? price : 1;
+        
+        output[item._id] = [[{"_tpl": currency, "count": price.toFixed(0)}]];
     }
 
     return output;
@@ -254,14 +260,14 @@ check if an item is allowed to be sold to a trader
 input : array of handbook categories, itemTpl of inventory
 output : boolean
 */
-function traderFilter(traderFilters,tplToCheck) {
-    let found = false;
+function traderFilter(traderFilters, tplToCheck) {
+    let found = "";
 
     for (let filter of traderFilters) {
         for (let subcateg of itm_hf.childrenCategories(filter)) {
             for (let itemCategory of itm_hf.templatesWithParent(subcateg)) {
                 if (itemCategory === tplToCheck) {
-                    found = true;
+                    found = subcateg;
                     break;
                 }
             }
