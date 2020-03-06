@@ -13,8 +13,8 @@ class TraderServer {
     initializeTraders() {
         logger.logWarning("Loading traders into RAM...");
 
-        for (let id in db.traders) {
-            this.traders[id] = json.parse(json.read(db.traders[id]));
+        for (let id in db.assort) {
+            this.traders[id] = json.parse(json.read(db.assort[id].base));
         }
     }
 
@@ -27,6 +27,10 @@ class TraderServer {
         let traders = [];
 
         for (let traderId in this.traders) {
+            if (traderId === "ragfair") {
+                continue;
+            }
+
             let trader = this.traders[traderId];
 
             trader.loyalty.currentLevel = pmcData.TraderStandings[traderId].currentLevel;

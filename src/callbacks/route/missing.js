@@ -29,7 +29,7 @@ function route() {
         "mods": "user/cache/mods.json"
     };
 
-    for (let trader in db.traders) {
+    for (let trader in db.assort) {
         db.user.cache["assort_" + trader] = "user/cache/assort_" + trader + ".json";
 
         if ("customization" in db.assort[trader]) {
