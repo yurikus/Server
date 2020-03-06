@@ -104,7 +104,7 @@ function detectMissingMods() {
             }
             logger.logWarning("Mod " + mod + " not installed, adding it to the modlist");
             modsConfig.push({"name": config.name, "author": config.author, "version": config.version, "enabled": true});
-            settings.server.rebuildCache = true;
+            serverConfig.rebuildCache = true;
             json.write("user/configs/mods.json", settings);
         }
     }
@@ -210,23 +210,23 @@ function all() {
     /* check if loadorder is missing */
     if (!fs.existsSync("user/cache/loadorder.json")) {
         logger.logWarning("Loadorder mismatch");
-        settings.server.rebuildCache = true;
+        serverConfig.rebuildCache = true;
     }
 
     /* detect if existing mods changed */
     if (detectChangedMods()) {
         logger.logWarning("Modlist mismatch");
-        settings.server.rebuildCache = true;
+        serverConfig.rebuildCache = true;
     }
 
     /* check if db need rebuid */
     if (isRebuildRequired()) {
         logger.logWarning("Rebuild required");
-        settings.server.rebuildCache = true;
+        serverConfig.rebuildCache = true;
     }
 
     /* rebuild db */
-    if (settings.server.rebuildCache) {
+    if (serverConfig.rebuildCache) {
         logger.logWarning("Rebuilding routes");
         
         flush();
