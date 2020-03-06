@@ -135,42 +135,40 @@ class TraderServer {
         this.assorts['579dc571d53a0658a154fbec'] = base;
     }
 
+    // delete assort keys
     removeItemFromAssort(assort, id) {
-	// delete assort keys
+        let ids_toremove = itm_hf.findAndReturnChildren(assort, id);
+
         delete assort.data.barter_scheme[id];
         delete assort.data.loyal_level_items[id];
 
-        // find and delete all related items
-        if (id !== undefined && id !== null && id !== "undefined") {
-            let ids_toremove = itm_hf.findAndReturnChildren(assort, id);
-
-            for (let i in ids_toremove) {
-                for (let a in assort.data.items) {
-                    if (assort.data.items[a]._id === ids_toremove[i]) {
-                        assort.data.items.splice(a, 1);
-                    }
+        for (let i in ids_toremove) {
+            for (let a in assort.data.items) {
+                if (assort.data.items[a]._id === ids_toremove[i]) {
+                    assort.data.items.splice(a, 1);
                 }
             }
-
-            return assort;
         }
 
-        logger.logError("assort item id is not valid");
-        return "";
+        return assort;
     }
 
     getCustomization(traderId, sessionID) {
+        let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+        let allSuits = customization_f.getCustomization().data;
         let suitArray = json.parse(json.read(db.user.cache["customization_" + traderId]));
         let suitList = [];
+
         for (let suit of suitArray) {
             if (suit.suiteId in customization_f.getCustomization().data) {
-                let side = customization_f.getCustomization().data[suit.suiteId]._props.Side[0];
-                let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
+                let side = allSuits[suit.suiteId]._props.Side[0];
+
                 if (side === pmcData.Info.Side) {
                     suitList.push(suit);
                 }
             }
         }
+        
         return suitList;
     }
 
@@ -202,24 +200,20 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         && item._id !== pmcData.Inventory.questStashItems
         && !itm_hf.isNotSellable(item._tpl) 
         && traderFilter(traderData.data.sell_category,item._tpl) ) {
-
             let price = 0;
+
             //find all child of the item and sum the price 
-            for(let childItemId of itm_hf.findAndReturnChildren(pmcData,item._id) )
-            {
-                let childitem = itm_hf.findInventoryItemById(pmcData,childItemId);//find template to retrive price later
-                if(childitem != false)//in case of findItemByid didn't work
-                {
-                    let tempPrice = (items.data[childitem._tpl]._props.CreditsPrice >= 1 ? items.data[childitem._tpl]._props.CreditsPrice : 1);
-                    let count = (typeof childitem.upd !== "undefined" ? (typeof childitem.upd.StackObjectsCount !== "undefined" ? childitem.upd.StackObjectsCount : 1) : 1);
-                    tempPrice = tempPrice * count;
-                    price = price + tempPrice;
-                }
-                else
-                {
-                    price = (items.data[item._tpl]._props.CreditsPrice >= 1 ? items.data[item._tpl]._props.CreditsPrice : 1);
-                    let count = (typeof item.upd !== "undefined" ? (typeof item.upd.StackObjectsCount !== "undefined" ? item.upd.StackObjectsCount : 1) : 1);
-                    price = price * count;
+            for (let childItemId of itm_hf.findAndReturnChildren(pmcData,item._id)) {
+                let childitem = itm_hf.findInventoryItemById(pmcData,childItemId);
+                
+                //in case of findItemByid didn't work
+                if (childitem !== false) {
+                    let tempPrice = (items.data[childitem._tpl]._props.CreditsPrice >= 1) ? items.data[childitem._tpl]._props.CreditsPrice : 1;
+                    let count = ("upd" in childitem && "StackObjectsCount" in childitem.upd) ? childitem.upd.StackObjectsCount : 1;
+                    price = price + (tempPrice * count);
+                } else {
+                    let count = ("upd" in item && "StackObjectsCount" in item.upd) ? childitem.upd.StackObjectsCount : 1;
+                    price = ((items.data[item._tpl]._props.CreditsPrice >= 1) ? items.data[item._tpl]._props.CreditsPrice : 1) * count;
                 }
             }
 
@@ -228,24 +222,23 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
                 price *= item.upd.Dogtag.Level;
             }
 
-            //meds calculation
-            let hpresource = (typeof item.upd !== "undefined" ? (typeof item.upd.MedKit !== "undefined" ? item.upd.MedKit.HpResource : 0) : 0);  
-            if(hpresource > 0)
-            {
+            // meds calculation
+            let hpresource = ("upd" in item && "Medkit" in item.upd) ? item.upd.MedKit.HpResource : 0;  
+            
+            if (hpresource > 0) {
                 let maxHp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
-                price = price * (hpresource/maxHp);
+                price *= (hpresourc / maxHp);
             }
 
             //weapons and armor calculation
-            let repairable = (typeof item.upd !== "undefined" ? (typeof item.upd.Repairable !== "undefined" ? item.upd.Repairable : 1) : 1);  
-            if(repairable != 1 )
-            {
-                price = price * (repairable.Durability/repairable.MaxDurability)
+            let repairable = ("upd" in item && "Repairable" in item.upd) ? item.upd.Repairable : 1;
+
+            if (repairable !== 1 ) {
+                price *= (repairable.Durability / repairable.MaxDurability)
             }
 
-
             // get real price
-            price = price * settings.gameplay.trading.sellMultiplier;
+            price *= settings.gameplay.trading.sellMultiplier;
             price = itm_hf.fromRUB(price, currency);
             price = (price > 0 && price !== "NaN" ? price : 1);
             
@@ -261,23 +254,20 @@ check if an item is allowed to be sold to a trader
 input : array of handbook categories, itemTpl of inventory
 output : boolean
 */
-function traderFilter(traderFilters,tplToCheck)
-{
+function traderFilter(traderFilters,tplToCheck) {
     let found = false;
-    for(let filter of traderFilters)
-    {
-        for(let subcateg of itm_hf.childrenCategories(filter) )
-        {
-            for(let itemCategory of itm_hf.templatesWithParent(subcateg) )
-            {
-                if( itemCategory == tplToCheck)
-                {
+
+    for (let filter of traderFilters) {
+        for (let subcateg of itm_hf.childrenCategories(filter)) {
+            for (let itemCategory of itm_hf.templatesWithParent(subcateg)) {
+                if (itemCategory === tplToCheck) {
                     found = true;
                     break;
                 }
             }
         }
     }
+
     return found;
 }
 
