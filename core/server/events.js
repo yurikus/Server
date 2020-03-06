@@ -82,4 +82,4 @@ function compareEvent(a, b) {
 	return 0;
 }
 
-module.exports.scheduledEventHandler = new ScheduledEventHandler(settings.server.eventPollIntervalSec);
+module.exports.scheduledEventHandler = new ScheduledEventHandler(serverConfig.eventPollIntervalSec);
