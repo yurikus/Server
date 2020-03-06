@@ -10,7 +10,7 @@ class AccountServer {
     }
 
     initialize() {
-        this.accounts = json.parse(json.read(db.user.configs.accounts)) || {};
+        this.accounts = json.parse(json.read(db.user.configs.accounts));
     }
 
     saveToDisk() {

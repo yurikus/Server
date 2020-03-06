@@ -16,8 +16,8 @@ class Initializer {
         global.json = require('./util/json.js');
 
         /* setup core files */
-        global.serverConfig = json.parse(json.read("user/configs/server.json")) || {"ip": "127.0.0.1", "port": 443, "eventPollIntervalSec": 60, "rebuildCache": true};
-        global.modsConfig = json.parse(json.read("user/configs/mods.json")) || [];
+        global.serverConfig = json.parse(json.read("user/configs/server.json"));
+        global.modsConfig = json.parse(json.read("user/configs/mods.json"));
         global.db = {};
         global.res = {};
 

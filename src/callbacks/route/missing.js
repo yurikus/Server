@@ -3,7 +3,7 @@
 const fs = require('fs');
 
 function route() {
-    if (!settings.server.rebuildCache) {
+    if (!serverConfig.rebuildCache) {
         return;
     }
     

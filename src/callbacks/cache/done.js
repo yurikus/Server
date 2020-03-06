@@ -1,7 +1,7 @@
 "use strict";
 
 function done() {
-    settings.server.rebuildCache = false;
+    serverConfig.rebuildCache = false;
     json.write("user/server.config.json", settings);
 }
 
