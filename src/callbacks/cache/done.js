@@ -2,7 +2,7 @@
 
 function done() {
     serverConfig.rebuildCache = false;
-    json.write("user/server.config.json", settings);
+    json.write("user/config/server.json", serverConfig);
 }
 
 server.addStartCallback("doneCaching", done);
