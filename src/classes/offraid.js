@@ -65,7 +65,8 @@ function deleteInventory(pmcData, sessionID) {
         if (item.parentId === pmcData.Inventory.equipment
         && item.slotId !== "SecuredContainer"
         && item.slotId !== "Scabbard"
-        && item.slotId !== "Pockets") {
+        && item.slotId !== "Pockets"
+        || item.parentId === pmcData.Inventory.questRaidItems) {
             toDelete.push(item._id);
         }
 
@@ -83,6 +84,8 @@ function deleteInventory(pmcData, sessionID) {
     for (let item of toDelete) {
         move_f.removeItemFromProfile(pmcData, item);
     }
+
+    pmcData.Inventory.fastPanel = {}
 
     return pmcData;
 }
