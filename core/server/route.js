@@ -105,7 +105,7 @@ function detectMissingMods() {
             logger.logWarning("Mod " + mod + " not installed, adding it to the modlist");
             modsConfig.push({"name": config.name, "author": config.author, "version": config.version, "enabled": true});
             serverConfig.rebuildCache = true;
-            json.write("user/configs/mods.json", settings);
+            json.write("user/configs/mods.json", modsConfig);
         }
     }
 }
