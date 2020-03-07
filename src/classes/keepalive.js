@@ -191,7 +191,7 @@ function updateBitcoinFarm(btcProd,farmReceipe,btcFarmLevel,btcFarmCGs)
     }
     if(btcProd.Progress > 216000 && btcProd.Products[2] === undefined && btcFarmLevel > 2)
     {
-        //add a third btc
+        //add a third btc and then reset timer of btcProd.Progress
     }
     
     return btcProd;
