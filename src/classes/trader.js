@@ -197,14 +197,13 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     // get sellable items
     for (let item of pmcData.Inventory.items) 
     {
-        let sellFilter = traderFilter(Object.keys(traderCategories), item._tpl)
         let price = 0;
         if (item._id === pmcData.Inventory.equipment
         || item._id === pmcData.Inventory.stash
         || item._id === pmcData.Inventory.questRaidItems
         || item._id === pmcData.Inventory.questStashItems
         || itm_hf.isNotSellable(item._tpl) 
-        || sellFilter[0] == false) {
+        || traderFilter(Object.keys(traderCategories), item._tpl) == false) {
             continue;
         }
 
@@ -260,7 +259,6 @@ output : boolean
 */
 function traderFilter(traderFilters, tplToCheck) {
     let found = false;
-    let category = "";
     for (let filter of traderFilters) 
     {
         for (let subcateg of itm_hf.childrenCategories(filter)) 
@@ -270,14 +268,13 @@ function traderFilter(traderFilters, tplToCheck) {
                 if (itemCategory === tplToCheck) 
                 {
                     found = true;
-                    category = subcateg;
                     break;
                 }
             }
         }
     }
 
-    return [found,category];
+    return found;
 }
 
 module.exports.traderServer = new TraderServer();
