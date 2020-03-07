@@ -258,23 +258,29 @@ input : array of handbook categories, itemTpl of inventory
 output : boolean
 */
 function traderFilter(traderFilters, tplToCheck) {
-    let found = false;
+
     for (let filter of traderFilters) 
     {
+        for (let iaaaaa of itm_hf.templatesWithParent(filter)) 
+        {
+            if (iaaaaa == tplToCheck) 
+            {
+                return true;
+            }
+        }
+        
         for (let subcateg of itm_hf.childrenCategories(filter)) 
         {
-            for (let itemCategory of itm_hf.templatesWithParent(subcateg)) 
+            for (let itemFromSubcateg of itm_hf.templatesWithParent(subcateg)) 
             {
-                if (itemCategory === tplToCheck) 
+                if (itemFromSubcateg == tplToCheck) 
                 {
-                    found = true;
-                    break;
+                    return true;
                 }
             }
         }
     }
-
-    return found;
+    return false;
 }
 
 module.exports.traderServer = new TraderServer();
