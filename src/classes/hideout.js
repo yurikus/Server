@@ -355,7 +355,7 @@ function applyPlayerUpgradesBonuses(bonuses,pmcData)
 		case "QuestMoneyReward":
 			break;
 
-		case "InsuranceReturnTime"
+		case "InsuranceReturnTime":
 			break;
 
 		case "ExperienceRate":
