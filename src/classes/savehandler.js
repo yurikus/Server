@@ -13,12 +13,12 @@ function initialize() {
 		});
 	}
 	
-	if (gameplayConfig.saveIntervalSec > 0) {
-		setInterval(function() {
-			saveHandler.saveOpenSessions();
-			logger.logSuccess("Player progress autosaved!");
-		}, settings.autosave.saveIntervalSec * 1000);
-	}
+	if (gameplayConfig.autosave.saveIntervalSec > 0) {
+        setInterval(function() {
+            saveHandler.saveOpenSessions();
+            logger.logSuccess("Player progress autosaved!");
+        }, gameplayConfig.autosave.saveIntervalSec * 1000);
+    }
 }
 
 function saveOpenSessions() {
