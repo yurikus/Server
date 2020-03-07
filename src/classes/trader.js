@@ -195,14 +195,16 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     let output = {};
 
     // get sellable items
-    for (let item of pmcData.Inventory.items) {
+    for (let item of pmcData.Inventory.items) 
+    {
+        let sellFilter = traderFilter(Object.keys(traderCategories), item._tpl)
         let price = 0;
         if (item._id === pmcData.Inventory.equipment
         || item._id === pmcData.Inventory.stash
         || item._id === pmcData.Inventory.questRaidItems
         || item._id === pmcData.Inventory.questStashItems
         || itm_hf.isNotSellable(item._tpl) 
-        || traderFilter(Object.keys(traderCategories), item._tpl) == false) {
+        || sellFilter[0] == false) {
             continue;
         }
 
@@ -229,7 +231,6 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 
         // meds calculation
         let hpresource = ("upd" in item && "Medkit" in item.upd) ? item.upd.MedKit.HpResource : 0;  
-        
         if (hpresource > 0) {
             let maxHp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
             price *= (hpresourc / maxHp);
@@ -237,12 +238,12 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 
         // weapons and armor calculation
         let repairable = ("upd" in item && "Repairable" in item.upd) ? item.upd.Repairable : 1;
-
         if (repairable !== 1 ) {
             price *= (repairable.Durability / repairable.MaxDurability)
         }
+
         // get real price
-        //price *= traderCategories[category]; //we will se that later 
+        price *= traderCategories[sellFilter[1]];
         price = itm_hf.fromRUB(price, currency);
         price = (price > 0 && price !== "NaN") ? price : 1;
         
@@ -259,6 +260,7 @@ output : boolean
 */
 function traderFilter(traderFilters, tplToCheck) {
     let found = false;
+    let category = "";
     for (let filter of traderFilters) 
     {
         for (let subcateg of itm_hf.childrenCategories(filter)) 
@@ -268,13 +270,14 @@ function traderFilter(traderFilters, tplToCheck) {
                 if (itemCategory === tplToCheck) 
                 {
                     found = true;
+                    category = subcateg;
                     break;
                 }
             }
         }
     }
 
-    return found;
+    return [found,category];
 }
 
 module.exports.traderServer = new TraderServer();
