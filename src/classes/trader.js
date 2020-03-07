@@ -81,7 +81,7 @@ class TraderServer {
     }
 
     getAssort(traderId) {
-        if (!("traderId" in this.assorts)) {
+        if (!(traderId in this.assorts)) {
             this.generateAssort(traderId);
         }
         
