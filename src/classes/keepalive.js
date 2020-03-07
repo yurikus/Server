@@ -135,8 +135,16 @@ function updateFuel(generatorArea,solarPower)
                 resourceValue -= decreaseFuel
             }
             resourceValue = Math.round(resourceValue * 1000) / 1000;
-            generatorArea.slots[i].item[0].upd ={ "StackObjectsCount": 1,"Resource": {"Value": resourceValue} } ;
-            console.log("Generator : " + resourceValue + " fuel left on slot " + (i+1) )
+
+            if(resourceValue>0)
+            {
+                generatorArea.slots[i].item[0].upd ={ "StackObjectsCount": 1,"Resource": {"Value": resourceValue} };
+                console.log("Generator : " + resourceValue + " fuel left on slot " + (i+1) )
+            }
+            else//if fuel is empty, remove it
+            {
+                generatorArea.slots[i].item[0] = null;
+            }  
             break;//break here to avoid update all the fuel tanks
         }
     }
@@ -162,8 +170,16 @@ function updateAirFilters(airFilterArea)
                 resourceValue -= decreaseValue
             }
             resourceValue = Math.round(resourceValue * 10000) / 10000;
-            airFilterArea.slots[i].item[0].upd = { "StackObjectsCount": 1,"Resource": {"Value": resourceValue} } ;
-            console.log("air filters : " + resourceValue +" left on tank " + (i+1) )
+
+            if(resourceValue > 0)
+            {
+                airFilterArea.slots[i].item[0].upd = { "StackObjectsCount": 1,"Resource": {"Value": resourceValue}};
+                console.log("air filters : " + resourceValue +" left on tank " + (i+1) );
+            }
+            else
+            {
+                airFilterArea.slots[i].item[0] = null;
+            }
             break;
         }
     }
