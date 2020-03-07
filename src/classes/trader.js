@@ -243,7 +243,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         }
 
         // get real price
-        price *= traderCategories[sellFilter[1]];
+        //price *= traderCategories[sellFilter[1]];
         price = itm_hf.fromRUB(price, currency);
         price = (price > 0 && price !== "NaN") ? price : 1;
         
