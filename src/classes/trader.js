@@ -196,15 +196,13 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 
     // get sellable items
     for (let item of pmcData.Inventory.items) {
-        let category = traderFilter(traderData.data.sell_category, item._tpl);
         let price = 0;
-
         if (item._id === pmcData.Inventory.equipment
         || item._id === pmcData.Inventory.stash
         || item._id === pmcData.Inventory.questRaidItems
         || item._id === pmcData.Inventory.questStashItems
         || itm_hf.isNotSellable(item._tpl) 
-        || category === "") {
+        || traderFilter(Object.keys(traderCategories), item._tpl) == false) {
             continue;
         }
 
@@ -243,9 +241,8 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         if (repairable !== 1 ) {
             price *= (repairable.Durability / repairable.MaxDurability)
         }
-
         // get real price
-        price *= traderCategories[category];
+        //price *= traderCategories[category]; //we will se that later 
         price = itm_hf.fromRUB(price, currency);
         price = (price > 0 && price !== "NaN") ? price : 1;
         
@@ -261,13 +258,16 @@ input : array of handbook categories, itemTpl of inventory
 output : boolean
 */
 function traderFilter(traderFilters, tplToCheck) {
-    let found = "";
-
-    for (let filter of traderFilters) {
-        for (let subcateg of itm_hf.childrenCategories(filter)) {
-            for (let itemCategory of itm_hf.templatesWithParent(subcateg)) {
-                if (itemCategory === tplToCheck) {
-                    found = subcateg;
+    let found = false;
+    for (let filter of traderFilters) 
+    {
+        for (let subcateg of itm_hf.childrenCategories(filter)) 
+        {
+            for (let itemCategory of itm_hf.templatesWithParent(subcateg)) 
+            {
+                if (itemCategory === tplToCheck) 
+                {
+                    found = true;
                     break;
                 }
             }
