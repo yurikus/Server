@@ -61,19 +61,21 @@ function upgradeComplete(pmcData, body, sessionID) {
 		pmcData.Hideout.Areas[hideoutArea].constructing = false;
 		
 		//go to apply bonuses
-		for(let area_bonus of areas)
+		for(let area_bonus of areas.data)
 		{
 			if( area_bonus.type != pmcData.Hideout.Areas[hideoutArea].type){ continue; }
 
 			let arrayofBonuses = area_bonus.stages[pmcData.Hideout.Areas[hideoutArea].level].bonuses;
 
-			console.log(arrayofBonuses);
-
-			for(let bonusesInArray of arrayofBonuses)
+			if(arrayofBonuses.length > 0)
 			{
-				//if bonusesInArray.length>0 then: 
-				applyPlayerUpgradesBonuses(bonusesInArray,pmcData);
+				for(let bonusesInArray of arrayofBonuses)
+				{
+					applyPlayerUpgradesBonuses(bonusesInArray,pmcData);
+				}
 			}
+
+
 		}
 
 	}
