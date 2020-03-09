@@ -317,12 +317,13 @@ function takeProduction(pmcData, body, sessionID) {
 
 function registerProduction(pmcData, body, sessionID) {
 	for (let receipe in production.data) {
-		if (body.recipeId === production.data[receipe]._id) {
+		if (body.recipeId === production.data[receipe]._id) {	
 			pmcData.Hideout.Production[production.data[receipe].areaType] = { 
 				"Progress": 0,
 				"inProgress": true,
 				"RecipeId": body.recipeId,
 				"Products": [],
+				"SkipTime": 0,
 				"StartTime": Math.floor(Date.now() / 1000)
 			};
 		}
@@ -339,6 +340,7 @@ function applyPlayerUpgradesBonuses(bonuses,pmcData)
 
 		case "MaximumEnergyReserve":
 			break;
+
 		case "EnergyRegeneration":
 			break;
 

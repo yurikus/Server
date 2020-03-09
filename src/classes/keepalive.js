@@ -88,10 +88,7 @@ function updatePlayerHideout(sessionID) {
 
                 if(pmcData.Hideout.Production[prod].RecipeId == "5d5c205bd582a50d042a3c0e") //if its btcFarm
                 {
-                    if(isGeneratorOn == true)
-                    {
-                        pmcData.Hideout.Production[prod] = updateBitcoinFarm(pmcData.Hideout.Production[prod],receipe,btcFarmLevel,btcFarmCGs);
-                    }
+                    pmcData.Hideout.Production[prod] = updateBitcoinFarm(pmcData.Hideout.Production[prod],receipe,btcFarmLevel,btcFarmCGs,isGeneratorOn);
                 }
                 else
                 {
@@ -108,6 +105,7 @@ function updatePlayerHideout(sessionID) {
                         pmcData.Hideout.Production[prod].inProgress = false;
                     }*/
                 }
+                break;
             }
         }
     }
@@ -186,26 +184,36 @@ function updateAirFilters(airFilterArea)
     return airFilterArea;
 }
 
-function updateBitcoinFarm(btcProd,farmReceipe,btcFarmLevel,btcFarmCGs)
+function updateBitcoinFarm(btcProd,farmReceipe,btcFarmLevel,btcFarmCGs,isGeneratorOn)
 {
     //console.log("bitcoin farm : level "+ btcFarmLevel + " & cgs = " +btcFarmCGs)
+    let startTimelessSkip = btcProd.StartTime + btcProd.SkipTime;
 
-    let time_elapsed = 120;
-    let speedBoost = 2940/(3*btcFarmCGs+46)^-2 //this is an invert function from tarkov wiki, very usefull
+    let time_elapsed = (Math.floor(Date.now() / 1000) - startTimelessSkip) - btcProd.Progress;
 
-    time_elapsed = time_elapsed - speedBoost;
-  
-    btcProd.Progress += time_elapsed; 
+    //console.log(time_elapsed,btcProd.StartTime,btcProd.SkipTime,startTimelessSkip);
 
-    if(btcProd.Progress > 72000 && btcProd.Products[0] === undefined)
+    //let speedBoost = 2940/(3*btcFarmCGs+46)^-2 //this is an invert function from tarkov wiki, very usefull
+    //time_elapsed = time_elapsed - speedBoost;
+
+    if(isGeneratorOn == true)
+    {
+        btcProd.Progress += time_elapsed; 
+    }
+    else
+    {
+        btcProd.SkipTime += time_elapsed;
+    }
+
+    if(btcProd.Progress > farmReceipe.productionTime && btcProd.Products[0] === undefined)
     {
         //btcProd.Products[0].push({ id: newid(), tpl:farmReceipe.Endproduct,upd:{stackthingblablabal:1}})
     }
-    if(btcProd.Progress > 144000 && btcProd.Products[1] === undefined && btcFarmLevel > 1)
+    if(btcProd.Progress > farmReceipe.productionTime*2 && btcProd.Products[1] === undefined && btcFarmLevel > 1)
     {
         //add a second btc
     }
-    if(btcProd.Progress > 216000 && btcProd.Products[2] === undefined && btcFarmLevel > 2)
+    if(btcProd.Progress > farmReceipe.productionTime*3 && btcProd.Products[2] === undefined && btcFarmLevel > 2)
     {
         //add a third btc and then reset timer of btcProd.Progress
     }
