@@ -187,8 +187,6 @@ function updateBitcoinFarm(btcProd,farmReceipe,btcFarmCGs,isGeneratorOn)
     let startTimelessSkip = btcProd.StartTime + btcProd.SkipTime;
     let time_elapsed = (Math.floor(Date.now() / 1000) - startTimelessSkip) - btcProd.Progress;
 
-    console.log( Math.floor(Date.now() / 1000) - startTimelessSkip,  btcProd.Progress )
-
     if(isGeneratorOn == true)
     {
         btcProd.Progress += time_elapsed; 
@@ -203,7 +201,12 @@ function updateBitcoinFarm(btcProd,farmReceipe,btcFarmCGs,isGeneratorOn)
 
     if(btcProd.Progress > final_prodtime && btcProd.Products[0] === undefined)
     {
-        //btcProd.Products[0].push({ id: newid(), tpl:farmReceipe.Endproduct,upd:{stackthingblablabal:1}})
+        /*
+        btcProd.Products.push({
+            "_id" : 
+        });
+        */
+        //btcProd.Products.push({ id: newid(), tpl:farmReceipe.Endproduct,upd:{stackthingblablabal:1}})
     }
     if(btcProd.Progress > final_prodtime*2 && btcProd.Products[1] === undefined)
     {
