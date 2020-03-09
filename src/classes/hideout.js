@@ -262,7 +262,7 @@ function takeProduction(pmcData, body, sessionID) {
 
 		// delete the production in profile Hideout.Production
 		for (let prod in pmcData.Hideout.Production) {
-			if (pmcData.Hideout.Production[prod].RecipeId === body.recipeId) {
+			if (pmcData.Hideout.Production[prod].RecipeId === body.recipeId && pmcData.Hideout.Production[prod].RecipeId !== "5d5c205bd582a50d042a3c0e") {
 				delete pmcData.Hideout.Production[prod];
 			}
 		}
