@@ -53,6 +53,10 @@ class AccountServer {
         return this.accounts[sessionID].nickname;
     }
 
+    setNickname(sessionID, nickname) {
+        this.accounts[sessionID].nickname = nickname;
+    }
+
     findID(data) {
         let buff = Buffer.from(data.token, 'base64');
         let text = buff.toString('ascii');
@@ -67,9 +71,8 @@ class AccountServer {
     
         for (let accountId in this.accounts) {
             let account = this.accounts[accountId];
-            let pmcData = profile_f.profileServer.getPmcProfile(account.id);
     
-            if (info.nickname === account.nickanme || ("Info" in pmcData && info.nickanme === pmcData.Info.Nickname)) {
+            if (info.nickname === account.nickname) {
                 found = true;
                 break;
             }

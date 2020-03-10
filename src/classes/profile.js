@@ -85,6 +85,9 @@ class ProfileServer {
             };
         }
 
+        // set nickname
+        account_f.accountServer.setNickname(account.id, info.nickname);
+
         // create profile
         json.write(folder + "character.json", pmcData);
         json.write(folder + "storage.json", storage);
