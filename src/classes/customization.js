@@ -15,6 +15,10 @@ function getPath(sessionID) {
 	return path.replace("__REPLACEME__", sessionID);
 }
 
+function getStorage(sessionID) {
+	return json.parse(json.read(getPath(sessionID)));
+}
+
 function wearClothing(pmcData, body, sessionID) {
 	for (let i = 0; i < body.suites.length; i++) {
 		let suite = customization[body.suites[i]];
@@ -84,6 +88,6 @@ function buyClothing(pmcData, body, sessionID) {
 
 module.exports.initialize = initialize;
 module.exports.getCustomization = getCustomization;
-module.exports.getPath = getPath;
+module.exports.getStorage = getStorage;
 module.exports.wearClothing = wearClothing;
 module.exports.buyClothing = buyClothing;

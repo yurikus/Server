@@ -190,6 +190,7 @@ class TraderServer {
     function to calculate the price of each player items in the inventory when selling
 */
 function getPurchasesData(tmpTraderInfo, sessionID) {
+    let items = staticdata_f.getItems();
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let traderData = trader_f.traderServer.getTrader(tmpTraderInfo, sessionID);
     let traderCategories = json.parse(json.read(db.assort[tmpTraderInfo].categories));
@@ -197,9 +198,9 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     let output = {};
 
     // get sellable items
-    for (let item of pmcData.Inventory.items) 
-    {
+    for (let item of pmcData.Inventory.items) {
         let price = 0;
+
         if (item._id === pmcData.Inventory.equipment
         || item._id === pmcData.Inventory.stash
         || item._id === pmcData.Inventory.questRaidItems
@@ -231,7 +232,8 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
         }
 
         // meds calculation
-        let hpresource = ("upd" in item && "Medkit" in item.upd) ? item.upd.MedKit.HpResource : 0;  
+        let hpresource = ("upd" in item && "Medkit" in item.upd) ? item.upd.MedKit.HpResource : 0;
+
         if (hpresource > 0) {
             let maxHp = itm_hf.getItem(item._tpl)[1]._props.MaxHpResource;
             price *= (hpresourc / maxHp);
@@ -239,6 +241,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 
         // weapons and armor calculation
         let repairable = ("upd" in item && "Repairable" in item.upd) ? item.upd.Repairable : 1;
+
         if (repairable !== 1 ) {
             price *= (repairable.Durability / repairable.MaxDurability)
         }

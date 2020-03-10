@@ -1,11 +1,11 @@
 "use strict";
 
 function getCustomization(url, info, sessionID) {
-    return json.stringify(customization_f.getCustomization());
+    return json.stringify({"err": 0, "errmsg": null, "data": customization_f.getCustomization()});
 }
 
 function getCustomizationStorage(url, info, sessionID) {
-    return json.read(customization_f.getPath(sessionID));
+    return json.stringify({"err": 0, "errmsg": null, "data": customization_f.getStorage(sessionID)});
 }
 
 router.addStaticRoute("/client/customization", getCustomization);
