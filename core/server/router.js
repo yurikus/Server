@@ -53,6 +53,8 @@ class Router {
                 if (info.crc === crctest.crc) {
                     logger.logWarning("[CRC match]: loading from game cache files");
                     output = '{"err":0, "errmsg":null, "data":null}';
+                } else {
+                    output = crctest;
                 }
             }
         }
@@ -63,7 +65,7 @@ class Router {
             output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
         }
     
-        return output;
+        return utility.clearString(output);
     }
 }
 
