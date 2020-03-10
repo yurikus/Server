@@ -15,8 +15,8 @@ class ItemServer {
 
     handleRoutes(info, sessionID) {
         let result = "";
-        
-        for (let body of info) {
+
+        for (let body of info.data) {
             let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
             if (body.Action in this.routes) {
