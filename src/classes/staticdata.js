@@ -5,12 +5,14 @@ let globals = undefined;
 let templates = undefined;
 
 function initialize() {
-    global.tplLookup = itm_hf.createLookup();
     global.gameplayConfig = json.parse(json.read(db.user.configs.gameplay));
     
     items = json.parse(json.read(db.user.cache.items));
     globals = json.parse(json.read(db.globals));
     templates = json.parse(json.read(db.user.cache.templates));
+
+    // todo: remove dependency on this
+    global.tplLookup = itm_hf.createLookup();
 }
 
 function getItems() {

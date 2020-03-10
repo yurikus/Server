@@ -2,14 +2,16 @@
 
 /* A reverse lookup for templates */
 function createLookup() {
+    let templates = staticdata_f.getTemplates();
+
     let lookup = {
-        items: {
-            byId: {},
-            byParent: {}
+        "items": {
+            "byId": {},
+            "byParent": {}
         },
-        categories: {
-            byId: {},
-            byParent: {}
+        "categories": {
+            "byId": {},
+            "byParent": {}
         }
     }
 
@@ -20,7 +22,8 @@ function createLookup() {
     }
 
     for (let x of templates.Categories) {
-        lookup.categories.byId[x.Id] = x.ParentId ? x.ParentId : null;
+        lookup.categories.byId[x.Id] = (x.ParentId) ? x.ParentId : null;
+
         if (x.ParentId) { // root as no parent
             lookup.categories.byParent[x.ParentId] || (lookup.categories.byParent[x.ParentId] = []);
             lookup.categories.byParent[x.ParentId].push(x.Id);
@@ -40,7 +43,7 @@ function templatesWithParent(x) {
 }
 
 function isCategory(x) {
-    return x in tplLookup.categories.byId;
+    return (x in tplLookup.categories.byId);
 }
 
 function childrenCategories(x) {
@@ -54,6 +57,7 @@ function childrenCategories(x) {
 function recheckInventoryFreeSpace(pmcData, sessionID) { // recalculate stach taken place
     let PlayerStash = getPlayerStash(sessionID);
     let Stash2D = Array(PlayerStash[1]).fill(0).map(x => Array(PlayerStash[0]).fill(0));
+
     for (let item of pmcData.Inventory.items) {
         if ("location" in item && item.parentId === pmcData.Inventory.stash) {
             let tmpSize = getSize(item._tpl, item._id, pmcData.Inventory.items);
@@ -71,8 +75,8 @@ function recheckInventoryFreeSpace(pmcData, sessionID) { // recalculate stach ta
             let fH = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iW : iH);
             let fW = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iH : iW);
 
-            for (let y = 0; y < fH; y++) {
-                // fixed filling out of bound
+            // fixed filling out of bound
+            for (let y = 0; y < fH; y++) { 
                 if (item.location.y + y <= PlayerStash[1] && item.location.x + fW <= PlayerStash[0]) {
                     let FillTo = ((item.location.x + fW >= PlayerStash[0]) ? PlayerStash[0] : item.location.x + fW);
 
