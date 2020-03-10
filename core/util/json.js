@@ -11,7 +11,7 @@ function createDir(file) {
 }
 
 function stringify(data) {
-    return JSON.stringify(data, null, "\t");
+    return utility.clearString(JSON.stringify(data, null, "\t"));
 }
 
 function parse(string) {

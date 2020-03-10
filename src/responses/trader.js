@@ -11,7 +11,7 @@ function getCustomization(url, info, sessionID) {
 }
 
 function getProfilePurchases(url, info, sessionID) {
-    return utility.clearString(json.stringify({"err": 0, "errmsg": null, "data": trader_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1), sessionID)}));
+    return json.stringify({"err": 0, "errmsg": null, "data": trader_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1), sessionID)});
 }
 
 function getTrader(url, info, sessionID) {

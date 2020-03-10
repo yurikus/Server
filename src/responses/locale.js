@@ -5,11 +5,11 @@ function getLocale(url, info, sessionID) {
 }
 
 function getMenuLocale(url, info, sessionID) {
-    return json.stringify({"err": 0, "errmsg": null, "data": locale_f.localeServer.getMenu(url.replace("/client/menu/locale/", ''))});
+    return json.stringify({"err": 0, "errmsg": null, "data": locale_f.localeServer.getMenu(url.replace("/client/menu/locale/", ""))});
 }
 
 function getGlobalLocale(url, info, sessionID) {
-    return json.stringify({"err": 0, "errmsg": null, "data": locale_f.localeServer.getGlobal(url.replace("/client/locale/", ''))});
+    return json.stringify({"err": 0, "errmsg": null, "data": locale_f.localeServer.getGlobal(url.replace("/client/locale/", ""))});
 }
 
 router.addStaticRoute("/client/languages", getLocale);

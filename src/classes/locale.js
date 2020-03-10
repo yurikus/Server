@@ -21,11 +21,11 @@ class LocaleServer {
         return this.languages;
     }
 
-    getMenu(locale) {
+    getMenu(locale = "en") {
         return this.menus[locale];
     }
 
-    getGlobal(locale) {
+    getGlobal(locale = "en") {
         return this.globals[locale];
     }
 }
