@@ -12,6 +12,10 @@ class LocationServer {
         logger.logWarning("Loading locations into RAM...");
 
         for (let locationName in db.locations) {
+            if (locationName === "base") {
+                continue;
+            }
+
             let node = db.locations[locationName];
             let location = json.parse(json.read(node.base));
 
@@ -121,19 +125,17 @@ class LocationServer {
 
     /* get all locations without loot data */
     generateAll() {
-        let base = json.parse(json.read("db/cache/locations.json"));
-        let data = {};
+        let output = json.parse(json.read(db.locations.base));
 
         // use right id's and strip loot
         for (let locationName in this.locations) {
             let map = this.locations[locationName];
 
             map.Loot = [];
-            data[this.locations[locationName]._Id] = map;
+            output.locations[this.locations[locationName]._Id] = map;
         }
 
-        base.locations = data;
-        return json.stringify(base);
+        return output;
     }
 }
 

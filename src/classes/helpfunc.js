@@ -2,7 +2,7 @@
 
 /* A reverse lookup for templates */
 function createLookup() {
-    let templates = staticdata_f.getTemplates();
+    const templates = staticdata_f.getTemplates();
 
     let lookup = {
         "items": {

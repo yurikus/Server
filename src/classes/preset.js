@@ -2,7 +2,8 @@
 
 class ItemPresets {
     initialize() {
-        const presets = Object.values(globals.ItemPresets);
+        this.globals = staticdata_f.getGlobals();
+        const presets = Object.values(this.globals.ItemPresets);
         const reverse = {};
 
         for (const p of presets) {
@@ -19,7 +20,7 @@ class ItemPresets {
     }
 
     isPreset(id) {
-        return id in globals.ItemPresets;
+        return id in this.globals.ItemPresets;
     }
 
     hasPreset(templateId) {
@@ -35,7 +36,7 @@ class ItemPresets {
         const ids = this.lookup[templateId];
 
         for (const id of ids) {
-            presets.push(globals.ItemPresets[id]);
+            presets.push(this.globals.ItemPresets[id]);
         }
 
         return presets;
@@ -59,7 +60,7 @@ class ItemPresets {
 
     getBaseItemTpl(presetId) {
         if (this.isPreset(presetId)) {
-            let preset = globals.ItemPresets[presetId];
+            let preset = this.globals.ItemPresets[presetId];
 
             for (let item of preset._items) {
                 if (preset._parent === item._id) {
