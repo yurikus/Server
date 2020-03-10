@@ -67,7 +67,7 @@ class AccountServer {
     
         for (let accountId in this.accounts) {
             let account = this.accounts[accountId];
-            let pmcData = profile_f.getPmcData(account.id);
+            let pmcData = profile_f.profileServer.getPmcProfile(account.id);
     
             if (info.nickname === account.nickanme || info.nickanme === pmcData.Info.Nickname) {
                 found = true;

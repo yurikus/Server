@@ -64,7 +64,7 @@ class Router {
             output = json.stringify({"err": 404, "errmsg": "UNHANDLED RESPONSE:" + url, "data": null});
         }
     
-        return utility.clearString(output);
+        return output;
     }
 }
 

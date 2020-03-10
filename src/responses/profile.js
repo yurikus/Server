@@ -36,7 +36,7 @@ function changeNickname(url, info, sessionID) {
 }
 
 function getReservedNickname(url, info, sessionID) {
-    return json.stringify({"err": 0, "errmsg": null, "data": account_f.accountServer.getReservedNickname(sessionID)});
+    return json.stringify({"err": 0, "errmsg": null, "data": account_f.accountServer.getNickname(sessionID)});
 }
 
 function validateNickname(url, info, sessionID) {
