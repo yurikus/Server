@@ -4,11 +4,11 @@
 class LocationServer {
     constructor() {
         this.locations = {};
-        this.initializeLocations();
+        this.initialize();
     }
 
     /* Load all the locations into memory. */
-    initializeLocations() {
+    initialize() {
         logger.logWarning("Loading locations into RAM...");
 
         for (let locationName in db.locations) {

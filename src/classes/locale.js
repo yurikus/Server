@@ -1,17 +1,33 @@
 ﻿"use strict";
 
-function getLanguages() {
-    return json.read(db.user.cache.languages);
+class LocaleServer {
+    constructor() {
+        this.languages = [];
+        this.menus = [];
+        this.globals = [];
+    }
+
+    initialize() {
+        logger.logWarning("Loading locales into RAM...");
+
+        for (let locale in db.locales) {
+            this.languages.push(json.parse(json.read(db.locales[locale][locale]))); 
+            this.menus[locale] = json.parse(json.read(db.locales[locale].menu));
+            this.globals[locale] = json.parse(json.read(db.user.cache["locale_" + locale]));
+        }
+    }
+
+    getLanguages() {
+        return this.languages;
+    }
+
+    getMenu(locale) {
+        return this.menus[locale];
+    }
+
+    getGlobal(locale) {
+        return this.globals[locale];
+    }
 }
 
-function getMenu(lang = "en") {
-    return json.read(db.locales[lang.toLowerCase()].menu);
-}
-
-function getGlobal(lang = "en") {
-    return json.read(db.user.cache["locale_" + lang.toLowerCase()]);
-}
-
-module.exports.getLanguages = getLanguages;
-module.exports.getMenu = getMenu;
-module.exports.getGlobal = getGlobal;
+module.exports.localeServer = new LocaleServer();
