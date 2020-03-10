@@ -3,7 +3,7 @@
 function main(pmcData, body, sessionID) {
     let output = item_f.itemServer.getOutput();
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);
-    let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
+    let repairRate = (tmpTraderInfo.repair.price_rate === 0) ? 1 : (tmpTraderInfo.repair.price_rate / 100 + 1);
 
     for (let repairItem of body.repairItems) {
         // find the item to repair
@@ -20,7 +20,7 @@ function main(pmcData, body, sessionID) {
         }
 
         // get repair price and pay the money
-        let repairCost = Math.round((items.data[itemToRepair._tpl]._props.RepairCost * repairItem.count * repairRate) * gameplayConfig.trading.repairMultiplier);
+        let repairCost = Math.round((items[itemToRepair._tpl]._props.RepairCost * repairItem.count * repairRate) * gameplayConfig.trading.repairMultiplier);
 
         if (!itm_hf.payMoney(pmcData, {"scheme_items": [{"id": repairItem._id, "count": Math.round(repairCost)}], "tid": body.tid}, sessionID)) {
             logger.logError("no money found");
@@ -36,7 +36,7 @@ function main(pmcData, body, sessionID) {
 
         itemToRepair.upd.Repairable.Durability = calculateDurability;
         itemToRepair.upd.Repairable.MaxDurability = calculateDurability;
-        output.data.items.change.push(itemToRepair);
+        output.items.change.push(itemToRepair);
     }
 
     return output;

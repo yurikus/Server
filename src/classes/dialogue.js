@@ -76,7 +76,7 @@ class DialogueServer {
 			const stashId = utility.generateNewItemId();
 
 			items.stash = stashId;
-			items.data = [];
+			items = [];
 
 			rewards = itm_hf.replaceIDs(null, rewards);
 
@@ -85,7 +85,7 @@ class DialogueServer {
 					reward.parentId = stashId;
 					reward.slotId = "main";
 				}
-				items.data.push(reward);
+				items.push(reward);
 			}
 
 			dialogue.attachmentsNew += 1;
@@ -136,7 +136,7 @@ class DialogueServer {
 
 			for (let message of messages) {
 				if (message._id === messageId) {
-					return message.items.data;
+					return message.items;
 				}
 			}
 		}

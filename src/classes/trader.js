@@ -50,13 +50,13 @@ class TraderServer {
         // level up player
         let checkedExp = 0;
 
-        for (let level in globals.data.config.exp.level.exp_table) {
+        for (let level in globals.config.exp.level.exp_table) {
             if (pmcData.Info.Experience < checkedExp) {
                 break;
             }
 
             pmcData.Info.Level = parseInt(level);
-            checkedExp += globals.data.config.exp.level.exp_table[level].exp;
+            checkedExp += globals.config.exp.level.exp_table[level].exp;
         }
 
         // level up traders
@@ -99,12 +99,12 @@ class TraderServer {
 
         // 1 is min level, 4 is max level
         if (traderId !== "ragfair") {
-            let keys = Object.keys(base.data.loyal_level_items);
+            let keys = Object.keys(base.loyal_level_items);
             let level = this.traders[traderId].loyalty.currentLevel;
 
             for (let i = 1; i < 4; i++) {
                 for (let key of keys) {
-                    if (base.data.loyal_level_items[key] > level) {
+                    if (base.loyal_level_items[key] > level) {
                         base = this.removeItemFromAssort(base, key);
                     }
                 }
@@ -128,9 +128,9 @@ class TraderServer {
             }
 
             added.push(id);
-            base.data.items.push(json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].items[id])));
-            base.data.barter_scheme[id] = json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].barter_scheme[id]));
-            base.data.loyal_level_items[id] = json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].loyal_level_items[id]));
+            base.items.push(json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].items[id])));
+            base.barter_scheme[id] = json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].barter_scheme[id]));
+            base.loyal_level_items[id] = json.parse(json.read(db.assort["579dc571d53a0658a154fbec"].loyal_level_items[id]));
         }
 
         this.assorts['579dc571d53a0658a154fbec'] = base;
@@ -140,13 +140,13 @@ class TraderServer {
     removeItemFromAssort(assort, id) {
         let ids_toremove = itm_hf.findAndReturnChildren(assort, id);
 
-        delete assort.data.barter_scheme[id];
-        delete assort.data.loyal_level_items[id];
+        delete assort.barter_scheme[id];
+        delete assort.loyal_level_items[id];
 
         for (let i in ids_toremove) {
-            for (let a in assort.data.items) {
-                if (assort.data.items[a]._id === ids_toremove[i]) {
-                    assort.data.items.splice(a, 1);
+            for (let a in assort.items) {
+                if (assort.items[a]._id === ids_toremove[i]) {
+                    assort.items.splice(a, 1);
                 }
             }
         }
@@ -156,12 +156,12 @@ class TraderServer {
 
     getCustomization(traderId, sessionID) {
         let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
-        let allSuits = customization_f.getCustomization().data;
+        let allSuits = customization_f.getCustomization();
         let suitArray = json.parse(json.read(db.user.cache["customization_" + traderId]));
         let suitList = [];
 
         for (let suit of suitArray) {
-            if (suit.suiteId in customization_f.getCustomization().data) {
+            if (suit.suiteId in customization_f.getCustomization()) {
                 for (var i = 0; i < allSuits[suit.suiteId]._props.Side.length; i++) {
                     let side = allSuits[suit.suiteId]._props.Side[i];
 
@@ -193,7 +193,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
     let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
     let traderData = trader_f.traderServer.getTrader(tmpTraderInfo, sessionID);
     let traderCategories = json.parse(json.read(db.assort[tmpTraderInfo].categories));
-    let currency = itm_hf.getCurrency(traderData.data.currency);
+    let currency = itm_hf.getCurrency(traderData.currency);
     let output = {};
 
     // get sellable items
@@ -216,10 +216,10 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
             if (childitem === false) {
                 // root item
                 let count = ("upd" in item && "StackObjectsCount" in item.upd) ? childitem.upd.StackObjectsCount : 1;
-                price = ((items.data[item._tpl]._props.CreditsPrice >= 1) ? items.data[item._tpl]._props.CreditsPrice : 1) * count;
+                price = ((items[item._tpl]._props.CreditsPrice >= 1) ? items[item._tpl]._props.CreditsPrice : 1) * count;
             } else {
                 // child item
-                let tempPrice = (items.data[childitem._tpl]._props.CreditsPrice >= 1) ? items.data[childitem._tpl]._props.CreditsPrice : 1;
+                let tempPrice = (items[childitem._tpl]._props.CreditsPrice >= 1) ? items[childitem._tpl]._props.CreditsPrice : 1;
                 let count = ("upd" in childitem && "StackObjectsCount" in childitem.upd) ? childitem.upd.StackObjectsCount : 1;
                 price = price + (tempPrice * count);
             }

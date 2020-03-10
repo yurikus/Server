@@ -2,11 +2,11 @@
 
 function createProfile(url, info, sessionID) {
     profile_f.profileServer.createProfile(info, sessionID);
-    return '{"err":0,"errmsg":null,"data":{"uid":"pmc' + sessionID + '"}}';
+    return json.stringify({"err": 0, "errmsg": null, "data": {"uid": "pmc" + sessionID}});
 }
 
 function getProfileData(url, info, sessionID) {
-    let output = {err: 0, errmsg: null, data: []};
+    let output = {"err": 0, "errmsg": null, "data": []};
 
     if (!account_f.accountServer.isWiped(sessionID)) {
         output.data.push(profile_f.profileServer.getPmcProfile(sessionID));
@@ -17,25 +17,36 @@ function getProfileData(url, info, sessionID) {
 }
 
 function regenerateScav(url, info, sessionID) {
-    return json.stringify({err: 0, errmsg: null, data: [profile_f.profileServer.generateScav(sessionID)]});
+    return json.stringify({"err": 0, "errmsg": null, "data": [profile_f.profileServer.generateScav(sessionID)]});
 }
 
 function changeVoice(url, info, sessionID) {
     profile_f.profileServer.changeVoice(info, sessionID);
-    return '{"err":0, "errmsg":null, "data":null}';
+    return json.stringify({"err":0, "errmsg": null, "data": null});
 }
 
 function changeNickname(url, info, sessionID) {
-    return profile_f.profileServer.changeNickname(info, sessionID);
+    let output = profile_f.profileServer.changeNickname(info, sessionID);
+
+    if (output.status === 255) {
+        return json.stringify({"err": 225, "errmsg": "this nickname is already in use", "data": null});
+    }
+
+    return json.stringify({"err":0, "errmsg":null, "data": data});
 }
 
 function getReservedNickname(url, info, sessionID) {
-    return '{"err":0,"errmsg":null,"data":"' + account_f.accountServer.getReservedNickname(sessionID) + '"}';
+    return json.stringify({"err": 0, "errmsg": null, "data": account_f.accountServer.getReservedNickname(sessionID)});
 }
 
 function validateNickname(url, info, sessionID) {
-    // todo: validate nickname properly
-    return '{"err":0,"errmsg":null,"data":{"status":"ok"}}';
+    let output = profile_f.profileServer.validateNickname(info, sessionID);
+
+    if (output.status === null) {
+        return json.stringify({"err": 225, "errmsg": "this nickname is already in use", "data": null});
+    }
+
+    return json.stringify({"err": 0, "errmsg": null, "data": output});
 }
 
 router.addStaticRoute("/client/game/profile/create", createProfile);

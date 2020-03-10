@@ -13,7 +13,7 @@ function updateTraders(sessionID) {
     let timeNow = Math.floor(Date.now() / 1000);
     let tradersToUpdateList = trader_f.traderServer.getAllTraders(sessionID);
 
-    tradersToUpdateList = tradersToUpdateList.data;
+    tradersToUpdateList = tradersToUpdateList;
     
     for (let i = 0; i < tradersToUpdateList.length; i++) {
         if ((tradersToUpdateList[i].supply_next_time + update_per) > timeNow) {
@@ -75,7 +75,7 @@ function updatePlayerHideout(sessionID) {
         if(pmcData.Hideout.Production[prod].inProgress == false){continue;}
 
         let needGenerator = false;
-        for(let receipe of receipes.data)
+        for(let receipe of receipes)
         {
             if(receipe._id == pmcData.Hideout.Production[prod].RecipeId )
             {

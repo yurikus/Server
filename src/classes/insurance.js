@@ -102,7 +102,7 @@ class InsuranceServer {
             messageContent = {
                 "templateId": dialogueTemplates.insuranceFound[utility.getRandomInt(0, dialogueTemplates.insuranceFound.length - 1)],
                 "type": dialogue_f.getMessageTypeValue("insuranceReturn"),
-                "maxStorageTime": trader.data.insurance.max_storage_time * 3600,
+                "maxStorageTime": trader.insurance.max_storage_time * 3600,
                 "systemData": {
                     "date": utility.getDate(),
                     "time": utility.getTime(),
@@ -113,7 +113,7 @@ class InsuranceServer {
             events.scheduledEventHandler.addToSchedule({
                 "type": "insuranceReturn",
                 "sessionId": sessionID,
-                "scheduledTime": Date.now() + utility.getRandomInt(trader.data.insurance.min_return_hour * 3600, trader.data.insurance.max_return_hour * 3600) * 1000,
+                "scheduledTime": Date.now() + utility.getRandomInt(trader.insurance.min_return_hour * 3600, trader.insurance.max_return_hour * 3600) * 1000,
                 "data": {
                     "traderId": traderId,
                     "messageContent": messageContent,
@@ -128,12 +128,12 @@ class InsuranceServer {
     processReturn(event) {
         // Inject a little bit of a surprise by failing the insurance from time to time ;)
         if (utility.getRandomInt(0, 99) > gameplayConfig.trading.insureReturnChance) {
-            let insuranceFailedTemplates = json.parse(json.read(db.dialogues[event.data.traderId])).insuranceFailed;
-            event.data.messageContent.templateId = insuranceFailedTemplates[utility.getRandomInt(0, insuranceFailedTemplates.length)];
-            event.data.items = [];
+            let insuranceFailedTemplates = json.parse(json.read(db.dialogues[event.traderId])).insuranceFailed;
+            event.messageContent.templateId = insuranceFailedTemplates[utility.getRandomInt(0, insuranceFailedTemplates.length)];
+            event.items = [];
         }
     
-        dialogue_f.dialogueServer.addDialogueMessage(event.data.traderId, event.data.messageContent, event.sessionId, event.data.items);
+        dialogue_f.dialogueServer.addDialogueMessage(event.traderId, event.messageContent, event.sessionId, event.items);
     }
 }
 

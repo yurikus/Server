@@ -211,7 +211,7 @@ function handoverQuest(pmcData, body, sessionID) {
             let index = pmcData.Inventory.items.length;
 
             // important: don't tell the client to remove the attachments, it will handle it
-            output.data.items.del.push({ "_id": itemHandover.id });
+            output.items.del.push({ "_id": itemHandover.id });
             counter = 1;
 
             // important: loop backward when removing items from the array we're looping on
@@ -254,7 +254,7 @@ function changeItemStack(pmcData, id, value, output) {
             if (value > 0) {
                 pmcData.Inventory.items[item].upd.StackObjectsCount = value;
 
-                output.data.items.change.push({
+                output.items.change.push({
                     "_id": pmcData.Inventory.items[item]._id,
                     "_tpl": pmcData.Inventory.items[item]._tpl,
                     "parentId": pmcData.Inventory.items[item].parentId,
@@ -263,7 +263,7 @@ function changeItemStack(pmcData, id, value, output) {
                     "upd": { "StackObjectsCount": pmcData.Inventory.items[item].upd.StackObjectsCount }
                 });
             } else {
-                output.data.items.del.push({ "_id": id });
+                output.items.del.push({ "_id": id });
                 pmcData.Inventory.items.splice(item, 1);
             }
 

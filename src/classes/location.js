@@ -132,7 +132,7 @@ class LocationServer {
             data[this.locations[locationName]._Id] = map;
         }
 
-        base.data.locations = data;
+        base.locations = data;
         return json.stringify(base);
     }
 }

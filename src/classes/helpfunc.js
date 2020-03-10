@@ -13,13 +13,13 @@ function createLookup() {
         }
     }
 
-    for (let x of templates.data.Items) {
+    for (let x of templates.Items) {
         lookup.items.byId[x.Id] = x.Price;
         lookup.items.byParent[x.ParentId] || (lookup.items.byParent[x.ParentId] = []);
         lookup.items.byParent[x.ParentId].push(x.Id);
     }
 
-    for (let x of templates.data.Categories) {
+    for (let x of templates.Categories) {
         lookup.categories.byId[x.Id] = x.ParentId ? x.ParentId : null;
         if (x.ParentId) { // root as no parent
             lookup.categories.byParent[x.ParentId] || (lookup.categories.byParent[x.ParentId] = []);
@@ -132,7 +132,7 @@ function fromRUB(value, currency) {
 function payMoney(pmcData, body, sessionID) {
     let output = item_f.itemServer.getOutput();
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);
-    let currencyTpl = getCurrency(tmpTraderInfo.data.currency);
+    let currencyTpl = getCurrency(tmpTraderInfo.currency);
 
     // delete barter things(not a money) from inventory
     if (body.Action === 'TradingConfirm') {
@@ -190,7 +190,7 @@ function payMoney(pmcData, body, sessionID) {
         } else {
             moneyItem.upd.StackObjectsCount -= leftToPay;
             leftToPay = 0;
-            output.data.items.change.push(moneyItem);
+            output.items.change.push(moneyItem);
         }
 
         if (leftToPay === 0) {
@@ -200,11 +200,11 @@ function payMoney(pmcData, body, sessionID) {
 
     // set current sale sum
     // convert barterPrice itemTpl into RUB then convert RUB into trader currency
-    let saleSum = pmcData.TraderStandings[body.tid].currentSalesSum += fromRUB(inRUB(barterPrice, currencyTpl), getCurrency(tmpTraderInfo.data.currency));
+    let saleSum = pmcData.TraderStandings[body.tid].currentSalesSum += fromRUB(inRUB(barterPrice, currencyTpl), getCurrency(tmpTraderInfo.currency));
 
     pmcData.TraderStandings[body.tid].currentSalesSum = saleSum;
     trader_f.traderServer.lvlUp(body.tid, sessionID);
-    output.data.currentSalesSums[body.tid] = saleSum;
+    output.currentSalesSums[body.tid] = saleSum;
 
     // save changes
     logger.logSuccess("Items taken. Status OK.");
@@ -289,7 +289,7 @@ function isItemInStash(pmcData, item) {
 * */
 function getMoney(pmcData, amount, body, output, sessionID) {
     let tmpTraderInfo = trader_f.traderServer.getTrader(body.tid, sessionID);
-    let currency = getCurrency(tmpTraderInfo.data.currency);
+    let currency = getCurrency(tmpTraderInfo.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let maxStackSize = (json.parse(json.read(db.items[currency])))._props.StackMaxSize;
     let skip = false;
@@ -312,15 +312,15 @@ function getMoney(pmcData, amount, body, output, sessionID) {
 
             // make stack max money, then look further
             item.upd.StackObjectsCount = maxStackSize;
-            output.data.items.change.push(item);
+            output.items.change.push(item);
             calcAmount -= difference;
             continue;
         }
 
         // receive money
         item.upd.StackObjectsCount += calcAmount;
-        output.data.items.change.push(item);
-        logger.logSuccess("Money received: " + amount + " " + tmpTraderInfo.data.currency);
+        output.items.change.push(item);
+        logger.logSuccess("Money received: " + amount + " " + tmpTraderInfo.currency);
         skip = true;
         break;
     }
@@ -351,8 +351,8 @@ function getMoney(pmcData, amount, body, output, sessionID) {
                         };
 
                         pmcData.Inventory.items.push(MoneyItem);
-                        output.data.items.new.push(MoneyItem);
-                        logger.logSuccess("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency);
+                        output.items.new.push(MoneyItem);
+                        logger.logSuccess("Money created: " + calcAmount + " " + tmpTraderInfo.currency);
                         break addedMoney;
                     }
                 }
@@ -364,7 +364,7 @@ function getMoney(pmcData, amount, body, output, sessionID) {
 
     pmcData.TraderStandings[body.tid].currentSalesSum = saleSum;
     trader_f.traderServer.lvlUp(body.tid, sessionID);
-    output.data.currentSalesSums[body.tid] = saleSum;
+    output.currentSalesSums[body.tid] = saleSum;
 
     return output;
 }
@@ -375,8 +375,8 @@ function getMoney(pmcData, amount, body, output, sessionID) {
 * */
 function getPlayerStash(sessionID) { //this sets automaticly a stash size from items.json (its not added anywhere yet cause we still use base stash)
     let stashTPL = profile_f.getStashType(sessionID);
-    let stashX = (items.data[stashTPL]._props.Grids[0]._props.cellsH !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsH : 10;
-    let stashY = (items.data[stashTPL]._props.Grids[0]._props.cellsV !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsV : 66;
+    let stashX = (items[stashTPL]._props.Grids[0]._props.cellsH !== 0) ? items[stashTPL]._props.Grids[0]._props.cellsH : 10;
+    let stashY = (items[stashTPL]._props.Grids[0]._props.cellsV !== 0) ? items[stashTPL]._props.Grids[0]._props.cellsV : 66;
     return [stashX, stashY];
 }
 
@@ -385,9 +385,9 @@ function getPlayerStash(sessionID) { //this sets automaticly a stash size from i
 * output: [ItemFound?(true,false), itemData]
 * */
 function getItem(template) { // -> Gets item from <input: _tpl>
-    for (let itm in items.data) {
-        if (items.data[itm]._id && items.data[itm]._id === template) {
-            let item = items.data[itm];
+    for (let itm in items) {
+        if (items[itm]._id && items[itm]._id === template) {
+            let item = items[itm];
             return [true, item];
         }
     }
@@ -518,7 +518,7 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 function findAndReturnChildren(pmcData, itemid) {
     if(pmcData.Inventory == null) //if finding children from trader assort loading, just a temp workaround
     { 
-        return findAndReturnChildrenByItems(pmcData.data.items, itemid); 
+        return findAndReturnChildrenByItems(pmcData.items, itemid); 
     } 
     else
     { 

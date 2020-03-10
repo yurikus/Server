@@ -11,9 +11,9 @@ function generate() {
 
     // set weather
     if (gameplayConfig.location.forceWeatherEnabled) {
-        output = weather.data[gameplayConfig.location.forceWeatherId];
+        output = weather[gameplayConfig.location.forceWeatherId];
     } else {
-        output = weather.data[utility.getRandomInt(0, weather.data.length - 1)];
+        output = weather[utility.getRandomInt(0, weather.length - 1)];
     }
 
     // replace date and time

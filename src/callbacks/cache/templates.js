@@ -7,7 +7,7 @@ function cache() {
     
     logger.logInfo("Caching: templates.json");
 
-    let base = json.parse(json.read("db/cache/templates.json"));
+    let base = {"Categories": [], "Items": []};
     let inputDir = [
         "categories",
         "items"
@@ -21,14 +21,13 @@ function cache() {
             let fileData = json.parse(json.read(filePath));
 
             if (path == 0) {
-                base.data.Categories.push(fileData);
+                base.Categories.push(fileData);
             } else {
-                base.data.Items.push(fileData);
+                base.Items.push(fileData);
             }
         }
     }
 
-    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/templates.json", base);
 }
 

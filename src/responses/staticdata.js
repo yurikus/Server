@@ -1,16 +1,16 @@
 "use strict";
 
 function getItems(url, info, sessionID) {
-    return json.stringify(items);
+    return json.stringify({"err": 0, "errmsg": null, "data": items});
 }
 
 function getGlobals(url, info, sessionID) {
-    globals.data.time = Date.now() / 1000;
-    return json.stringify(globals);
+    globals.time = Math.round(Date.now() / 1000);
+    return json.stringify({"err": 0, "errmsg": null, "data": globals});
 }
 
 function getTemplates(url, info, sessionID) {
-    return json.stringify(templates);
+    return json.stringify({"err": 0, "errmsg": null, "data": templates});
 }
 
 router.addStaticRoute("/client/items", getItems);

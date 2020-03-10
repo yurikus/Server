@@ -72,7 +72,7 @@ class ProfileServer {
         pmcData.Info.RegistrationDate = Math.floor(new Date() / 1000);
 
         // storage info
-        storage.data._id = "pmc" + account.id;
+        storage._id = "pmc" + account.id;
 
         // set trader standing      
         for (let trader in db.assort) {
@@ -81,7 +81,7 @@ class ProfileServer {
                 "currentSalesSum": 0,
                 "currentStanding": 0,
                 "NextLoyalty": null,
-                "loyaltyLevels": ((trader_f.traderServer.getTrader(trader)).data.loyalty.loyaltyLevels)
+                "loyaltyLevels": ((trader_f.traderServer.getTrader(trader)).loyalty.loyaltyLevels)
             };
         }
 
@@ -114,13 +114,23 @@ class ProfileServer {
 
         // check if the nickname exists
         if (account_f.nicknameTaken(info)) {
-            return '{"err":225, "errmsg":"this nickname is already in use", "data":null}';
+            return {"status": 255, "nicknamechangedate": Math.floor(new Date() / 1000)}
         }
 
         // change nickname
         pmcData.Info.Nickname = info.nickname;
         pmcData.Info.LowerNickname = info.nickname.toLowerCase();
-        return ('{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + "}}");
+        return {"status": 0, "nicknamechangedate": Math.floor(new Date() / 1000)};
+    }
+
+    validateNickname(info, sessionID) {
+        // check if the nickname exists
+        if (account_f.nicknameTaken(info)) {
+            return {"status": null}
+        }
+
+        // change nickname
+        return {"status": "ok"};
     }
 
     changeVoice(info, sessionID) {

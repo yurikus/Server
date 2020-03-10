@@ -5,14 +5,13 @@ function cache() {
         return;
     }
     
-    let base = json.parse(json.read("db/cache/languages.json"));
+    let base = [];
 
     for (let file in db.locales) {
         let fileData = json.parse(json.read(db.locales[file][file]));
-        base.data.push(fileData);
+        base.push(fileData);
     }
 
-    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/languages.json", base);
 }
 

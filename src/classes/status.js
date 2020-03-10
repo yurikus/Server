@@ -73,7 +73,7 @@ function examineItem(pmcData, body, sessionID) {
         if (body.fromOwner.type === "Trader") {
             let tmpTraderAssort = trader_f.traderServer.getAssort(body.fromOwner.id);
     
-            for (let item of tmpTraderAssort.data.items) {
+            for (let item of tmpTraderAssort.items) {
                 if (item._id === body.item) {
                     logger.logInfo("Found trader with examined item: " + item._id, "", "", true);
                     returned = item._tpl;

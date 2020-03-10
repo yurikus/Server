@@ -1,40 +1,55 @@
 "use strict";
 
-function genericCacher(cachename, filepathNode, output = "") {
-    logger.logInfo("Caching: " + cachename);
+function genericCacher(cacheName, filepathNode) {
+    logger.logInfo("Caching: " + cacheName);
 
-    let base = json.parse(json.read("db/cache/" + cachename));
+    let base = undefined;
     let inputFiles = filepathNode;
+
+    switch (cacheName) {
+        case "quests.json":
+        case "traders.json":
+        case "hideout_areas.json":
+        case "hideout_production.json":
+        case "hideout_scavcase.json":
+        case "weather.json":
+            base = [];
+        break;
+
+        case "items.json":
+        case "customization.json":
+            base = {};
+        break;
+    }
 
     for (let file in inputFiles) {
         let filePath = inputFiles[file];
         let fileData = json.parse(json.read(filePath));
         let fileName = "";
 
-        switch (cachename) {
+        switch (cacheName) {
             case "quests.json":
             case "traders.json":
             case "hideout_areas.json":
             case "hideout_production.json":
             case "hideout_scavcase.json":
             case "weather.json":
-                base.data.push(fileData);
+                base.push(fileData);
             break;
 
             case "items.json":
                 fileName = fileData._id;
-                base.data[fileName] = fileData;
+                base[fileName] = fileData;
             break;
 
             case "customization.json":
                 fileName = file;
-                base.data[fileName] = fileData;
+                base[fileName] = fileData;
             break;
         }
     }
 
-    base.crc = utility.adlerGen(json.stringify(base.data));
-    json.write("user/cache/" + cachename, base);
+    json.write("user/cache/" + cacheName, base);
 }
 
 function cache() {

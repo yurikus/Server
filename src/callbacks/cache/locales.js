@@ -6,7 +6,7 @@ function cache() {
     }
     
     for (let locale in db.locales) {
-        let base = json.parse(json.read("db/cache/locale.json"));
+        let base = {"interface": {}, "enum": [], "error": {}, "mail": {}, "quest": {}, "preset": {}, "handbook": {}, "season": {}, "templates": {}, "locations": {}, "banners": {}, "trading": {}}
         let inputNode = db.locales[locale];
         let inputDir = [
             "mail",
@@ -22,8 +22,8 @@ function cache() {
 
         logger.logInfo("Caching: locale_" + locale + ".json");
 
-        base.data.interface = json.parse(json.read(inputNode.interface));
-        base.data.error = json.parse(json.read(inputNode.error));
+        base.interface = json.parse(json.read(inputNode.interface));
+        base.error = json.parse(json.read(inputNode.error));
 
         for (let path in inputDir) {
             let inputFiles = inputNode[inputDir[path]];
@@ -36,28 +36,27 @@ function cache() {
                 let fileName = inputNames[i++];
 
                 if (path == 0) {
-                    base.data.mail[fileName] = fileData;
+                    base.mail[fileName] = fileData;
                 } else if (path == 1) {
-                    base.data.quest[fileName] = fileData;
+                    base.quest[fileName] = fileData;
                 } else if (path == 2) {
-                    base.data.preset[fileName] = fileData;
+                    base.preset[fileName] = fileData;
                 } else if (path == 3) {
-                    base.data.handbook[fileName] = fileData;
+                    base.handbook[fileName] = fileData;
                 } else if (path == 4) {
-                    base.data.season[fileName] = fileData;
+                    base.season[fileName] = fileData;
                 } else if (path == 5) {
-                    base.data.templates[fileName] = fileData;
+                    base.templates[fileName] = fileData;
                 } else if (path == 6) {
-                    base.data.locations[fileName] = fileData;
+                    base.locations[fileName] = fileData;
                 } else if (path == 7) {
-                    base.data.banners[fileName] = fileData;
+                    base.banners[fileName] = fileData;
                 } else if (path == 8) {
-                    base.data.trading[fileName] = fileData;
+                    base.trading[fileName] = fileData;
                 }
             }
         }
 
-        base.crc = utility.adlerGen(json.stringify(base.data));
         json.write("user/cache/locale_" + locale + ".json", base);
     }
 }

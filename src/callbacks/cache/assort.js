@@ -9,7 +9,7 @@ function cache() {
     for (let trader in db.assort) {
         logger.logInfo("Caching: assort_" + trader + ".json");
 
-        let base = json.parse(json.read("db/cache/assort.json"));
+        let base = {"items": [], "barter_scheme": {}, "loyal_level_items": {}};
         let inputNode = db.assort[trader];
         let inputDir = [
             "items",
@@ -28,16 +28,15 @@ function cache() {
                 let fileData = json.parse(json.read(filePath));
 
                 if (path == 0) {
-                    base.data.items.push(fileData);
+                    base.items.push(fileData);
                 } else if (path == 1) {
-                    base.data.barter_scheme[fileName] = fileData;
+                    base.barter_scheme[fileName] = fileData;
                 } else if (path == 2) {
-                    base.data.loyal_level_items[fileName] = fileData;
+                    base.loyal_level_items[fileName] = fileData;
                 }
             }
         }
 
-        base.crc = utility.adlerGen(json.stringify(base.data));
         json.write("user/cache/assort_" + trader + ".json", base);
     }
 
@@ -52,7 +51,6 @@ function cache() {
                 base.push(json.parse(json.read(db.assort[trader].customization[file])));
             }
 
-            base.crc = utility.adlerGen(json.stringify(base));
             json.write("user/cache/customization_" + trader + ".json", base);
         }
     }

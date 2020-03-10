@@ -124,7 +124,7 @@ function getOffers(request) {
     let offers = [];
 
     if (!request.linkedSearchId && !request.neededSearchId) {
-        response.categories = (trader_f.traderServer.getAssort("ragfair")).data.loyal_level_items;
+        response.categories = (trader_f.traderServer.getAssort("ragfair")).loyal_level_items;
     }
 
     if (request.buildCount) {
@@ -160,7 +160,7 @@ function getOffers(request) {
 }
 
 function getLinkedSearchList(linkedSearchId) {
-    let item = items.data[linkedSearchId];
+    let item = items[linkedSearchId];
     // merging all possible filters without duplicates
     let result = new Set([
         ...getFilters(item, "Slots"),
@@ -174,7 +174,7 @@ function getLinkedSearchList(linkedSearchId) {
 function getNeededSearchList(neededSearchId) {
     let result = [];
 
-    for (let item of Object.values(items.data)) {
+    for (let item of Object.values(items)) {
         if (isInFilter(neededSearchId, item, "Slots")
          || isInFilter(neededSearchId, item, "Chambers")
          || isInFilter(neededSearchId, item, "Cartridges")) {
@@ -214,7 +214,7 @@ function getCategoryList(handbookId) {
 
 function createOffer(template, onlyFunc, usePresets = true) {
     // Some slot filters reference bad items
-    if (!(template in global.items.data)) {
+    if (!(template in global.items)) {
         logger.logWarning("Item " + template + " does not exist");
         return [];
     }

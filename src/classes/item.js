@@ -16,7 +16,7 @@ class ItemServer {
     handleRoutes(info, sessionID) {
         let result = "";
         
-        for (let body of info.data) {
+        for (let body of info) {
             let pmcData = profile_f.profileServer.getPmcProfile(sessionID);
 
             if (body.Action in this.routes) {
@@ -27,7 +27,7 @@ class ItemServer {
         }
 
         if (result !== "") {
-            result = json.stringify(result);
+            result = json.stringify({"err": 0, "errmsg": null, "data": result});
         }
 
         this.resetOutput();
@@ -47,7 +47,7 @@ class ItemServer {
     }
 
     resetOutput() {
-        this.output = {"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{}}};
+        this.output = {"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[], "currentSalesSums":{}};
     }
 }
 

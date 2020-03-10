@@ -46,9 +46,13 @@ class Router {
         if ("crc" in info) {
             let crctest = json.parse(output);
 
-            if ("crc" in crctest && info.crc === crctest.crc) {
-                logger.logWarning("[CRC match]: loading from game cache files");
-                output = '{"err":0, "errmsg":null, "data":null}';
+            if ("data" in crctest) {
+                crctest.crc = utility.adlerGen(json.stringify(crctest.data));
+
+                if (info.crc === crctest.crc) {
+                    logger.logWarning("[CRC match]: loading from game cache files");
+                    output = '{"err":0, "errmsg":null, "data":null}';
+                }
             }
         }
 
