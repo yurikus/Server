@@ -25,7 +25,7 @@ function getScavcase() {
 }
 
 function getSettings() {
-	return getSettings;
+	return settings;
 }
 
 function upgrade(pmcData, body, sessionID) {

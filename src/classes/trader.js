@@ -20,7 +20,7 @@ class TraderServer {
     }
 
     getTrader(id) {
-        return {err: 0, errmsg: null, data: this.traders[id]};
+        return this.traders[id];
     }
 
     getAllTraders(sessionID) {
@@ -260,28 +260,22 @@ input : array of handbook categories, itemTpl of inventory
 output : boolean
 */
 function traderFilter(traderFilters, tplToCheck) {
-
-    for (let filter of traderFilters) 
-    {
-        for (let iaaaaa of itm_hf.templatesWithParent(filter)) 
-        {
-            if (iaaaaa == tplToCheck) 
-            {
+    for (let filter of traderFilters) {
+        for (let item of itm_hf.templatesWithParent(filter)) {
+            if (item == tplToCheck) {
                 return true;
             }
         }
         
-        for (let subcateg of itm_hf.childrenCategories(filter)) 
-        {
-            for (let itemFromSubcateg of itm_hf.templatesWithParent(subcateg)) 
-            {
-                if (itemFromSubcateg == tplToCheck) 
-                {
+        for (let subcateg of itm_hf.childrenCategories(filter)) {
+            for (let itemFromSubcateg of itm_hf.templatesWithParent(subcateg)) {
+                if (itemFromSubcateg == tplToCheck) {
                     return true;
                 }
             }
         }
     }
+
     return false;
 }
 
