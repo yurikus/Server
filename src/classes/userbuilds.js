@@ -7,14 +7,13 @@ function getPath(sessionID) {
 
 function getUserBuilds(sessionID) {
 	let userBuildsMap = json.parse(json.read(getPath(sessionID)));
-
-	let userBuilds = [];
+	let output = [];
 
 	for (let buildName in userBuildsMap) {
-		userBuilds.push(userBuildsMap[buildName]);
+		output.push(userBuildsMap[buildName]);
 	}
 
-	return userBuilds;
+	return output;
 }
 
 function SaveBuild(pmcData, body, sessionID) {
