@@ -162,10 +162,12 @@ class TraderServer {
 
         for (let suit of suitArray) {
             if (suit.suiteId in customization_f.getCustomization().data) {
-                let side = allSuits[suit.suiteId]._props.Side[0];
+                for (var i = 0; i < allSuits[suit.suiteId]._props.Side.length; i++) {
+                    let side = allSuits[suit.suiteId]._props.Side[i];
 
-                if (side === pmcData.Info.Side) {
-                    suitList.push(suit);
+                    if (side === pmcData.Info.Side) {
+                     suitList.push(suit);
+                    }
                 }
             }
         }
