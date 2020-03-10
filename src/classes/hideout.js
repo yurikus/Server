@@ -61,19 +61,21 @@ function upgradeComplete(pmcData, body, sessionID) {
 		pmcData.Hideout.Areas[hideoutArea].constructing = false;
 		
 		//go to apply bonuses
-		for(let area_bonus of areas)
+		for(let area_bonus of areas.data)
 		{
 			if( area_bonus.type != pmcData.Hideout.Areas[hideoutArea].type){ continue; }
 
 			let arrayofBonuses = area_bonus.stages[pmcData.Hideout.Areas[hideoutArea].level].bonuses;
 
-			console.log(arrayofBonuses);
-
-			for(let bonusesInArray of arrayofBonuses)
+			if(arrayofBonuses.length > 0)
 			{
-				//if bonusesInArray.length>0 then: 
-				applyPlayerUpgradesBonuses(bonusesInArray,pmcData);
+				for(let bonusesInArray of arrayofBonuses)
+				{
+					applyPlayerUpgradesBonuses(bonusesInArray,pmcData);
+				}
 			}
+
+
 		}
 
 	}
@@ -260,7 +262,7 @@ function takeProduction(pmcData, body, sessionID) {
 
 		// delete the production in profile Hideout.Production
 		for (let prod in pmcData.Hideout.Production) {
-			if (pmcData.Hideout.Production[prod].RecipeId === body.recipeId) {
+			if (pmcData.Hideout.Production[prod].RecipeId === body.recipeId && pmcData.Hideout.Production[prod].RecipeId !== "5d5c205bd582a50d042a3c0e") {
 				delete pmcData.Hideout.Production[prod];
 			}
 		}
@@ -315,12 +317,13 @@ function takeProduction(pmcData, body, sessionID) {
 
 function registerProduction(pmcData, body, sessionID) {
 	for (let receipe in production.data) {
-		if (body.recipeId === production.data[receipe]._id) {
+		if (body.recipeId === production.data[receipe]._id) {	
 			pmcData.Hideout.Production[production.data[receipe].areaType] = { 
 				"Progress": 0,
 				"inProgress": true,
 				"RecipeId": body.recipeId,
 				"Products": [],
+				"SkipTime": 0,
 				"StartTime": Math.floor(Date.now() / 1000)
 			};
 		}
@@ -337,6 +340,7 @@ function applyPlayerUpgradesBonuses(bonuses,pmcData)
 
 		case "MaximumEnergyReserve":
 			break;
+
 		case "EnergyRegeneration":
 			break;
 
