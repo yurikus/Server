@@ -3,11 +3,29 @@
 let areas = undefined;
 let production = undefined;
 let scavcase = undefined;
+let settings = undefined;
 
 function initialize() {
 	areas = json.parse(json.read(db.user.cache.hideout_areas));
 	production = json.parse(json.read(db.user.cache.hideout_production));
 	scavcase = json.parse(json.read(db.user.cache.hideout_scavcase));
+	settings = json.parse(json.read(db.hideout.settings));
+}
+
+function getAreas() {
+	return areas;
+}
+
+function getProduction() {
+	return production;
+}
+
+function getScavcase() {
+	return scavcase;
+}
+
+function getSettings() {
+	return getSettings;
 }
 
 function upgrade(pmcData, body, sessionID) {
@@ -382,6 +400,10 @@ function applyPlayerUpgradesBonuses(bonuses,pmcData)
 }
 
 module.exports.initialize = initialize;
+module.exports.getAreas = getAreas;
+module.exports.getProduction = getProduction;
+module.exports.getScavcase = getScavcase;
+module.exports.getSettings = getSettings;
 module.exports.upgrade = upgrade;
 module.exports.upgradeComplete = upgradeComplete;
 module.exports.putItemsInAreaSlots = putItemsInAreaSlots;

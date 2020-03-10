@@ -1,19 +1,19 @@
 "use strict";
 
 function getRecipes(url, info, sessionID) {
-    return json.read(db.user.cache.hideout_production);
+    return json.stringify({"err": 0, "errmsg": null, "data": hideout_f.getProduction()});
 }
 
 function getSettings(url, info, sessionID) {
-    return json.read(db.hideout.settings);
+    return json.stringify({"err": 0, "errmsg": null, "data": hideout_f.getSettings()});
 }
 
 function getAreas(url, info, sessionID) {
-    return json.read(db.user.cache.hideout_areas);
+    return json.stringify({"err": 0, "errmsg": null, "data": hideout_f.getAreas()});
 }
 
 function getScavDatacaseRecipes(url, info, sessionID) {
-    return json.read(db.user.cache.hideout_scavcase);
+    return json.stringify({"err": 0, "errmsg": null, "data": hideout_f.getScavcase()});
 }
 
 router.addStaticRoute("/client/hideout/production/recipes", getRecipes);
