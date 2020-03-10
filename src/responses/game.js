@@ -5,7 +5,7 @@ function nullResponse(url, info, sessionID) {
 }
 
 function getGameConfig(url, info, sessionID) {
-    return json.stringify({"err": 0, "errmsg": null, "data": {"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": sessionID, "token": "token_" + sessionID, "taxonomy": "341", "activeProfileId": "pmc" + sessionID, "nickname": profile_f.profileServer.getNickname(sessionID), "backend": {"Trading": server.getBackendUrl(), "Messaging": server.getBackendUrl(), "Main": server.getBackendUrl(), "RagFair": server.getBackendUrl()}, "totalInGame": 0}});
+    return json.stringify({"err": 0, "errmsg": null, "data": {"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": sessionID, "token": "token_" + sessionID, "taxonomy": "341", "activeProfileId": "pmc" + sessionID, "nickname": account_f.accountServer.getNickname(sessionID), "backend": {"Trading": server.getBackendUrl(), "Messaging": server.getBackendUrl(), "Main": server.getBackendUrl(), "RagFair": server.getBackendUrl()}, "totalInGame": 0}});
 }
 
 function selectProfile(url, info, sessionID) {
