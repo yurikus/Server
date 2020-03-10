@@ -52,7 +52,7 @@ class Router {
 
                 if (info.crc === crctest.crc) {
                     logger.logWarning("[CRC match]: loading from game cache files");
-                    output = '{"err":0, "errmsg":null, "data":null}';
+                    output = json.stringify({"err": 0, "errmsg": null, "data": null});
                 } else {
                     output = crctest;
                 }
@@ -62,7 +62,7 @@ class Router {
         /* route doesn't exist or response is not properly set up */
         if (output === "") {
             logger.logError("[UNHANDLED][" + url + "] request data: " + json.stringify(info));
-            output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
+            output = json.stringify({"err": 404, "errmsg": "UNHANDLED RESPONSE: ' + url + '", "data": null});
         }
     
         return utility.clearString(output);
