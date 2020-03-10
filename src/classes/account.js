@@ -18,7 +18,7 @@ class AccountServer {
     }
 
     find(sessionID) {
-        for (let accountId of Object.keys(this.accounts)) {
+        for (let accountId in this.accounts) {
             let account = this.accounts[accountId];
 
             if (account.id === sessionID) {
@@ -38,7 +38,7 @@ class AccountServer {
     }
 
     exists(info) {
-        for (let accountId of Object.keys(this.accounts)) {
+        for (let accountId in this.accounts) {
             let account = this.accounts[accountId];
 
             if (info.email === account.email && info.password === account.password) {
@@ -49,7 +49,7 @@ class AccountServer {
         return 0;
     }
 
-    getReservedNickname(sessionID) {
+    getNickname(sessionID) {
         return this.accounts[sessionID].nickname;
     }
 
@@ -60,6 +60,22 @@ class AccountServer {
         let sessionID = this.exists(info);
 
         return sessionID.toString();
+    }
+
+    nicknameTaken(info) {
+        let found = false;
+    
+        for (let accountId in this.accounts) {
+            let account = this.accounts[accountId];
+            let pmcData = profile_f.getPmcData(account.id);
+    
+            if (info.nickname === account.nickanme || info.nickanme === pmcData.Info.Nickname) {
+                found = true;
+                break;
+            }
+        }
+    
+        return found;
     }
 }
 

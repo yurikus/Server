@@ -109,33 +109,24 @@ class ProfileServer {
         return scavData;
     }
 
-    getNickname(sessionID) {
-        let pmcData = this.getPmcProfile(sessionID);
-        return pmcData.Info.Nickname;
+    validateNickname(info, sessionID) {
+        if (account_f.accountServer.nicknameTaken(info)) {
+            return {"status": null}
+        }
+
+        return {"status": "ok"};
     }
 
     changeNickname(info, sessionID) {
         let pmcData = this.getPmcProfile(sessionID);
 
-        // check if the nickname exists
-        if (account_f.nicknameTaken(info)) {
+        if (account_f.accountServer.nicknameTaken(info)) {
             return {"status": 255, "nicknamechangedate": Math.floor(new Date() / 1000)}
         }
 
-        // change nickname
         pmcData.Info.Nickname = info.nickname;
         pmcData.Info.LowerNickname = info.nickname.toLowerCase();
         return {"status": 0, "nicknamechangedate": Math.floor(new Date() / 1000)};
-    }
-
-    validateNickname(info, sessionID) {
-        // check if the nickname exists
-        if (account_f.nicknameTaken(info)) {
-            return {"status": null}
-        }
-
-        // change nickname
-        return {"status": "ok"};
     }
 
     changeVoice(info, sessionID) {
