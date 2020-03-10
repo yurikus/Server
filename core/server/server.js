@@ -29,7 +29,7 @@ class Server {
         this.ip = serverConfig.ip;
         this.port = serverConfig.port;
         this.backendUrl = "https://" + this.ip + ":" + this.port;
-        this.version = "dev-r23.3";
+        this.version = "dev-r23.4";
         this.mime = {
             txt: 'text/plain',
             jpg: 'image/jpeg',
