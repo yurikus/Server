@@ -1,7 +1,7 @@
 "use strict";
 
 function getLocations(url, info, sessionID) {
-    return location_f.locationServer.generateAll();
+    return json.stringify({"err": 0, "errmsg": null, "data": location_f.locationServer.generateAll()});
 }
 
 function getLocation(url, info, sessionID) {

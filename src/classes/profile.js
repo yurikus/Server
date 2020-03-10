@@ -109,6 +109,11 @@ class ProfileServer {
         return scavData;
     }
 
+    getNickname(sessionID) {
+        let pmcData = this.getPmcProfile(sessionID);
+        return pmcData.Info.Nickname;
+    }
+
     changeNickname(info, sessionID) {
         let pmcData = this.getPmcProfile(sessionID);
 

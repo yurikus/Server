@@ -1,15 +1,15 @@
 "use strict";
 
 function nullArrayResponse(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":[]}';
+    return json.stringify({"err": 0, "errmsg": null, "data": []});
 }
 
 function getFriendList(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
+    return json.stringify({"err": 0, "errmsg": null, "data": {"Friends": [], "Ignore": [], "InIgnoreList": []}});
 }
 
 function getChatServerList(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
+    return json.stringify({"err": 0, "errmsg": null, "data": [{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId": 20, "DateTime": Math.floor(new Date() / 1000), "IsDeveloper": true, "Regions": ["EUR"], "VersionId": "bgkidft87ddd", "Ip": "", "Port": 0, "Chats": [{"_id":"0", "Members":0}]}]});
 }
 
 function getMailDialogList(url, info, sessionID) {
@@ -21,8 +21,7 @@ function getMailDialogView(url, info, sessionID) {
 }
 
 function getMailDialogInfo(url, info, sessionID) {
-    let data = dialogue_f.dialogueServer.getDialogueInfo(info.dialogId, sessionID);
-    return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';
+    return json.stringify({"err": 0, "errmsg": null, "data": dialogue_f.dialogueServer.getDialogueInfo(info.dialogId, sessionID)});
 }
 
 function removeDialog(url, info, sessionID) {
@@ -46,8 +45,7 @@ function setRead(url, info, sessionID) {
 }
 
 function getAllAttachments(url, info, sessionID) {
-    let data = dialogue_f.dialogueServer.getAllAttachments(info.dialogId, sessionID);
-    return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';
+    return json.stringify({"err": 0, "errmsg": null, "data": dialogue_f.dialogueServer.getAllAttachments(info.dialogId, sessionID)});
 }
 
 router.addStaticRoute("/client/friend/list", getFriendList);

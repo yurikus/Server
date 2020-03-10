@@ -2,15 +2,15 @@
 
 function updateHealth(url, info, sessionID) {
     health_f.healthServer.updateHealth(info, sessionID);
-    return '{"err":0, "errmsg":null, "data":null}';
+    return json.stringify({"err": 0, "errmsg": null, "data": null});
 }
 
 function offraidEat(pmcData, body, sessionID) {
-    return health_f.healthServer.offraidEat(pmcData, body, sessionID)
+    return json.stringify({"err": 0, "errmsg": null, "data": health_f.healthServer.offraidEat(pmcData, body, sessionID)});
 }
 
 function offraidHeal(pmcData, body, sessionID) {
-    return health_f.healthServer.offraidHeal(pmcData, body, sessionID);
+    return json.stringify({"err": 0, "errmsg": null, "data": health_f.healthServer.offraidHeal(pmcData, body, sessionID)});
 }
 
 router.addStaticRoute("/player/health/events", updateHealth);
