@@ -113,7 +113,7 @@ function completeQuest(pmcData, body, sessionID) {
         if(pmcData.Hideout.Areas[area].type == 11)
         {
             if(pmcData.Hideout.Areas[area].level == 1){intelCenterBonus = 5;}
-            if(pmcData.Hideout.Areas[area].level == 2){intelCenterBonus = 15;}
+            if(pmcData.Hideout.Areas[area].level > 1){intelCenterBonus = 15;}
         }
     }
 
@@ -240,7 +240,7 @@ function applyMoneyBoost(quest,moneyBoost)
         {
             if( itm_hf.isMoneyTpl(quest.rewards.Success[reward].items[0]._tpl) )
             {
-                quest.rewards.Success[reward].items[0].upd.StackObjectsCount = quest.rewards.Success[reward].items[0].upd.StackObjectsCount + (quest.rewards.Success[reward].items[0].upd.StackObjectsCount*moneyBoost/100);
+                quest.rewards.Success[reward].items[0].upd.StackObjectsCount += quest.rewards.Success[reward].items[0].upd.StackObjectsCount*moneyBoost/100;
             }
         }
     }
