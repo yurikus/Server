@@ -31,15 +31,14 @@ function processReward(reward) {
     for (let item of reward.items) {
         if (item._id === reward.target) {
             targets = itm_hf.splitStack(item);
-        }
-        else {
+        } else {
             mods.push(item);
         }
     }
 
     // add mods to the base items, fix ids
     for (let target of targets) {
-        let items = [ target ];
+        let items = [target];
 
         for (let mod of mods) {
             items.push(itm_hf.clone(mod));
@@ -94,12 +93,14 @@ function acceptQuest(pmcData, body, sessionID) {
     // Create a dialog message for starting the quest.
     // Note that for starting quests, the correct locale field is "description", not "startedMessageText".
     let quest = json.parse(json.read(db.quests[body.qid]));
-    let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
-    let messageContent = {templateId: questLocale.description, type: dialogue_f.getMessageTypeValue('questStart')};
     let questRewards = getQuestRewardItems(quest, state);
+    let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
+    let messageContent = {
+        "templateId": questLocale.description,
+        "type": dialogue_f.getMessageTypeValue('questStart')
+    };
 
     dialogue_f.dialogueServer.addDialogueMessage(quest.traderId, messageContent, sessionID, questRewards);
-
     return item_f.itemServer.getOutput();
 }
 
@@ -108,12 +109,15 @@ function completeQuest(pmcData, body, sessionID) {
     let intelCenterBonus = 0;//percentage of money reward
 
     //find if player has money reward boost 
-    for(let area in pmcData.Hideout.Areas)
-    {
-        if(pmcData.Hideout.Areas[area].type == 11)
-        {
-            if(pmcData.Hideout.Areas[area].level == 1){intelCenterBonus = 5;}
-            if(pmcData.Hideout.Areas[area].level == 2){intelCenterBonus = 15;}
+    for (let area in pmcData.Hideout.Areas) {
+        if (pmcData.Hideout.Areas[area].type === 11) {
+            if (pmcData.Hideout.Areas[area].level === 1) {
+                intelCenterBonus = 5;
+            }
+
+            if (pmcData.Hideout.Areas[area].level > 1) {
+                intelCenterBonus = 15;
+            }
         }
     }
 
@@ -126,10 +130,12 @@ function completeQuest(pmcData, body, sessionID) {
 
     // give reward
     let quest = json.parse(json.read(db.quests[body.qid]));
-    if(intelCenterBonus > 0)
-    { 
-        quest = applyMoneyBoost(quest,intelCenterBonus);    //money = money + (money*intelCenterBonus/100)
+
+    if(intelCenterBonus > 0) { 
+        //money += money * intelCenterBonus / 100
+        quest = applyMoneyBoost(quest,intelCenterBonus);    
     }
+
     let questRewards = getQuestRewardItems(quest, state);
 
     for (let reward of quest.rewards.Success) {
@@ -162,12 +168,11 @@ function completeQuest(pmcData, body, sessionID) {
     let questDb = json.parse(json.read(db.quests[body.qid]));
     let questLocale = json.parse(json.read(db.locales["en"].quest[body.qid]));
     let messageContent = {
-        templateId: questLocale.successMessageText,
-        type: dialogue_f.getMessageTypeValue('questSuccess')
+        "templateId": questLocale.successMessageText,
+        "type": dialogue_f.getMessageTypeValue('questSuccess')
     }
 
     dialogue_f.dialogueServer.addDialogueMessage(questDb.traderId, messageContent, sessionID, questRewards);
-
     return item_f.itemServer.getOutput();
 }
 
@@ -184,7 +189,6 @@ function handoverQuest(pmcData, body, sessionID) {
         if (condition._props.id === body.conditionId && types.includes(condition._parent)) {
             value = parseInt(condition._props.value);
             handoverMode = condition._parent === types[0];
-
             break;
         }
     }
@@ -204,8 +208,7 @@ function handoverQuest(pmcData, body, sessionID) {
             if (counter === value) {
                 break;
             }
-        }
-        else {
+        } else {
             // for weapon assembly quests, remove the item and its children
             let toRemove = itm_hf.findAndReturnChildren(pmcData, itemHandover.id);
             let index = pmcData.Inventory.items.length;
@@ -215,7 +218,7 @@ function handoverQuest(pmcData, body, sessionID) {
             counter = 1;
 
             // important: loop backward when removing items from the array we're looping on
-            while (index --> 0) {
+            while (index-- > 0) {
                 if (toRemove.includes(pmcData.Inventory.items[index]._id)) {
                     pmcData.Inventory.items.splice(index, 1);
                 }
@@ -232,20 +235,16 @@ function handoverQuest(pmcData, body, sessionID) {
     return output;
 }
 
-function applyMoneyBoost(quest,moneyBoost)
-{
-    for (let reward in quest.rewards.Success)
-    {
-        if(quest.rewards.Success[reward].type == "Item")
-        {
-            if( itm_hf.isMoneyTpl(quest.rewards.Success[reward].items[0]._tpl) )
-            {
-                quest.rewards.Success[reward].items[0].upd.StackObjectsCount = quest.rewards.Success[reward].items[0].upd.StackObjectsCount + (quest.rewards.Success[reward].items[0].upd.StackObjectsCount*moneyBoost/100);
-            }
+function applyMoneyBoost(quest,moneyBoost) {
+    for (let reward in quest.rewards.Success) {
+        if (quest.rewards.Success[reward].type === "Item" && itm_hf.isMoneyTpl(quest.rewards.Success[reward].items[0]._tpl)) {
+            quest.rewards.Success[reward].items[0].upd.StackObjectsCount += quest.rewards.Success[reward].items[0].upd.StackObjectsCount * moneyBoost / 100;
         }
     }
+
     return quest;
 }
+
 /* Sets the item stack to value, or delete the item if value <= 0 */
 // TODO maybe merge this function and the one from customization
 function changeItemStack(pmcData, id, value, output) {
