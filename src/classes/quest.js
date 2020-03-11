@@ -131,7 +131,7 @@ function completeQuest(pmcData, body, sessionID) {
     // give reward
     let quest = json.parse(json.read(db.quests[body.qid]));
 
-    if(intelCenterBonus > 0) { 
+    if (intelCenterBonus > 0) { 
         //money += money * intelCenterBonus / 100
         quest = applyMoneyBoost(quest,intelCenterBonus);    
     }
