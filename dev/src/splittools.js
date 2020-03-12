@@ -24,7 +24,7 @@ function genericSplitter(type, basepath, basefile) {
                 break;
 
             case "languages":
-                output = outputDir + basepath + "/" + file.data[element].ShortName + ".json";
+                output = outputDir + basepath + "/" + file.data[element].ShortName + "/" + file.data[element].ShortName + ".json";
                 json.write(output, file.data[element]);
                 break;
 
@@ -34,7 +34,7 @@ function genericSplitter(type, basepath, basefile) {
                 break;
 
             case "customOffers":
-                output = outputDir + basepath + "/" + file.data[element].suiteId + ".json";
+                output = outputDir + basepath + "/" + file.data[element].tid + "/" + file.data[element].suiteId + ".json";
                 json.write(output, file.data[element]);
                 break;
         }
@@ -52,7 +52,12 @@ function quests() {
 }
 
 function traders() {
-    genericSplitter("traders", "traders", inputDir + "trading.escapefromtarkov.com.client.trading.api.getTradersList.txt");
+    let file = json.parse(json.read(inputDir + "trading.escapefromtarkov.com.client.trading.api.getTradersList.txt"));
+
+    for (let element in file.data) {
+        let output = outputDir + "assort/" + file.data[element]._id + "/" + "base.json";
+        console.log("done: " + output);
+    }
 }
 
 function locations() {
@@ -67,15 +72,15 @@ function locations() {
 }
 
 function language() {
-    genericSplitter("languages", "locales/languages", inputDir + "prod.escapefromtarkov.com.client.languages.txt");
+    genericSplitter("languages", "locales", inputDir + "prod.escapefromtarkov.com.client.languages.txt");
 }
 
 function customizationOutfits() {
-    genericSplitter("customOutfits", "customization/outfits", inputDir + "prod.escapefromtarkov.com.client.customization.txt");
+    genericSplitter("customOutfits", "customization", inputDir + "prod.escapefromtarkov.com.client.customization.txt");
 }
 
 function customizationOffers() {
-    genericSplitter("customOffers", "customization/offers", inputDir + "trading.escapefromtarkov.com.client.trading.customization.5ac3b934156ae10c4430e83c.offers.txt");
+    genericSplitter("customOffers", "assort", inputDir + "trading.escapefromtarkov.com.client.trading.customization.5ac3b934156ae10c4430e83c.offers.txt");
 }
 
 function hideoutAreas() {
@@ -116,16 +121,16 @@ function assortHelper(assortFile, shortName) {
             let output = "";
 
             if (element === "items") {
-                if (key[target].hasOwnProperty("upd")) {
+                if ("upd" in key[target]) {
                     // trader has endless supply of item
                     key[target].upd = {UnlimitedCount: true, StackObjectsCount: 999999999};
                 }
 
                 output = outputDir + "assort/" + shortName + "/"  + "items" + "/" + key[target]._id + ".json";
             } else if (element === "barter_scheme") {
-                output = outputDir + "assort/" + shortName + "/"  + "barter" + "/" + target + ".json";
+                output = outputDir + "assort/" + shortName + "/"  + "barter_scheme" + "/" + target + ".json";
             } else if (element === "loyal_level_items") {
-                output = outputDir + "assort/" + shortName + "/"  + "level" + "/" + target + ".json";
+                output = outputDir + "assort/" + shortName + "/"  + "loyal_level_items" + "/" + target + ".json";
             }
 
             json.write(output, key[target]);
@@ -261,7 +266,6 @@ function generateRagfairTrader() {
 function splitAll() {
     console.log("Splitting files...");
 
-/*
     items();
     quests();
     traders();
@@ -275,10 +279,6 @@ function splitAll() {
     templates();
     assort();
     locales();
-    generateRagfairTrader();
-*/
-    items();
-    templates();
     generateRagfairTrader();
 
     console.log("Splitting done");
