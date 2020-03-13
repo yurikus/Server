@@ -34,7 +34,7 @@ function genericSplitter(type, basepath, basefile) {
                 break;
 
             case "customOffers":
-                output = outputDir + basepath + "/" + file.data[element].tid + "/" + file.data[element].suiteId + ".json";
+                output = outputDir + basepath + "/" + file.data[element].tid + "/customization/" + file.data[element].suiteId + ".json";
                 json.write(output, file.data[element]);
                 break;
         }
