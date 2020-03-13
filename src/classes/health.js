@@ -54,7 +54,7 @@ class HealthServer {
 
     offraidEat(pmcData, body, sessionID) {        
         let output = item_f.itemServer.getOutput();
-        let resourceLeft = 0;
+        let resourceLeft;
         let maxResource = {};
         let effects = {};
     
@@ -62,14 +62,13 @@ class HealthServer {
             if (item._id === body.item) {
                 maxResource = itm_hf.getItem(item._tpl)[1]._props.MaxResource;
                 effects = itm_hf.getItem(item._tpl)[1]._props.effects_health; 
-    
+
                 if (maxResource > 1) {   
                     if ("FoodDrink" in item.upd) {
                         item.upd.FoodDrink.HpPercent -= body.count; 
                     } else {
                         item.upd.FoodDrink = {"HpPercent" : maxResource - body.count};
-                    }
-
+                    } 
                     resourceLeft = item.upd.FoodDrink.HpPercent;
                 }
             }

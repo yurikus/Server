@@ -57,6 +57,8 @@ function getMapName(mapName) {
     return "shoreline";
   } else if (mapName.includes("woods")) {
     return "woods";
+  } else if (mapName.includes("hideout")) {
+    return "hideout";
   } else {
     // ERROR
     return "";
@@ -86,11 +88,12 @@ function getMapLoot() {
 
 function stripMapLootDuplicates() {
   for (let mapName of getDirList(outputDir)) {
-    if (mapName === "hideout") {
+    let dirName = outputDir + mapName + "/loot/";
+
+    if (!fs.existsSync(dirName)) {
       continue;
     }
 
-    let dirName = outputDir + mapName + "/loot/";
     let inputFiles = fs.readdirSync(dirName);
     let mapLoot = {};
     let emptyLoot = {};
@@ -216,11 +219,12 @@ function stripMapLootDuplicates() {
 
 function renameMapLoot() {
   for (let mapName of getDirList(outputDir)) {
-    if (mapName === "hideout") {
+    let dirName = outputDir + mapName + "/loot/";
+
+    if (!fs.existsSync(dirName)) {
       continue;
     }
 
-    let dirName = outputDir + mapName + "/loot/";
     let inputFiles = fs.readdirSync(dirName);
 
     console.log("Renaming " + mapName);
@@ -276,11 +280,85 @@ function getMapLootCount() {
   }
 }
 
-function map() {
+function getMapEntries() {
+  let inputFiles = fs.readdirSync(inputDir + "all/");
+  let i = 0;
+
+  for (let file of inputFiles) {
+    let filePath = inputDir + "all/" + file;
+    let fileName = file.replace(".json", "");
+    let fileData = json.parse(json.read(filePath));
+    let mapName = getMapName(fileName.toLowerCase());
+
+    console.log("Splitting: " + filePath);
+    let node = ("Location" in fileData) ? fileData.Location.SpawnAreas : fileData.SpawnAreas;
+
+    for (let item in node) {
+      let savePath = outputDir + mapName + "/entries/" + i++ + ".json";
+      console.log("entry." + fileName + ": " + item);
+      json.write(savePath, node[item]);
+    }
+  }
+}
+
+function stripMapEntryDuplicates() {
+  for (let mapName of getDirList(outputDir)) {
+    let dirName = outputDir + mapName + "/entries/";
+
+    if (!fs.existsSync(dirName)) {
+      continue;
+    }
+
+    let inputFiles = fs.readdirSync(dirName);
+    let mapkeys = {};
+
+    console.log("Checking " + mapName);
+
+    // get all items
+    for (let file of inputFiles) {
+      let filePath = dirName + file;
+      let fileData = json.parse(json.read(filePath));
+
+      if (fileData.Id in mapkeys) {
+        console.log(mapName + ".duplicate: " + fileData.Id + ", " + file);
+        fs.unlinkSync(filePath);
+      } else {
+        mapkeys[fileData.Id] = true;
+      }
+    }
+  }
+}
+
+function renameMapEntries() {
+  for (let mapName of getDirList(outputDir)) {
+    let dirName = outputDir + mapName + "/entries/";
+
+    if (!fs.existsSync(dirName)) {
+      continue;
+    }
+    
+    let inputFiles = fs.readdirSync(dirName);
+
+    console.log("Renaming " + mapName);
+
+    for (let file in inputFiles) {
+      fs.renameSync(dirName + inputFiles[file], dirName + "infill_" + file + ".json");
+    }
+  }
+}
+
+function maploot() {
   getMapLoot();
   stripMapLootDuplicates();
   renameMapLoot();
   getMapLootCount();
 }
 
-map();
+function mapentries() {
+  getMapEntries();
+  stripMapEntryDuplicates();
+  renameMapEntries();
+}
+
+maploot();
+mapentries();
