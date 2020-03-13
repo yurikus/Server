@@ -64,10 +64,47 @@ function locations() {
     let file = json.parse(json.read(inputDir + "prod.escapefromtarkov.com.client.locations.txt"));
 
     for (let element in file.data.locations) {
-        let output = outputDir + "locations/" + element + ".json";
+        let data = file.data.locations[element];
+        let basedir = outputDir + "locations/" + data.Id.toLowerCase().replace(" ", "") + "/";
+        let output = "";
 
-        json.write(output, file.data.locations[element]);
-        console.log("done: " + output);
+        // waves
+        for (let item in data.waves) {
+            output = basedir + "waves/" + "wave_" + item + ".json";
+            json.write(output, data.waves[item]);
+        }
+
+        data.waves = [];
+
+        // exits
+        for (let item in data.exits) {
+            output = basedir + "exits/" + "exfill_" + item + ".json";
+            json.write(output, data.exits[item]);
+        }
+
+        data.exits = [];
+
+        // entry
+        for (let item in data.SpawnAreas) {
+            output = basedir + "entries/" + "infill_" + item + ".json";
+            json.write(output, data.SpawnAreas[item]);
+        }
+
+        data.SpawnAreas = [];
+
+        // spawns
+        for (let item in data.BossLocationSpawn) {
+            output = basedir + "bosses/" + "boss_" + item + ".json";
+            json.write(output, data.BossLocationSpawn[item]);
+        }
+
+        data.BossLocationSpawn = [];
+
+        // base
+        output = basedir + "base" + ".json";
+        json.write(output, data);
+        
+        console.log("done: " + file.data.locations[element].Id);
     }
 }
 
@@ -283,9 +320,7 @@ function splitAll() {
     generateRagfairTrader();
 */
 
-    items();
-    templates();
-    generateRagfairTrader();
+    locations();
 
     console.log("Splitting done");
 }
