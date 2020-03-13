@@ -88,11 +88,12 @@ function getMapLoot() {
 
 function stripMapLootDuplicates() {
   for (let mapName of getDirList(outputDir)) {
-    if (mapName === "hideout") {
+    let dirName = outputDir + mapName + "/loot/";
+
+    if (!fs.existsSync(dirName)) {
       continue;
     }
 
-    let dirName = outputDir + mapName + "/loot/";
     let inputFiles = fs.readdirSync(dirName);
     let mapLoot = {};
     let emptyLoot = {};
