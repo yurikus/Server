@@ -281,6 +281,10 @@ function splitAll() {
     locales();
     generateRagfairTrader();
 
+    items();
+    templates();
+    generateRagfairTrader();
+
     console.log("Splitting done");
 }
 
