@@ -85,11 +85,6 @@ function locations() {
         data.exits = [];
 
         // entry
-        for (let item in data.SpawnAreas) {
-            output = basedir + "entries/" + "infill_" + item + ".json";
-            json.write(output, data.SpawnAreas[item]);
-        }
-
         data.SpawnAreas = [];
 
         // spawns
@@ -303,7 +298,6 @@ function generateRagfairTrader() {
 function splitAll() {
     console.log("Splitting files...");
 
-/*
     items();
     quests();
     traders();
@@ -318,9 +312,6 @@ function splitAll() {
     assort();
     locales();
     generateRagfairTrader();
-*/
-
-    locations();
 
     console.log("Splitting done");
 }
