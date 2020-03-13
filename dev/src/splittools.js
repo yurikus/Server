@@ -266,6 +266,7 @@ function generateRagfairTrader() {
 function splitAll() {
     console.log("Splitting files...");
 
+/*
     items();
     quests();
     traders();
@@ -280,6 +281,7 @@ function splitAll() {
     assort();
     locales();
     generateRagfairTrader();
+*/
 
     items();
     templates();
