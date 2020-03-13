@@ -224,7 +224,7 @@ function renameMapLoot() {
     if (!fs.existsSync(dirName)) {
       continue;
     }
-    
+
     let inputFiles = fs.readdirSync(dirName);
 
     console.log("Renaming " + mapName);
@@ -304,6 +304,11 @@ function getMapEntries() {
 function stripMapEntryDuplicates() {
   for (let mapName of getDirList(outputDir)) {
     let dirName = outputDir + mapName + "/entries/";
+
+    if (!fs.existsSync(dirName)) {
+      continue;
+    }
+
     let inputFiles = fs.readdirSync(dirName);
     let mapkeys = {};
 
@@ -327,6 +332,11 @@ function stripMapEntryDuplicates() {
 function renameMapEntries() {
   for (let mapName of getDirList(outputDir)) {
     let dirName = outputDir + mapName + "/entries/";
+
+    if (!fs.existsSync(dirName)) {
+      continue;
+    }
+    
     let inputFiles = fs.readdirSync(dirName);
 
     console.log("Renaming " + mapName);
